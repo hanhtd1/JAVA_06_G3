@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 public class AdminUserController {
-  @GetMapping("login")
+  @GetMapping({"/", "login"})
   public String login() {
     return "sign-in";
   }
@@ -15,7 +15,7 @@ public class AdminUserController {
   @PostMapping("login")
   public String doLogin(@RequestParam(name = "email") String email,@RequestParam(name = "password") String password) {
     System.out.println(email + ", " + password);
-    return "redirect:index";
+    return "redirect:admin/";
   }
   
   @GetMapping("load-trainee")
