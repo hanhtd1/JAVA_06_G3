@@ -1,4 +1,4 @@
-package fa.training.services;
+package fa.training.controllers;
 
 import java.util.List;
 
