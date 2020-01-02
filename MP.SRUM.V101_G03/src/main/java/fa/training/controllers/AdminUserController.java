@@ -17,4 +17,9 @@ public class AdminUserController {
     System.out.println(email + ", " + password);
     return "redirect:index";
   }
+  
+  @GetMapping("load-trainee")
+  public String loadTraineeInfo() {
+    
+  }
 }
