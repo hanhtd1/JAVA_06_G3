@@ -1,0 +1,261 @@
+
+<div class="col s12 m12 l12 no-p-h">
+	<div class="card mailbox-content">
+		<div class="card-content">
+			<div class="col s12 m12 l12 p-h-md">
+				<h3>Trainer Management</h3>
+				<div class="col m12 l12">
+					<div class="input-field col s12  m12 l12  m-t-sm">
+						<p class="f-s-16">View by major</p>
+						<select class="p-h-md">
+							<option value="0" selected>All</option>
+							<option value="1">Java</option>
+							<option value="2">.Net</option>
+							<option value="3">Test</option>
+						</select>
+					</div>
+				</div>
+			</div>
+			<div class="row no-m-t no-m-b">
+				<div class="col s12 m5 l3">
+					<div class="mailbox-list">
+						<ul>
+							<li class=""><a href="">
+									<h5 class="f-s-19">Trainer ABC</h5>
+									<p>
+										<i class="tiny material-icons">email</i>
+										jonathansm@fsoft.com.vn
+									</p>
+									<p>
+										<i class="tiny material-icons">email</i> Java
+									</p>
+							</a></li>
+						</ul>
+					</div>
+				</div>
+				<div class="col s12 m7 l9">
+					<div class="mailbox-view">
+						<div class="mailbox-view-header">
+							<div class="left">
+								<div class="left">
+									<img src="assets/images/profile-image-1.png" alt=""
+										class="circle mailbox-profile-image z-depth-1">
+								</div>
+								<div class="left">
+									<span class="mailbox-title">Trainer ABC</span> <span
+										class="mailbox-author">jonathansm@fsoft.com.vn</span>
+								</div>
+							</div>
+							<div class="right mailbox-buttons">
+								<a class="modal-trigger waves-effect waves-grey btn-flat m-t-xs"
+									href="#edit-trainer-modal">Edit</a> <a
+									class="waves-effect waves-red btn-flat m-t-xs modal-trigger"
+									href="#update-trainer">Update</a>
+							</div>
+							<div class="divider mailbox-divider"></div>
+							<div class="mailbox-text">
+								<div class="mailbox-details">
+									<a href="javascript:void(0);" class="details-toggle">Show
+										Details Information</a>
+									<div class="row details-list">
+										<div class="col s1 first-col">
+											<span><i class="tiny material-icons">person_pin</i> </span> <span><i
+												class="tiny material-icons">work</i></span> <span><i
+												class="tiny material-icons">email</i></span>
+										</div>
+										<div class="col s8 second-col">
+											<span> 10/10/1997</span> <span> HN19_FR_JAVA_06</span> <span>
+												jonathansm@fsoft.com.vn</span>
+										</div>
+									</div>
+								</div>
+								<p>Class List</p>
+								<div class="divider mailbox-divider"></div>
+								<div class="">
+									<ul class="collapsible" data-collapsible="accordion">
+										<li>
+											<div class="collapsible-header">HN19_FR_JAVA_06</div>
+											<div class="collapsible-body">
+												<p>Len lop cac ngay 3,5,7 ...</p>
+											</div>
+										</li>
+										<li>
+											<div class="collapsible-header">HN19_FR_JAVA_06</div>
+											<div class="collapsible-body">
+												<p>Lorem ipsum dolor sit amet.</p>
+											</div>
+										</li>
+										<li>
+											<div class="collapsible-header">HN19_FR_JAVA_06</div>
+											<div class="collapsible-body">
+												<p>Lorem ipsum dolor sit amet.</p>
+											</div>
+										</li>
+										<li>
+											<div class="collapsible-header">HN19_FR_JAVA_06</div>
+											<div class="collapsible-body">
+												<p>Lorem ipsum dolor sit amet.</p>
+											</div>
+										</li>
+										<li>
+											<div class="collapsible-header">HN19_FR_JAVA_06</div>
+											<div class="collapsible-body">
+												<p>Lorem ipsum dolor sit amet.</p>
+											</div>
+										</li>
+									</ul>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="left-sidebar-hover"></div>
+<div class="fixed-action-btn vertical"
+	style="bottom: 45px; right: 24px;">
+	<a class="btn-floating btn-large red"> <i
+		class="large material-icons">mode_edit</i>
+	</a>
+	<ul>
+		<li><a href="#add-trainer-modal"
+			class="btn-floating blue modal-trigger"><i class="material-icons">add</i>Add</a></li>
+		<li><a class="btn-floating green darken-1"><i
+				class="material-icons">description</i></a></li>
+	</ul>
+</div>
+<!-- Modal add trainee to class -->
+<div id="add-trainer-modal" class="modal modal-fixed-footer">
+	<form class="col s12">
+		<div class="modal-content">
+			<h4>Add new trainee</h4>
+			<div class="row">
+				<div class="row">
+					<div class="input-field col s6">
+						<input id="add_first_name" type="text" class="validate"> <label
+							for="add_first_name">First Name</label>
+					</div>
+					<div class="input-field col s6">
+						<input id="add_last_name" type="text" class="validate"> <label
+							for="add_last_name">Last Name</label>
+					</div>
+				</div>
+				<div class="row">
+					<div class="input-field col s6">
+						<input id="add_phone" type="tel" class="validate"> <label
+							for="add_phone">Phone</label>
+					</div>
+					<div class="input-field col s6">
+						<select id="add_gender" required>
+							<option value="" selected>Gender</option>
+							<option value="Male">Male</option>
+							<option value="Female">Female</option>
+							<option value="Other">Other</option>
+						</select>
+					</div>
+				</div>
+				<div class="row">
+					<div class="input-field col s6">
+						<input id="add_account" type="text" class="validate"> <label
+							for="add_account">Account</label>
+					</div>
+					<div class="input-field col s6">
+						<input id="add_email" type="email" class="validate"> <label
+							for="add_email">Email</label>
+					</div>
+				</div>
+				<div class="row">
+					<div class="input-field col s6">
+						<p>Birth Day</p>
+						<input id="add_birthday" type="date" class="validate">
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="modal-footer">
+			<a href="#!"
+				class=" modal-action modal-close waves-effect waves-green btn-flat">Cancel</a>
+			<button type="submit" class="modal-action waves-effect red btn ">Submit</button>
+		</div>
+	</form>
+</div>
+<!-- Modal update trainee information -->
+<div id="edit-trainer-modal" class="modal modal-fixed-footer">
+	<form class="col s12">
+		<div class="modal-content">
+			<h4>Add new trainee</h4>
+			<div class="row">
+				<div class="row">
+					<div class="input-field col s6">
+						<input id="add_first_name" type="text" class="validate"> <label
+							for="add_first_name">First Name</label>
+					</div>
+					<div class="input-field col s6">
+						<input id="add_last_name" type="text" class="validate"> <label
+							for="add_last_name">Last Name</label>
+					</div>
+				</div>
+				<div class="row">
+					<div class="input-field col s6">
+						<input id="add_phone" type="tel" class="validate"> <label
+							for="add_phone">Phone</label>
+					</div>
+					<div class="input-field col s6">
+						<select id="add_gender" required>
+							<option value="" selected>Gender</option>
+							<option value="Male">Male</option>
+							<option value="Female">Female</option>
+							<option value="Other">Other</option>
+						</select>
+					</div>
+				</div>
+				<div class="row">
+					<div class="input-field col s6">
+						<input id="add_account" type="text" class="validate"> <label
+							for="add_account">Account</label>
+					</div>
+					<div class="input-field col s6">
+						<input id="add_email" type="email" class="validate"> <label
+							for="add_email">Email</label>
+					</div>
+				</div>
+				<div class="row">
+					<div class="input-field col s6">
+						<p>Birth Day</p>
+						<input id="add_birthday" type="date" class="validate">
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="modal-footer">
+			<a href="#!"
+				class=" modal-action modal-close waves-effect waves-green btn-flat">Cancel</a>
+			<button type="submit" class="modal-action waves-effect red btn ">Submit</button>
+		</div>
+	</form>
+</div>
+<!-- Modal delete trainee confirm -->
+<div id="update-trainer" class="modal l6">
+	<div class="modal-content">
+		<h4>Delete this trainee?</h4>
+		<p>Are you sure to delete this trainee?</p>
+		<div class="modal-footer">
+			<a href="#!"
+				class=" modal-action modal-close waves-effect waves-green btn-flat">Cancel</a>
+			<a href="#!" class=" modal-action waves-effect waves-red btn-flat">Delete</a>
+		</div>
+	</div>
+</div>
+<script src="assets/plugins/jquery/jquery-2.2.0.min.js"></script>
+<script src="assets/plugins/materialize/js/materialize.min.js"></script>
+<script
+	src="assets/plugins/material-preloader/js/materialPreloader.min.js"></script>
+<script src="assets/plugins/jquery-blockui/jquery.blockui.js"></script>
+<script src="assets/plugins/simditor/scripts/module.js"></script>
+<script src="assets/plugins/simditor/scripts/hotkeys.js"></script>
+<script src="assets/plugins/simditor/scripts/uploader.js"></script>
+<script src="assets/plugins/simditor/scripts/simditor.js"></script>
+<script src="assets/js/alpha.min.js"></script>
+<script src="assets/js/pages/mailbox.js"></script>
