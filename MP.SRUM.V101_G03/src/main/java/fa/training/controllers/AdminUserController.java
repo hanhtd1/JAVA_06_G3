@@ -20,6 +20,6 @@ public class AdminUserController {
   
   @GetMapping("load-trainee")
   public String loadTraineeInfo() {
-    
+    return "";
   }
 }
