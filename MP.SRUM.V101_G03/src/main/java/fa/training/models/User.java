@@ -3,7 +3,6 @@ package fa.training.models;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.List;
-
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -14,6 +13,8 @@ import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 /**
  *
@@ -75,21 +76,27 @@ public class User implements Serializable {
   @Column(name = "Status")
   private String status;
 
+  @JsonIgnore
   @ManyToMany(mappedBy = "userList")
   private List<Attendance> attendanceList;
 
+  @JsonIgnore
   @ManyToMany(mappedBy = "userList", fetch = FetchType.EAGER)
   private List<Clazz> clazzList;
 
+  @JsonIgnore
   @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
   private List<Score> scoreList;
 
+  @JsonIgnore
   @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
   private List<Feedback> feedbackList;
 
+  @JsonIgnore
   @OneToMany(cascade = CascadeType.ALL, mappedBy = "trainer")
   private List<ReviewTrainee> reviewTraineeList;
 
+  @JsonIgnore
   @OneToMany(cascade = CascadeType.ALL, mappedBy = "trainee")
   private List<ReviewTrainee> reviewTraineeList1;
 
@@ -257,7 +264,9 @@ public class User implements Serializable {
 
   @Override
   public String toString() {
-    return "com.User[ id=" + id + " ]";
+    return "User [id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + ", phone=" + phone + ", email="
+        + email + ", password=" + password + ", account=" + account + ", birthDay=" + birthDay + ", role=" + role
+        + ", gender=" + gender + ", status=" + status + "]";
   }
 
 }

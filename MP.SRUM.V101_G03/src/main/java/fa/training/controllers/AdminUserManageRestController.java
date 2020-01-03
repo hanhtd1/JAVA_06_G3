@@ -18,20 +18,19 @@ import fa.training.services.AdminUserService;
 @RestController
 @RequestMapping("admin")
 public class AdminUserManageRestController {
-  
+
   @Autowired
   private AdminUserService adminUserService;
-  
+
   @GetMapping("trainee-info")
-  public ResponseEntity<User> getTraineeInfo(@RequestParam int id){
+  public ResponseEntity<User> getTraineeInfo(@RequestParam int id) {
     User user = adminUserService.getUser(id);
     return new ResponseEntity<User>(user, HttpStatus.OK);
   }
-  
+
   @PostMapping("create-user")
-  public ResponseEntity<List<User>> createUser(@RequestBody User user){
-    
+  public ResponseEntity<List<User>> createUser(@RequestBody User user) {
     return new ResponseEntity<>(HttpStatus.CREATED);
   }
-  
+
 }
