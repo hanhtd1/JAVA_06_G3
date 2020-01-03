@@ -1,7 +1,7 @@
 package fa.training.models;
 
 import java.io.Serializable;
-import java.util.Date;
+import java.time.LocalDate;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -47,7 +47,7 @@ public class User implements Serializable {
     private String account;
 
     @Column(name = "BirthDay")
-    private Date birthDay;
+    private LocalDate birthDay;
 
     @Column(name = "Role")
     private String role;
@@ -100,7 +100,7 @@ public class User implements Serializable {
     }
  
     public User(String firstName, String lastName, String phone, String email, String password, String account,
-        Date birthDay, String role, String gender, String status) {
+    		LocalDate birthDay, String role, String gender, String status) {
       super();
       this.firstName = firstName;
       this.lastName = lastName;
@@ -170,11 +170,11 @@ public class User implements Serializable {
         this.account = account;
     }
 
-    public Date getBirthDay() {
+    public LocalDate getBirthDay() {
         return birthDay;
     }
 
-    public void setBirthDay(Date birthDay) {
+    public void setBirthDay(LocalDate birthDay) {
         this.birthDay = birthDay;
     }
 

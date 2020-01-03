@@ -18,32 +18,32 @@ public class ClazzSubjectPK implements Serializable{
   private static final long serialVersionUID = 1L;
 
     @Column(name = "ClazzId")
-    private int clazzId;
+    private Integer clazzId;
  
     @Column(name = "SubjectId")
-    private int subjectId;
+    private Integer subjectId;
 
     public ClazzSubjectPK() {
     }
 
-    public ClazzSubjectPK(int clazzId, int subjectId) {
+    public ClazzSubjectPK(Integer clazzId, Integer subjectId) {
         this.clazzId = clazzId;
         this.subjectId = subjectId;
     }
 
-    public int getClazzId() {
+    public Integer getClazzId() {
         return clazzId;
     }
 
-    public void setClazzId(int clazzId) {
+    public void setClazzId(Integer clazzId) {
         this.clazzId = clazzId;
     }
 
-    public int getSubjectId() {
+    public Integer getSubjectId() {
         return subjectId;
     }
 
-    public void setSubjectId(int subjectId) {
+    public void setSubjectId(Integer subjectId) {
         this.subjectId = subjectId;
     }
 

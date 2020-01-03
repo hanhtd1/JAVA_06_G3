@@ -17,44 +17,44 @@ public class ScorePK implements Serializable{
   private static final long serialVersionUID = 1L;
 
     @Column(name = "Id")
-    private int id;
+    private Integer id;
 
     @Column(name = "SubjectId")
-    private int subjectId;
+    private Integer subjectId;
 
     @Column(name = "UserId")
-    private int userId;
+    private Integer userId;
 
     public ScorePK() {
     }
 
-    public ScorePK(int id, int subjectId, int userId) {
+    public ScorePK(Integer id, Integer subjectId, Integer userId) {
         this.id = id;
         this.subjectId = subjectId;
         this.userId = userId;
     }
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
-    public int getSubjectId() {
+    public Integer getSubjectId() {
         return subjectId;
     }
 
-    public void setSubjectId(int subjectId) {
+    public void setSubjectId(Integer subjectId) {
         this.subjectId = subjectId;
     }
 
-    public int getUserId() {
+    public Integer getUserId() {
         return userId;
     }
 
-    public void setUserId(int userId) {
+    public void setUserId(Integer userId) {
         this.userId = userId;
     }
 

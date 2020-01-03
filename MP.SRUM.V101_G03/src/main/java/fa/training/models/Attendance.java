@@ -6,18 +6,18 @@
 package fa.training.models;
 
 import java.io.Serializable;
-import java.util.Date;
+import java.time.LocalDate;
 import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 
 /**
  *
@@ -27,92 +27,103 @@ import javax.persistence.TemporalType;
 @Table(name = "Attendance")
 public class Attendance implements Serializable {
 
-    private static final long serialVersionUID = 1L;
-    @Id
-    @Column(name = "Date")
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date date;
-    
-    @Column(name = "Type")
-    private String type;
-    
-    @Column(name = "Note")
-    private String note;
-    
-    @JoinTable(name = "AttendanceUser", joinColumns = {
-        @JoinColumn(name = "AttendanceDate", referencedColumnName = "Date")}, inverseJoinColumns = {
-        @JoinColumn(name = "UserId", referencedColumnName = "Id")})
-    @ManyToMany
-    private List<User> userList;
+	private static final long serialVersionUID = 1L;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Integer id;
 
-    public Attendance() {
-    }
+	@Column(name = "Date")
+	private LocalDate date;
 
-    public Attendance(Date date) {
-        this.date = date;
-    }
+	@Column(name = "Type")
+	private String type;
 
-    public Attendance(Date date, String type, String note) {
-        this.date = date;
-        this.type = type;
-        this.note = note;
-    }
+	@Column(name = "Note")
+	private String note;
 
-    public Date getDate() {
-        return date;
-    }
+	@JoinTable(name = "AttendanceUser", joinColumns = {
+			@JoinColumn(name = "AttendanceId", referencedColumnName = "id") }, inverseJoinColumns = {
+					@JoinColumn(name = "UserId", referencedColumnName = "Id") })
+	@ManyToMany
+	private List<User> userList;
 
-    public void setDate(Date date) {
-        this.date = date;
-    }
+	public Attendance() {
+	}
 
-    public String getType() {
-        return type;
-    }
+	public Attendance(Integer id) {
+		super();
+		this.id = id;
+	}
 
-    public void setType(String type) {
-        this.type = type;
-    }
+	public Attendance(LocalDate date, String type, String note) {
+		this.date = date;
+		this.type = type;
+		this.note = note;
+	}
 
-    public String getNote() {
-        return note;
-    }
+	public Integer getId() {
+		return id;
+	}
 
-    public void setNote(String note) {
-        this.note = note;
-    }
+	public void setId(Integer id) {
+		this.id = id;
+	}
 
-    public List<User> getUserList() {
-        return userList;
-    }
+	public LocalDate getDate() {
+		return date;
+	}
 
-    public void setUserList(List<User> userList) {
-        this.userList = userList;
-    }
+	public void setDate(LocalDate date) {
+		this.date = date;
+	}
 
-    @Override
-    public int hashCode() {
-        int hash = 0;
-        hash += (date != null ? date.hashCode() : 0);
-        return hash;
-    }
+	public String getType() {
+		return type;
+	}
 
-    @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Attendance)) {
-            return false;
-        }
-        Attendance other = (Attendance) object;
-        if ((this.date == null && other.date != null) || (this.date != null && !this.date.equals(other.date))) {
-            return false;
-        }
-        return true;
-    }
+	public void setType(String type) {
+		this.type = type;
+	}
 
-    @Override
-    public String toString() {
-        return "com.Attendance[ date=" + date + " ]";
-    }
-    
+	public String getNote() {
+		return note;
+	}
+
+	public void setNote(String note) {
+		this.note = note;
+	}
+
+	public List<User> getUserList() {
+		return userList;
+	}
+
+	public void setUserList(List<User> userList) {
+		this.userList = userList;
+	}
+
+	@Override
+	public int hashCode() {
+		int hash = 0;
+		hash += (date != null ? date.hashCode() : 0);
+		return hash;
+	}
+
+	@Override
+	public boolean equals(Object object) {
+		// TODO: Warning - this method won't work in the case the id fields are not set
+		if (!(object instanceof Attendance)) {
+			return false;
+		}
+		Attendance other = (Attendance) object;
+		if ((this.date == null && other.date != null) || (this.date != null && !this.date.equals(other.date))) {
+			return false;
+		}
+		return true;
+	}
+
+	@Override
+	public String toString() {
+		return "com.Attendance[ date=" + date + " ]";
+	}
+
 }
