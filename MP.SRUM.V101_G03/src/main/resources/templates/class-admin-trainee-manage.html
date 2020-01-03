@@ -35,162 +35,17 @@
 				<div class="col s12 m5 l3">
 					<div class="mailbox-list">
 						<ul>
-							<li class=""><a href="">
-									<h5 class="f-s-19">Jonathan Smith</h5>
-									<p>
-										<i class="tiny material-icons">person_pin</i> 10/10/1997
+							<li th:each="trainee:${trainees}">
+								<a href="#!" th:onclick="'loadTraineeInfo('+${trainee.id}+')'">
+									<h5 class="f-s-19" th:text="${trainee.name}"></h5>
+									<p th:text="${trainee.birthDay}">
 									</p>
-									<p>
-										<i class="tiny material-icons">work</i> Java 06
+									<p th:text="${trainee.className}">
 									</p>
-									<p>
-										<i class="tiny material-icons">email</i>
-										jonathansm@fsoft.com.vn
+									<p th:text="${trainee.email}">
 									</p>
-							</a></li>
-							<li class=""><a href="">
-									<h5 class="f-s-19">Jonathan Smith</h5>
-									<p>
-										<i class="tiny material-icons">person_pin</i> 10/10/1997
-									</p>
-									<p>
-										<i class="tiny material-icons">work</i> Java 06
-									</p>
-									<p>
-										<i class="tiny material-icons">email</i>
-										jonathansm@fsoft.com.vn
-									</p>
-							</a></li>
-							<li class=""><a href="">
-									<h5 class="f-s-19">Jonathan Smith</h5>
-									<p>
-										<i class="tiny material-icons">person_pin</i> 10/10/1997
-									</p>
-									<p>
-										<i class="tiny material-icons">work</i> Java 06
-									</p>
-									<p>
-										<i class="tiny material-icons">email</i>
-										jonathansm@fsoft.com.vn
-									</p>
-							</a></li>
-							<li class=""><a href="">
-									<h5 class="f-s-19">Jonathan Smith</h5>
-									<p>
-										<i class="tiny material-icons">person_pin</i> 10/10/1997
-									</p>
-									<p>
-										<i class="tiny material-icons">work</i> Java 06
-									</p>
-									<p>
-										<i class="tiny material-icons">email</i>
-										jonathansm@fsoft.com.vn
-									</p>
-							</a></li>
-							<li class=""><a href="">
-									<h5 class="f-s-19">Jonathan Smith</h5>
-									<p>
-										<i class="tiny material-icons">person_pin</i> 10/10/1997
-									</p>
-									<p>
-										<i class="tiny material-icons">work</i> Java 06
-									</p>
-									<p>
-										<i class="tiny material-icons">email</i>
-										jonathansm@fsoft.com.vn
-									</p>
-							</a></li>
-							<li class=""><a href="">
-									<h5 class="f-s-19">Jonathan Smith</h5>
-									<p>
-										<i class="tiny material-icons">person_pin</i> 10/10/1997
-									</p>
-									<p>
-										<i class="tiny material-icons">work</i> Java 06
-									</p>
-									<p>
-										<i class="tiny material-icons">email</i>
-										jonathansm@fsoft.com.vn
-									</p>
-							</a></li>
-							<li class=""><a href="">
-									<h5 class="f-s-19">Jonathan Smith</h5>
-									<p>
-										<i class="tiny material-icons">person_pin</i> 10/10/1997
-									</p>
-									<p>
-										<i class="tiny material-icons">work</i> Java 06
-									</p>
-									<p>
-										<i class="tiny material-icons">email</i>
-										jonathansm@fsoft.com.vn
-									</p>
-							</a></li>
-							<li class=""><a href="">
-									<h5 class="f-s-19">Jonathan Smith</h5>
-									<p>
-										<i class="tiny material-icons">person_pin</i> 10/10/1997
-									</p>
-									<p>
-										<i class="tiny material-icons">work</i> Java 06
-									</p>
-									<p>
-										<i class="tiny material-icons">email</i>
-										jonathansm@fsoft.com.vn
-									</p>
-							</a></li>
-							<li class=""><a href="">
-									<h5 class="f-s-19">Jonathan Smith</h5>
-									<p>
-										<i class="tiny material-icons">person_pin</i> 10/10/1997
-									</p>
-									<p>
-										<i class="tiny material-icons">work</i> Java 06
-									</p>
-									<p>
-										<i class="tiny material-icons">email</i>
-										jonathansm@fsoft.com.vn
-									</p>
-							</a></li>
-							<li class=""><a href="">
-									<h5 class="f-s-19">Jonathan Smith</h5>
-									<p>
-										<i class="tiny material-icons">person_pin</i> 10/10/1997
-									</p>
-									<p>
-										<i class="tiny material-icons">work</i> Java 06
-									</p>
-									<p>
-										<i class="tiny material-icons">email</i>
-										jonathansm@fsoft.com.vn
-									</p>
-							</a></li>
-							<li class=""><a href="">
-									<h5 class="f-s-19">Jonathan Smith</h5>
-									<p>
-										<i class="tiny material-icons">person_pin</i> 10/10/1997
-									</p>
-									<p>
-										<i class="tiny material-icons">work</i> Java 06
-									</p>
-									<p>
-										<i class="tiny material-icons">email</i>
-										jonathansm@fsoft.com.vn
-									</p>
-							</a></li>
-							<li class=""><a href="">
-									<h5 class="f-s-19">Jonathan Smith</h5>
-									<p>
-										<i class="tiny material-icons">person_pin</i> 10/10/1997
-									</p>
-									<p>
-										<i class="tiny material-icons">work</i> Java 06
-									</p>
-									<p>
-										<i class="tiny material-icons">email</i>
-										jonathansm@fsoft.com.vn
-									</p>
-							</a></li>
+								</a>
+							</li>
 						</ul>
 					</div>
 				</div>
@@ -199,12 +54,12 @@
 						<div class="mailbox-view-header">
 							<div class="left">
 								<div class="left">
-									<img src="assets/images/profile-image-1.png" alt=""
+									<img th:src="@{../assets/images/profile-image-1.png}" alt=""
 										class="circle mailbox-profile-image z-depth-1">
 								</div>
 								<div class="left">
-									<span class="mailbox-title">Jonathan Smith</span> <span
-										class="mailbox-author">jonathansm@fsoft.com.vn</span>
+									<span class="mailbox-title" id="trainee-name"></span> <span
+										class="mailbox-author" id="trainee-email"></span>
 								</div>
 							</div>
 							<div class="right mailbox-buttons">
@@ -225,8 +80,9 @@
 												class="tiny material-icons">email</i></span>
 										</div>
 										<div class="col s8 second-col">
-											<span> 10/10/1997</span> <span> HN19_FR_JAVA_06</span> <span>
-												jonathansm@fsoft.com.vn</span>
+											<span id="trainee-birthday"> </span> 
+											<span id="trainee-email"> </span> 
+											<span id="trainee-account"> </span>
 										</div>
 									</div>
 								</div>
@@ -467,3 +323,4 @@
 <script th:src="@{../assets/js/pages/table-data.js}"></script>
 <script th:src="@{../assets/js/pages/mailbox.js}"></script>
 <script th:src="@{../assets/js/pages/form-wizard.js}"></script>
+<script th:src="@{../assets/js/admin-manage.js}"></script>

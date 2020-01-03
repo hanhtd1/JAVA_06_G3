@@ -1,12 +1,22 @@
 package fa.training.controllers;
 
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import fa.training.dto.UserDto;
+import fa.training.services.AdminUserService;
+
 @Controller
 @RequestMapping("admin")
-public class MainController {
+public class AdminMainController {
+  
+  @Autowired
+  private AdminUserService adminUserService;
   
   @GetMapping("/")
   public String home() {
@@ -24,7 +34,9 @@ public class MainController {
   }
   
   @GetMapping("trainee-manage")
-  public String traineeManage() {
+  public String traineeManage(Model model) {
+    List<UserDto> trainees = adminUserService.getUsersByRole("ROLE_TRAINER");
+    model.addAttribute("trainees", trainees);
     return "class-admin-trainee-manage";
   }
   

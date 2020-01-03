@@ -1,12 +1,13 @@
 package fa.training.models;
 
 import java.io.Serializable;
-import java.util.Date;
+import java.time.LocalDate;
 import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -15,8 +16,6 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 
 /**
  *
@@ -35,9 +34,8 @@ public class Clazz implements Serializable {
   @Column(name = "Name")
   private String name;
 
-  @Column(name = "OpenDate")
-  @Temporal(TemporalType.TIMESTAMP)
-  private Date openDate;
+  @Column(name = "OpenLocalDate")
+  private LocalDate openLocalDate;
 
   @Column(name = "Note")
   private String note;
@@ -50,7 +48,7 @@ public class Clazz implements Serializable {
   @JoinTable(name = "UserClazz", joinColumns = {
       @JoinColumn(name = "ClazzId", referencedColumnName = "Id") }, inverseJoinColumns = {
           @JoinColumn(name = "UserId", referencedColumnName = "Id") })
-  @ManyToMany
+  @ManyToMany(fetch = FetchType.EAGER)
   private List<User> userList;
   @OneToMany(cascade = CascadeType.ALL, mappedBy = "clazz")
   private List<ClazzSubject> clazzSubjectList;
@@ -62,10 +60,10 @@ public class Clazz implements Serializable {
     this.id = id;
   }
 
-  public Clazz(Integer id, String name, Date openDate, String note, String category, String status) {
+  public Clazz(Integer id, String name, LocalDate openLocalDate, String note, String category, String status) {
     this.id = id;
     this.name = name;
-    this.openDate = openDate;
+    this.openLocalDate = openLocalDate;
     this.note = note;
     this.category = category;
     this.status = status;
@@ -87,12 +85,12 @@ public class Clazz implements Serializable {
     this.name = name;
   }
 
-  public Date getOpenDate() {
-    return openDate;
+  public LocalDate getOpenLocalDate() {
+    return openLocalDate;
   }
 
-  public void setOpenDate(Date openDate) {
-    this.openDate = openDate;
+  public void setOpenLocalDate(LocalDate openLocalDate) {
+    this.openLocalDate = openLocalDate;
   }
 
   public String getNote() {
