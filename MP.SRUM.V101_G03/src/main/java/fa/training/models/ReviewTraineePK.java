@@ -18,32 +18,32 @@ public class ReviewTraineePK implements Serializable{
   private static final long serialVersionUID = 1L;
 
     @Column(name = "TrainerId")
-    private int trainerId;
+    private Integer trainerId;
 
     @Column(name = "TraineeId")
-    private int traineeId;
+    private Integer traineeId;
 
     public ReviewTraineePK() {
     }
 
-    public ReviewTraineePK(int trainerId, int traineeId) {
+    public ReviewTraineePK(Integer trainerId, Integer traineeId) {
         this.trainerId = trainerId;
         this.traineeId = traineeId;
     }
 
-    public int getTrainerId() {
+    public Integer getTrainerId() {
         return trainerId;
     }
 
-    public void setTrainerId(int trainerId) {
+    public void setTrainerId(Integer trainerId) {
         this.trainerId = trainerId;
     }
 
-    public int getTraineeId() {
+    public Integer getTraineeId() {
         return traineeId;
     }
 
-    public void setTraineeId(int traineeId) {
+    public void setTraineeId(Integer traineeId) {
         this.traineeId = traineeId;
     }
 
