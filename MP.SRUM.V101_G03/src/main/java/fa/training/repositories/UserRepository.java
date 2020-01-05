@@ -3,14 +3,26 @@ package fa.training.repositories;
 import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import fa.training.models.User;
 
 @Repository
 public interface UserRepository extends JpaRepository<User, Integer> {
+  
+  /**
+   * @author TrangDM2
+   * @param status
+   * @param id
+   */
+  @Transactional
+  @Modifying
+  @Query("update User u set u.status= :status where u.id= :id")
+  void updateUserStatus(@Param("status") String status, @Param("id") int id);
   /**
    * @author TrangDM2
    * 
@@ -25,13 +37,29 @@ public interface UserRepository extends JpaRepository<User, Integer> {
   @Query("select u from User u JOIN u.clazzList uc ON uc.id IN (SELECT c.id FROM Clazz c WHERE category= :category) and u.role= :role ")
   List<User> getAllUserByClassCategory(@Param("category") String category, @Param("role") String role);
 
-//  @Query("SELECT u FROM User u"
-//      + "JOIN u.clazzList uc"
-//      + "ON uc.id IN"
-//      + "(SELECT c.id FROM Clazz c WHERE c.category= :category "
-//      + "AND c.)")
-//  List<User> getAllUserByClassCategoryAndClassIdAndStatus();
-  
+  /**
+   * @author TrangDM2
+   * @param account
+   * @return
+   */
+  User findByAccount(String account);
+
+  /**
+   * @author TrangDM2
+   * @return
+   */
+  @Query("select u from User u Where (u.firstName like :keyword or u.lastName like :keyword or u.account like :keyword) and role= :role and status like :status")
+  List<User> findUsersByKeyword(@Param("keyword") String keyword, @Param("role") String role,
+      @Param("status") String status);
+
+  /**
+   * @author TrangDM2
+   * @param email
+   * @return number of row where email = param
+   */
+  @Query("select count(u) from User u where account like :account")
+  int getNumberOfAccount(@Param("account") String account);
+
   /**
    * @author TrangDM2
    * 

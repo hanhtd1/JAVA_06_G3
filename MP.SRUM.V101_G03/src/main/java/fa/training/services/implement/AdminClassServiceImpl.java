@@ -19,7 +19,10 @@ public class AdminClassServiceImpl implements AdminClassService {
   
   @Autowired
   private ClassRepository classRepository;
-  
+
+  /**
+   *@author TrangDM2
+   */
   @Override
   public List<Clazz> getClasses(){
     return classRepository.findAll();

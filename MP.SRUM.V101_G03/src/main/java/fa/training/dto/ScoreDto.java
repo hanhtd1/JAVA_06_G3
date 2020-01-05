@@ -2,6 +2,10 @@ package fa.training.dto;
 
 import fa.training.models.Score;
 
+/**
+ * @author TrangDM2
+ *
+ */
 public class ScoreDto {
   private Integer id;
   private Integer traineeId;

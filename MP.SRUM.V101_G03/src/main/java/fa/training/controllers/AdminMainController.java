@@ -27,21 +27,34 @@ public class AdminMainController {
   @Autowired
   private AdminClassService adminClassService;
   
+  
+  /**
+   * @author TrangDM2
+   */
   @GetMapping("/")
   public String home() {
     return "index";
   }
   
+  /**
+   * @author TrangDM2
+   */
   @GetMapping("home")
   public String classAdmin() {
     return "class-admin-dashboard";
   }
   
+  /**
+   * @author TrangDM2
+   */
   @GetMapping("class-manage")
   public String classManage() {
     return "class-admin-class-manage";
   }
   
+  /**
+   * @author TrangDM2
+   */
   @GetMapping("trainee-manage")
   public String traineeManage(Model model) {
     List<UserDto> trainees = adminUserService.getUsersByRole("ROLE_TRAINEE");
@@ -51,21 +64,33 @@ public class AdminMainController {
     return "class-admin-trainee-manage";
   }
   
+  /**
+   * @author TrangDM2
+   */
   @GetMapping("subject-manage")
   public String subjectManage() {
     return "class-admin-subject-manage";
   }
   
+  /**
+   * @author TrangDM2
+   */
   @GetMapping("trainer-manage")
   public String trainerManage() {
     return "class-admin-trainer-manage";
   }
   
+  /**
+   * @author TrangDM2
+   */
   @GetMapping("file-manage")
   public String fileManage() {
     return "import-export";
   } 
   
+  /**
+   * @author TrangDM2
+   */
   @GetMapping("guide")
   public String guide() {
     return "guide";

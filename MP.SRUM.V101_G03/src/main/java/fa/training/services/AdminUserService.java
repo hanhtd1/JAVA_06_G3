@@ -25,4 +25,12 @@ public interface AdminUserService {
 
   List<ScoreDto> getScore(Integer id);
 
+  String generateAccount(String firstName, String lastName);
+
+  User getUserByAccount(String account);
+
+  List<UserDto> findUserByKeyword(String keyword, String role, String status);
+
+  void updateUserStatus(int id, String status);
+
 }
