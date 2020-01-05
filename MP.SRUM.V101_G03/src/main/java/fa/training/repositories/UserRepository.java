@@ -12,21 +12,28 @@ import fa.training.models.User;
 @Repository
 public interface UserRepository extends JpaRepository<User, Integer> {
   /**
-   * @author TranDM2
+   * @author TrangDM2
    * 
    */
   @Query("select u from User u where role = :role")
   List<User> getAllUserByRole(@Param("role") String role);
 
   /**
-   * @author TranDM2
+   * @author TrangDM2
    * 
    */
   @Query("select u from User u JOIN u.clazzList uc ON uc.id IN (SELECT c.id FROM Clazz c WHERE category= :category) and u.role= :role ")
   List<User> getAllUserByClassCategory(@Param("category") String category, @Param("role") String role);
 
+//  @Query("SELECT u FROM User u"
+//      + "JOIN u.clazzList uc"
+//      + "ON uc.id IN"
+//      + "(SELECT c.id FROM Clazz c WHERE c.category= :category "
+//      + "AND c.)")
+//  List<User> getAllUserByClassCategoryAndClassIdAndStatus();
+  
   /**
-   * @author TranDM2
+   * @author TrangDM2
    * 
    */
   @Query("select u from User u JOIN u.clazzList uc ON uc.id =:clazzId and u.role= :role ")

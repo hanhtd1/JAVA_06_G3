@@ -17,9 +17,7 @@
 					<p class="f-s-16">View by class</p>
 					<select class="p-h-md">
 						<option value="0" selected>All</option>
-						<option value="1">Class 1</option>
-						<option value="2">Class 2</option>
-						<option value="3">Class 3</option>
+						<option th:each="class:${classes}" th:value="${class.id}" th:text="${class.name}"></option>
 					</select>
 				</div>
 				<div class="input-field col s4 m-t-sm">
@@ -64,7 +62,7 @@
 							</div>
 							<div class="right mailbox-buttons">
 								<a class="modal-trigger waves-effect waves-grey btn-flat m-t-xs"
-									href="#update_trainee_information">Edit</a> <a
+									href="#update_trainee_information" th:onclick="editTraineeInfo()">Edit</a> <a
 									class="waves-effect waves-red btn-flat m-t-xs modal-trigger"
 									href="#delete-confirm">Delete</a>
 							</div>
@@ -100,54 +98,7 @@
 												<th style="word-wrap: break-word;" data-field="price">Feedback</th>
 											</tr>
 										</thead>
-										<tbody>
-											<tr>
-												<td>JPL</td>
-												<td>9</td>
-												<td>9</td>
-												<td>Done</td>
-												<td><a
-													class="modal-trigger waves-effect waves-blue btn m-t-xs"
-													href="#feedback-modal">View feedback</a></td>
-											</tr>
-											<tr>
-												<td>SQL</td>
-												<td>8</td>
-												<td>8</td>
-												<td>Done</td>
-												<td><a
-													class="modal-trigger waves-effect waves-blue btn m-t-xs"
-													href="#feedback-modal">View feedback</a></td>
-											</tr>
-											<tr>
-												<td>ORM</td>
-												<td>--</td>
-												<td>--</td>
-												<td>In process</td>
-												<td></td>
-											</tr>
-											<tr>
-												<td>CNU</td>
-												<td>--</td>
-												<td>--</td>
-												<td>In coming</td>
-												<td></td>
-											</tr>
-											<tr>
-												<td>JWEB</td>
-												<td>--</td>
-												<td>--</td>
-												<td>In coming</td>
-												<td></td>
-											</tr>
-											<tr>
-												<td>SFW</td>
-												<td>--</td>
-												<td>--</td>
-												<td>In coming</td>
-												<td></td>
-											</tr>
-										</tbody>
+										<tbody id="scores"></tbody>
 									</table>
 								</div>
 							</div>
@@ -174,43 +125,42 @@
 </div>
 <!-- Modal add trainee -->
 <div id="add-trainee-modal" class="modal modal-fixed-footer">
-	<form class="col s12" th:action="@{/create-trainee}">
+	<form class="col s12" th:onsubmit="return addTrainee()" id="add_trainee_form" name="add_trainee_form">
 		<div class="modal-content">
 			<h4>Add new trainee</h4>
 			<div class="row">
 				<div class="row">
 					<div class="input-field col s6">
 						<input id="add_first_name" name="firstName" type="text"
-							class="validate"> <label for="add_first_name">First
+							class="validate" required> <label for="add_first_name">First
 							Name</label>
 					</div>
 					<div class="input-field col s6">
 						<input id="add_last_name" name="lastName" type="text"
-							class="validate"> <label for="add_last_name">Last
+							class="validate" required> <label for="add_last_name">Last
 							Name</label>
 					</div>
 				</div>
 				<div class="row">
 					<div class="input-field col s6">
-						<input id="add_phone" name="phone" type="tel" class="validate">
+						<input id="add_phone" name="phone" type="tel" class="validate" required>
 						<label for="add_phone">Phone</label>
 					</div>
 					<div class="input-field col s6">
-						<select id="add_gender" name="gender" required>
-							<option value="" selected>Gender</option>
+						<select id="add_gender" name="gender">
 							<option value="Male">Male</option>
 							<option value="Female">Female</option>
-							<option value="Other">Other</option>
+							<option value="Other" selected>Other</option>
 						</select>
 					</div>
 				</div>
 				<div class="row">
 					<div class="input-field col s6">
 						<input id="add_account" name="account" type="text"
-							class="validate"> <label for="add_account">Account</label>
+							class="validate" required> <label for="add_account">Account</label>
 					</div>
 					<div class="input-field col s6">
-						<input id="add_email" name="email" type="email" class="validate">
+						<input id="add_email" name="email" type="email" class="validate" required>
 						<label for="add_email">Email</label>
 					</div>
 				</div>
@@ -218,7 +168,7 @@
 					<div class="input-field col s6">
 						<p>Birth Day</p>
 						<input id="add_birthday" name="birthDay" type="date"
-							class="validate">
+							class="validate" required="required">
 					</div>
 				</div>
 			</div>
@@ -247,46 +197,30 @@
 <div id="update_trainee_information" class="modal modal-fixed-footer">
 	<form class="col s12">
 		<div class="modal-content">
-			<h4>Add new trainee</h4>
+			<h4>UPDATE TRAINEE INFORMATION</h4>
 			<div class="row">
 				<div class="row">
-					<div class="input-field col s6">
-						<input id="add_first_name" type="text" class="validate"> <label
-							for="add_first_name">First Name</label>
+					<div class="input-field col s6"> 
+						<span>First Name</span>
+						<input id="update_first_name" type="text" class="validate">
 					</div>
 					<div class="input-field col s6">
-						<input id="add_last_name" type="text" class="validate"> <label
-							for="add_last_name">Last Name</label>
+						<span>Last Name</span>
+						<input id="update_last_name" type="text" class="validate">
+					</div>
+				</div>
+				<div class="row">
+					<div class="input-field col s12">
+						<span>Phone</span>
+						<input id="update_phone" type="tel" class="validate">
 					</div>
 				</div>
 				<div class="row">
 					<div class="input-field col s6">
-						<input id="add_phone" type="tel" class="validate"> <label
-							for="add_phone">Phone</label>
+						<input id="update_account" type="text" class="validate" readonly>
 					</div>
 					<div class="input-field col s6">
-						<select id="add_gender" required>
-							<option value="" selected>Gender</option>
-							<option value="Male">Male</option>
-							<option value="Female">Female</option>
-							<option value="Other">Other</option>
-						</select>
-					</div>
-				</div>
-				<div class="row">
-					<div class="input-field col s6">
-						<input id="add_account" type="text" class="validate"> <label
-							for="add_account">Account</label>
-					</div>
-					<div class="input-field col s6">
-						<input id="add_email" type="email" class="validate"> <label
-							for="add_email">Email</label>
-					</div>
-				</div>
-				<div class="row">
-					<div class="input-field col s6">
-						<p>Birth Day</p>
-						<input id="add_birthday" type="date" class="validate">
+						<input id="update_email" type="email" class="validate" readonly>
 					</div>
 				</div>
 			</div>

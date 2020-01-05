@@ -7,9 +7,9 @@ import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 /**
  *
@@ -17,24 +17,24 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "Score")
-@NamedQueries({
-    @NamedQuery(name = "Score.findAll", query = "SELECT s FROM Score s")})
 public class Score implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @EmbeddedId
     protected ScorePK scorePK;
 
-    @Column(name = "Name")
-    private String name;
+    @Column(name = "Theory")
+    private Float theory;
 
-    @Column(name = "Value")
-    private float value;
+    @Column(name = "Practice")
+    private Float practice;
     
+    @JsonIgnore
     @JoinColumn(name = "SubjectId", referencedColumnName = "Id", insertable = false, updatable = false)
     @ManyToOne(optional = false)
     private Subject subject;
     
+    @JsonIgnore
     @JoinColumn(name = "UserId", referencedColumnName = "Id", insertable = false, updatable = false)
     @ManyToOne(optional = false)
     private User user;
@@ -46,14 +46,14 @@ public class Score implements Serializable {
         this.scorePK = scorePK;
     }
 
-    public Score(ScorePK scorePK, String name, float value) {
+    public Score(ScorePK scorePK, Float theory, Float practice) {
         this.scorePK = scorePK;
-        this.name = name;
-        this.value = value;
+        this.theory = theory;
+        this.practice = practice;
     }
 
-    public Score(int id, int subjectId, int userId) {
-        this.scorePK = new ScorePK(id, subjectId, userId);
+    public Score(int subjectId, int userId) {
+        this.scorePK = new ScorePK(subjectId, userId);
     }
 
     public ScorePK getScorePK() {
@@ -64,20 +64,20 @@ public class Score implements Serializable {
         this.scorePK = scorePK;
     }
 
-    public String getName() {
-        return name;
+    public Float getTheory() {
+        return theory;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setTheory(float value) {
+        this.theory = value;
     }
 
-    public float getValue() {
-        return value;
+    public Float getPractice() {
+        return practice;
     }
 
-    public void setValue(float value) {
-        this.value = value;
+    public void setPractice(float value) {
+        this.practice = value;
     }
 
     public Subject getSubject() {
@@ -118,7 +118,7 @@ public class Score implements Serializable {
 
     @Override
     public String toString() {
-        return "com.Score[ scorePK=" + scorePK + " ]";
+      return "Score [scorePK=" + scorePK + ", name=" + theory + ", value=" + practice + "]";
     }
     
 }

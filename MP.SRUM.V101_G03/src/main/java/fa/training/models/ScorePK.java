@@ -16,9 +16,6 @@ public class ScorePK implements Serializable{
    */
   private static final long serialVersionUID = 1L;
 
-    @Column(name = "Id")
-    private Integer id;
-
     @Column(name = "SubjectId")
     private Integer subjectId;
 
@@ -28,18 +25,9 @@ public class ScorePK implements Serializable{
     public ScorePK() {
     }
 
-    public ScorePK(Integer id, Integer subjectId, Integer userId) {
-        this.id = id;
+    public ScorePK(Integer subjectId, Integer userId) {
         this.subjectId = subjectId;
         this.userId = userId;
-    }
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
     }
 
     public Integer getSubjectId() {
@@ -61,7 +49,6 @@ public class ScorePK implements Serializable{
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (int) id;
         hash += (int) subjectId;
         hash += (int) userId;
         return hash;
@@ -74,9 +61,6 @@ public class ScorePK implements Serializable{
             return false;
         }
         ScorePK other = (ScorePK) object;
-        if (this.id != other.id) {
-            return false;
-        }
         if (this.subjectId != other.subjectId) {
             return false;
         }
@@ -88,7 +72,7 @@ public class ScorePK implements Serializable{
 
     @Override
     public String toString() {
-        return "com.ScorePK[ id=" + id + ", subjectId=" + subjectId + ", userId=" + userId + " ]";
+        return "com.ScorePK[ subjectId=" + subjectId + ", userId=" + userId + " ]";
     }
     
 }

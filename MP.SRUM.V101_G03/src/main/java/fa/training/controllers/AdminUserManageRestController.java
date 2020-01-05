@@ -12,9 +12,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import fa.training.dto.ScoreDto;
 import fa.training.models.User;
 import fa.training.services.AdminUserService;
 
+
+/**
+ * @author TrangDM2
+ *
+ */
 @RestController
 @RequestMapping("admin")
 public class AdminUserManageRestController {
@@ -27,10 +33,21 @@ public class AdminUserManageRestController {
     User user = adminUserService.getUser(id);
     return new ResponseEntity<User>(user, HttpStatus.OK);
   }
-
-  @PostMapping("create-user")
-  public ResponseEntity<List<User>> createUser(@RequestBody User user) {
-    return new ResponseEntity<>(HttpStatus.CREATED);
+  
+  @GetMapping("trainee-score")
+  public ResponseEntity<List<ScoreDto>> getScores(@RequestParam int id) {
+    List<ScoreDto> scores = adminUserService.getScore(id);
+    return new ResponseEntity<List<ScoreDto>>(scores, HttpStatus.OK);
   }
 
+  @PostMapping("create-user")
+  public ResponseEntity<String> createUser(@RequestBody User user) {
+    user.setRole("ROLE_TRAINEE");
+    user.setStatus("Active");
+    user.setPassword("123456789");
+    adminUserService.saveUser(user);
+    return new ResponseEntity<String>("Add trainee Success", HttpStatus.CREATED);
+  }
+
+  
 }

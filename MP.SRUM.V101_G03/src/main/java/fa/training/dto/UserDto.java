@@ -5,6 +5,10 @@ import java.time.LocalDate;
 import fa.training.models.Clazz;
 import fa.training.models.User;
 
+/**
+ * @author TrangDM2
+ *
+ */
 public class UserDto {
   private int id;
   private String name;
@@ -21,8 +25,10 @@ public class UserDto {
     this.email = user.getEmail();
     this.account = user.getAccount();
     this.birthDay = user.getBirthDay();
-    this.classId = clazz.getId();
-    this.className = clazz.getName();
+    if(clazz!=null) {
+      this.classId = clazz.getId();
+      this.className = clazz.getName();
+    }
   }
 
   public LocalDate getBirthDay() {

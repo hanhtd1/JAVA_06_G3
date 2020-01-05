@@ -9,14 +9,23 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import fa.training.dto.UserDto;
+import fa.training.models.Clazz;
+import fa.training.services.AdminClassService;
 import fa.training.services.AdminUserService;
 
+/**
+ * @author TrangDM2
+ *
+ */
 @Controller
 @RequestMapping("admin")
 public class AdminMainController {
   
   @Autowired
   private AdminUserService adminUserService;
+  
+  @Autowired
+  private AdminClassService adminClassService;
   
   @GetMapping("/")
   public String home() {
@@ -35,8 +44,10 @@ public class AdminMainController {
   
   @GetMapping("trainee-manage")
   public String traineeManage(Model model) {
-    List<UserDto> trainees = adminUserService.getUsersByRole("ROLE_TRAINER");
+    List<UserDto> trainees = adminUserService.getUsersByRole("ROLE_TRAINEE");
+    List<Clazz> classes = adminClassService.getClasses();
     model.addAttribute("trainees", trainees);
+    model.addAttribute("classes", classes);
     return "class-admin-trainee-manage";
   }
   
