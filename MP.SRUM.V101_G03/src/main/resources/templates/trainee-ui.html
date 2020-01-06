@@ -728,7 +728,7 @@
 																			<td>Done</td>
 																			<td><a
 																				class="modal-trigger waves-effect waves-light btn"
-																				href="#modal3">View Feedback</a></td>
+																				href="#modal3" th:onclick="'load-feedback('+${}+','+ ${}+')'">View Feedback</a></td>
 																		</tr>
 																		<tr>
 																			<td>SQL</td>
@@ -782,38 +782,12 @@
 																			<th class="w-25" data-field="price">Note</th>
 																		</tr>
 																	</thead>
-																	<tbody>
+																	<tbody th:each="att : ${attendances}">
 																		<tr>
-																			<td>2019/1202</td>
-																			<td>Late</td>
-																			<td>No reason</td>
+																			<td th:text="${att.date}"></td>
+																			<td th:text="${att.type}"></td>
+																			<td th:text="${att.note}"></td>
 																		</tr>
-																		<tr>
-																			<td>2019/1202</td>
-																			<td>Late</td>
-																			<td>No reason</td>
-																		</tr>
-																		<tr>
-																			<td>2019/1202</td>
-																			<td>Late</td>
-																			<td>No reason</td>
-																		</tr>
-																		<tr>
-																			<td>2019/1202</td>
-																			<td>Late</td>
-																			<td>No reason</td>
-																		</tr>
-																		<tr>
-																			<td>2019/1202</td>
-																			<td>Late</td>
-																			<td>No reason</td>
-																		</tr>
-																		<tr>
-																			<td>2019/1202</td>
-																			<td>Late</td>
-																			<td>No reason</td>
-																		</tr>
-
 																	</tbody>
 																</table>
 															</div>
@@ -926,9 +900,7 @@
 			<div id="modal3" class="modal modal-fixed-footer">
 				<div class="modal-content">
 					<h4>Modal Header</h4>
-					<p>Lorem ipsum dolor sit amet.Feedback Feedback Feedback
-						Feedback Feedback...Feedback Feedback Feedback Feedback
-						Feedback...Feedback Feedback Feedback Feedback Feedback...</p>
+					<p id="feedback-content"></p>
 				</div>
 			</div>
 			<!-- Modal Structure -->
