@@ -8,4 +8,6 @@ import fa.training.models.Feedback;
 @Repository
 public interface FeedbackRepository extends JpaRepository<Feedback, Integer> {
 
+	public Feedback findByUserIdAndSubjectId(int userId, int subjectId);
+
 }
