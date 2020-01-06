@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 import fa.training.dto.ScoreDto;
 import fa.training.dto.UserDto;
 import fa.training.models.User;
-import fa.training.services.AdminUserService;
+import fa.training.services.IAdminUserService;
 
 /**
  * @author TrangDM2
@@ -26,7 +26,7 @@ import fa.training.services.AdminUserService;
 public class AdminUserManageRestController {
 
   @Autowired
-  private AdminUserService adminUserService;
+  private IAdminUserService adminUserService;
 
   /**
    *@author TrangDM2

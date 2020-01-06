@@ -10,8 +10,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import fa.training.dto.UserDto;
 import fa.training.models.Clazz;
-import fa.training.services.AdminClassService;
-import fa.training.services.AdminUserService;
+import fa.training.services.IAdminClassService;
+import fa.training.services.IAdminUserService;
 
 /**
  * @author TrangDM2
@@ -22,10 +22,10 @@ import fa.training.services.AdminUserService;
 public class AdminMainController {
   
   @Autowired
-  private AdminUserService adminUserService;
+  private IAdminUserService adminUserService;
   
   @Autowired
-  private AdminClassService adminClassService;
+  private IAdminClassService adminClassService;
   
   
   /**

@@ -13,14 +13,14 @@ import fa.training.models.Score;
 import fa.training.models.User;
 import fa.training.repositories.ScoreRepository;
 import fa.training.repositories.UserRepository;
-import fa.training.services.AdminUserService;
+import fa.training.services.IAdminUserService;
 
 /**
  * @author TrangDM2
  *
  */
 @Service
-public class AdminUserServiceImpl implements AdminUserService {
+public class AdminUserService implements IAdminUserService {
   @Autowired
   private UserRepository userRepository;
   @Autowired

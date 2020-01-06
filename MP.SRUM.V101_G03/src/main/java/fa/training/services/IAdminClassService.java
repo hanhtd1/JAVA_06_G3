@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 import fa.training.models.Clazz;
 
 @Service
-public interface AdminClassService {
+public interface IAdminClassService {
 
   List<Clazz> getClasses();
 
