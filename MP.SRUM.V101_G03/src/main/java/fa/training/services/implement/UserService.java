@@ -9,12 +9,8 @@ import fa.training.models.User;
 import fa.training.repositories.UserRepository;
 import fa.training.services.IUserService;
 
-/**
- * @author HoangLV7
- *
- */
 @Service
-public class UserServiceImpl implements IUserService {
+public class UserService implements IUserService {
 
 	@Autowired
 	private UserRepository userRepository;

@@ -15,12 +15,13 @@ import fa.training.models.Score;
  */
 @Repository
 public interface ScoreRepository extends JpaRepository<Score, Integer> {
-  
-  /**
-   * @author TrangDM2
-   * @param id
-   * @return
-   */
-  @Query("select s from Score s where s.user.id = :id")
-  List<Score> findAllScoreByUserId(@Param("id") Integer id);
+
+	/**
+	 * @author TrangDM2
+	 * @param id
+	 * @return
+	 */
+	@Query("select s from Score s where s.user.id = :id")
+	List<Score> findAllScoreByUserId(@Param("id") Integer id);
+	
 }

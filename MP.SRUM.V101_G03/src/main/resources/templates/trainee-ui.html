@@ -685,7 +685,7 @@
 														Details Information</a>
 													<div class="row details-list">
 														<div class="col s1 first-col">
-															<span><i class="tiny material-icons">person_pin</i></span>
+															<span><i class="tiny material-icons">cake</i></span>
 															<span><i class="tiny material-icons">email</i></span>
 															<span><i class="tiny material-icons">perm_phone_msg</i></span>
 														</div>
@@ -720,52 +720,30 @@
 																				Feedback</th>
 																		</tr>
 																	</thead>
-																	<tbody>
+																	<tbody th:each="score : ${scores}">
 																		<tr>
-																			<td>JPL</td>
-																			<td>9</td>
-																			<td>9</td>
-																			<td>Done</td>
-																			<td><a
-																				class="modal-trigger waves-effect waves-light btn"
-																				href="#modal3" th:onclick="'load-feedback('+${}+','+ ${}+')'">View Feedback</a></td>
-																		</tr>
-																		<tr>
-																			<td>SQL</td>
-																			<td>8</td>
-																			<td>8</td>
-																			<td>Done</td>
-																			<td><a
-																				class="waves-effect waves-light btn modal-trigger"
-																				href="#feedback-modal">Feadback</a></td>
-																		</tr>
-																		<tr>
-																			<td>ORM</td>
-																			<td>7</td>
-																			<td>9</td>
-																			<td>Doing</td>
-																			<td></td>
-																		</tr>
-																		<tr>
-																			<td>CNU</td>
-																			<td>7</td>
-																			<td>10</td>
-																			<td>Todo</td>
-																			<td></td>
-																		</tr>
-																		<tr>
-																			<td>JWEB</td>
-																			<td>7</td>
-																			<td>10</td>
-																			<td>Todo</td>
-																			<td></td>
-																		</tr>
-																		<tr>
-																			<td>SFW</td>
-																			<td>7</td>
-																			<td>10</td>
-																			<td>Todo</td>
-																			<td></td>
+																			<td th:text="${score.subjectName}"></td>
+																			<td th:text="${score.theory}"></td>
+																			<td th:text="${score.practice}"></td>
+																			<td th:text="${score.status}"></td>
+																			
+																			<td th:if="${score.status} != 'In Coming'">
+																				<div th:if="${score.status} == 'Done'">
+																					<a	
+																						class="modal-trigger waves-effect waves-light btn waves-block"
+																						href="#modal3" th:onclick="'load_feedback('+${score.traineeId}+','+ ${score.subjectId}+')'">View Feedback</a>
+																				</div>
+																				<div th:unless="${score.status} == 'Done'" class="row" style="margin: 0">
+																					<a	
+																						class="modal-trigger waves-effect waves-light btn waves-block col s6"
+																						href="#modal3" th:onclick="'load_feedback('+${score.traineeId}+','+ ${score.subjectId}+')'">View</a>
+																					<a
+																						class="waves-effect waves-light btn modal-trigger  waves-block red col s6"
+																						href="#feedback-modal" th:onclick="'load_feedback_info('+${score.traineeId}+','+ ${score.subjectId}+')'">Feedback</a>
+																				</div>
+																			</td>
+
+																			<td th:unless="${score.status} != 'In Coming'"></td>	
 																		</tr>
 																	</tbody>
 																</table>
@@ -897,37 +875,39 @@
 				</div>
 			</div>
 			<!-- Modal Structure -->
-			<div id="modal3" class="modal modal-fixed-footer">
+			<div id="modal3" class="modal">
 				<div class="modal-content">
-					<h4>Modal Header</h4>
+					<h4>Feedback</h4>
 					<p id="feedback-content"></p>
 				</div>
 			</div>
 			<!-- Modal Structure -->
 			<div id="feedback-modal" class="modal">
+				<form class="col s12" th:action="@{/trainee/add-feedback}" method="POST">
 				<div class="modal-content">
 					<span class="card-title">Character Counter</span>
 					<div class="row">
-						<form class="col s12">
-							<div class="row">
-								<div class="input-field col s12">
-									<textarea id="textarea1" class="materialize-textarea"
-										length="200"></textarea>
-									<label for="textarea1">Textarea</label>
-								</div>
-							</div>
-						</form>
+						<div class="input-field col s12">
+							<textarea id="textarea1" class="materialize-textarea"
+								length="200" name="feedbackContent"></textarea>
+							<label for="textarea1">Textarea</label>
+						</div>
+						<div>
+							<input type="hidden" name="userId" id="userId"/>
+							<input type="hidden" name="subjectId" id="subjectId"/>
+						</div>
 					</div>
 				</div>
 				<div class="modal-footer">
-					<a href="#!"
-						class=" modal-action modal-close waves-effect waves-green btn-flat">Submit</a>
+					<button
+						class=" modal-action modal-close waves-effect waves-green btn-flat" type="submit">Submit</button>
 				</div>
+				</form>
 			</div>
 			<!-- Modal Structure -->
 			<div id="view-feedback-modal" class="modal" style="width: 40%;">
 				<div class="modal-content">
-					<h4>Modal Header</h4>
+					<h4>Feedback</h4>
 					<p>Lorem ipsum dolor</p>
 				</div>
 			</div>
