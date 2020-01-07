@@ -10,16 +10,16 @@ import fa.training.models.User;
 import fa.training.repositories.AttendanceRepository;
 import fa.training.services.IAttendanceService;
 
-/**
- * @author HoangLV7
- *
- */
 @Service
-public class AttendanceServiceImpl implements IAttendanceService{
+public class AttendanceService implements IAttendanceService{
 
 	@Autowired
 	private AttendanceRepository attendanceRepository;
 
+	/**
+	 * @author HoangLV7
+	 * 
+	 */
 	@Override
 	public List<Attendance> getAttendancesByUser(User user) {
 		return attendanceRepository.findAttendanceByUser(user.getId());

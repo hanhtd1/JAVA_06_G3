@@ -7,70 +7,70 @@ import fa.training.models.Score;
  *
  */
 public class ScoreDto {
-  private Integer traineeId;
-  private Integer subjectId;
-  private String subjectName;
 
-  public Integer getSubjectId() {
-    return subjectId;
-  }
+	private Integer traineeId;
+	private Integer subjectId;
+	private String subjectName;
+	private Float theory;
+	private Float practice;
+	private String status;
 
-  public void setSubjectId(Integer subjectId) {
-    this.subjectId = subjectId;
-  }
+	public ScoreDto(Score score) {
+		super();
+		this.traineeId = score.getScorePK().getUserId();
+		this.subjectId = score.getSubject().getId();
+		this.subjectName = score.getSubject().getName();
+		this.theory = score.getTheory();
+		this.practice = score.getPractice();
+		this.status = score.getTheory() == null ? score.getPractice() == null ? "In Coming" : "In Progress" : score.getPractice() == null ? "In Progress" : "Done";
+	}
 
-  private Float theory;
-  private Float practice;
-  private String status;
+	public Integer getSubjectId() {
+		return subjectId;
+	}
 
-  public ScoreDto(Score score) {
-    super();
-    this.traineeId = score.getScorePK().getUserId();
-    this.subjectId = score.getSubject().getId();
-    this.subjectName = score.getSubject().getName();
-    this.theory = score.getTheory();
-    this.practice = score.getPractice();
-    this.status = score.getTheory() == null ? score.getPractice() == null ? "In Coming" : "In Progress" : score.getPractice() == null ? "In Progress" : "Done";
-  }
+	public void setSubjectId(Integer subjectId) {
+		this.subjectId = subjectId;
+	}
 
-  public Integer getTraineeId() {
-    return traineeId;
-  }
+	public Integer getTraineeId() {
+		return traineeId;
+	}
 
-  public void setTraineeId(Integer traineeId) {
-    this.traineeId = traineeId;
-  }
+	public void setTraineeId(Integer traineeId) {
+		this.traineeId = traineeId;
+	}
 
-  public String getSubjectName() {
-    return subjectName;
-  }
+	public String getSubjectName() {
+		return subjectName;
+	}
 
-  public void setSubjectName(String subjectName) {
-    this.subjectName = subjectName;
-  }
+	public void setSubjectName(String subjectName) {
+		this.subjectName = subjectName;
+	}
 
-  public Float getTheory() {
-    return theory;
-  }
+	public Float getTheory() {
+		return theory;
+	}
 
-  public void setTheory(Float theory) {
-    this.theory = theory;
-  }
+	public void setTheory(Float theory) {
+		this.theory = theory;
+	}
 
-  public Float getPractice() {
-    return practice;
-  }
+	public Float getPractice() {
+		return practice;
+	}
 
-  public void setPractice(Float practice) {
-    this.practice = practice;
-  }
+	public void setPractice(Float practice) {
+		this.practice = practice;
+	}
 
-  public String getStatus() {
-    return status;
-  }
+	public String getStatus() {
+		return status;
+	}
 
-  public void setStatus(String status) {
-    this.status = status;
-  }
+	public void setStatus(String status) {
+		this.status = status;
+	}
 
 }
