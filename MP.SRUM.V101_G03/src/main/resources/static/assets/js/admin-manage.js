@@ -1,4 +1,7 @@
 var currentTrainee;
+var currentClass;
+
+//Traineee
 function loadTrainees(){
 	$("#list_trainees").html("");
 	$.get({
@@ -30,6 +33,48 @@ function showTraineeList(res, className){
 			"</li>"
 	);
 }
+
+//CLassss
+function loadClasses(){
+	$("#list_trainees").html("");
+	$.get({
+		url: "/admin/get-classes",
+		data: {
+			keyword: $("#find-class").val(),
+			status: $("#class-status").val()
+		},
+		success: (resp)=>{
+			resp.map((res)=>{
+				this.showClassList(res)
+			})
+		}
+	})
+	return false;
+}
+function showClassList(res){
+	$("#list_classes").append("<li>\n" +
+		"<a  href=\"#!\" onclick=\"loadTraineeInfo("+res.id+")\" >\n" +
+		"<h5 class=\"f-s-19\">"+res.name+"</h5>\n" +
+		"<span>\n" +
+		"<i class=\"tiny material-icons\">person_pin</i> <span>"+res.userList.length+"</span> Members\n" +
+		"</span>\n" +
+		"</a>\n" +
+		"</li>");
+}
+
+function loadClassDetail(id){
+	currentClass = id;
+	$.get({
+		url: "/admin/class-detail",
+		data: {
+			id: id
+		},
+		success: (resp)=>{
+			$("#class-detail").html(resp)
+		}
+	})
+}
+
 
 function loadTraineeInfo(id){
 	$("#scores").html("")

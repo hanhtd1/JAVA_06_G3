@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import fa.training.dto.UserDto;
 import fa.training.models.Clazz;
@@ -26,7 +27,6 @@ public class AdminMainController {
   
   @Autowired
   private IAdminClassService adminClassService;
-  
   
   /**
    * @author TrangDM2
@@ -48,10 +48,21 @@ public class AdminMainController {
    * @author TrangDM2
    */
   @GetMapping("class-manage")
-  public String classManage() {
+  public String classManage(Model model) {
+    List<Clazz> clazzes = adminClassService.getClasses();
+    model.addAttribute("classes", clazzes);
     return "class-admin-class-manage";
   }
   
+  /**
+   * @author TrangDM2
+   */
+  @GetMapping("class-detail")
+  public String classDetail(Model model, @RequestParam Integer id) {
+    Clazz clazz = adminClassService.getClass(id);
+    model.addAttribute("class", clazz);
+    return "class-detail";
+  }
   /**
    * @author TrangDM2
    */

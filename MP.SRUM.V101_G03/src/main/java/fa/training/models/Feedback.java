@@ -44,8 +44,8 @@ public class Feedback implements Serializable {
         this.content = content;
     }
 
-    public Feedback(int id, int subjectId, int userId) {
-        this.feedbackPK = new FeedbackPK(id, subjectId, userId);
+    public Feedback(int subjectId, int userId) {
+        this.feedbackPK = new FeedbackPK(subjectId, userId);
     }
 
     public FeedbackPK getFeedbackPK() {

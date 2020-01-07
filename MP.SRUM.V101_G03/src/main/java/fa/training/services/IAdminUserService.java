@@ -1,6 +1,7 @@
 package fa.training.services;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 
@@ -27,7 +28,7 @@ public interface IAdminUserService {
 
   String generateAccount(String firstName, String lastName);
 
-  User getUserByAccount(String account);
+  Optional<User> getUserByAccount(String account);
 
   List<UserDto> findUserByKeyword(String keyword, String role, String status);
 

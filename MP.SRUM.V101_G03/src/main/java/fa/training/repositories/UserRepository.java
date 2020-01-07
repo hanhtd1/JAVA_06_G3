@@ -1,6 +1,7 @@
 package fa.training.repositories;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
@@ -13,7 +14,7 @@ import fa.training.models.User;
 
 @Repository
 public interface UserRepository extends JpaRepository<User, Integer> {
-  
+
   /**
    * @author TrangDM2
    * @param status
@@ -42,7 +43,7 @@ public interface UserRepository extends JpaRepository<User, Integer> {
    * @param account
    * @return
    */
-  User findByAccount(String account);
+  Optional<User> findByAccount(String account);
 
   /**
    * @author TrangDM2

@@ -2,6 +2,7 @@ package fa.training.services.implement;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -38,7 +39,7 @@ public class AdminUserService implements IAdminUserService {
    *@author TrangDM2
    */
   @Override
-  public User getUserByAccount(String account) {
+  public Optional<User> getUserByAccount(String account) {
     return userRepository.findByAccount(account);
   }
 
@@ -135,4 +136,5 @@ public class AdminUserService implements IAdminUserService {
     } else account += String.valueOf(number);
     return account;
   }
+
 }

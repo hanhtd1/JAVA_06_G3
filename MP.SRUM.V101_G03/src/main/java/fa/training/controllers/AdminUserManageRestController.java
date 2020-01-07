@@ -5,7 +5,9 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -59,7 +61,7 @@ public class AdminUserManageRestController {
    *@author TrangDM2
    */
   @PostMapping("create-user")
-  public ResponseEntity<String> createUser(@RequestBody User user) {
+  public ResponseEntity<String> createUser(@ModelAttribute User user) {
     byte role = Byte.parseByte(user.getRole());
     if (adminUserService.getUserByAccount(user.getAccount()) == null) {
       user.setRole(role==1?"ROLE_TRAINEE":"ROLE_TRAINER");
@@ -77,7 +79,9 @@ public class AdminUserManageRestController {
    */
   @PostMapping("update-user")
   public ResponseEntity<String> updaterUser(@RequestBody User user){
-    User u = adminUserService.getUserByAccount(user.getAccount());
+    User u = adminUserService.getUserByAccount(user.getAccount()).orElseThrow(() -> {
+      throw new UsernameNotFoundException("Account not found");
+    });
     user.setPassword(u.getPassword());
     user.setRole(u.getRole());
     user.setStatus(u.getStatus());

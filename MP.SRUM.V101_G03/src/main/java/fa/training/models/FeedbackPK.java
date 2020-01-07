@@ -15,10 +15,6 @@ public class FeedbackPK implements Serializable{
    * 
    */
   private static final long serialVersionUID = 1L;
-
-    @Column(name = "Id")
-    private Integer id;
-
     @Column(name = "SubjectId")
     private Integer subjectId;
 
@@ -28,18 +24,9 @@ public class FeedbackPK implements Serializable{
     public FeedbackPK() {
     }
 
-    public FeedbackPK(Integer id, Integer subjectId, Integer userId) {
-        this.id = id;
+    public FeedbackPK(Integer subjectId, Integer userId) {
         this.subjectId = subjectId;
         this.userId = userId;
-    }
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
     }
 
     public Integer getSubjectId() {
@@ -61,7 +48,6 @@ public class FeedbackPK implements Serializable{
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (int) id;
         hash += (int) subjectId;
         hash += (int) userId;
         return hash;
@@ -74,9 +60,6 @@ public class FeedbackPK implements Serializable{
             return false;
         }
         FeedbackPK other = (FeedbackPK) object;
-        if (this.id != other.id) {
-            return false;
-        }
         if (this.subjectId != other.subjectId) {
             return false;
         }
@@ -86,9 +69,4 @@ public class FeedbackPK implements Serializable{
         return true;
     }
 
-    @Override
-    public String toString() {
-        return "com.FeedbackPK[ id=" + id + ", subjectId=" + subjectId + ", userId=" + userId + " ]";
-    }
-    
 }

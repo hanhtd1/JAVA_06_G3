@@ -118,7 +118,7 @@
 </div>
 <!-- Modal add trainee -->
 <div id="add-trainee-modal" class="modal modal-fixed-footer">
-	<form class="col s12" th:onsubmit="return addTrainee()"
+	<form class="col s12" th:object="${user}" th:onsubmit="return addTrainee()"
 		id="add_trainee_form" name="add_trainee_form">
 		<div class="modal-content">
 			<h4>Add new trainee</h4>
@@ -264,11 +264,9 @@
 </div>
 <script th:src="@{../assets/plugins/jquery/jquery-2.2.0.min.js}"></script>
 <script th:src="@{../assets/plugins/materialize/js/materialize.min.js}"></script>
-<script
-	th:src="@{../assets/plugins/material-preloader/js/materialPreloader.min.js}"></script>
+<script th:src="@{../assets/plugins/material-preloader/js/materialPreloader.min.js}"></script>
 <script th:src="@{../assets/plugins/jquery-blockui/jquery.blockui.js}"></script>
-<script
-	th:src="@{../assets/plugins/datatables/js/jquery.dataTables.min.js}"></script>
+<script th:src="@{../assets/plugins/datatables/js/jquery.dataTables.min.js}"></script>
 <script th:src="@{../assets/plugins/simditor/scripts/module.js}"></script>
 <script th:src="@{../assets/plugins/simditor/scripts/hotkeys.js}"></script>
 <script th:src="@{../assets/plugins/simditor/scripts/uploader.js}"></script>
@@ -278,3 +276,4 @@
 <script th:src="@{../assets/js/pages/mailbox.js}"></script>
 <script th:src="@{../assets/js/pages/form-wizard.js}"></script>
 <script th:src="@{../assets/js/admin-manage.js}"></script>
+<div id="scripts"></div>

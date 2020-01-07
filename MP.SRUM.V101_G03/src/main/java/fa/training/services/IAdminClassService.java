@@ -11,4 +11,6 @@ public interface IAdminClassService {
 
   List<Clazz> getClasses();
 
+  Clazz getClass(Integer id);
+
 }

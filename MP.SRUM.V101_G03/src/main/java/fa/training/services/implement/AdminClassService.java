@@ -27,4 +27,9 @@ public class AdminClassService implements IAdminClassService {
   public List<Clazz> getClasses(){
     return classRepository.findAll();
   }
+  
+  @Override
+  public Clazz getClass(Integer id) {
+    return classRepository.findById(id).get();
+  }
 }

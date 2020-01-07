@@ -81,6 +81,7 @@
 			</div>
 		</div>
 	</div>
+	
 	<div class="mn-content valign-wrapper">
 		<main class="mn-inner container">
 			<div class="valign">
@@ -90,21 +91,18 @@
 							<div class="card-content ">
 								<span class="card-title">Sign In</span>
 								<div class="row">
-									<form class="col s12" action="#" th:action="@{login}"
-										method="POST">
+									<form class="col s12" th:action="@{login}" method="POST">
+										<b th:if="${#request.getParameter('error') == 'true'}" style="color: red">Invalid account or password</b>
 										<div class="input-field col s12">
-											<input id="email" name="email" type="email" class="validate">
-											<label for="email">Email</label>
+											<input id=account name="email" type="text" class="validate">
+											<label for="account">Account</label>
 										</div>
 										<div class="input-field col s12">
 											<input id="password" name="password" type="password"
 												class="validate"> <label for="password">Password</label>
 										</div>
 										<div class="col s12 right-align m-t-sm">
-											<a href="sign-up.html"
-												class="waves-effect waves-grey btn-flat">sign up</a>
-											<button type="submit"
-												class="waves-effect waves-light btn teal">sign in</button>
+											<button type="submit" class="waves-effect waves-light btn teal">sign in</button>
 										</div>
 									</form>
 								</div>
