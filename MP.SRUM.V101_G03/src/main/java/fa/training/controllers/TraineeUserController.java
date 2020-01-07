@@ -68,13 +68,13 @@ public class TraineeUserController {
 	
 	@GetMapping("/feedback-info")
 	public @ResponseBody Feedback feedbackInfo(@RequestParam("userId") int userId, @RequestParam("subjectId") int subjectId) {
-		return new Feedback(0, subjectId, userId);
+		return new Feedback(subjectId, userId);
 	}
 	
 	@RequestMapping(path = "/add-feedback", method = RequestMethod.POST)
 	public String addFeedback(Model model, @RequestParam("feedbackContent") String feedback,
 			@RequestParam("userId" ) int userId, @RequestParam("subjectId") int subjectId) {
-		iFeedbackService.save(new Feedback(new FeedbackPK(10, subjectId, userId), feedback));
+		iFeedbackService.save(new Feedback(new FeedbackPK(subjectId, userId), feedback));
 		return index(model);
 	}
 	
