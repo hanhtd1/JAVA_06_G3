@@ -62,6 +62,13 @@ public interface UserRepository extends JpaRepository<User, Integer> {
 	@Query("select count(u) from User u where account like :account")
 	int getNumberOfAccount(@Param("account") String account);
 
+	/**
+	 * @author TrangDM2
+	 * 
+	 */
+	@Query("select u from User u JOIN u.clazzList uc ON uc.id =:clazzId and u.role= :role ")
+	List<User> getAllUserByClass(@Param("clazzId") int classId, @Param("role") String role);
+	
   /**
    * @author HoangLV7
    * 
@@ -73,13 +80,6 @@ public interface UserRepository extends JpaRepository<User, Integer> {
       + "WHERE uc.clazz_id in (SELECT uc.clazz_id\r\n"
       + "FROM uzer u INNER JOIN user_clazz uc ON u.id = :user AND u.id  = uc.user_id)", nativeQuery = true)
   public List<User> getMembers(User user);
-
-	/**
-	 * @author TrangDM2
-	 * 
-	 */
-	@Query("select u from User u JOIN u.clazzList uc ON uc.id =:clazzId and u.role= :role ")
-	List<User> getAllUserByClass(@Param("clazzId") int classId, @Param("role") String role);
 
 
 	/**

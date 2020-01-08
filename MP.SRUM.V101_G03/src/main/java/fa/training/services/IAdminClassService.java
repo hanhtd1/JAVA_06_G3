@@ -6,6 +6,10 @@ import org.springframework.stereotype.Service;
 
 import fa.training.models.Clazz;
 
+/**
+ * @author TrangDM2
+ *
+ */
 @Service
 public interface IAdminClassService {
 

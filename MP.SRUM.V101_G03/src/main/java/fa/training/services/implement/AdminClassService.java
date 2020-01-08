@@ -28,6 +28,9 @@ public class AdminClassService implements IAdminClassService {
     return classRepository.findAll();
   }
   
+  /**
+   *@author TrangDM2
+   */
   @Override
   public Clazz getClass(Integer id) {
     return classRepository.findById(id).get();

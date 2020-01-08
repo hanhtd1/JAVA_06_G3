@@ -8,7 +8,7 @@
 			</div>
 			<div class="sidebar-profile-info">
 				<a href="javascript:void(0);" class="account-settings-link">
-					<p>Class Admin</p> <span>trangdm2@fsoft.com.vn</span>
+					<p th:text="${currentUser.firstName} +' '+ ${currentUser.lastName}"></p> <span th:text="${currentUser.email}"></span>
 				</a>
 			</div>
 		</div>

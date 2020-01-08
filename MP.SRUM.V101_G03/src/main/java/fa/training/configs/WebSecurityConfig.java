@@ -11,6 +11,10 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
+/**
+ * @author TrangDM2
+ *
+ */
 @Configuration
 @EnableWebSecurity
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
@@ -19,11 +23,17 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
   UserDetailsService userlogin;
   
   
+  /**
+   *@author TrangDM2
+   */
   @Override
   protected void configure(AuthenticationManagerBuilder auth) throws Exception {
     auth.userDetailsService(userlogin).passwordEncoder(passwordEncoder());
   }
   
+  /**
+   *@author TrangDM2
+   */
   @Override
   protected void configure(HttpSecurity http) throws Exception {
     
@@ -39,11 +49,18 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     .and().logout().logoutUrl("/logout").logoutSuccessUrl("/login").permitAll();
   }
   
+  /**
+   *@author TrangDM2
+   */
   @Override
   public void configure(WebSecurity web) throws Exception {
     web.ignoring().antMatchers("/assets/**");
   }
   
+  /**
+   * @author TrangDM2
+   * @return
+   */
   @Bean
   public BCryptPasswordEncoder passwordEncoder() {
     return new BCryptPasswordEncoder();
