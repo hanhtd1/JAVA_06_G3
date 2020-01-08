@@ -8,16 +8,15 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-
-import fa.training.services.implement.UserLoginService;
 
 @Configuration
 @EnableWebSecurity
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
   
   @Autowired
-  UserLoginService userlogin;
+  UserDetailsService userlogin;
   
   
   @Override
@@ -28,20 +27,16 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
   @Override
   protected void configure(HttpSecurity http) throws Exception {
     
-//    http.authorizeRequests().antMatchers("/admin/**").access("hasRole('ROLE_ADMIN')");
+    http.authorizeRequests().antMatchers("/admin/**").access("hasRole('ROLE_ADMIN')");
     http.authorizeRequests().antMatchers("/trainer/**").access("hasRole('ROLE_TRAINER')");
-//    http.authorizeRequests().antMatchers("/trainee/**").access("hasAnyRole('ROLE_TRAINEE')");
+    http.authorizeRequests().antMatchers("/trainee/**").access("hasRole('ROLE_TRAINEE')");
     http.authorizeRequests().and().exceptionHandling().accessDeniedPage("/403");
-
-    http.authorizeRequests().antMatchers("/admin/**").permitAll();//TODO for test 
-    http.authorizeRequests().antMatchers("/trainee/**").permitAll();
     
-    
-    
-    http.csrf().disable().authorizeRequests().anyRequest().authenticated().and().formLogin().loginPage("/login")
+    http.csrf().disable().authorizeRequests().anyRequest().authenticated()
+    .and().formLogin().loginPage("/login")
     .usernameParameter("account")
-    .defaultSuccessUrl("/index").failureUrl("/login?error=true").permitAll()
-    .and().logout().logoutUrl("/logout").logoutSuccessUrl("/login?logout").permitAll(); 
+    .defaultSuccessUrl("/authorization").failureUrl("/login?error=true").permitAll()
+    .and().logout().logoutUrl("/logout").logoutSuccessUrl("/login").permitAll();
   }
   
   @Override

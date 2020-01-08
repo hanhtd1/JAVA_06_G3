@@ -9,9 +9,9 @@ import fa.training.models.User;
  *
  */
 public interface IUserService {
-	public List<User> getMembers(User user);
+  public List<User> getMembers(User user);
 
-	public User getUser(String account, String password);
-	
-	public User getUserById(int userId);
+  User getUser(String account);
+
+  User getUserById(int userId);
 }

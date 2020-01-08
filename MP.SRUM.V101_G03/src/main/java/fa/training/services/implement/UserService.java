@@ -29,8 +29,8 @@ public class UserService implements IUserService {
 	 * 
 	 */
 	@Override
-	public User getUser(String account, String password) {
-		return userRepository.findByAccountAndPassword(account, password);
+	public User getUser(String account) {
+		return userRepository.findByAccount(account).get();
 	}
 
 	/**
@@ -40,5 +40,4 @@ public class UserService implements IUserService {
 	public User getUserById(int userId) {
 		return userRepository.findUserById(userId);
 	}
-
 }
