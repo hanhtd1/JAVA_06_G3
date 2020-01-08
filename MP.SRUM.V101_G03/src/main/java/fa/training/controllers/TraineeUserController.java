@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -32,13 +33,13 @@ public class TraineeUserController {
 
 	@Autowired
 	private IUserService iUserService;
-	
+
 	@Autowired
 	private IAttendanceService iAttendanceService;
-	
+
 	@Autowired
 	private IFeedbackService iFeedbackService;
-	
+
 	@Autowired
 	private IScoreService iScoreService;
 
@@ -46,9 +47,9 @@ public class TraineeUserController {
 	public String index(Model model) {
 		String account = "hoanglv7";
 		String password = "123456";
-		
+
 		User trainee = iUserService.getUser(account, password);
-		
+
 		List<User> users = iUserService.getMembers(trainee);
 		List<Attendance> attendances = iAttendanceService.getAttendancesByUser(trainee);
 		List<ScoreDto> scores = iScoreService.getScoreByUser(trainee.getId());
@@ -60,25 +61,27 @@ public class TraineeUserController {
 		model.addAttribute("scores", scores);
 		return "trainee-ui";
 	}
-	
+
 	@GetMapping("/view-feedback")
-	public @ResponseBody String viewFeedback(@RequestParam("userId") int userId, @RequestParam("subjectId") int subjectId) {
+	public @ResponseBody String viewFeedback(@RequestParam("userId") int userId,
+			@RequestParam("subjectId") int subjectId) {
 		Feedback feedback = iFeedbackService.getAllFeedback(userId, subjectId);
-		return feedback == null? "You didn't commit feedback!" : feedback.getContent();
+		return feedback == null ? "You didn't commit feedback!" : feedback.getContent();
 	}
-	
+
 	@GetMapping("/feedback-info")
-	public @ResponseBody Feedback feedbackInfo(@RequestParam("userId") int userId, @RequestParam("subjectId") int subjectId) {
+	public @ResponseBody Feedback feedbackInfo(@RequestParam("userId") int userId,
+			@RequestParam("subjectId") int subjectId) {
 		return new Feedback(subjectId, userId);
 	}
-	
+
 	@RequestMapping(path = "/add-feedback", method = RequestMethod.POST)
 	public String addFeedback(Model model, @RequestParam("feedbackContent") String feedback,
-			@RequestParam("userId" ) int userId, @RequestParam("subjectId") int subjectId) {
+			@RequestParam("userId") int userId, @RequestParam("subjectId") int subjectId) {
 		iFeedbackService.save(new Feedback(new FeedbackPK(subjectId, userId), feedback));
 		return "redirect:/trainee/";
 	}
-	
+
 	@GetMapping("/member-info")
 	public String memberInfo(Model model, @RequestParam("userId") int userId) {
 		User user = iUserService.getUserById(userId);
