@@ -94,7 +94,7 @@
 									<form class="col s12" th:action="@{login}" method="POST">
 										<b th:if="${#request.getParameter('error') == 'true'}" style="color: red">Invalid account or password</b>
 										<div class="input-field col s12">
-											<input id=account name="email" type="text" class="validate">
+											<input id=account name="account" type="text" class="validate">
 											<label for="account">Account</label>
 										</div>
 										<div class="input-field col s12">

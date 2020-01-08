@@ -21,7 +21,6 @@ public class UserLoginService implements UserDetailsService {
     User user = userRepository.findByAccount(username).orElseThrow(() -> {
       throw new UsernameNotFoundException("Account not found");
     });
-
     UserDetails userDetails = new org.springframework.security.core.userdetails.User(user.getAccount(),
         user.getPassword(), AuthorityUtils.createAuthorityList(user.getRole()));
     return userDetails;

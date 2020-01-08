@@ -6,8 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -30,6 +30,8 @@ public class AdminUserManageRestController {
   @Autowired
   private IAdminUserService adminUserService;
 
+  @Autowired
+  private BCryptPasswordEncoder bcrypt;
   /**
    *@author TrangDM2
    */
@@ -61,12 +63,12 @@ public class AdminUserManageRestController {
    *@author TrangDM2
    */
   @PostMapping("create-user")
-  public ResponseEntity<String> createUser(@ModelAttribute User user) {
+  public ResponseEntity<String> createUser(@RequestBody User user) {
     byte role = Byte.parseByte(user.getRole());
-    if (adminUserService.getUserByAccount(user.getAccount()) == null) {
+    if (!adminUserService.getUserByAccount(user.getAccount()).isPresent()) {
       user.setRole(role==1?"ROLE_TRAINEE":"ROLE_TRAINER");
       user.setStatus("Active");
-      user.setPassword("123456789");
+      user.setPassword(bcrypt.encode("123456789"));
       adminUserService.saveUser(user);
       return new ResponseEntity<String>("Add trainee Success", HttpStatus.CREATED);
     } else {
