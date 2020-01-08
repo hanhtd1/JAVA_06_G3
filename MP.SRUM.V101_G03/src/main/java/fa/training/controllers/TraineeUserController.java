@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import fa.training.dto.ScoreDto;
 import fa.training.models.Attendance;
+import fa.training.models.Clazz;
 import fa.training.models.Feedback;
 import fa.training.models.FeedbackPK;
 import fa.training.models.User;
@@ -51,9 +52,9 @@ public class TraineeUserController {
 		List<User> users = iUserService.getMembers(trainee);
 		List<Attendance> attendances = iAttendanceService.getAttendancesByUser(trainee);
 		List<ScoreDto> scores = iScoreService.getScoreByUser(trainee.getId());
-		
+		Clazz classTrainee = trainee.getClazzList().get(0);
+		model.addAttribute("class", classTrainee);
 		model.addAttribute("users", users);
-		
 		model.addAttribute("trainee", trainee);
 		model.addAttribute("attendances", attendances);
 		model.addAttribute("scores", scores);
@@ -75,12 +76,16 @@ public class TraineeUserController {
 	public String addFeedback(Model model, @RequestParam("feedbackContent") String feedback,
 			@RequestParam("userId" ) int userId, @RequestParam("subjectId") int subjectId) {
 		iFeedbackService.save(new Feedback(new FeedbackPK(subjectId, userId), feedback));
-		return index(model);
+		return "redirect:/trainee/";
 	}
 	
 	@GetMapping("/member-info")
-	public @ResponseBody List<ScoreDto> memberInfo(@RequestParam("userId") int userId) {
-		return iScoreService.getScoreByUser(userId);
+	public String memberInfo(Model model, @RequestParam("userId") int userId) {
+		User user = iUserService.getUserById(userId);
+		List<ScoreDto> scores = iScoreService.getScoreByUser(userId);
+		model.addAttribute("user", user);
+		model.addAttribute("scores", scores);
+		return "trainee-score";
 	}
 
 }

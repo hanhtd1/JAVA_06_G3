@@ -33,4 +33,12 @@ public class UserService implements IUserService {
 		return userRepository.findByAccountAndPassword(account, password);
 	}
 
+	/**
+	 * @author HoangLV7
+	 */
+	@Override
+	public User getUserById(int userId) {
+		return userRepository.findUserById(userId);
+	}
+
 }

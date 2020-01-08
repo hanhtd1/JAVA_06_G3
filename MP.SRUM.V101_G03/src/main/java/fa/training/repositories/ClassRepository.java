@@ -7,5 +7,5 @@ import fa.training.models.Clazz;
 
 @Repository
 public interface ClassRepository extends JpaRepository<Clazz, Integer> {
-  
+	
 }
