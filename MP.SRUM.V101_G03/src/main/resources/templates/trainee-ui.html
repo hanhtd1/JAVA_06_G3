@@ -638,11 +638,11 @@
 								<div class="row">
 									<ul>
 										<li>
-											<h4>HN19_FR_JAVA_06</h4>
+											<h4 th:text="${class.name}"></h4>
 										</li>
 										<li>
-											<h5>
-												<i class=" material-icons">supervisor_account</i> 20 Members
+											<h5 th:text="${users.size() + ' Members'}">
+												<i class="material-icons">supervisor_account</i>
 											</h5>
 										</li>
 									</ul>
@@ -655,11 +655,11 @@
 										<ul th:each="user : ${users}" th:object="${user}" th:if="${trainee.id} != ${user.id}">
 										<li>
 											<a class="waves-effect waves-light  modal-trigger "
-												href="#trainee-detail-modal">
+												href="#trainee-detail-modal" th:onclick="'load_member_info('+${user.id}+')'">
 												<h5 class="f-s-19" th:text="${user.firstName} + ' ' + ${user.lastName}"></h5>
-												<p th:text="${user.account}"> <i class="tiny material-icons">person_pin</i></p>
-												<p th:text="${user.email}"> <i class="tiny material-icons">email</i></p>
-												<p th:text="${user.phone}"><i class="tiny material-icons">perm_phone_msg</i></p>
+												<p th:text="${user.account}"><span><i class="tiny material-icons">person_pin</i></p>
+												<p th:text="${user.email}"><span><i class="tiny material-icons">email</i></p>
+												<p th:text="${user.phone}"><span><i class="tiny material-icons">perm_phone_msg</i></p>
 											</a>
 											</li>
 										</ul>
@@ -784,98 +784,13 @@
 			</div>
 			<!-- Modal Structure -->
 			<div id="trainee-detail-modal" class="modal modal-fixed-footer">
-				<div class="">
-					<div class="mailbox-view">
-						<div class="mailbox-view-header">
-							<div class="left">
-								<div class="left">
-									<img src="assets/images/profile-image-1.png" alt=""
-										class="circle mailbox-profile-image z-depth-1">
-								</div>
-								<div class="left">
-									<span class="mailbox-title">Jonathan Smith</span> <span
-										class="mailbox-author">JonathanSmith12</span>
-								</div>
-							</div>
+				<div class="" id="member-content">
 
-							<div class="mailbox-text">
-								<div class="mailbox-details">
-									<a href="javascript:void(0);" class="details-toggle">Show
-										Details Information</a>
-									<div class="row details-list">
-										<div class="col s1 first-col">
-											<span><i class="tiny material-icons">person_pin</i> </span> <span><i
-												class="tiny material-icons">work</i></span> <span><i
-												class="tiny material-icons">email</i></span> <span><i
-												class="tiny material-icons">perm_phone_msg</i></span>
-										</div>
-										<div class="col s8 second-col">
-											<span> 10/10/1997</span> <span> HN19_FR_JAVA_06</span> <span>
-												jonathansm@fsoft.com.vn</span> <span> 090 123 1221</span>
-										</div>
-									</div>
-								</div>
-								<div class="divider mailbox-divider"></div>
-								<div class="p-h-md">
-									<table style="table-layout: fixed;"
-										class="responsive-table bordered striped">
-										<thead>
-											<tr>
-												<th data-field="id">Subjects</th>
-												<th class="w-25" data-field="name">Theory Mark</th>
-												<th class="w-25" data-field="price">Practice Mark</th>
-												<th class="w-25" data-field="price">Status</th>
-												<th style="word-wrap: break-word;" data-field="price">
-													Feedback</th>
-											</tr>
-										</thead>
-										<tbody>
-											<tr>
-												<td>JPL</td>
-												<td>9</td>
-												<td>9</td>
-												<td>Done</td>
-												<td><a class="modal-trigger waves-effect waves-light"
-													href="#view-feedback-modal">View Feedback</a></td>
-											</tr>
-											<tr>
-												<td>ORM</td>
-												<td>7</td>
-												<td>9</td>
-												<td>Doing</td>
-												<td></td>
-											</tr>
-											<tr>
-												<td>CNU</td>
-												<td>7</td>
-												<td>10</td>
-												<td>Todo</td>
-												<td></td>
-											</tr>
-											<tr>
-												<td>JWEB</td>
-												<td>7</td>
-												<td>10</td>
-												<td>Todo</td>
-												<td></td>
-											</tr>
-											<tr>
-												<td>SFW</td>
-												<td>7</td>
-												<td>10</td>
-												<td>Todo</td>
-												<td></td>
-											</tr>
-										</tbody>
-									</table>
-								</div>
-							</div>
-						</div>
 					</div>
 				</div>
 			</div>
 			<!-- Modal Structure -->
-			<div id="modal3" class="modal">
+			<div id="modal3" class="modal" style="width: 40%">
 				<div class="modal-content">
 					<h4>Feedback</h4>
 					<p id="feedback-content"></p>

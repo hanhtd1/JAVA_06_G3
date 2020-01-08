@@ -1,0 +1,79 @@
+<div class="mailbox-view">
+	<div class="mailbox-view-header">
+		<div class="left">
+			<div class="left">
+				<img th:src="@{../assets/images/profile-image-1.png}" alt=""
+					class="circle mailbox-profile-image z-depth-1">
+			</div>
+			<div class="left">
+				<span class="mailbox-title"
+					th:text="${user.firstName} + ' ' + ${user.lastName}"></span> <span
+					class="mailbox-author" th:text="${user.account}"></span>
+			</div>
+		</div>
+
+		<div class="mailbox-text">
+			<div class="mailbox-details">
+				<a href="javascript:void(0);" class="details-toggle">Show
+					Details Information</a>
+				<div class="row details-list">
+					<div class="col s1 first-col">
+						<span><i class="tiny material-icons">cake</i></span> <span><i
+							class="tiny material-icons">email</i></span> <span><i
+							class="tiny material-icons">perm_phone_msg</i></span>
+					</div>
+					<div class="col s8 second-col">
+						<span th:text="${user.birthDay}"></span> <span
+							th:text="${user.email}"></span> <span th:text="${user.phone}"></span>
+					</div>
+				</div>
+			</div>
+			<div class="divider mailbox-divider"></div>
+			<div class="p-h-md">
+				<table style="table-layout: fixed;"
+					class="responsive-table bordered striped">
+					<thead>
+						<tr>
+							<th data-field="id">Subjects</th>
+							<th class="w-25" data-field="name">Theory Mark</th>
+							<th class="w-25" data-field="price">Practice Mark</th>
+							<th class="w-25" data-field="price">Status</th>
+							<th style="word-wrap: break-word;" data-field="price">
+								Feedback</th>
+						</tr>
+					</thead>
+					<tbody th:each="score : ${scores}">
+						<tr>
+							<td th:text="${score.subjectName}"></td>
+							<td th:text="${score.theory}"></td>
+							<td th:text="${score.practice}"></td>
+							<td th:text="${score.status}"></td>
+
+							<td th:if="${score.status} != 'In Coming'"><a
+								class="modal-trigger waves-effect waves-light btn waves-block"
+								href="#modal3"
+								th:onclick="'load_feedback('+${score.traineeId}+','+ ${score.subjectId}+')'">View
+									Feedback</a></td>
+
+							<td th:unless="${score.status} != 'In Coming'"></td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+
+	<!-- Javascripts -->
+	<script th:src="@{../assets/plugins/jquery/jquery-2.2.0.min.js}"></script>
+	<script th:src="@{../assets/plugins/materialize/js/materialize.min.js}"></script>
+	<script
+		th:src="@{../assets/plugins/material-preloader/js/materialPreloader.min.js}"></script>
+	<script th:src="@{../assets/plugins/jquery-blockui/jquery.blockui.js}"></script>
+	<script th:src="@{../assets/plugins/simditor/scripts/module.js}"></script>
+	<script th:src="@{../assets/plugins/simditor/scripts/hotkeys.js}"></script>
+	<script th:src="@{../assets/plugins/simditor/scripts/uploader.js}"></script>
+	<script th:src="@{../assets/plugins/simditor/scripts/simditor.js}"></script>
+	<script th:src="@{../assets/js/alpha.min.js}"></script>
+	<script th:src="@{../assets/js/pages/mailbox.js}"></script>
+
+	<script th:src="@{../assets/js/trainee.js}"></script>

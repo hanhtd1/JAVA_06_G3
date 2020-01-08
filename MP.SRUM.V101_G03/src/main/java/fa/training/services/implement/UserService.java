@@ -32,4 +32,12 @@ public class UserService implements IUserService {
 	public User getUser(String account) {
 		return userRepository.findByAccount(account).get();
 	}
+
+	/**
+	 * @author HoangLV7
+	 */
+	@Override
+	public User getUserById(int userId) {
+		return userRepository.findUserById(userId);
+	}
 }

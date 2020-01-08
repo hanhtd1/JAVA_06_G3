@@ -34,12 +34,12 @@ function load_member_info(userId){
 	$.ajax({
 		type: "GET",
 		url: "/trainee/member-info",
-		dataType : "JSON",
 		data: {
 			userId : userId,
 		},
 		success: (data)=>{
-			
+			console.log(data)
+			$("#member-content").html(data)
 		}
 	})
 }
