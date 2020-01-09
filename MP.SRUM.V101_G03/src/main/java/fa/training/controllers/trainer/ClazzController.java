@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import fa.training.models.Clazz;
-import fa.training.service.ClazzService;
+import fa.training.services.ClazzService;
 
 /**
  *

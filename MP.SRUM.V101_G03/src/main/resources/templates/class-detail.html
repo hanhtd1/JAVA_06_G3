@@ -1,0 +1,91 @@
+<div class="mailbox-view">
+  <div class="mailbox-view-header">
+    <div class="left">
+      <div class="left">
+        <img th:src="@{../assets/images/profile-image-1.png}" alt=""
+             class="circle mailbox-profile-image z-depth-1">
+      </div>
+      <div class="left">
+        <span class="mailbox-title" th:text="${class.name}"></span> <span
+              class="mailbox-author"><i class="tiny material-icons">person_pin</i>
+											<span th:text="${class.userList.size()}"></span> persons</span>
+      </div>
+    </div>
+    <div class="right mailbox-buttons">
+      <a
+              class="modal-trigger waves-effect waves-grey btn-flat m-t-xs"
+              href="#update-class-modal">Edit</a> <a
+            class="waves-effect waves-red btn-flat m-t-xs modal-trigger"
+            href="#update-class-status">Update</a>
+    </div>
+    <div class="divider mailbox-divider"></div>
+    <div class="mailbox-text">
+      <div class="mailbox-details">
+        <a href="javascript:void(0);" class="details-toggle">Show
+          Details Information</a>
+        <div class="row details-list">
+          <div class="col s1 first-col">
+            <span><i class="tiny material-icons">person_pin</i> </span>
+            <span><i class="tiny material-icons">work</i></span> <span><i class="tiny material-icons">email</i></span>
+          </div>
+          <div class="col s8 second-col">
+            <span th:text="${class.openLocalDate}"></span>
+            <span th:text="${class.category}"></span>
+            <span th:text="${class.status}"> </span>
+          </div>
+        </div>
+      </div>
+      <p>Trainee List</p>
+      <div class="class-actions m-t-md">
+        <a class="modal-trigger waves-effect waves-light btn blue"
+           href="#attendance-modal">Attendance</a> <a
+              class="waves-effect waves-light btn light-green modal-trigger "
+              href="#add-trainee-modal">Add Trainees</a> <a
+              class="modal-trigger waves-effect waves-light btn green"
+              href="#update-subject-modal">Update Subjects</a> <a
+              class="modal-trigger waves-effect waves-light btn orange"
+              href="#update-mark-modal">Update Marks</a> <a
+              class="modal-trigger waves-effect waves-light btn light-blue"
+              href="#update-trainer-modal">Update Trainers</a>
+      </div>
+      <div class="divider mailbox-divider"></div>
+      <div class="">
+        <table style="table-layout: fixed;"
+               class="responsive-table bordered striped p-h-md">
+          <thead>
+          <tr>
+            <th data-field="id">Account</th>
+            <th data-field="name">Full Name</th>
+            <th data-field="price">Birth Date</th>
+            <th data-field="price">Phone</th>
+            <th data-field="price">Status</th>
+            <th data-field="price">Action</th>
+          </tr>
+          </thead>
+          <tbody>
+            <tr th:each="trainee:${class.userList}">
+              <td th:text="${trainee.account}"></td>
+              <td th:text="${trainee.firstName} +' '+${trainee.lastName} ">Do Manh Trang</td>
+              <td th:text="${trainee.birthDay}"></td>
+              <td th:text="${trainee.phone}"></td>
+              <td th:text="${trainee.status}"></td>
+              <td><a
+                      class="waves-effect waves-light btn blue modal-trigger p-h-xs"
+                      href="#trainee-info"><i class="material-icons">perm_identity</i></a>
+                <a class="waves-effect waves-light btn green p-h-xs"><i
+                        class="material-icons">library_books</i></a> <a
+                        class="waves-effect waves-light btn red p-h-xs"><i
+                        class="material-icons">clear</i></a></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+<script th:src="@{../assets/plugins/jquery/jquery-2.2.0.min.js}"></script>
+<script th:src="@{../assets/plugins/materialize/js/materialize.min.js}"></script>
+<script th:src="@{../assets/plugins/material-preloader/js/materialPreloader.min.js}"></script>
+<script th:src="@{../assets/plugins/jquery-blockui/jquery.blockui.js}"></script>
+<script th:src="@{../assets/js/alpha.min.js}"></script>
+<script th:src="@{../assets/js/admin-manage.js}"></script>

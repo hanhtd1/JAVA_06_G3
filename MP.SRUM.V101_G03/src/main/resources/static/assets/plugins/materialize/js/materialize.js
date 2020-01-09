@@ -270,7 +270,8 @@ m.isFunction(t)&&t(null,!0)}),f.queue(a,m.isString(v)?v:"",[])),"stop"===y?(i(a)
   if(window.Package){
     Materialize = {};
   } else {
-    window.Materialize = {};
+
+      window.Materialize = {};
   }
 })(window);
 

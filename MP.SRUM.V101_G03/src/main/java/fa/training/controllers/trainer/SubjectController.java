@@ -9,8 +9,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import fa.training.models.Feedback;
 import fa.training.models.Subject;
-import fa.training.service.FeedbackService;
-import fa.training.service.SubjectService;
+import fa.training.services.FeedbackService;
+import fa.training.services.SubjectService;
 
 /**
  *

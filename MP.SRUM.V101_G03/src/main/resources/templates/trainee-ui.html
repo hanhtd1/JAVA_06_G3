@@ -1,33 +1,42 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 
 <head>
 
-    <!-- Title -->
-    <title>Group 3 | Trainee</title>
+<!-- Title -->
+<title>Group 3 | Trainee</title>
 
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-    <meta charset="UTF-8">
-    <meta name="description" content="Responsive Admin Dashboard Template" />
-    <meta name="keywords" content="admin,dashboard" />
-    <meta name="author" content="Steelcoders" />
+<meta name="viewport"
+	content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+<meta charset="UTF-8">
+<meta name="description" content="Responsive Admin Dashboard Template" />
+<meta name="keywords" content="admin,dashboard" />
+<meta name="author" content="Steelcoders" />
 
-    <!-- Styles -->
-    <link type="text/css" rel="stylesheet" href="assets/plugins/materialize/css/materialize.min.css" />
-    <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <link href="assets/plugins/material-preloader/css/materialPreloader.min.css" rel="stylesheet">
-    <link href="assets/plugins/pricing-tables/css/style.css" rel="stylesheet">
-    <link href="assets/plugins/simditor/styles/simditor.css" rel="stylesheet" />
+<!-- Styles -->
+<link type="text/css" rel="stylesheet"
+	th:href="@{../assets/plugins/materialize/css/materialize.min.css}" />
+<link href="http://fonts.googleapis.com/icon?family=Material+Icons"
+	rel="stylesheet">
+<link
+	th:href="@{../assets/plugins/material-preloader/css/materialPreloader.min.css}"
+	rel="stylesheet">
+<link th:href="@{../assets/plugins/pricing-tables/css/style.css}"
+	rel="stylesheet">
+<link th:href="@{../assets/plugins/simditor/styles/simditor.css}"
+	rel="stylesheet" />
 
-    <!-- Theme Styles -->
-    <link href="assets/css/alpha.min.css" rel="stylesheet" type="text/css" />
-    <link href="assets/css/custom.css" rel="stylesheet" type="text/css" />
+<!-- Theme Styles -->
+<link th:href="@{../assets/css/alpha.min.css}" rel="stylesheet"
+	type="text/css" />
+<link th:href="@{../assets/css/custom.css}" rel="stylesheet"
+	type="text/css" />
 
-    <script src="assets/plugins/pricing-tables/js/modernizr.js"></script>
+<script th:src="@{../assets/plugins/pricing-tables/js/modernizr.js}"></script>
 
-    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
+<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+<!--[if lt IE 9]>
         <script src="http://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
         <script src="http://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
         <![endif]-->
@@ -35,939 +44,805 @@
 </head>
 
 <body>
-    <div class="loader-bg"></div>
-    <div class="loader">
-        <div class="preloader-wrapper big active">
-            <div class="spinner-layer spinner-blue">
-                <div class="circle-clipper left">
-                    <div class="circle"></div>
-                </div>
-                <div class="gap-patch">
-                    <div class="circle"></div>
-                </div>
-                <div class="circle-clipper right">
-                    <div class="circle"></div>
-                </div>
-            </div>
-            <div class="spinner-layer spinner-spinner-teal lighten-1">
-                <div class="circle-clipper left">
-                    <div class="circle"></div>
-                </div>
-                <div class="gap-patch">
-                    <div class="circle"></div>
-                </div>
-                <div class="circle-clipper right">
-                    <div class="circle"></div>
-                </div>
-            </div>
-            <div class="spinner-layer spinner-yellow">
-                <div class="circle-clipper left">
-                    <div class="circle"></div>
-                </div>
-                <div class="gap-patch">
-                    <div class="circle"></div>
-                </div>
-                <div class="circle-clipper right">
-                    <div class="circle"></div>
-                </div>
-            </div>
-            <div class="spinner-layer spinner-green">
-                <div class="circle-clipper left">
-                    <div class="circle"></div>
-                </div>
-                <div class="gap-patch">
-                    <div class="circle"></div>
-                </div>
-                <div class="circle-clipper right">
-                    <div class="circle"></div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="mn-content fixed-sidebar">
-        <header class="mn-header navbar-fixed">
-            <nav class="cyan darken-1">
-                <div class="nav-wrapper row">
-                    <section class="material-design-hamburger navigation-toggle">
-                        <a href="#" data-activates="slide-out"
-                            class="button-collapse show-on-large material-design-hamburger__icon">
-                            <span class="material-design-hamburger__layer"></span>
-                        </a>
-                    </section>
-                    <div class="header-title col s3">
-                        <span class="chapter-title">SRUM</span>
-                    </div>
-                    <!-- <form class="left search col s6 hide-on-small-and-down">
+	<div class="loader-bg"></div>
+	<div class="loader">
+		<div class="preloader-wrapper big active">
+			<div class="spinner-layer spinner-blue">
+				<div class="circle-clipper left">
+					<div class="circle"></div>
+				</div>
+				<div class="gap-patch">
+					<div class="circle"></div>
+				</div>
+				<div class="circle-clipper right">
+					<div class="circle"></div>
+				</div>
+			</div>
+			<div class="spinner-layer spinner-spinner-teal lighten-1">
+				<div class="circle-clipper left">
+					<div class="circle"></div>
+				</div>
+				<div class="gap-patch">
+					<div class="circle"></div>
+				</div>
+				<div class="circle-clipper right">
+					<div class="circle"></div>
+				</div>
+			</div>
+			<div class="spinner-layer spinner-yellow">
+				<div class="circle-clipper left">
+					<div class="circle"></div>
+				</div>
+				<div class="gap-patch">
+					<div class="circle"></div>
+				</div>
+				<div class="circle-clipper right">
+					<div class="circle"></div>
+				</div>
+			</div>
+			<div class="spinner-layer spinner-green">
+				<div class="circle-clipper left">
+					<div class="circle"></div>
+				</div>
+				<div class="gap-patch">
+					<div class="circle"></div>
+				</div>
+				<div class="circle-clipper right">
+					<div class="circle"></div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="mn-content fixed-sidebar">
+		<header class="mn-header navbar-fixed">
+			<nav class="cyan darken-1">
+				<div class="nav-wrapper row">
+					<section class="material-design-hamburger navigation-toggle">
+						<a href="#" data-activates="slide-out"
+							class="button-collapse show-on-large material-design-hamburger__icon">
+							<span class="material-design-hamburger__layer"></span>
+						</a>
+					</section>
+					<div class="header-title col s3">
+						<span class="chapter-title">SRUM</span>
+					</div>
+					<!-- <form class="left search col s6 hide-on-small-and-down">
                         <div class="input-field">
                             <input id="search" type="search" placeholder="Search" autocomplete="off">
                             <label for="search"><i class="material-icons search-icon">search</i></label>
                         </div>
                         <a href="javascript: void(0)" class="close-search"><i class="material-icons">close</i></a>
                     </form> -->
-                    <ul class="right col s9 m3 nav-right-menu">
-                        <li><a href="javascript:void(0)" data-activates="chat-sidebar"
-                                class="chat-button show-on-large"><i class="material-icons">more_vert</i></a></li>
-                        <li class="hide-on-small-and-down"><a href="javascript:void(0)" data-activates="dropdown1"
-                                class="dropdown-button dropdown-right show-on-large"><i
-                                    class="material-icons">notifications_none</i><span class="badge">4</span></a></li>
-                        <li class="hide-on-med-and-up"><a href="javascript:void(0)" class="search-toggle"><i
-                                    class="material-icons">search</i></a></li>
-                    </ul>
+					<ul class="right col s9 m3 nav-right-menu">
+						<li><a href="javascript:void(0)"
+							data-activates="chat-sidebar" class="chat-button show-on-large"><i
+								class="material-icons">more_vert</i></a></li>
+						<li class="hide-on-small-and-down"><a
+							href="javascript:void(0)" data-activates="dropdown1"
+							class="dropdown-button dropdown-right show-on-large"><i
+								class="material-icons">notifications_none</i><span class="badge">4</span></a></li>
+						<li class="hide-on-med-and-up"><a href="javascript:void(0)"
+							class="search-toggle"><i class="material-icons">search</i></a></li>
+					</ul>
 
-                    <ul id="dropdown1" class="dropdown-content notifications-dropdown">
-                        <li class="notificatoins-dropdown-container">
-                            <ul>
-                                <li class="notification-drop-title">Today</li>
-                                <li>
-                                    <a href="#!">
-                                        <div class="notification">
-                                            <div class="notification-icon circle cyan"><i
-                                                    class="material-icons">done</i></div>
-                                            <div class="notification-text">
-                                                <p><b>Alan Grey</b> uploaded new theme</p><span>7 min ago</span>
-                                            </div>
-                                        </div>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#!">
-                                        <div class="notification">
-                                            <div class="notification-icon circle deep-purple"><i
-                                                    class="material-icons">cached</i></div>
-                                            <div class="notification-text">
-                                                <p><b>Tom</b> updated status</p><span>14 min ago</span>
-                                            </div>
-                                        </div>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#!">
-                                        <div class="notification">
-                                            <div class="notification-icon circle red"><i
-                                                    class="material-icons">delete</i></div>
-                                            <div class="notification-text">
-                                                <p><b>Amily Lee</b> deleted account</p><span>28 min ago</span>
-                                            </div>
-                                        </div>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#!">
-                                        <div class="notification">
-                                            <div class="notification-icon circle cyan"><i
-                                                    class="material-icons">person_add</i></div>
-                                            <div class="notification-text">
-                                                <p><b>Tom Simpson</b> registered</p><span>2 hrs ago</span>
-                                            </div>
-                                        </div>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#!">
-                                        <div class="notification">
-                                            <div class="notification-icon circle green"><i
-                                                    class="material-icons">file_upload</i></div>
-                                            <div class="notification-text">
-                                                <p>Finished uploading files</p><span>4 hrs ago</span>
-                                            </div>
-                                        </div>
-                                    </a>
-                                </li>
-                                <li class="notification-drop-title">Yestarday</li>
-                                <li>
-                                    <a href="#!">
-                                        <div class="notification">
-                                            <div class="notification-icon circle green"><i
-                                                    class="material-icons">security</i></div>
-                                            <div class="notification-text">
-                                                <p>Security issues fixed</p><span>16 hrs ago</span>
-                                            </div>
-                                        </div>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#!">
-                                        <div class="notification">
-                                            <div class="notification-icon circle indigo"><i
-                                                    class="material-icons">file_download</i></div>
-                                            <div class="notification-text">
-                                                <p>Finished downloading files</p><span>22 hrs ago</span>
-                                            </div>
-                                        </div>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#!">
-                                        <div class="notification">
-                                            <div class="notification-icon circle cyan"><i
-                                                    class="material-icons">code</i></div>
-                                            <div class="notification-text">
-                                                <p>Code changes were saved</p><span>1 day ago</span>
-                                            </div>
-                                        </div>
-                                    </a>
-                                </li>
-                            </ul>
-                        </li>
-                    </ul>
-                </div>
-            </nav>
-        </header>
-        <div class="search-results">
-            <div class="container search-container">
-                <div class="row">
-                    <div class="col s12 search-head">
-                        <div class="row">
-                            <div class="col s12">
-                                <div class="left">
-                                    <p class="search-results-title">Quick search results</p>
-                                    <p class="search-filter left">
-                                        <input type="checkbox" class="filled-in" id="filled-in-box" checked />
-                                        <label for="filled-in-box">Google search</label>
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="res-not-found">No results found</div>
-                    </div>
-                    <div class="col s12 m4 search-result-container">
-                        <div class="card card-transparent">
-                            <div class="row valign-wrapper">
-                                <div class="col s3">
-                                    <img src="assets/images/profile-image-1.png" alt=""
-                                        class="circle responsive-img z-depth-1">
-                                </div>
-                                <div class="col s9">
-                                    <span class="search-result-text">
-                                        Search <span class="search-text search-result-highlight"></span><br><span
-                                            class="secondary-search-text">Last active 2 days ago</span>
-                                    </span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="card card-transparent">
-                            <div class="row valign-wrapper">
-                                <div class="col s3">
-                                    <img src="assets/images/profile-image-3.jpg" alt=""
-                                        class="circle responsive-img z-depth-1">
-                                </div>
-                                <div class="col s9">
-                                    <span class="search-result-text">
-                                        News about <span class="search-text search-result-highlight"></span><br><span
-                                            class="secondary-search-text">23 Blogs</span>
-                                    </span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="card card-transparent">
-                            <div class="row valign-wrapper">
-                                <div class="col s3">
-                                    <img src="assets/images/profile-image.png" alt=""
-                                        class="circle responsive-img z-depth-1">
-                                </div>
-                                <div class="col s9">
-                                    <span class="search-result-text">
-                                        Tom King (Works at <span
-                                            class="search-text search-result-highlight"></span>)<br><span
-                                            class="secondary-search-text">Avaible for freelance work</span>
-                                    </span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col s12 m4 search-result-container">
-                        <div class="card card-transparent ">
-                            <div class="row valign-wrapper">
-                                <div class="col s3">
-                                    <span class="z-depth-1 circle search-circle indigo lighten-1">F</span>
-                                </div>
-                                <div class="col s9">
-                                    <span class="search-result-text">
-                                        <span class="search-text search-result-highlight"></span> on Facebook<br><span
-                                            class="secondary-search-text"><a href="#">View website</a></span>
-                                    </span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="card card-transparent">
-                            <div class="row valign-wrapper">
-                                <div class="col s3">
-                                    <span class="z-depth-1 circle search-circle light-blue lighten-1">T</span>
-                                </div>
-                                <div class="col s9">
-                                    <span class="search-result-text">
-                                        <span class="search-text search-result-highlight"></span> on Twitter<br><span
-                                            class="secondary-search-text"><a href="#">View website</a></span>
-                                    </span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="card card-transparent">
-                            <div class="row valign-wrapper">
-                                <div class="col s3">
-                                    <span class="z-depth-1 circle search-circle red darken-1">G</span>
-                                </div>
-                                <div class="col s9">
-                                    <span class="search-result-text">
-                                        Google+ <span class="search-text search-result-highlight"></span><br><span
-                                            class="secondary-search-text"><a href="#">View website</a></span>
-                                    </span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col s12 m4 search-result-container">
-                        <div class="card card-transparent">
-                            <div class="card-content first">
-                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sunt in culpa qui<span
-                                        class="search-text search-result-highlight"></span> quis.</p>
-                            </div>
-                            <div class="card-action">
-                                <span class="grey-text">Yesterday, 4:56 PM</span>
-                            </div>
-                        </div>
-                        <div class="card card-transparent">
-                            <div class="card-content">
-                                <p>Sunt in culpa qui <span class="search-text search-result-highlight"></span> officia
-                                    deserunt mollit anim id est laborum. officia deserunt mollit anim id est laborum
-                                    officia deserunt mollit anim</p>
-                            </div>
-                            <div class="card-action">
-                                <span class="grey-text">27 January 2016</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <aside id="chat-sidebar" class="side-nav white">
-            <div class="side-nav-wrapper">
-                <div class="col s12">
-                    <ul class="tabs tab-demo" style="width: 100%;">
-                        <li class="tab col s3"><a href="#sidebar-chat-tab" class="active">chat</a></li>
-                        <li class="tab col s3"><a href="#sidebar-more-tab">settings</a></li>
-                    </ul>
-                </div>
-                <div id="sidebar-chat-tab" class="col s12 sidebar-messages right-sidebar-panel">
-                    <p class="right-sidebar-heading">CHAT LIST</p>
-                    <div class="chat-list">
-                        <a href="javascript:void(0)" class="chat-message">
-                            <div class="chat-item">
-                                <div class="chat-item-image">
-                                    <img src="assets/images/profile-image.png" class="circle" alt="">
-                                </div>
-                                <div class="chat-item-info">
-                                    <p class="chat-name">John Doe</p>
-                                    <span class="chat-message">Hello</span>
-                                </div>
-                            </div>
-                        </a>
-                        <a href="javascript:void(0)" class="chat-message">
-                            <div class="chat-item">
-                                <div class="chat-item-image">
-                                    <img src="assets/images/profile-image-1.png" class="circle" alt="">
-                                </div>
-                                <div class="chat-item-info">
-                                    <p class="chat-name">Tom Simpson</p>
-                                    <span class="chat-message">How are you?</span>
-                                </div>
-                            </div>
-                        </a>
-                        <a href="javascript:void(0)" class="chat-message">
-                            <div class="chat-item">
-                                <div class="chat-item-image">
-                                    <img src="assets/images/profile-image-3.jpg" class="circle" alt="">
-                                </div>
-                                <div class="chat-item-info">
-                                    <p class="chat-name">Alan Grey</p>
-                                    <span class="chat-message">Call me later</span>
-                                </div>
-                            </div>
-                        </a>
-                        <a href="javascript:void(0)" class="chat-message">
-                            <div class="chat-item">
-                                <div class="chat-item-image">
-                                    <img src="assets/images/profile-image.png" class="circle" alt="">
-                                </div>
-                                <div class="chat-item-info">
-                                    <p class="chat-name">Michael Fisher</p>
-                                    <span class="chat-message">How's it going?</span>
-                                </div>
-                            </div>
-                        </a>
-                        <a href="javascript:void(0)" class="chat-message">
-                            <div class="chat-item">
-                                <div class="chat-item-image">
-                                    <img src="assets/images/profile-image-1.png" class="circle" alt="">
-                                </div>
-                                <div class="chat-item-info">
-                                    <p class="chat-name">Amily Lee</p>
-                                    <span class="chat-message">We're good</span>
-                                </div>
-                            </div>
-                        </a>
-                        <a href="javascript:void(0)" class="chat-message">
-                            <div class="chat-item">
-                                <div class="chat-item-image">
-                                    <img src="assets/images/profile-image.png" class="circle" alt="">
-                                </div>
-                                <div class="chat-item-info">
-                                    <p class="chat-name">Sandra Smith</p>
-                                    <span class="chat-message">See you later!</span>
-                                </div>
-                            </div>
-                        </a>
-                        <a href="javascript:void(0)" class="chat-message">
-                            <div class="chat-item">
-                                <div class="chat-item-image">
-                                    <img src="assets/images/profile-image-3.jpg" class="circle" alt="">
-                                </div>
-                                <div class="chat-item-info">
-                                    <p class="chat-name">Sandra Smith</p>
-                                    <span class="chat-message">Can we meet?</span>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="chat-sidebar-options">
-                        <a href="#" class="left"><i class="material-icons">edit</i></a>
-                        <a href="#" class="right"><i class="material-icons">settings</i></a>
-                    </div>
-                </div>
-                <div id="sidebar-more-tab" class="col s12 sidebar-more right-sidebar-panel">
-                    <p class="right-sidebar-heading">SYSTEM</p>
-                    <div class="settings-list">
-                        <div class="setting-item">
-                            <div class="setting-text">Notifications</div>
-                            <div class="setting-set">
-                                <div class="switch">
-                                    <label>
-                                        <input type="checkbox" checked>
-                                        <span class="lever"></span>
-                                    </label>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="setting-item">
-                            <div class="setting-text">Quick Results</div>
-                            <div class="setting-set">
-                                <div class="switch">
-                                    <label>
-                                        <input type="checkbox" checked>
-                                        <span class="lever"></span>
-                                    </label>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="setting-item">
-                            <div class="setting-text">Auto Updates</div>
-                            <div class="setting-set">
-                                <div class="switch">
-                                    <label>
-                                        <input type="checkbox">
-                                        <span class="lever"></span>
-                                    </label>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <p class="right-sidebar-heading">ACCOUNT</p>
-                    <div class="settings-list">
-                        <div class="setting-item">
-                            <div class="setting-text">Offline Mode</div>
-                            <div class="setting-set">
-                                <div class="switch">
-                                    <label>
-                                        <input type="checkbox">
-                                        <span class="lever"></span>
-                                    </label>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="setting-item">
-                            <div class="setting-text">Location</div>
-                            <div class="setting-set">
-                                <div class="switch">
-                                    <label>
-                                        <input type="checkbox">
-                                        <span class="lever"></span>
-                                    </label>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="setting-item">
-                            <div class="setting-text">Show Offline Users</div>
-                            <div class="setting-set">
-                                <div class="switch">
-                                    <label>
-                                        <input type="checkbox">
-                                        <span class="lever"></span>
-                                    </label>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="setting-item">
-                            <div class="setting-text">Save History</div>
-                            <div class="setting-set">
-                                <div class="switch">
-                                    <label>
-                                        <input type="checkbox">
-                                        <span class="lever"></span>
-                                    </label>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </aside>
-        <aside id="chat-messages" class="side-nav white">
-            <p class="sidebar-chat-name">Tom Simpson<a href="#" data-activates="chat-messages"
-                    class="chat-message-link"><i class="material-icons">keyboard_arrow_right</i></a></p>
-            <div class="messages-container">
-                <div class="message-wrapper them">
-                    <div class="circle-wrapper"><img src="assets/images/profile-image-1.png" class="circle" alt="">
-                    </div>
-                    <div class="text-wrapper">Lorem Ipsum</div>
-                </div>
-                <div class="message-wrapper me">
-                    <div class="circle-wrapper"><img src="assets/images/profile-image-3.jpg" class="circle" alt="">
-                    </div>
-                    <div class="text-wrapper">Integer in faucibus diam?</div>
-                </div>
-                <div class="message-wrapper them">
-                    <div class="circle-wrapper"><img src="assets/images/profile-image-1.png" class="circle" alt="">
-                    </div>
-                    <div class="text-wrapper">Vivamus quis neque volutpat, hendrerit justo vitae, suscipit dui</div>
-                </div>
-                <div class="message-wrapper me">
-                    <div class="circle-wrapper"><img src="assets/images/profile-image-3.jpg" class="circle" alt="">
-                    </div>
-                    <div class="text-wrapper">Suspendisse condimentum tortor et lorem pretium</div>
-                </div>
-                <div class="message-wrapper them">
-                    <div class="circle-wrapper"><img src="assets/images/profile-image-1.png" class="circle" alt="">
-                    </div>
-                    <div class="text-wrapper">dolore eu fugiat nulla pariatur</div>
-                </div>
-                <div class="message-wrapper me">
-                    <div class="circle-wrapper"><img src="assets/images/profile-image-3.jpg" class="circle" alt="">
-                    </div>
-                    <div class="text-wrapper">Duis maximus leo eget massa porta</div>
-                </div>
-            </div>
-            <div class="message-compose-box">
-                <div class="input-field">
-                    <input placeholder="Write message" id="message_compose" type="text">
-                </div>
-            </div>
-        </aside>
-        <aside id="slide-out" class="side-nav white fixed">
-            <div class="side-nav-wrapper">
-                <div class="sidebar-profile">
-                    <div class="sidebar-profile-image">
-                        <img src="assets/images/profile-image.png" class="circle" alt="">
-                    </div>
-                    <div class="sidebar-profile-info">
-                        <p class="account-settings-link">
-                            <p>Trainee</p>
-                            <span>trainee@fsoft.com.vn</span>
-                        </p>
-                    </div>
-                </div>
-                <ul class="sidebar-menu collapsible collapsible-accordion" data-collapsible="accordion">
-                    <li class="no-padding">
-                        <a class="collapsible-header waves-effect waves-grey"><i
-                                class="material-icons">view_list</i>Dashboard</a>
-                    </li>
-                    <li class="no-padding">
-                        <a class="collapsible-header waves-effect waves-grey"><i
-                                class="material-icons">info</i>Guide</a>
-                    </li>
-                    <li class="divider"></li>
-                    <li class="no-padding">
-                        <a class="waves-effect waves-grey"><i class="material-icons">exit_to_app</i>Sign Out</a>
-                    </li>
-                </ul>
-                <div class="footer">
-                    <p class="copyright">Group 3 ©</p>
-                    <a href="#!">Privacy</a> &amp; <a href="#!">Terms</a>
-                </div>
-            </div>
-        </aside>
-        <main class="mn-inner inner-active-sidebar">
-            <div class="row no-m-t no-m-b">
-                <div class="col s12 m12 l12 no-p-h">
-                    <div class="card mailbox-content">
-                        <div class="card-content">
-                            <div class="col s12 m12 l12">
-                                <div class="row">
-                                    <ul>
-                                        <li>
-                                            <h4>HN19_FR_JAVA_06</h4>
-                                        </li>
-                                        <li>
-                                            <h5><i class=" material-icons">supervisor_account</i>
-                                                20 Members</h5>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <div class="divider mailbox-divider"></div>
-                            <div class="row no-m-t no-m-b">
-                                <div class="col s12 m5 l3">
-                                    <div class="mailbox-list">
-                                        <ul>
-                                            <li class="">
-                                                <!-- Modal Trigger -->
-                                                <a class="waves-effect waves-light  modal-trigger "
-                                                    href="#trainee-detail-modal">
-                                                    <h5 class="f-s-19">Jonathan Smith Modals</h5>
-                                                    <p><i class="tiny material-icons">person_pin</i> JonathanSmit12</p>
-                                                    <p><i class="tiny material-icons">email</i> jonathansm@fsoft.com.vn
-                                                        <p><i class="tiny material-icons">perm_phone_msg</i> 023 1231232
-                                                        </p>
-                                                </a>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
-                                <div class="col s12 m7 l9">
-                                    <div class="mailbox-view">
-                                        <div class="mailbox-view-header">
-                                            <div class="left">
-                                                <div class="left">
-                                                    <img src="assets/images/profile-image-1.png" alt=""
-                                                        class="circle mailbox-profile-image z-depth-1">
-                                                </div>
-                                                <div class="left">
-                                                    <span class="mailbox-title">Jonathan Smith</span>
-                                                    <span class="mailbox-author">JonathanSmith12</span>
-                                                </div>
-                                            </div>
+					<ul id="dropdown1" class="dropdown-content notifications-dropdown">
+						<li class="notificatoins-dropdown-container">
+							<ul>
+								<li class="notification-drop-title">Today</li>
+								<li><a href="#!">
+										<div class="notification">
+											<div class="notification-icon circle cyan">
+												<i class="material-icons">done</i>
+											</div>
+											<div class="notification-text">
+												<p>
+													<b>Alan Grey</b> uploaded new theme
+												</p>
+												<span>7 min ago</span>
+											</div>
+										</div>
+								</a></li>
+								<li><a href="#!">
+										<div class="notification">
+											<div class="notification-icon circle deep-purple">
+												<i class="material-icons">cached</i>
+											</div>
+											<div class="notification-text">
+												<p>
+													<b>Tom</b> updated status
+												</p>
+												<span>14 min ago</span>
+											</div>
+										</div>
+								</a></li>
+								<li><a href="#!">
+										<div class="notification">
+											<div class="notification-icon circle red">
+												<i class="material-icons">delete</i>
+											</div>
+											<div class="notification-text">
+												<p>
+													<b>Amily Lee</b> deleted account
+												</p>
+												<span>28 min ago</span>
+											</div>
+										</div>
+								</a></li>
+								<li><a href="#!">
+										<div class="notification">
+											<div class="notification-icon circle cyan">
+												<i class="material-icons">person_add</i>
+											</div>
+											<div class="notification-text">
+												<p>
+													<b>Tom Simpson</b> registered
+												</p>
+												<span>2 hrs ago</span>
+											</div>
+										</div>
+								</a></li>
+								<li><a href="#!">
+										<div class="notification">
+											<div class="notification-icon circle green">
+												<i class="material-icons">file_upload</i>
+											</div>
+											<div class="notification-text">
+												<p>Finished uploading files</p>
+												<span>4 hrs ago</span>
+											</div>
+										</div>
+								</a></li>
+								<li class="notification-drop-title">Yestarday</li>
+								<li><a href="#!">
+										<div class="notification">
+											<div class="notification-icon circle green">
+												<i class="material-icons">security</i>
+											</div>
+											<div class="notification-text">
+												<p>Security issues fixed</p>
+												<span>16 hrs ago</span>
+											</div>
+										</div>
+								</a></li>
+								<li><a href="#!">
+										<div class="notification">
+											<div class="notification-icon circle indigo">
+												<i class="material-icons">file_download</i>
+											</div>
+											<div class="notification-text">
+												<p>Finished downloading files</p>
+												<span>22 hrs ago</span>
+											</div>
+										</div>
+								</a></li>
+								<li><a href="#!">
+										<div class="notification">
+											<div class="notification-icon circle cyan">
+												<i class="material-icons">code</i>
+											</div>
+											<div class="notification-text">
+												<p>Code changes were saved</p>
+												<span>1 day ago</span>
+											</div>
+										</div>
+								</a></li>
+							</ul>
+						</li>
+					</ul>
+				</div>
+			</nav>
+		</header>
+		<div class="search-results">
+			<div class="container search-container">
+				<div class="row">
+					<div class="col s12 search-head">
+						<div class="row">
+							<div class="col s12">
+								<div class="left">
+									<p class="search-results-title">Quick search results</p>
+									<p class="search-filter left">
+										<input type="checkbox" class="filled-in" id="filled-in-box"
+											checked /> <label for="filled-in-box">Google search</label>
+									</p>
+								</div>
+							</div>
+						</div>
+						<div class="res-not-found">No results found</div>
+					</div>
+					<div class="col s12 m4 search-result-container">
+						<div class="card card-transparent">
+							<div class="row valign-wrapper">
+								<div class="col s3">
+									<img src="assets/images/profile-image-1.png" alt=""
+										class="circle responsive-img z-depth-1">
+								</div>
+								<div class="col s9">
+									<span class="search-result-text"> Search <span
+										class="search-text search-result-highlight"></span><br> <span
+										class="secondary-search-text">Last active 2 days ago</span>
+									</span>
+								</div>
+							</div>
+						</div>
+						<div class="card card-transparent">
+							<div class="row valign-wrapper">
+								<div class="col s3">
+									<img src="assets/images/profile-image-3.jpg" alt=""
+										class="circle responsive-img z-depth-1">
+								</div>
+								<div class="col s9">
+									<span class="search-result-text"> News about <span
+										class="search-text search-result-highlight"></span><br> <span
+										class="secondary-search-text">23 Blogs</span>
+									</span>
+								</div>
+							</div>
+						</div>
+						<div class="card card-transparent">
+							<div class="row valign-wrapper">
+								<div class="col s3">
+									<img src="assets/images/profile-image.png" alt=""
+										class="circle responsive-img z-depth-1">
+								</div>
+								<div class="col s9">
+									<span class="search-result-text"> Tom King (Works at <span
+										class="search-text search-result-highlight"></span>)<br>
+										<span class="secondary-search-text">Avaible for
+											freelance work</span>
+									</span>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="col s12 m4 search-result-container">
+						<div class="card card-transparent ">
+							<div class="row valign-wrapper">
+								<div class="col s3">
+									<span class="z-depth-1 circle search-circle indigo lighten-1">F</span>
+								</div>
+								<div class="col s9">
+									<span class="search-result-text"> <span
+										class="search-text search-result-highlight"></span> on
+										Facebook<br> <span class="secondary-search-text"><a
+											href="#">View website</a></span>
+									</span>
+								</div>
+							</div>
+						</div>
+						<div class="card card-transparent">
+							<div class="row valign-wrapper">
+								<div class="col s3">
+									<span
+										class="z-depth-1 circle search-circle light-blue lighten-1">T</span>
+								</div>
+								<div class="col s9">
+									<span class="search-result-text"> <span
+										class="search-text search-result-highlight"></span> on Twitter<br>
+										<span class="secondary-search-text"><a href="#">View
+												website</a></span>
+									</span>
+								</div>
+							</div>
+						</div>
+						<div class="card card-transparent">
+							<div class="row valign-wrapper">
+								<div class="col s3">
+									<span class="z-depth-1 circle search-circle red darken-1">G</span>
+								</div>
+								<div class="col s9">
+									<span class="search-result-text"> Google+ <span
+										class="search-text search-result-highlight"></span><br> <span
+										class="secondary-search-text"><a href="#">View
+												website</a></span>
+									</span>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="col s12 m4 search-result-container">
+						<div class="card card-transparent">
+							<div class="card-content first">
+								<p>
+									Lorem ipsum dolor sit amet, consectetur adipiscing elit, sunt
+									in culpa qui<span class="search-text search-result-highlight"></span>
+									quis.
+								</p>
+							</div>
+							<div class="card-action">
+								<span class="grey-text">Yesterday, 4:56 PM</span>
+							</div>
+						</div>
+						<div class="card card-transparent">
+							<div class="card-content">
+								<p>
+									Sunt in culpa qui <span
+										class="search-text search-result-highlight"></span> officia
+									deserunt mollit anim id est laborum. officia deserunt mollit
+									anim id est laborum officia deserunt mollit anim
+								</p>
+							</div>
+							<div class="card-action">
+								<span class="grey-text">27 January 2016</span>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<aside id="chat-sidebar" class="side-nav white">
+			<div class="side-nav-wrapper">
+				<div class="col s12">
+					<ul class="tabs tab-demo" style="width: 100%;">
+						<li class="tab col s3"><a href="#sidebar-chat-tab"
+							class="active">chat</a></li>
+						<li class="tab col s3"><a href="#sidebar-more-tab">settings</a></li>
+					</ul>
+				</div>
+				<div id="sidebar-chat-tab"
+					class="col s12 sidebar-messages right-sidebar-panel">
+					<p class="right-sidebar-heading">CHAT LIST</p>
+					<div class="chat-list">
+						<a href="javascript:void(0)" class="chat-message">
+							<div class="chat-item">
+								<div class="chat-item-image">
+									<img src="assets/images/profile-image.png" class="circle"
+										alt="">
+								</div>
+								<div class="chat-item-info">
+									<p class="chat-name">John Doe</p>
+									<span class="chat-message">Hello</span>
+								</div>
+							</div>
+						</a> <a href="javascript:void(0)" class="chat-message">
+							<div class="chat-item">
+								<div class="chat-item-image">
+									<img src="assets/images/profile-image-1.png" class="circle"
+										alt="">
+								</div>
+								<div class="chat-item-info">
+									<p class="chat-name">Tom Simpson</p>
+									<span class="chat-message">How are you?</span>
+								</div>
+							</div>
+						</a> <a href="javascript:void(0)" class="chat-message">
+							<div class="chat-item">
+								<div class="chat-item-image">
+									<img src="assets/images/profile-image-3.jpg" class="circle"
+										alt="">
+								</div>
+								<div class="chat-item-info">
+									<p class="chat-name">Alan Grey</p>
+									<span class="chat-message">Call me later</span>
+								</div>
+							</div>
+						</a> <a href="javascript:void(0)" class="chat-message">
+							<div class="chat-item">
+								<div class="chat-item-image">
+									<img src="assets/images/profile-image.png" class="circle"
+										alt="">
+								</div>
+								<div class="chat-item-info">
+									<p class="chat-name">Michael Fisher</p>
+									<span class="chat-message">How's it going?</span>
+								</div>
+							</div>
+						</a> <a href="javascript:void(0)" class="chat-message">
+							<div class="chat-item">
+								<div class="chat-item-image">
+									<img src="assets/images/profile-image-1.png" class="circle"
+										alt="">
+								</div>
+								<div class="chat-item-info">
+									<p class="chat-name">Amily Lee</p>
+									<span class="chat-message">We're good</span>
+								</div>
+							</div>
+						</a> <a href="javascript:void(0)" class="chat-message">
+							<div class="chat-item">
+								<div class="chat-item-image">
+									<img src="assets/images/profile-image.png" class="circle"
+										alt="">
+								</div>
+								<div class="chat-item-info">
+									<p class="chat-name">Sandra Smith</p>
+									<span class="chat-message">See you later!</span>
+								</div>
+							</div>
+						</a> <a href="javascript:void(0)" class="chat-message">
+							<div class="chat-item">
+								<div class="chat-item-image">
+									<img src="assets/images/profile-image-3.jpg" class="circle"
+										alt="">
+								</div>
+								<div class="chat-item-info">
+									<p class="chat-name">Sandra Smith</p>
+									<span class="chat-message">Can we meet?</span>
+								</div>
+							</div>
+						</a>
+					</div>
+					<div class="chat-sidebar-options">
+						<a href="#" class="left"><i class="material-icons">edit</i></a> <a
+							href="#" class="right"><i class="material-icons">settings</i></a>
+					</div>
+				</div>
+				<div id="sidebar-more-tab"
+					class="col s12 sidebar-more right-sidebar-panel">
+					<p class="right-sidebar-heading">SYSTEM</p>
+					<div class="settings-list">
+						<div class="setting-item">
+							<div class="setting-text">Notifications</div>
+							<div class="setting-set">
+								<div class="switch">
+									<label> <input type="checkbox" checked> <span
+										class="lever"></span>
+									</label>
+								</div>
+							</div>
+						</div>
+						<div class="setting-item">
+							<div class="setting-text">Quick Results</div>
+							<div class="setting-set">
+								<div class="switch">
+									<label> <input type="checkbox" checked> <span
+										class="lever"></span>
+									</label>
+								</div>
+							</div>
+						</div>
+						<div class="setting-item">
+							<div class="setting-text">Auto Updates</div>
+							<div class="setting-set">
+								<div class="switch">
+									<label> <input type="checkbox"> <span
+										class="lever"></span>
+									</label>
+								</div>
+							</div>
+						</div>
+					</div>
+					<p class="right-sidebar-heading">ACCOUNT</p>
+					<div class="settings-list">
+						<div class="setting-item">
+							<div class="setting-text">Offline Mode</div>
+							<div class="setting-set">
+								<div class="switch">
+									<label> <input type="checkbox"> <span
+										class="lever"></span>
+									</label>
+								</div>
+							</div>
+						</div>
+						<div class="setting-item">
+							<div class="setting-text">Location</div>
+							<div class="setting-set">
+								<div class="switch">
+									<label> <input type="checkbox"> <span
+										class="lever"></span>
+									</label>
+								</div>
+							</div>
+						</div>
+						<div class="setting-item">
+							<div class="setting-text">Show Offline Users</div>
+							<div class="setting-set">
+								<div class="switch">
+									<label> <input type="checkbox"> <span
+										class="lever"></span>
+									</label>
+								</div>
+							</div>
+						</div>
+						<div class="setting-item">
+							<div class="setting-text">Save History</div>
+							<div class="setting-set">
+								<div class="switch">
+									<label> <input type="checkbox"> <span
+										class="lever"></span>
+									</label>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</aside>
+		<aside id="chat-messages" class="side-nav white">
+			<p class="sidebar-chat-name">
+				Tom Simpson<a href="#" data-activates="chat-messages"
+					class="chat-message-link"><i class="material-icons">keyboard_arrow_right</i></a>
+			</p>
+			<div class="messages-container">
+				<div class="message-wrapper them">
+					<div class="circle-wrapper">
+						<img src="assets/images/profile-image-1.png" class="circle" alt="">
+					</div>
+					<div class="text-wrapper">Lorem Ipsum</div>
+				</div>
+				<div class="message-wrapper me">
+					<div class="circle-wrapper">
+						<img src="assets/images/profile-image-3.jpg" class="circle" alt="">
+					</div>
+					<div class="text-wrapper">Integer in faucibus diam?</div>
+				</div>
+				<div class="message-wrapper them">
+					<div class="circle-wrapper">
+						<img src="assets/images/profile-image-1.png" class="circle" alt="">
+					</div>
+					<div class="text-wrapper">Vivamus quis neque volutpat,
+						hendrerit justo vitae, suscipit dui</div>
+				</div>
+				<div class="message-wrapper me">
+					<div class="circle-wrapper">
+						<img src="assets/images/profile-image-3.jpg" class="circle" alt="">
+					</div>
+					<div class="text-wrapper">Suspendisse condimentum tortor et
+						lorem pretium</div>
+				</div>
+				<div class="message-wrapper them">
+					<div class="circle-wrapper">
+						<img src="assets/images/profile-image-1.png" class="circle" alt="">
+					</div>
+					<div class="text-wrapper">dolore eu fugiat nulla pariatur</div>
+				</div>
+				<div class="message-wrapper me">
+					<div class="circle-wrapper">
+						<img src="assets/images/profile-image-3.jpg" class="circle" alt="">
+					</div>
+					<div class="text-wrapper">Duis maximus leo eget massa porta</div>
+				</div>
+			</div>
+			<div class="message-compose-box">
+				<div class="input-field">
+					<input placeholder="Write message" id="message_compose" type="text">
+				</div>
+			</div>
+		</aside>
+		<aside id="slide-out" class="side-nav white fixed">
+			<div class="side-nav-wrapper">
+				<div class="sidebar-profile">
+					<div class="sidebar-profile-image">
+						<img th:src="@{../assets/images/profile-image.png}" class="circle" alt="">
+					</div>
+					<div class="sidebar-profile-info">
+						<p class="account-settings-link">
+						<p th:text="${trainee.account}"></p>
+						<span th:text="${trainee.email}"></span>
+						</p>
+					</div>
+				</div>
+				<ul class="sidebar-menu collapsible collapsible-accordion"
+					data-collapsible="accordion">
+					<li class="no-padding"><a
+						class="collapsible-header waves-effect waves-grey"><i
+							class="material-icons">view_list</i>Dashboard</a></li>
+					<li class="no-padding"><a
+						class="collapsible-header waves-effect waves-grey"><i
+							class="material-icons">info</i>Guide</a></li>
+					<li class="divider"></li>
+					<li class="no-padding"><a href="/logout" class="waves-effect waves-grey"><i
+							class="material-icons">exit_to_app</i>Sign Out</a></li>
+				</ul>
+				<div class="footer">
+					<p class="copyright">Group 3 ©</p>
+					<a href="#!">Privacy</a> &amp; <a href="#!">Terms</a>
+				</div>
+			</div>
+		</aside>
+		<main class="mn-inner inner-active-sidebar">
+			<div class="row no-m-t no-m-b">
+				<div class="col s12 m12 l12 no-p-h">
+					<div class="card mailbox-content">
+						<div class="card-content">
+							<div class="col s12 m12 l12">
+								<div class="row">
+									<ul>
+										<li>
+											<h4 th:text="${class.name}"></h4>
+										</li>
+										<li>
+											<h5 th:text="${users.size() + ' Members'}">
+												<i class="material-icons">supervisor_account</i>
+											</h5>
+										</li>
+									</ul>
+								</div>
+							</div>
+							<div class="divider mailbox-divider"></div>
+							<div class="row no-m-t no-m-b">
+								<div class="col s12 m5 l3">
+									<div class="mailbox-list">
+										<ul th:each="user : ${users}" th:object="${user}" th:if="${trainee.id} != ${user.id}">
+										<li>
+											<a class="waves-effect waves-light  modal-trigger "
+												href="#trainee-detail-modal" th:onclick="'load_member_info('+${user.id}+')'">
+												<h5 class="f-s-19" th:text="${user.firstName} + ' ' + ${user.lastName}"></h5>
+												<p th:text="${user.account}"><span><i class="tiny material-icons">person_pin</i></p>
+												<p th:text="${user.email}"><span><i class="tiny material-icons">email</i></p>
+												<p th:text="${user.phone}"><span><i class="tiny material-icons">perm_phone_msg</i></p>
+											</a>
+											</li>
+										</ul>
+									</div>
+								</div>
+								<div class="col s12 m7 l9">
+									<div class="mailbox-view">
+										<div class="mailbox-view-header">
+											<div class="left">
+												<div class="left">
+													<img th:src="@{../assets/images/profile-image-1.png}" alt=""
+														class="circle mailbox-profile-image z-depth-1">
+												</div>
+												<div class="left">
+													<span class="mailbox-title" th:text="${trainee.firstName} + ' ' + ${trainee.lastName}"></span>
+													<span class="mailbox-author" th:text="${trainee.account}"></span>
+												</div>
+											</div>
 
-                                            <div class="mailbox-text">
-                                                <div class="mailbox-details">
-                                                    <a href="javascript:void(0);" class="details-toggle">Show Details
-                                                        Information</a>
-                                                    <div class="row details-list">
-                                                        <div class="col s1 first-col">
-                                                            <span><i class="tiny material-icons">person_pin</i> </span>
-                                                            <span><i class="tiny material-icons">work</i></span>
-                                                            <span><i class="tiny material-icons">email</i></span>
-                                                            <span><i
-                                                                    class="tiny material-icons">perm_phone_msg</i></span>
-                                                        </div>
-                                                        <div class="col s8 second-col">
-                                                            <span> 10/10/1997</span>
-                                                            <span> HN19_FR_JAVA_06</span>
-                                                            <span> jonathansm@fsoft.com.vn</span>
-                                                            <span> 090 123 1221</span>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div>
-                                                    <div class="row">
-                                                        <div class="col s12">
-                                                            <ul class="tabs tab-demo z-depth-1" style="width: 100%;">
-                                                                <li class="tab col s3"><a href="#grades">Grades</a></li>
-                                                                <li class="tab col s3"><a href="#attendance"
-                                                                        class="active">Attendance</a></li>
-                                                            </ul>
-                                                        </div>
-                                                        <div id="grades" class="col s12">
-                                                            <div class="p-h-md">
-                                                                <table style="table-layout: fixed;"
-                                                                    class="responsive-table bordered striped">
-                                                                    <thead>
-                                                                        <tr>
-                                                                            <th data-field="id">Subjects</th>
-                                                                            <th class="w-25" data-field="name">
-                                                                                Theory Mark</th>
-                                                                            <th class="w-25" data-field="price">
-                                                                                Practice Mark</th>
-                                                                            <th class="w-25" data-field="price">
-                                                                                Status</th>
-                                                                            <th style="word-wrap: break-word;"
-                                                                                data-field="price">
-                                                                                Feedback</th>
-                                                                        </tr>
-                                                                    </thead>
-                                                                    <tbody>
-                                                                        <tr>
-                                                                            <td>JPL</td>
-                                                                            <td>9</td>
-                                                                            <td>9</td>
-                                                                            <td>Done</td>
-                                                                            <td>
-                                                                                <a class="modal-trigger waves-effect waves-light btn"
-                                                                                    href="#modal3">View Feedback</a>
-                                                                            </td>
-                                                                        </tr>
-                                                                        <tr>
-                                                                            <td>SQL</td>
-                                                                            <td>8</td>
-                                                                            <td>8</td>
-                                                                            <td>Done</td>
-                                                                            <td>
-                                                                                <a class="waves-effect waves-light btn modal-trigger"
-                                                                                    href="#feedback-modal">Feadback</a>
-                                                                            </td>
-                                                                        </tr>
-                                                                        <tr>
-                                                                            <td>ORM</td>
-                                                                            <td>7</td>
-                                                                            <td>9</td>
-                                                                            <td>Doing</td>
-                                                                            <td></td>
-                                                                        </tr>
-                                                                        <tr>
-                                                                            <td>CNU</td>
-                                                                            <td>7</td>
-                                                                            <td>10</td>
-                                                                            <td>Todo</td>
-                                                                            <td></td>
-                                                                        </tr>
-                                                                        <tr>
-                                                                            <td>JWEB</td>
-                                                                            <td>7</td>
-                                                                            <td>10</td>
-                                                                            <td>Todo</td>
-                                                                            <td> </td>
-                                                                        </tr>
-                                                                        <tr>
-                                                                            <td>SFW</td>
-                                                                            <td>7</td>
-                                                                            <td>10</td>
-                                                                            <td>Todo</td>
-                                                                            <td></td>
-                                                                        </tr>
-                                                                    </tbody>
-                                                                </table>
-                                                            </div>
-                                                        </div>
-                                                        <div id="attendance" class="col s12">
-                                                            <div class="p-h-md">
-                                                                <table style="table-layout: fixed;"
-                                                                    class="responsive-table bordered striped">
-                                                                    <thead>
-                                                                        <tr>
-                                                                            <th data-field="id">Date</th>
-                                                                            <th class="w-25" data-field="name">
-                                                                                Status</th>
-                                                                            <th class="w-25" data-field="price">
-                                                                                Note</th>
-                                                                        </tr>
-                                                                    </thead>
-                                                                    <tbody>
-                                                                        <tr>
-                                                                            <td>2019/1202</td>
-                                                                            <td>Late</td>
-                                                                            <td>No reason</td>
-                                                                        </tr>
-                                                                        <tr>
-                                                                            <td>2019/1202</td>
-                                                                            <td>Late</td>
-                                                                            <td>No reason</td>
-                                                                        </tr>
-                                                                        <tr>
-                                                                            <td>2019/1202</td>
-                                                                            <td>Late</td>
-                                                                            <td>No reason</td>
-                                                                        </tr>
-                                                                        <tr>
-                                                                            <td>2019/1202</td>
-                                                                            <td>Late</td>
-                                                                            <td>No reason</td>
-                                                                        </tr>
-                                                                        <tr>
-                                                                            <td>2019/1202</td>
-                                                                            <td>Late</td>
-                                                                            <td>No reason</td>
-                                                                        </tr>
-                                                                        <tr>
-                                                                            <td>2019/1202</td>
-                                                                            <td>Late</td>
-                                                                            <td>No reason</td>
-                                                                        </tr>
+											<div class="mailbox-text">
+												<div class="mailbox-details">
+													<a href="javascript:void(0);" class="details-toggle">Show
+														Details Information</a>
+													<div class="row details-list">
+														<div class="col s1 first-col">
+															<span><i class="tiny material-icons">cake</i></span>
+															<span><i class="tiny material-icons">email</i></span>
+															<span><i class="tiny material-icons">perm_phone_msg</i></span>
+														</div>
+														<div class="col s8 second-col">
+															<span th:text="${trainee.birthDay}"></span>
+															<span th:text="${trainee.email}"></span>
+															<span th:text="${trainee.phone}"></span>
+														</div>
+													</div>
+												</div>
+												<div>
+													<div class="row">
+														<div class="col s12">
+															<ul class="tabs tab-demo z-depth-1" style="width: 100%;">
+																<li class="tab col s3"><a href="#grades">Grades</a></li>
+																<li class="tab col s3"><a href="#attendance"
+																	class="active">Attendance</a></li>
+															</ul>
+														</div>
+														<div id="grades" class="col s12">
+															<div class="p-h-md">
+																<table style="table-layout: fixed;"
+																	class="responsive-table bordered striped">
+																	<thead>
+																		<tr>
+																			<th data-field="id">Subjects</th>
+																			<th class="w-25" data-field="name">Theory Mark</th>
+																			<th class="w-25" data-field="price">Practice
+																				Mark</th>
+																			<th class="w-25" data-field="price">Status</th>
+																			<th style="word-wrap: break-word;" data-field="price">
+																				Feedback</th>
+																		</tr>
+																	</thead>
+																	<tbody th:each="score : ${scores}">
+																		<tr>
+																			<td th:text="${score.subjectName}"></td>
+																			<td th:text="${score.theory}"></td>
+																			<td th:text="${score.practice}"></td>
+																			<td th:text="${score.status}"></td>
+																			
+																			<td th:if="${score.status} != 'In Coming'">
+																				<div th:if="${score.status} == 'Done'">
+																					<a	
+																						class="modal-trigger waves-effect waves-light btn waves-block"
+																						href="#modal3" th:onclick="'load_feedback('+${score.traineeId}+','+ ${score.subjectId}+')'">View Feedback</a>
+																				</div>
+																				<div th:unless="${score.status} == 'Done'" class="row" style="margin: 0">
+																					<a	
+																						class="modal-trigger waves-effect waves-light btn waves-block col s6"
+																						href="#modal3" th:onclick="'load_feedback('+${score.traineeId}+','+ ${score.subjectId}+')'">View</a>
+																					<a
+																						class="waves-effect waves-light btn modal-trigger  waves-block red col s6"
+																						href="#feedback-modal" th:onclick="'load_feedback_info('+${score.traineeId}+','+ ${score.subjectId}+')'">Feedback</a>
+																				</div>
+																			</td>
 
-                                                                    </tbody>
-                                                                </table>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="divider mailbox-divider"></div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!-- Modal Structure -->
-            <div id="trainee-detail-modal" class="modal modal-fixed-footer">
-                <div class="">
-                    <div class="mailbox-view">
-                        <div class="mailbox-view-header">
-                            <div class="left">
-                                <div class="left">
-                                    <img src="assets/images/profile-image-1.png" alt=""
-                                        class="circle mailbox-profile-image z-depth-1">
-                                </div>
-                                <div class="left">
-                                    <span class="mailbox-title">Jonathan
-                                        Smith</span>
-                                    <span class="mailbox-author">JonathanSmith12</span>
-                                </div>
-                            </div>
+																			<td th:unless="${score.status} != 'In Coming'"></td>	
+																		</tr>
+																	</tbody>
+																</table>
+															</div>
+														</div>
+														<div id="attendance" class="col s12">
+															<div class="p-h-md">
+																<table style="table-layout: fixed;"
+																	class="responsive-table bordered striped">
+																	<thead>
+																		<tr>
+																			<th data-field="id">Date</th>
+																			<th class="w-25" data-field="name">Status</th>
+																			<th class="w-25" data-field="price">Note</th>
+																		</tr>
+																	</thead>
+																	<tbody th:each="att : ${attendances}">
+																		<tr>
+																			<td th:text="${att.date}"></td>
+																			<td th:text="${att.type}"></td>
+																			<td th:text="${att.note}"></td>
+																		</tr>
+																	</tbody>
+																</table>
+															</div>
+														</div>
+													</div>
+												</div>
+												<div class="divider mailbox-divider"></div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- Modal Structure -->
+			<div id="trainee-detail-modal" class="modal modal-fixed-footer">
+				<div class="" id="member-content">
 
-                            <div class="mailbox-text">
-                                <div class="mailbox-details">
-                                    <a href="javascript:void(0);" class="details-toggle">Show Details
-                                        Information</a>
-                                    <div class="row details-list">
-                                        <div class="col s1 first-col">
-                                            <span><i class="tiny material-icons">person_pin</i>
-                                            </span>
-                                            <span><i class="tiny material-icons">work</i></span>
-                                            <span><i class="tiny material-icons">email</i></span>
-                                            <span><i class="tiny material-icons">perm_phone_msg</i></span>
-                                        </div>
-                                        <div class="col s8 second-col">
-                                            <span> 10/10/1997</span>
-                                            <span> HN19_FR_JAVA_06</span>
-                                            <span> jonathansm@fsoft.com.vn</span>
-                                            <span> 090 123 1221</span>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="divider mailbox-divider"></div>
-                                <div class="p-h-md">
-                                    <table style="table-layout: fixed;" class="responsive-table bordered striped">
-                                        <thead>
-                                            <tr>
-                                                <th data-field="id">Subjects</th>
-                                                <th class="w-25" data-field="name">
-                                                    Theory Mark</th>
-                                                <th class="w-25" data-field="price">
-                                                    Practice Mark</th>
-                                                <th class="w-25" data-field="price">
-                                                    Status</th>
-                                                <th style="word-wrap: break-word;" data-field="price">
-                                                    Feedback</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr>
-                                                <td>JPL</td>
-                                                <td>9</td>
-                                                <td>9</td>
-                                                <td>Done</td>
-                                                <td>
-                                                    <a class="modal-trigger waves-effect waves-light"
-                                                        href="#view-feedback-modal">View Feedback</a>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>ORM</td>
-                                                <td>7</td>
-                                                <td>9</td>
-                                                <td>Doing</td>
-                                                <td></td>
-                                            </tr>
-                                            <tr>
-                                                <td>CNU</td>
-                                                <td>7</td>
-                                                <td>10</td>
-                                                <td>Todo</td>
-                                                <td></td>
-                                            </tr>
-                                            <tr>
-                                                <td>JWEB</td>
-                                                <td>7</td>
-                                                <td>10</td>
-                                                <td>Todo</td>
-                                                <td> </td>
-                                            </tr>
-                                            <tr>
-                                                <td>SFW</td>
-                                                <td>7</td>
-                                                <td>10</td>
-                                                <td>Todo</td>
-                                                <td></td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!-- Modal Structure -->
-            <div id="modal3" class="modal modal-fixed-footer">
-                <div class="modal-content">
-                    <h4>Modal Header</h4>
-                    <p>Lorem ipsum dolor
-                        sit
-                        amet.Feedback
-                        Feedback
-                        Feedback
-                        Feedback
-                        Feedback...Feedback
-                        Feedback
-                        Feedback
-                        Feedback
-                        Feedback...Feedback
-                        Feedback
-                        Feedback
-                        Feedback
-                        Feedback...</p>
-                </div>
-            </div>
-            <!-- Modal Structure -->
-            <div id="feedback-modal" class="modal">
-                <div class="modal-content">
-                    <span class="card-title">Character Counter</span>
-                    <div class="row">
-                        <form class="col s12">
-                            <div class="row">
-                                <div class="input-field col s12">
-                                    <textarea id="textarea1" class="materialize-textarea" length="200"></textarea>
-                                    <label for="textarea1">Textarea</label>
-                                </div>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <a href="#!" class=" modal-action modal-close waves-effect waves-green btn-flat">Submit</a>
-                </div>
-            </div>
-            <!-- Modal Structure -->
-            <div id="view-feedback-modal" class="modal" style="width: 40%;">
-                <div class="modal-content">
-                    <h4>Modal Header</h4>
-                    <p>Lorem ipsum dolor</p>
-                </div>
-            </div>
-        </main>
-    </div>
-    <div class="left-sidebar-hover"></div>
-    <!-- Javascripts -->
-    <script src="assets/plugins/jquery/jquery-2.2.0.min.js"></script>
-    <script src="assets/plugins/materialize/js/materialize.min.js"></script>
-    <script src="assets/plugins/material-preloader/js/materialPreloader.min.js"></script>
-    <script src="assets/plugins/jquery-blockui/jquery.blockui.js"></script>
-    <script src="assets/plugins/simditor/scripts/module.js"></script>
-    <script src="assets/plugins/simditor/scripts/hotkeys.js"></script>
-    <script src="assets/plugins/simditor/scripts/uploader.js"></script>
-    <script src="assets/plugins/simditor/scripts/simditor.js"></script>
-    <script src="assets/js/alpha.min.js"></script>
-    <script src="assets/js/pages/mailbox.js"></script>
+					</div>
+				</div>
+			</div>
+			<!-- Modal Structure -->
+			<div id="modal3" class="modal" style="width: 40%">
+				<div class="modal-content">
+					<h4>Feedback</h4>
+					<p id="feedback-content"></p>
+				</div>
+			</div>
+			<!-- Modal Structure -->
+			<div id="feedback-modal" class="modal">
+				<form class="col s12" th:action="@{/trainee/add-feedback}" method="POST">
+				<div class="modal-content">
+					<span class="card-title">Character Counter</span>
+					<div class="row">
+						<div class="input-field col s12">
+							<textarea id="textarea1" class="materialize-textarea"
+								length="200" name="feedbackContent"></textarea>
+							<label for="textarea1">Textarea</label>
+						</div>
+						<div>
+							<input type="hidden" name="userId" id="userId"/>
+							<input type="hidden" name="subjectId" id="subjectId"/>
+						</div>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button
+						class=" modal-action modal-close waves-effect waves-green btn-flat" type="submit">Submit</button>
+				</div>
+				</form>
+			</div>
+			<!-- Modal Structure -->
+			<div id="view-feedback-modal" class="modal" style="width: 40%;">
+				<div class="modal-content">
+					<h4>Feedback</h4>
+					<p>Lorem ipsum dolor</p>
+				</div>
+			</div>
+		</main>
+	</div>
+	<div class="left-sidebar-hover"></div>
+	<!-- Javascripts -->
+	<script th:src="@{../assets/plugins/jquery/jquery-2.2.0.min.js}"></script>
+	<script th:src="@{../assets/plugins/materialize/js/materialize.min.js}"></script>
+	<script
+		th:src="@{../assets/plugins/material-preloader/js/materialPreloader.min.js}"></script>
+	<script th:src="@{../assets/plugins/jquery-blockui/jquery.blockui.js}"></script>
+	<script th:src="@{../assets/plugins/simditor/scripts/module.js}"></script>
+	<script th:src="@{../assets/plugins/simditor/scripts/hotkeys.js}"></script>
+	<script th:src="@{../assets/plugins/simditor/scripts/uploader.js}"></script>
+	<script th:src="@{../assets/plugins/simditor/scripts/simditor.js}"></script>
+	<script th:src="@{../assets/js/alpha.min.js}"></script>
+	<script th:src="@{../assets/js/pages/mailbox.js}"></script>
+
+	<script th:src="@{../assets/js/trainee.js}"></script>
 
 </body>
 
