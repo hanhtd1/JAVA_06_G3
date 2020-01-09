@@ -47,7 +47,6 @@ public class TraineeUserController {
 	@GetMapping("/")
 	public String index(Model model) {
 	  Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-	  System.out.println(auth.getName());
 		String account = auth.getName();
 		
 		User trainee = iUserService.getUser(account);
