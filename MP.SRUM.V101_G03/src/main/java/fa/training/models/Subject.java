@@ -21,124 +21,124 @@ import javax.persistence.Table;
 @Table(name = "Subject")
 public class Subject implements Serializable {
 
-    private static final long serialVersionUID = 1L;
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Basic(optional = false)
-    @Column(name = "Id")
-    private Integer id;
+	private static final long serialVersionUID = 1L;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Basic(optional = false)
+	@Column(name = "Id")
+	private Integer id;
 
-    @Column(name = "Name")
-    private String name;
+	@Column(name = "Name")
+	private String name;
 
-    @Column(name = "Code")
-    private String code;
+	@Column(name = "Code")
+	private String code;
 
-    @Column(name = "Duration")
-    private float duration;
-    
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "subject")
-    private List<Score> scoreList;
-    
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "subject")
-    private List<Feedback> feedbackList;
-    
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "subject")
-    private List<ClazzSubject> clazzSubjectList;
+	@Column(name = "Duration")
+	private float duration;
 
-    public Subject() {
-    }
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "subject")
+	private List<Score> scoreList;
 
-    public Subject(Integer id) {
-        this.id = id;
-    }
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "subject")
+	private List<Feedback> feedbackList;
 
-    public Subject(Integer id, String name, String code, float duration) {
-        this.id = id;
-        this.name = name;
-        this.code = code;
-        this.duration = duration;
-    }
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "subject")
+	private List<ClazzSubject> clazzSubjectList;
 
-    public Integer getId() {
-        return id;
-    }
+	public Subject() {
+	}
 
-    public void setId(Integer id) {
-        this.id = id;
-    }
+	public Subject(Integer id) {
+		this.id = id;
+	}
 
-    public String getName() {
-        return name;
-    }
+	public Subject(Integer id, String name, String code, float duration) {
+		this.id = id;
+		this.name = name;
+		this.code = code;
+		this.duration = duration;
+	}
 
-    public void setName(String name) {
-        this.name = name;
-    }
+	public Integer getId() {
+		return id;
+	}
 
-    public String getCode() {
-        return code;
-    }
+	public void setId(Integer id) {
+		this.id = id;
+	}
 
-    public void setCode(String code) {
-        this.code = code;
-    }
+	public String getName() {
+		return name;
+	}
 
-    public float getDuration() {
-        return duration;
-    }
+	public void setName(String name) {
+		this.name = name;
+	}
 
-    public void setDuration(float duration) {
-        this.duration = duration;
-    }
+	public String getCode() {
+		return code;
+	}
 
-    public List<Score> getScoreList() {
-        return scoreList;
-    }
+	public void setCode(String code) {
+		this.code = code;
+	}
 
-    public void setScoreList(List<Score> scoreList) {
-        this.scoreList = scoreList;
-    }
+	public float getDuration() {
+		return duration;
+	}
 
-    public List<Feedback> getFeedbackList() {
-        return feedbackList;
-    }
+	public void setDuration(float duration) {
+		this.duration = duration;
+	}
 
-    public void setFeedbackList(List<Feedback> feedbackList) {
-        this.feedbackList = feedbackList;
-    }
+	public List<Score> getScoreList() {
+		return scoreList;
+	}
 
-    public List<ClazzSubject> getClazzSubjectList() {
-        return clazzSubjectList;
-    }
+	public void setScoreList(List<Score> scoreList) {
+		this.scoreList = scoreList;
+	}
 
-    public void setClazzSubjectList(List<ClazzSubject> clazzSubjectList) {
-        this.clazzSubjectList = clazzSubjectList;
-    }
+	public List<Feedback> getFeedbackList() {
+		return feedbackList;
+	}
 
-    @Override
-    public int hashCode() {
-        int hash = 0;
-        hash += (id != null ? id.hashCode() : 0);
-        return hash;
-    }
+	public void setFeedbackList(List<Feedback> feedbackList) {
+		this.feedbackList = feedbackList;
+	}
 
-    @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Subject)) {
-            return false;
-        }
-        Subject other = (Subject) object;
-        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
-            return false;
-        }
-        return true;
-    }
+	public List<ClazzSubject> getClazzSubjectList() {
+		return clazzSubjectList;
+	}
 
-    @Override
-    public String toString() {
-        return "com.Subject[ id=" + id + " ]";
-    }
-    
+	public void setClazzSubjectList(List<ClazzSubject> clazzSubjectList) {
+		this.clazzSubjectList = clazzSubjectList;
+	}
+
+	@Override
+	public int hashCode() {
+		int hash = 0;
+		hash += (id != null ? id.hashCode() : 0);
+		return hash;
+	}
+
+	@Override
+	public boolean equals(Object object) {
+		// TODO: Warning - this method won't work in the case the id fields are not set
+		if (!(object instanceof Subject)) {
+			return false;
+		}
+		Subject other = (Subject) object;
+		if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
+			return false;
+		}
+		return true;
+	}
+
+	@Override
+	public String toString() {
+		return "com.Subject[ id=" + id + " ]";
+	}
+
 }

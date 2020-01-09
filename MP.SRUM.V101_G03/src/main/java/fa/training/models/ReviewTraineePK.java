@@ -75,5 +75,4 @@ public class ReviewTraineePK implements Serializable{
     public String toString() {
         return "com.ReviewTraineePK[ trainerId=" + trainerId + ", traineeId=" + traineeId + " ]";
     }
-    
 }

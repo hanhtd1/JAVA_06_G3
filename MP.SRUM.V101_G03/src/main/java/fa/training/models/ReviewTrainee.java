@@ -17,104 +17,105 @@ import javax.persistence.Table;
 @Table(name = "ReviewTrainee")
 public class ReviewTrainee implements Serializable {
 
-    private static final long serialVersionUID = 1L;
-    @EmbeddedId
-    protected ReviewTraineePK reviewTraineePK;
+	private static final long serialVersionUID = 1L;
+	@EmbeddedId
+	protected ReviewTraineePK reviewTraineePK;
 
-    @Column(name = "Type")
-    private String type;
+	@Column(name = "Type")
+	private String type;
 
-    @Column(name = "Content")
-    private String content;
-    
-    @JoinColumn(name = "TrainerId", referencedColumnName = "Id", insertable = false, updatable = false)
-    @ManyToOne(optional = false)
-    private User trainer;
-    
-    @JoinColumn(name = "TraineeId", referencedColumnName = "Id", insertable = false, updatable = false)
-    @ManyToOne(optional = false)
-    private User trainee;
+	@Column(name = "Content")
+	private String content;
 
-    public ReviewTrainee() {
-    }
+	@JoinColumn(name = "TrainerId", referencedColumnName = "Id", insertable = false, updatable = false)
+	@ManyToOne(optional = false)
+	private User trainer;
 
-    public ReviewTrainee(ReviewTraineePK reviewTraineePK) {
-        this.reviewTraineePK = reviewTraineePK;
-    }
+	@JoinColumn(name = "TraineeId", referencedColumnName = "Id", insertable = false, updatable = false)
+	@ManyToOne(optional = false)
+	private User trainee;
 
-    public ReviewTrainee(ReviewTraineePK reviewTraineePK, String type, String content) {
-        this.reviewTraineePK = reviewTraineePK;
-        this.type = type;
-        this.content = content;
-    }
+	public ReviewTrainee() {
+	}
 
-    public ReviewTrainee(int trainerId, int traineeId) {
-        this.reviewTraineePK = new ReviewTraineePK(trainerId, traineeId);
-    }
+	public ReviewTrainee(ReviewTraineePK reviewTraineePK) {
+		this.reviewTraineePK = reviewTraineePK;
+	}
 
-    public ReviewTraineePK getReviewTraineePK() {
-        return reviewTraineePK;
-    }
+	public ReviewTrainee(ReviewTraineePK reviewTraineePK, String type, String content) {
+		this.reviewTraineePK = reviewTraineePK;
+		this.type = type;
+		this.content = content;
+	}
 
-    public void setReviewTraineePK(ReviewTraineePK reviewTraineePK) {
-        this.reviewTraineePK = reviewTraineePK;
-    }
+	public ReviewTrainee(int trainerId, int traineeId) {
+		this.reviewTraineePK = new ReviewTraineePK(trainerId, traineeId);
+	}
 
-    public String getType() {
-        return type;
-    }
+	public ReviewTraineePK getReviewTraineePK() {
+		return reviewTraineePK;
+	}
 
-    public void setType(String type) {
-        this.type = type;
-    }
+	public void setReviewTraineePK(ReviewTraineePK reviewTraineePK) {
+		this.reviewTraineePK = reviewTraineePK;
+	}
 
-    public String getContent() {
-        return content;
-    }
+	public String getType() {
+		return type;
+	}
 
-    public void setContent(String content) {
-        this.content = content;
-    }
+	public void setType(String type) {
+		this.type = type;
+	}
 
-    public User getUser() {
-        return trainer;
-    }
+	public String getContent() {
+		return content;
+	}
 
-    public void setUser(User user) {
-        this.trainer = user;
-    }
+	public void setContent(String content) {
+		this.content = content;
+	}
 
-    public User getUser1() {
-        return trainee;
-    }
+	public User getUser() {
+		return trainer;
+	}
 
-    public void setUser1(User user1) {
-        this.trainee = user1;
-    }
+	public void setUser(User user) {
+		this.trainer = user;
+	}
 
-    @Override
-    public int hashCode() {
-        int hash = 0;
-        hash += (reviewTraineePK != null ? reviewTraineePK.hashCode() : 0);
-        return hash;
-    }
+	public User getUser1() {
+		return trainee;
+	}
 
-    @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof ReviewTrainee)) {
-            return false;
-        }
-        ReviewTrainee other = (ReviewTrainee) object;
-        if ((this.reviewTraineePK == null && other.reviewTraineePK != null) || (this.reviewTraineePK != null && !this.reviewTraineePK.equals(other.reviewTraineePK))) {
-            return false;
-        }
-        return true;
-    }
+	public void setUser1(User user1) {
+		this.trainee = user1;
+	}
 
-    @Override
-    public String toString() {
-        return "com.ReviewTrainee[ reviewTraineePK=" + reviewTraineePK + " ]";
-    }
-    
+	@Override
+	public int hashCode() {
+		int hash = 0;
+		hash += (reviewTraineePK != null ? reviewTraineePK.hashCode() : 0);
+		return hash;
+	}
+
+	@Override
+	public boolean equals(Object object) {
+		// TODO: Warning - this method won't work in the case the id fields are not set
+		if (!(object instanceof ReviewTrainee)) {
+			return false;
+		}
+		ReviewTrainee other = (ReviewTrainee) object;
+		if ((this.reviewTraineePK == null && other.reviewTraineePK != null)
+				|| (this.reviewTraineePK != null && !this.reviewTraineePK.equals(other.reviewTraineePK))) {
+			return false;
+		}
+		return true;
+	}
+
+	@Override
+	public String toString() {
+		return "com.ReviewTrainee[ reviewTraineePK=" + reviewTraineePK + " ]";
+	}
+
 }

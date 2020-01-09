@@ -120,5 +120,4 @@ public class Score implements Serializable {
     public String toString() {
       return "Score [scorePK=" + scorePK + ", name=" + theory + ", value=" + practice + "]";
     }
-    
 }

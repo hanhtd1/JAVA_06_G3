@@ -125,5 +125,4 @@ public class Attendance implements Serializable {
 	public String toString() {
 		return "com.Attendance[ date=" + date + " ]";
 	}
-
 }

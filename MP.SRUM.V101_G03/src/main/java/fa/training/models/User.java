@@ -3,6 +3,7 @@ package fa.training.models;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.List;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -268,5 +269,4 @@ public class User implements Serializable {
         + email + ", password=" + password + ", account=" + account + ", birthDay=" + birthDay + ", role=" + role
         + ", gender=" + gender + ", status=" + status + "]";
   }
-
 }
