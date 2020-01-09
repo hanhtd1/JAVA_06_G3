@@ -17,92 +17,92 @@ import javax.persistence.Table;
 @Table(name = "Feedback")
 public class Feedback implements Serializable {
 
-    private static final long serialVersionUID = 1L;
-    @EmbeddedId
-    protected FeedbackPK feedbackPK;
+	private static final long serialVersionUID = 1L;
+	@EmbeddedId
+	protected FeedbackPK feedbackPK;
 
-    @Column(name = "Content")
-    private String content;
-    
-    @JoinColumn(name = "SubjectId", referencedColumnName = "Id", insertable = false, updatable = false)
-    @ManyToOne(optional = false)
-    private Subject subject;
-    
-    @JoinColumn(name = "UserId", referencedColumnName = "Id", insertable = false, updatable = false)
-    @ManyToOne(optional = false)
-    private User user;
+	@Column(name = "Content")
+	private String content;
 
-    public Feedback() {
-    }
+	@JoinColumn(name = "SubjectId", referencedColumnName = "Id", insertable = false, updatable = false)
+	@ManyToOne(optional = false)
+	private Subject subject;
 
-    public Feedback(FeedbackPK feedbackPK) {
-        this.feedbackPK = feedbackPK;
-    }
+	@JoinColumn(name = "UserId", referencedColumnName = "Id", insertable = false, updatable = false)
+	@ManyToOne(optional = false)
+	private User user;
 
-    public Feedback(FeedbackPK feedbackPK, String content) {
-        this.feedbackPK = feedbackPK;
-        this.content = content;
-    }
+	public Feedback() {
+	}
 
-    public Feedback(int id, int subjectId, int userId) {
-        this.feedbackPK = new FeedbackPK(id, subjectId, userId);
-    }
+	public Feedback(FeedbackPK feedbackPK) {
+		this.feedbackPK = feedbackPK;
+	}
 
-    public FeedbackPK getFeedbackPK() {
-        return feedbackPK;
-    }
+	public Feedback(FeedbackPK feedbackPK, String content) {
+		this.feedbackPK = feedbackPK;
+		this.content = content;
+	}
 
-    public void setFeedbackPK(FeedbackPK feedbackPK) {
-        this.feedbackPK = feedbackPK;
-    }
+	public Feedback(int subjectId, int userId) {
+		this.feedbackPK = new FeedbackPK(subjectId, userId);
+	}
 
-    public String getContent() {
-        return content;
-    }
+	public FeedbackPK getFeedbackPK() {
+		return feedbackPK;
+	}
 
-    public void setContent(String content) {
-        this.content = content;
-    }
+	public void setFeedbackPK(FeedbackPK feedbackPK) {
+		this.feedbackPK = feedbackPK;
+	}
 
-    public Subject getSubject() {
-        return subject;
-    }
+	public String getContent() {
+		return content;
+	}
 
-    public void setSubject(Subject subject) {
-        this.subject = subject;
-    }
+	public void setContent(String content) {
+		this.content = content;
+	}
 
-    public User getUser() {
-        return user;
-    }
+	public Subject getSubject() {
+		return subject;
+	}
 
-    public void setUser(User user) {
-        this.user = user;
-    }
+	public void setSubject(Subject subject) {
+		this.subject = subject;
+	}
 
-    @Override
-    public int hashCode() {
-        int hash = 0;
-        hash += (feedbackPK != null ? feedbackPK.hashCode() : 0);
-        return hash;
-    }
+	public User getUser() {
+		return user;
+	}
 
-    @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Feedback)) {
-            return false;
-        }
-        Feedback other = (Feedback) object;
-        if ((this.feedbackPK == null && other.feedbackPK != null) || (this.feedbackPK != null && !this.feedbackPK.equals(other.feedbackPK))) {
-            return false;
-        }
-        return true;
-    }
+	public void setUser(User user) {
+		this.user = user;
+	}
 
-    @Override
-    public String toString() {
-        return "com.Feedback[ feedbackPK=" + feedbackPK + " ]";
-    }
-    
+	@Override
+	public int hashCode() {
+		int hash = 0;
+		hash += (feedbackPK != null ? feedbackPK.hashCode() : 0);
+		return hash;
+	}
+
+	@Override
+	public boolean equals(Object object) {
+		// TODO: Warning - this method won't work in the case the id fields are not set
+		if (!(object instanceof Feedback)) {
+			return false;
+		}
+		Feedback other = (Feedback) object;
+		if ((this.feedbackPK == null && other.feedbackPK != null)
+				|| (this.feedbackPK != null && !this.feedbackPK.equals(other.feedbackPK))) {
+			return false;
+		}
+		return true;
+	}
+
+	@Override
+	public String toString() {
+		return "com.Feedback[ feedbackPK=" + feedbackPK + " ]";
+	}
 }

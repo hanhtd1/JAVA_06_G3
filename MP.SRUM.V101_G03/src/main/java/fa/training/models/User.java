@@ -1,12 +1,13 @@
 package fa.training.models;
 
 import java.io.Serializable;
-import java.util.Date;
+import java.time.LocalDate;
 import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -14,249 +15,258 @@ import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 /**
  *
  * @author TrangDM2
  */
 @Entity
-@Table(name = "Uzer") 
+@Table(name = "Uzer")
 public class User implements Serializable {
 
-    private static final long serialVersionUID = 1L;
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY) 
-    @Column(name = "Id")
-    private Integer id;
+	private static final long serialVersionUID = 1L;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "Id")
+	private Integer id;
 
-    @Column(name = "FirstName")
-    private String firstName;
+	@Column(name = "FirstName")
+	private String firstName;
 
-    @Column(name = "LastName")
-    private String lastName;
+	@Column(name = "LastName")
+	private String lastName;
 
-    @Column(name = "Phone")
-    private String phone;
+	@Column(name = "Phone")
+	private String phone;
 
-    @Column(name = "Email")
-    private String email;
+	@Column(name = "Email")
+	private String email;
 
-    @Column(name = "Password")
-    private String password;
+	@Column(name = "Password")
+	private String password;
 
-    @Column(name = "Account")
-    private String account;
+	@Column(name = "Account")
+	private String account;
 
-    @Column(name = "BirthDay")
-    private Date birthDay;
+	@Column(name = "BirthDay")
+	private LocalDate birthDay;
 
-    @Column(name = "Role")
-    private String role;
-    
-    @Column(name = "Gender")
-    private String gender;
-    
-    public String getGender() {
-      return gender;
-    }
+	@Column(name = "Role")
+	private String role;
 
-    public void setGender(String gender) {
-      this.gender = gender;
-    }
+	@Column(name = "Gender")
+	private String gender;
 
-    public String getStatus() {
-      return status;
-    }
+	public String getGender() {
+		return gender;
+	}
 
-    public void setStatus(String status) {
-      this.status = status;
-    }
+	public void setGender(String gender) {
+		this.gender = gender;
+	}
 
-    @Column(name = "Status")
-    private String status;
-    
-    @ManyToMany(mappedBy = "userList")
-    private List<Attendance> attendanceList;
-    
-    @ManyToMany(mappedBy = "userList")
-    private List<Clazz> clazzList;
-    
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
-    private List<Score> scoreList;
-    
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
-    private List<Feedback> feedbackList;
-    
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "trainer")
-    private List<ReviewTrainee> reviewTraineeList;
-    
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "trainee")
-    private List<ReviewTrainee> reviewTraineeList1;
+	public String getStatus() {
+		return status;
+	}
 
-    public User() {
-    }
+	public void setStatus(String status) {
+		this.status = status;
+	}
 
-    public User(Integer id) {
-        this.id = id;
-    }
- 
-    public User(String firstName, String lastName, String phone, String email, String password, String account,
-        Date birthDay, String role, String gender, String status) {
-      super();
-      this.firstName = firstName;
-      this.lastName = lastName;
-      this.phone = phone;
-      this.email = email;
-      this.password = password;
-      this.account = account;
-      this.birthDay = birthDay;
-      this.role = role;
-      this.gender = gender;
-      this.status = status;
-    }
+	@Column(name = "Status")
+	private String status;
 
-    public Integer getId() {
-        return id;
-    }
+	@JsonIgnore
+	@ManyToMany(mappedBy = "userList")
+	private List<Attendance> attendanceList;
 
-    public void setId(Integer id) {
-        this.id = id;
-    }
+	@JsonIgnore
+	@ManyToMany(mappedBy = "userList", fetch = FetchType.EAGER)
+	private List<Clazz> clazzList;
 
-    public String getFirstName() {
-        return firstName;
-    }
+	@JsonIgnore
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
+	private List<Score> scoreList;
 
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
+	@JsonIgnore
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
+	private List<Feedback> feedbackList;
+	
+	@JsonIgnore
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "trainer")
+	private List<ReviewTrainee> reviewTraineeList;
 
-    public String getLastName() {
-        return lastName;
-    }
+	@JsonIgnore
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "trainee")
+	private List<ReviewTrainee> reviewTraineeList1;
 
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
+	public User() {
+	}
 
-    public String getPhone() {
-        return phone;
-    }
+	public User(Integer id) {
+		this.id = id;
+	}
 
-    public void setPhone(String phone) {
-        this.phone = phone;
-    }
+	public User(String firstName, String lastName, String phone, String email, String password, String account,
+			LocalDate birthDay, String role, String gender, String status) {
+		super();
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.phone = phone;
+		this.email = email;
+		this.password = password;
+		this.account = account;
+		this.birthDay = birthDay;
+		this.role = role;
+		this.gender = gender;
+		this.status = status;
+	}
 
-    public String getEmail() {
-        return email;
-    }
+	public Integer getId() {
+		return id;
+	}
 
-    public void setEmail(String email) {
-        this.email = email;
-    }
+	public void setId(Integer id) {
+		this.id = id;
+	}
 
-    public String getPassword() {
-        return password;
-    }
+	public String getFirstName() {
+		return firstName;
+	}
 
-    public void setPassword(String password) {
-        this.password = password;
-    }
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
+	}
 
-    public String getAccount() {
-        return account;
-    }
+	public String getLastName() {
+		return lastName;
+	}
 
-    public void setAccount(String account) {
-        this.account = account;
-    }
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
+	}
 
-    public Date getBirthDay() {
-        return birthDay;
-    }
+	public String getPhone() {
+		return phone;
+	}
 
-    public void setBirthDay(Date birthDay) {
-        this.birthDay = birthDay;
-    }
+	public void setPhone(String phone) {
+		this.phone = phone;
+	}
 
-    public String getRole() {
-        return role;
-    }
+	public String getEmail() {
+		return email;
+	}
 
-    public void setRole(String role) {
-        this.role = role;
-    }
+	public void setEmail(String email) {
+		this.email = email;
+	}
 
-    public List<Attendance> getAttendanceList() {
-        return attendanceList;
-    }
+	public String getPassword() {
+		return password;
+	}
 
-    public void setAttendanceList(List<Attendance> attendanceList) {
-        this.attendanceList = attendanceList;
-    }
+	public void setPassword(String password) {
+		this.password = password;
+	}
 
-    public List<Clazz> getClazzList() {
-        return clazzList;
-    }
+	public String getAccount() {
+		return account;
+	}
 
-    public void setClazzList(List<Clazz> clazzList) {
-        this.clazzList = clazzList;
-    }
+	public void setAccount(String account) {
+		this.account = account;
+	}
 
-    public List<Score> getScoreList() {
-        return scoreList;
-    }
+	public LocalDate getBirthDay() {
+		return birthDay;
+	}
 
-    public void setScoreList(List<Score> scoreList) {
-        this.scoreList = scoreList;
-    }
+	public void setBirthDay(LocalDate birthDay) {
+		this.birthDay = birthDay;
+	}
 
-    public List<Feedback> getFeedbackList() {
-        return feedbackList;
-    }
+	public String getRole() {
+		return role;
+	}
 
-    public void setFeedbackList(List<Feedback> feedbackList) {
-        this.feedbackList = feedbackList;
-    }
+	public void setRole(String role) {
+		this.role = role;
+	}
 
-    public List<ReviewTrainee> getReviewTraineeList() {
-        return reviewTraineeList;
-    }
+	public List<Attendance> getAttendanceList() {
+		return attendanceList;
+	}
 
-    public void setReviewTraineeList(List<ReviewTrainee> reviewTraineeList) {
-        this.reviewTraineeList = reviewTraineeList;
-    }
+	public void setAttendanceList(List<Attendance> attendanceList) {
+		this.attendanceList = attendanceList;
+	}
 
-    public List<ReviewTrainee> getReviewTraineeList1() {
-        return reviewTraineeList1;
-    }
+	public List<Clazz> getClazzList() {
+		return clazzList;
+	}
 
-    public void setReviewTraineeList1(List<ReviewTrainee> reviewTraineeList1) {
-        this.reviewTraineeList1 = reviewTraineeList1;
-    }
+	public void setClazzList(List<Clazz> clazzList) {
+		this.clazzList = clazzList;
+	}
 
-    @Override
-    public int hashCode() {
-        int hash = 0;
-        hash += (id != null ? id.hashCode() : 0);
-        return hash;
-    }
+	public List<Score> getScoreList() {
+		return scoreList;
+	}
 
-    @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof User)) {
-            return false;
-        }
-        User other = (User) object;
-        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
-            return false;
-        }
-        return true;
-    }
+	public void setScoreList(List<Score> scoreList) {
+		this.scoreList = scoreList;
+	}
 
-    @Override
-    public String toString() {
-        return "com.User[ id=" + id + " ]";
-    }
-    
+	public List<Feedback> getFeedbackList() {
+		return feedbackList;
+	}
+
+	public void setFeedbackList(List<Feedback> feedbackList) {
+		this.feedbackList = feedbackList;
+	}
+
+	public List<ReviewTrainee> getReviewTraineeList() {
+		return reviewTraineeList;
+	}
+
+	public void setReviewTraineeList(List<ReviewTrainee> reviewTraineeList) {
+		this.reviewTraineeList = reviewTraineeList;
+	}
+
+	public List<ReviewTrainee> getReviewTraineeList1() {
+		return reviewTraineeList1;
+	}
+
+	public void setReviewTraineeList1(List<ReviewTrainee> reviewTraineeList1) {
+		this.reviewTraineeList1 = reviewTraineeList1;
+	}
+
+	@Override
+	public int hashCode() {
+		int hash = 0;
+		hash += (id != null ? id.hashCode() : 0);
+		return hash;
+	}
+
+	@Override
+	public boolean equals(Object object) {
+		// TODO: Warning - this method won't work in the case the id fields are not set
+		if (!(object instanceof User)) {
+			return false;
+		}
+		User other = (User) object;
+		if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
+			return false;
+		}
+		return true;
+	}
+
+	@Override
+	public String toString() {
+		return "User [id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + ", phone=" + phone
+				+ ", email=" + email + ", password=" + password + ", account=" + account + ", birthDay=" + birthDay
+				+ ", role=" + role + ", gender=" + gender + ", status=" + status + "]";
+	}
 }

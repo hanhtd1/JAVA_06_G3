@@ -1,217 +1,64 @@
 
-<div class="col s12 m12 l12 no-p-h">
+<div class="col s12 m12 l12 no-p-h" id="trainee-manages">
 	<div class="card mailbox-content">
 		<div class="card-content">
 			<div class="col s12 m12 l12 p-h-md">
 				<h3>Trainees Management</h3>
-				<div class="input-field col s4 m-t-sm">
-					<p class="f-s-16">View by category</p>
-					<select class="p-h-md">
-						<option value="0" selected>All</option>
-						<option value="1">Java</option>
-						<option value="2">.Net</option>
-						<option value="3">Test</option>
-					</select>
+				<div class="input-field col s6 m-t-md">
+					<form>
+						<div class="row">
+							<div class="input-field col s12">
+								<input th:onkeyup="loadTrainees()" id="find-trainee" type="text"
+									class="validate"> <label for="find-trainee"><i class="tiny material-icons">search</i> Find trainee</label>
+							</div>
+						</div>
+					</form>
 				</div>
-				<div class="input-field col s4 m-t-sm">
-					<p class="f-s-16">View by class</p>
-					<select class="p-h-md">
-						<option value="0" selected>All</option>
-						<option value="1">Class 1</option>
-						<option value="2">Class 2</option>
-						<option value="3">Class 3</option>
-					</select>
-				</div>
-				<div class="input-field col s4 m-t-sm">
-					<p class="f-s-16">View by status</p>
-					<select class="p-h-md">
-						<option value="0">All</option>
-						<option value="1" selected>Active</option>
-						<option value="2">Inactive</option>
+				<div class="input-field col s6">
+					<span>View by status</span> 
+					<select id="trainee-status" th:onchange="loadTrainees()" class="p-h-sm">
+						<option value="">All</option>
+						<option value="Active" selected>Active</option>
+						<option value="Inactive">Inactive</option>
+						<option value="Graduated">Graduated</option>
 					</select>
 				</div>
 			</div>
 			<div class="row no-m-t no-m-b">
 				<div class="col s12 m5 l3">
 					<div class="mailbox-list">
-						<ul>
-							<li class=""><a href="">
-									<h5 class="f-s-19">Jonathan Smith</h5>
-									<p>
-										<i class="tiny material-icons">person_pin</i> 10/10/1997
-									</p>
-									<p>
-										<i class="tiny material-icons">work</i> Java 06
-									</p>
-									<p>
-										<i class="tiny material-icons">email</i>
-										jonathansm@fsoft.com.vn
-									</p>
-							</a></li>
-							<li class=""><a href="">
-									<h5 class="f-s-19">Jonathan Smith</h5>
-									<p>
-										<i class="tiny material-icons">person_pin</i> 10/10/1997
-									</p>
-									<p>
-										<i class="tiny material-icons">work</i> Java 06
-									</p>
-									<p>
-										<i class="tiny material-icons">email</i>
-										jonathansm@fsoft.com.vn
-									</p>
-							</a></li>
-							<li class=""><a href="">
-									<h5 class="f-s-19">Jonathan Smith</h5>
-									<p>
-										<i class="tiny material-icons">person_pin</i> 10/10/1997
-									</p>
-									<p>
-										<i class="tiny material-icons">work</i> Java 06
-									</p>
-									<p>
-										<i class="tiny material-icons">email</i>
-										jonathansm@fsoft.com.vn
-									</p>
-							</a></li>
-							<li class=""><a href="">
-									<h5 class="f-s-19">Jonathan Smith</h5>
-									<p>
-										<i class="tiny material-icons">person_pin</i> 10/10/1997
-									</p>
-									<p>
-										<i class="tiny material-icons">work</i> Java 06
-									</p>
-									<p>
-										<i class="tiny material-icons">email</i>
-										jonathansm@fsoft.com.vn
-									</p>
-							</a></li>
-							<li class=""><a href="">
-									<h5 class="f-s-19">Jonathan Smith</h5>
-									<p>
-										<i class="tiny material-icons">person_pin</i> 10/10/1997
-									</p>
-									<p>
-										<i class="tiny material-icons">work</i> Java 06
-									</p>
-									<p>
-										<i class="tiny material-icons">email</i>
-										jonathansm@fsoft.com.vn
-									</p>
-							</a></li>
-							<li class=""><a href="">
-									<h5 class="f-s-19">Jonathan Smith</h5>
-									<p>
-										<i class="tiny material-icons">person_pin</i> 10/10/1997
-									</p>
-									<p>
-										<i class="tiny material-icons">work</i> Java 06
-									</p>
-									<p>
-										<i class="tiny material-icons">email</i>
-										jonathansm@fsoft.com.vn
-									</p>
-							</a></li>
-							<li class=""><a href="">
-									<h5 class="f-s-19">Jonathan Smith</h5>
-									<p>
-										<i class="tiny material-icons">person_pin</i> 10/10/1997
-									</p>
-									<p>
-										<i class="tiny material-icons">work</i> Java 06
-									</p>
-									<p>
-										<i class="tiny material-icons">email</i>
-										jonathansm@fsoft.com.vn
-									</p>
-							</a></li>
-							<li class=""><a href="">
-									<h5 class="f-s-19">Jonathan Smith</h5>
-									<p>
-										<i class="tiny material-icons">person_pin</i> 10/10/1997
-									</p>
-									<p>
-										<i class="tiny material-icons">work</i> Java 06
-									</p>
-									<p>
-										<i class="tiny material-icons">email</i>
-										jonathansm@fsoft.com.vn
-									</p>
-							</a></li>
-							<li class=""><a href="">
-									<h5 class="f-s-19">Jonathan Smith</h5>
-									<p>
-										<i class="tiny material-icons">person_pin</i> 10/10/1997
-									</p>
-									<p>
-										<i class="tiny material-icons">work</i> Java 06
-									</p>
-									<p>
-										<i class="tiny material-icons">email</i>
-										jonathansm@fsoft.com.vn
-									</p>
-							</a></li>
-							<li class=""><a href="">
-									<h5 class="f-s-19">Jonathan Smith</h5>
-									<p>
-										<i class="tiny material-icons">person_pin</i> 10/10/1997
-									</p>
-									<p>
-										<i class="tiny material-icons">work</i> Java 06
-									</p>
-									<p>
-										<i class="tiny material-icons">email</i>
-										jonathansm@fsoft.com.vn
-									</p>
-							</a></li>
-							<li class=""><a href="">
-									<h5 class="f-s-19">Jonathan Smith</h5>
-									<p>
-										<i class="tiny material-icons">person_pin</i> 10/10/1997
-									</p>
-									<p>
-										<i class="tiny material-icons">work</i> Java 06
-									</p>
-									<p>
-										<i class="tiny material-icons">email</i>
-										jonathansm@fsoft.com.vn
-									</p>
-							</a></li>
-							<li class=""><a href="">
-									<h5 class="f-s-19">Jonathan Smith</h5>
-									<p>
-										<i class="tiny material-icons">person_pin</i> 10/10/1997
-									</p>
-									<p>
-										<i class="tiny material-icons">work</i> Java 06
-									</p>
-									<p>
-										<i class="tiny material-icons">email</i>
-										jonathansm@fsoft.com.vn
-									</p>
-							</a></li>
+						<ul id="list_trainees">
+							<li th:each="trainee:${trainees}">
+								<a href="#!" th:onclick="'loadTraineeInfo('+${trainee.id}+')'">
+									<h5 class="f-s-19" th:text="${trainee.name}"></h5>
+									<span><i class="tiny material-icons">cake</i> <span th:text="${trainee.birthDay}"></span></span><br>
+									<span><i class="tiny material-icons">email</i> <span th:text="${trainee.email}"></span></span><br>
+									<span><i class="tiny material-icons">school</i> <span th:text="${trainee.className}"></span></span><br>
+								</a>
+							</li>
 						</ul>
 					</div>
 				</div>
-				<div class="col s12 m7 l9">
+				<div class="col s12 m7 l9" id="trainee-information"
+					style="display: none">
 					<div class="mailbox-view">
 						<div class="mailbox-view-header">
 							<div class="left">
 								<div class="left">
-									<img src="assets/images/profile-image-1.png" alt=""
+									<img th:src="@{../assets/images/profile-image-1.png}" alt=""
 										class="circle mailbox-profile-image z-depth-1">
 								</div>
 								<div class="left">
-									<span class="mailbox-title">Jonathan Smith</span> <span
-										class="mailbox-author">jonathansm@fsoft.com.vn</span>
+									<span class="mailbox-title" id="trainee-name"></span> <span
+										class="mailbox-author" id="trainee-email"></span>
 								</div>
 							</div>
 							<div class="right mailbox-buttons">
 								<a class="modal-trigger waves-effect waves-grey btn-flat m-t-xs"
-									href="#update_trainee_information">Edit</a> <a
+									href="#update_trainee_information"
+									th:onclick="editTraineeInfo()">Edit Info</a> <a
 									class="waves-effect waves-red btn-flat m-t-xs modal-trigger"
-									href="#delete-confirm">Delete</a>
+									href="#update-status">Update Status</a>
 							</div>
 							<div class="divider mailbox-divider"></div>
 							<div class="mailbox-text">
@@ -220,13 +67,13 @@
 										Details Information</a>
 									<div class="row details-list">
 										<div class="col s1 first-col">
-											<span><i class="tiny material-icons">person_pin</i> </span> <span><i
-												class="tiny material-icons">work</i></span> <span><i
-												class="tiny material-icons">email</i></span>
+											<span><i class="tiny material-icons">cake</i> </span> <span><i
+												class="tiny material-icons">call</i></span> <span><i
+												class="tiny material-icons">person</i></span>
 										</div>
 										<div class="col s8 second-col">
-											<span> 10/10/1997</span> <span> HN19_FR_JAVA_06</span> <span>
-												jonathansm@fsoft.com.vn</span>
+											<span id="trainee-birthday"> </span> <span id="trainee-phone">
+											</span> <span id="trainee-account"> </span>
 										</div>
 									</div>
 								</div>
@@ -244,54 +91,7 @@
 												<th style="word-wrap: break-word;" data-field="price">Feedback</th>
 											</tr>
 										</thead>
-										<tbody>
-											<tr>
-												<td>JPL</td>
-												<td>9</td>
-												<td>9</td>
-												<td>Done</td>
-												<td><a
-													class="modal-trigger waves-effect waves-blue btn m-t-xs"
-													href="#feedback-modal">View feedback</a></td>
-											</tr>
-											<tr>
-												<td>SQL</td>
-												<td>8</td>
-												<td>8</td>
-												<td>Done</td>
-												<td><a
-													class="modal-trigger waves-effect waves-blue btn m-t-xs"
-													href="#feedback-modal">View feedback</a></td>
-											</tr>
-											<tr>
-												<td>ORM</td>
-												<td>--</td>
-												<td>--</td>
-												<td>In process</td>
-												<td></td>
-											</tr>
-											<tr>
-												<td>CNU</td>
-												<td>--</td>
-												<td>--</td>
-												<td>In coming</td>
-												<td></td>
-											</tr>
-											<tr>
-												<td>JWEB</td>
-												<td>--</td>
-												<td>--</td>
-												<td>In coming</td>
-												<td></td>
-											</tr>
-											<tr>
-												<td>SFW</td>
-												<td>--</td>
-												<td>--</td>
-												<td>In coming</td>
-												<td></td>
-											</tr>
-										</tbody>
+										<tbody id="scores"></tbody>
 									</table>
 								</div>
 							</div>
@@ -318,51 +118,52 @@
 </div>
 <!-- Modal add trainee -->
 <div id="add-trainee-modal" class="modal modal-fixed-footer">
-	<form class="col s12" th:action="@{/create-trainee}">
+	<form class="col s12" th:object="${user}" th:onsubmit="return addTrainee()"
+		id="add_trainee_form" name="add_trainee_form">
 		<div class="modal-content">
 			<h4>Add new trainee</h4>
 			<div class="row">
+			<input type="hidden" name="role" id="add_role" value="1"/>
 				<div class="row">
 					<div class="input-field col s6">
 						<input id="add_first_name" name="firstName" type="text"
-							class="validate"> <label for="add_first_name">First
-							Name</label>
+							class="validate" th:onchange="generateAccountAndEmail()" required>
+						<label for="add_first_name">First Name</label>
 					</div>
 					<div class="input-field col s6">
 						<input id="add_last_name" name="lastName" type="text"
-							class="validate"> <label for="add_last_name">Last
-							Name</label>
+							class="validate" th:onchange="generateAccountAndEmail()" required>
+						<label for="add_last_name">Last Name</label>
 					</div>
 				</div>
 				<div class="row">
 					<div class="input-field col s6">
-						<input id="add_phone" name="phone" type="tel" class="validate">
-						<label for="add_phone">Phone</label>
+						<input id="add_phone" name="phone" type="tel" class="validate"
+							required> <label for="add_phone">Phone</label>
 					</div>
 					<div class="input-field col s6">
-						<select id="add_gender" name="gender" required>
-							<option value="" selected>Gender</option>
+						<select id="add_gender" name="gender">
 							<option value="Male">Male</option>
 							<option value="Female">Female</option>
-							<option value="Other">Other</option>
+							<option value="Other" selected>Other</option>
 						</select>
 					</div>
 				</div>
 				<div class="row">
 					<div class="input-field col s6">
-						<input id="add_account" name="account" type="text"
-							class="validate"> <label for="add_account">Account</label>
+						<span>Account</span> <input id="add_account" name="account"
+							type="text" class="validate" required readonly="readonly">
 					</div>
 					<div class="input-field col s6">
-						<input id="add_email" name="email" type="email" class="validate">
-						<label for="add_email">Email</label>
+						<span>Email</span> <input id="add_email" name="email" type="email"
+							class="validate" required readonly="readonly">
 					</div>
 				</div>
 				<div class="row">
 					<div class="input-field col s6">
 						<p>Birth Day</p>
 						<input id="add_birthday" name="birthDay" type="date"
-							class="validate">
+							class="validate" required="required">
 					</div>
 				</div>
 			</div>
@@ -382,55 +183,54 @@
 			<div class="row">Feed backkkkkkkkkk</div>
 		</div>
 		<div class="modal-footer">
-			<a href="#!"
+			<a href="#!" id="exit-feedback"
 				class=" modal-action modal-close waves-effect waves-green btn-flat">Done</a>
 		</div>
 	</form>
 </div>
 <!-- Modal Structure -->
 <div id="update_trainee_information" class="modal modal-fixed-footer">
-	<form class="col s12">
+	<form th:onsubmit="return updateTrainee()" class="col s12">
 		<div class="modal-content">
-			<h4>Add new trainee</h4>
+			<h4>UPDATE TRAINEE INFORMATION</h4>
 			<div class="row">
+				<input type="hidden" id="update_id" class="traineeId" name="traineeId" />
 				<div class="row">
 					<div class="input-field col s6">
-						<input id="add_first_name" type="text" class="validate"> <label
-							for="add_first_name">First Name</label>
+						<span>First Name</span> <input id="update_first_name" type="text"
+							class="validate">
 					</div>
 					<div class="input-field col s6">
-						<input id="add_last_name" type="text" class="validate"> <label
-							for="add_last_name">Last Name</label>
+						<span>Last Name</span> <input id="update_last_name" type="text"
+							class="validate">
+					</div>
+				</div>
+				<div class="row">
+					<div class="input-field col s12">
+						<span>Phone</span> <input id="update_phone" type="tel"
+							class="validate">
 					</div>
 				</div>
 				<div class="row">
 					<div class="input-field col s6">
-						<input id="add_phone" type="tel" class="validate"> <label
-							for="add_phone">Phone</label>
+						<span>Birth Day</span> 
+						<input id="update_birthday" type="date" class="validate">
 					</div>
 					<div class="input-field col s6">
-						<select id="add_gender" required>
-							<option value="" selected>Gender</option>
+						<span>Gender</span> 
+						<select id="update_gender" name="gender">
 							<option value="Male">Male</option>
 							<option value="Female">Female</option>
-							<option value="Other">Other</option>
+							<option value="Other" selected>Other</option>
 						</select>
 					</div>
 				</div>
 				<div class="row">
 					<div class="input-field col s6">
-						<input id="add_account" type="text" class="validate"> <label
-							for="add_account">Account</label>
+						<input id="update_account" type="text" class="validate" readonly>
 					</div>
 					<div class="input-field col s6">
-						<input id="add_email" type="email" class="validate"> <label
-							for="add_email">Email</label>
-					</div>
-				</div>
-				<div class="row">
-					<div class="input-field col s6">
-						<p>Birth Day</p>
-						<input id="add_birthday" type="date" class="validate">
+						<input id="update_email" type="email" class="validate" readonly>
 					</div>
 				</div>
 			</div>
@@ -443,27 +243,37 @@
 	</form>
 </div>
 <!-- Modal Structure -->
-<div id="delete-confirm" class="modal l6">
+<div id="update-status" class="modal l6">
 	<div class="modal-content">
-		<h4>Delete this trainee?</h4>
-		<p>Are you sure to delete this trainee?</p>
+		<h4>CHANGE TRAINEE STATUS</h4>
+		<div>
+			<p class="f-s-16">Change status</p>
+			<select class="p-h-md" id="traineeStatus">
+				<option value="Active" selected>Active</option>
+				<option value="Inactive">Inactive</option>
+				<option value="Graduated">Graduated</option>
+			</select> 
+			<input type="hidden" id="statusTraineeId" class="traineeId" name="traineeId" />
+		</div>
 		<div class="modal-footer">
 			<a href="#!"
 				class=" modal-action modal-close waves-effect waves-green btn-flat">Cancel</a>
-			<a href="#!" class=" modal-action waves-effect waves-red btn-flat">Delete</a>
+			<a href="#!" th:onclick="changeTraineeStatus()" class=" modal-action waves-effect waves-red btn-flat">Submit</a>
 		</div>
 	</div>
 </div>
-<script src="assets/plugins/jquery/jquery-2.2.0.min.js"></script>
-<script src="assets/plugins/materialize/js/materialize.min.js"></script>
-<script
-	src="assets/plugins/material-preloader/js/materialPreloader.min.js"></script>
-<script src="assets/plugins/jquery-blockui/jquery.blockui.js"></script>
-<script src="assets/plugins/simditor/scripts/module.js"></script>
-<script src="assets/plugins/simditor/scripts/hotkeys.js"></script>
-<script src="assets/plugins/simditor/scripts/uploader.js"></script>
-<script src="assets/plugins/simditor/scripts/simditor.js"></script>
-<script src="assets/js/alpha.min.js"></script>
-<script src="assets/js/pages/mailbox.js"></script>
-</body>
-</html>
+<script th:src="@{../assets/plugins/jquery/jquery-2.2.0.min.js}"></script>
+<script th:src="@{../assets/plugins/materialize/js/materialize.min.js}"></script>
+<script th:src="@{../assets/plugins/material-preloader/js/materialPreloader.min.js}"></script>
+<script th:src="@{../assets/plugins/jquery-blockui/jquery.blockui.js}"></script>
+<script th:src="@{../assets/plugins/datatables/js/jquery.dataTables.min.js}"></script>
+<script th:src="@{../assets/plugins/simditor/scripts/module.js}"></script>
+<script th:src="@{../assets/plugins/simditor/scripts/hotkeys.js}"></script>
+<script th:src="@{../assets/plugins/simditor/scripts/uploader.js}"></script>
+<script th:src="@{../assets/plugins/simditor/scripts/simditor.js}"></script>
+<script th:src="@{../assets/js/alpha.min.js}"></script>
+<script th:src="@{../assets/js/pages/table-data.js}"></script>
+<script th:src="@{../assets/js/pages/mailbox.js}"></script>
+<script th:src="@{../assets/js/pages/form-wizard.js}"></script>
+<script th:src="@{../assets/js/admin-manage.js}"></script>
+<div id="scripts"></div>

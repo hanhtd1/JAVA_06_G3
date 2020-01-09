@@ -1,0 +1,703 @@
+<div id="main-content" class="row no-m-t no-m-b">
+	<div class="col s12 m12 l12 no-p-h">
+		<div class="card mailbox-content">
+			<div class="card-content">
+				<div class="col s12 m12 l12 p-h-md">
+					<h3>Classes Management</h3>
+					<div class="col m12 l12">
+						<div class="input-field col s6 m-t-md">
+							<form>
+								<div class="row">
+									<div class="input-field col s12">
+										<input th:onkeyup="loadClass()" id="find-class" type="text"
+											class="validate"> <label for="find-class"><i
+											class="tiny material-icons">search</i> Find class</label>
+									</div>
+								</div>
+							</form>
+						</div>
+						<div class="input-field col s12 m6 l6 m-t-sm">
+							<p class="f-s-16">View by status</p>
+							<select id="class-status" class="p-h-md">
+								<option value="" selected>All</option>
+								<option value="In Coming">In Coming</option>
+								<option value="Active">Active</option>
+								<option value="Graduated">Graduated</option>
+							</select>
+						</div>
+					</div>
+				</div>
+				<div class="row no-m-t no-m-b">
+					<div class="col s12 m5 l3">
+						<div class="mailbox-list">
+							<ul id="list_classes">
+								<li th:each="class:${classes}" class="">
+									<a href="#!" th:onclick="'loadClassDetail('+${class.id}+')'">
+										<h5 class="f-s-19" th:text="${class.name}"></h5>
+										<span>
+											<i class="tiny material-icons">person_pin</i> <span th:text="${class.userList.size()}"> </span> Members
+										</span>
+									</a>
+								</li>
+							</ul>
+						</div>
+					</div>
+					<div class="col s12 m7 l9" id="class-detail">
+
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="left-sidebar-hover"></div>
+<div class="fixed-action-btn vertical"
+	style="bottom: 45px; right: 24px;">
+	<a class="btn-floating btn-large red"> <i
+		class="large material-icons">mode_edit</i>
+	</a>
+	<ul>
+		<li><a href="#add-class-modal"
+			class="btn-floating blue modal-trigger"><i class="material-icons">add</i>Add</a></li>
+		<li><a class="btn-floating green darken-1"><i
+				class="material-icons">description</i></a></li>
+	</ul>
+</div>
+<!-- Modal View Trainee information -->
+<div id="trainee-info" class="modal modal-fixed-footer">
+	<div class="modal-content">
+		<h4>Trainee information</h4>
+		<div class="mailbox-view">
+			<div class="mailbox-view-header">
+				<div class="left">
+					<div class="left">
+						<img src="assets/images/profile-image-1.png" alt=""
+							class="circle mailbox-profile-image z-depth-1">
+					</div>
+					<div class="left">
+						<span class="mailbox-title">Jonathan Smith</span> <span
+							class="mailbox-author">jonathansm@fsoft.com.vn</span>
+					</div>
+				</div>
+				<div class="right mailbox-buttons">
+					<a class="modal-trigger waves-effect waves-grey btn-flat m-t-xs"
+						href="#update-class-modal">Edit</a> <a
+						class="waves-effect waves-red btn-flat m-t-xs modal-trigger"
+						href="#delete-confirm">Delete</a>
+				</div>
+				<div class="divider mailbox-divider"></div>
+				<div class="mailbox-text">
+					<div class="mailbox-details">
+						<a href="javascript:void(0);" class="details-toggle">Show
+							Details Information</a>
+						<div class="row details-list">
+							<div class="col s1 first-col">
+								<span><i class="tiny material-icons">person_pin</i> </span> <span><i
+									class="tiny material-icons">work</i></span> <span><i
+									class="tiny material-icons">email</i></span>
+							</div>
+							<div class="col s8 second-col">
+								<span> 10/10/1997</span> <span> HN19_FR_JAVA_06</span> <span>
+									jonathansm@fsoft.com.vn</span>
+							</div>
+						</div>
+					</div>
+					<p>Grades</p>
+					<div class="divider mailbox-divider"></div>
+					<div class="trainee-detail">
+						<table style="table-layout: fixed;"
+							class="responsive-table bordered striped p-h-md">
+							<thead>
+								<tr>
+									<th data-field="id">Subjects</th>
+									<th class="w-25" data-field="name">Theory Mark</th>
+									<th class="w-25" data-field="price">Practice Mark</th>
+									<th class="w-25" data-field="price">Status</th>
+									<th style="word-wrap: break-word;" data-field="price">Feedback</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<td>JPL</td>
+									<td>9</td>
+									<td>9</td>
+									<td>Done</td>
+									<td><a
+										class="modal-trigger waves-effect waves-blue btn m-t-xs"
+										href="#feedback-modal">View feedback</a></td>
+								</tr>
+								<tr>
+									<td>SQL</td>
+									<td>8</td>
+									<td>8</td>
+									<td>Done</td>
+									<td><a
+										class="modal-trigger waves-effect waves-blue btn m-t-xs"
+										href="#feedback-modal">View feedback</a></td>
+								</tr>
+								<tr>
+									<td>ORM</td>
+									<td>7</td>
+									<td>9</td>
+									<td>Doing</td>
+									<td><a
+										class="modal-trigger waves-effect waves-blue btn m-t-xs"
+										href="#feedback-modal">View feedback</a></td>
+								</tr>
+								<tr>
+									<td>CNU</td>
+									<td>7</td>
+									<td>10</td>
+									<td>Todo</td>
+									<td><a
+										class="modal-trigger waves-effect waves-blue btn m-t-xs"
+										href="#feedback-modal">View feedback</a></td>
+								</tr>
+								<tr>
+									<td>JWEB</td>
+									<td>7</td>
+									<td>10</td>
+									<td>Todo</td>
+									<td><a
+										class="modal-trigger waves-effect waves-blue btn m-t-xs"
+										href="#feedback-modal">View feedback</a></td>
+								</tr>
+								<tr>
+									<td>SFW</td>
+									<td>7</td>
+									<td>10</td>
+									<td>Todo</td>
+									<td><a
+										class="modal-trigger waves-effect waves-blue btn m-t-xs"
+										href="#feedback-modal">View feedback</a></td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="modal-footer">
+		<a href="#!"
+			class="modal-action modal-close waves-effect waves-green btn-flat ">Agree</a>
+	</div>
+</div>
+<!-- Modal add trainee to class -->
+<div id="add-trainee-modal" class="modal modal-fixed-footer">
+	<div class="modal-content">
+		<h4>Modal Header</h4>
+		<div>
+			<form>
+				<div class="row">
+					<div class="input-field col s12">
+						<input id="find-trainee" type="text" class="validate"> <label
+							for="find-trainee">Find trainee</label>
+					</div>
+				</div>
+			</form>
+			<div class="p-v-sm p-h-sm">
+				<table style="table-layout: fixed;"
+					class="responsive-table bordered striped p-h-md">
+					<thead>
+						<tr>
+							<th class="w-50" data-field="id">Trainer Name</th>
+							<th data-field="name">Account</th>
+							<th data-field="price">Phone</th>
+							<th class="w-25" data-field="price">Action</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td>Trainee Abc Def</td>
+							<td>trainerad2</td>
+							<td>0987654321</td>
+							<td>
+								<button class="btn waves-effect blue p-h-xs">
+									<i class="material-icons">add</i>
+								</button>
+							</td>
+						</tr>
+						<tr>
+							<td>Trainee Abc Def</td>
+							<td>trainerad2</td>
+							<td>0987654321</td>
+							<td>
+								<button class="btn waves-effect blue p-h-xs">
+									<i class="material-icons">add</i>
+								</button>
+							</td>
+						</tr>
+						<tr>
+							<td>Trainee Abc Def</td>
+							<td>trainerad2</td>
+							<td>0987654321</td>
+							<td>
+								<button class="btn waves-effect blue p-h-xs">
+									<i class="material-icons">add</i>
+								</button>
+							</td>
+						</tr>
+						<tr>
+							<td>Trainee Abc Def</td>
+							<td>trainerad2</td>
+							<td>0987654321</td>
+							<td>
+								<button class="btn waves-effect blue p-h-xs">
+									<i class="material-icons">add</i>
+								</button>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+	<div class="modal-footer">
+		<a href="#!"
+			class="modal-action modal-close waves-effect waves-green btn-flat ">Agree</a>
+	</div>
+</div>
+<!-- Modal add trainee to class -->
+<div id="add-class-modal" class="modal modal-fixed-footer">
+	<form class="col s12">
+		<div class="modal-content">
+			<h4>Add new class</h4>
+			<div class="row">
+				<div class="row">
+					<div class="input-field col l12">
+						<input id="clazzName" type="text" class="validate" required>
+						<label for="clazzName">Class Name</label>
+					</div>
+				</div>
+				<div class="row">
+					<div class="input-field col s12">
+						<select required>
+							<option value="" selected>Choose Branch</option>
+							<option value="1">Java</option>
+							<option value="2">.Net</option>
+							<option value="3">Test</option>
+						</select>
+					</div>
+				</div>
+				<div class="row">
+					<div class="input-field col s12">
+						<p for="openDate">Open Date</p>
+						<input id="openDate" type="date" required>
+					</div>
+				</div>
+				<div class="row">
+					<div class="input-field col s12">
+						<input id="note" type="text" class="validate" required> <label
+							for="note">Note</label>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="modal-footer">
+			<a href="#!"
+				class=" modal-action modal-close waves-effect waves-green btn-flat">Cancel</a>
+			<button type="submit" class="modal-action waves-effect red btn ">Submit</button>
+		</div>
+	</form>
+</div>
+<!-- Modal feedback-->
+<div id="feedback-modal" class="modal" style="width: 40%;">
+	<form class="col s12">
+		<div class="modal-content">
+			<h4>Feedback</h4>
+			<div class="row">Feed backkkkkkkkkk</div>
+		</div>
+		<div class="modal-footer">
+			<a href="#!"
+				class=" modal-action modal-close waves-effect waves-green btn-flat">Done</a>
+		</div>
+	</form>
+</div>
+<!-- Modal update trainee information -->
+<div id="update-class-modal" class="modal modal-fixed-footer">
+	<form class="col s12">
+		<div class="modal-content">
+			<h4>Add new class</h4>
+			<div class="row">
+				<div class="row">
+					<div class="input-field col l12">
+						<input id="update-clazzName" type="text" class="validate" required>
+						<label for="update-clazzName">Class Name</label>
+					</div>
+				</div>
+				<div class="row">
+					<div class="input-field col s12">
+						<select required>
+							<option value="" selected>Choose Branch</option>
+							<option value="1">Java</option>
+							<option value="2">.Net</option>
+							<option value="3">Test</option>
+						</select>
+					</div>
+				</div>
+				<div class="row">
+					<div class="input-field col s12">
+						<p for="update-openDate">Open Date</p>
+						<input id="update-openDate" type="date" required>
+					</div>
+				</div>
+				<div class="row">
+					<div class="input-field col s12">
+						<input id="update-note" type="text" class="validate" required>
+						<label for="update-note">Note</label>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="modal-footer">
+			<a href="#!"
+				class=" modal-action modal-close waves-effect waves-green btn-flat">Cancel</a>
+			<button type="submit" class="modal-action waves-effect red btn ">Submit</button>
+		</div>
+	</form>
+</div>
+<!-- Modal delete trainee confirm -->
+<div id="update-class-status" class="modal l6">
+	<div class="modal-content">
+		<h4>Delete this trainee?</h4>
+		<p>Are you sure to delete this trainee?</p>
+		<div class="modal-footer">
+			<a href="#!"
+				class=" modal-action modal-close waves-effect waves-green btn-flat">Cancel</a>
+			<a href="#!" class=" modal-action waves-effect waves-red btn-flat">Delete</a>
+		</div>
+	</div>
+</div>
+<!-- Modal attendance -->
+<div id="attendance-modal" class="modal modal-fixed-footer">
+	<div class="modal-content">
+		<p class="f-s-32">Attendance</p>
+		<div>
+			<table style="table-layout: fixed;"
+				class="responsive-table bordered striped p-h-md">
+				<thead>
+					<tr>
+						<th data-field="id">Account</th>
+						<th data-field="name">Full Name</th>
+						<th data-field="price">Phone</th>
+						<th style="width: 25%" data-field="price">Attendance</th>
+						<th style="width: 25%" data-field="price">Note</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>trangdm2</td>
+						<td>Do Manh Trang</td>
+						<td>0934560199</td>
+						<td><select class="p-h-md">
+								<option value="" selected>Choose</option>
+								<option value="1">Absent</option>
+								<option value="2">Present</option>
+								<option value="3">Late</option>
+						</select></td>
+						<td><input type="text" class="validate"></td>
+					</tr>
+					<tr>
+						<td>trangdm2</td>
+						<td>Do Manh Trang</td>
+						<td>0934560199</td>
+						<td><select class="p-h-md">
+								<option value="" selected>Choose</option>
+								<option value="1">Absent</option>
+								<option value="2">Present</option>
+								<option value="3">Late</option>
+						</select></td>
+						<td><input type="text" class="validate"></td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+	<div class="modal-footer">
+		<a href="#!"
+			class="modal-action modal-close waves-effect waves-green btn-flat ">Agree</a>
+	</div>
+</div>
+<!-- Modal attendance -->
+<div id="update-subject-modal" class="modal modal-fixed-footer">
+	<div class="modal-content">
+		<h4>Subject manage</h4>
+		<div>
+			<div class="p-h-sm p-v-sm">
+				<table style="table-layout: fixed;"
+					class="responsive-table bordered striped p-h-md">
+					<thead>
+						<tr>
+							<th class="w-50" data-field="id">Subject Name</th>
+							<th data-field="name">Code</th>
+							<th data-field="price">Duration (Days)</th>
+							<th class="w-25" data-field="price">Action</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td>Java Programing Language</td>
+							<td>JPL</td>
+							<td>9</td>
+							<td>
+								<button class="btn waves-effect orange p-h-xs">
+									<i class="material-icons">remove</i>
+								</button>
+							</td>
+						</tr>
+						<tr>
+							<td>Java Programing Language</td>
+							<td>JPL</td>
+							<td>9</td>
+							<td>
+								<button class="btn waves-effect orange p-h-xs">
+									<i class="material-icons">remove</i>
+								</button>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+			<hr />
+			<div class="p-v-sm p-h-sm">
+				<table style="table-layout: fixed;"
+					class="responsive-table bordered striped p-h-md">
+					<thead>
+						<tr>
+							<th class="w-50" data-field="id">Subject Name</th>
+							<th data-field="name">Code</th>
+							<th data-field="price">Duration (Days)</th>
+							<th class="w-25" data-field="price">Action</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td>Java Programing Language</td>
+							<td>JPL</td>
+							<td>9</td>
+							<td>
+								<button class="btn waves-effect blue p-h-xs">
+									<i class="material-icons">add</i>
+								</button>
+							</td>
+						</tr>
+						<tr>
+							<td>Java Programing Language</td>
+							<td>JPL</td>
+							<td>9</td>
+							<td>
+								<button class="btn waves-effect blue p-h-xs">
+									<i class="material-icons">add</i>
+								</button>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+	<div class="modal-footer">
+		<a href="#!"
+			class="modal-action modal-close waves-effect waves-green btn-flat ">Agree</a>
+	</div>
+</div>
+<!-- Modal attendance -->
+<div id="update-mark-modal" class="modal modal-fixed-footer">
+	<div class="modal-content">
+		<h3>Update Mark</h3>
+		<div class="input-field col s4">
+			<p class="f-s-16">Select subject</p>
+			<select class="p-h-md">
+				<option value="" selected>Choose</option>
+				<option value="1">JPL</option>
+				<option value="2">SQL</option>
+				<option value="3">ORM</option>
+				<option value="4">CNU</option>
+				<option value="5">JWEB</option>
+				<option value="6">JSF</option>
+			</select>
+		</div>
+		<div>
+			<table style="table-layout: fixed;"
+				class="responsive-table bordered striped p-h-md">
+				<thead>
+					<tr>
+						<th data-field="id">Account</th>
+						<th data-field="name">Full Name</th>
+						<th data-field="price">Phone</th>
+						<th style="width: 15%" data-field="price">Theory marks</th>
+						<th style="width: 15%" data-field="price">Practice Marks</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>trangdm2</td>
+						<td>Do Manh Trang</td>
+						<td>0934560199</td>
+						<td><input type="number" class="validate"></td>
+						<td><input type="number" class="validate"></td>
+					</tr>
+					<tr>
+						<td>trangdm2</td>
+						<td>Do Manh Trang</td>
+						<td>0934560199</td>
+						<td><input type="number" class="validate"></td>
+						<td><input type="number" class="validate"></td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+	<div class="modal-footer">
+		<a href="#!" class="modal-action modal-close waves-effect green btn ">Submit</a>
+	</div>
+</div>
+<!-- Modal attendance -->
+<div id="update-trainer-modal" class="modal modal-fixed-footer">
+	<div class="modal-content">
+		<h4>Modal Header</h4>
+		<div>
+			<div class="p-h-sm p-v-sm">
+				<table style="table-layout: fixed;"
+					class="responsive-table bordered striped p-h-md">
+					<thead>
+						<tr>
+							<th class="w-50" data-field="id">Trainer Name</th>
+							<th data-field="name">Account</th>
+							<th data-field="price">Phone</th>
+							<th class="w-25" data-field="price">Action</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td>Trainer Abc Def</td>
+							<td>trainerad2</td>
+							<td>0987654321</td>
+							<td>
+								<button class="btn waves-effect orange p-h-xs">
+									<i class="material-icons">remove</i>
+								</button>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+			<hr />
+			<div class="p-v-sm p-h-sm">
+				<table style="table-layout: fixed;"
+					class="responsive-table bordered striped p-h-md">
+					<thead>
+						<tr>
+							<th class="w-50" data-field="id">Trainer Name</th>
+							<th data-field="name">Account</th>
+							<th data-field="price">Phone</th>
+							<th class="w-25" data-field="price">Action</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td>Trainer Abc Def</td>
+							<td>trainerad2</td>
+							<td>0987654321</td>
+							<td>
+								<button class="btn waves-effect blue p-h-xs">
+									<i class="material-icons">add</i>
+								</button>
+							</td>
+						</tr>
+						<tr>
+							<td>Trainer Abc Def</td>
+							<td>trainerad2</td>
+							<td>0987654321</td>
+							<td>
+								<button class="btn waves-effect blue p-h-xs">
+									<i class="material-icons">add</i>
+								</button>
+							</td>
+						</tr>
+						<tr>
+							<td>Trainer Abc Def</td>
+							<td>trainerad2</td>
+							<td>0987654321</td>
+							<td>
+								<button class="btn waves-effect blue p-h-xs">
+									<i class="material-icons">add</i>
+								</button>
+							</td>
+						</tr>
+						<tr>
+							<td>Trainer Abc Def</td>
+							<td>trainerad2</td>
+							<td>0987654321</td>
+							<td>
+								<button class="btn waves-effect blue p-h-xs">
+									<i class="material-icons">add</i>
+								</button>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+	<div class="modal-footer">
+		<a href="#!"
+			class="modal-action modal-close waves-effect waves-green btn-flat ">Agree</a>
+	</div>
+</div>
+<!-- Modal Structure -->
+<div id="update_trainee_information" class="modal modal-fixed-footer">
+
+	<form class="col s12">
+		<div class="modal-content">
+			<h4>Update trainee information</h4>
+			<div class="row">
+				<div class="row">
+					<div class="input-field col s6">
+						<input id="update_first_name" type="text" class="validate">
+						<label for="update_first_name">First Name</label>
+					</div>
+					<div class="input-field col s6">
+						<input id="update_last_name" type="text" class="validate">
+						<label for="update_last_name">Last Name</label>
+					</div>
+				</div>
+				<div class="row">
+					<div class="input-field col s12">
+						<input id="update_password" type="password" class="validate">
+						<label for="update_password">Password</label>
+					</div>
+				</div>
+				<div class="row">
+					<div class="input-field col s12">
+						<input id="update_email" type="email" class="validate"> <label
+							for="update_email">Email</label>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="modal-footer">
+			<a href="#!"
+				class=" modal-action modal-close waves-effect waves-green btn-flat">Cancel</a>
+			<button type="submit" class="modal-action waves-effect red btn ">Update</button>
+		</div>
+	</form>
+</div>
+
+<script th:src="@{../assets/plugins/jquery/jquery-2.2.0.min.js}"></script>
+<script th:src="@{../assets/plugins/materialize/js/materialize.min.js}"></script>
+<script
+	th:src="@{../assets/plugins/material-preloader/js/materialPreloader.min.js}"></script>
+<script th:src="@{../assets/plugins/jquery-blockui/jquery.blockui.js}"></script>
+<script
+	th:src="@{../assets/plugins/datatables/js/jquery.dataTables.min.js}"></script>
+<script th:src="@{../assets/plugins/simditor/scripts/module.js}"></script>
+<script th:src="@{../assets/plugins/simditor/scripts/hotkeys.js}"></script>
+<script th:src="@{../assets/plugins/simditor/scripts/uploader.js}"></script>
+<script th:src="@{../assets/plugins/simditor/scripts/simditor.js}"></script>
+<script th:src="@{../assets/js/alpha.min.js}"></script>
+<script th:src="@{../assets/js/pages/table-data.js}"></script>
+<script th:src="@{../assets/js/pages/mailbox.js}"></script>
+<script th:src="@{../assets/js/pages/form-wizard.js}"></script>
+<script th:src="@{../assets/js/admin-manage.js}"></script>
