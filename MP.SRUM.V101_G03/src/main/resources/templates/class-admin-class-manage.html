@@ -9,7 +9,11 @@
 							<form>
 								<div class="row">
 									<div class="input-field col s12">
+<<<<<<< HEAD
 										<input th:onkeyup="loadClasses()" id="find-class" type="text"
+=======
+										<input th:onkeyup="loadClass()" id="find-class" type="text"
+>>>>>>> trainer
 											class="validate"> <label for="find-class"><i
 											class="tiny material-icons">search</i> Find class</label>
 									</div>
@@ -31,6 +35,7 @@
 					<div class="col s12 m5 l3">
 						<div class="mailbox-list">
 							<ul id="list_classes">
+<<<<<<< HEAD
 								<li th:each="class:${classes}" class=""><a href="#!"
 									th:onclick="'loadClassInfo('+${class.id}+')'">
 										<h5 class="f-s-19" th:text="${class.name}"></h5> 
@@ -102,6 +107,21 @@
 								</div>
 							</div>
 						</div>
+=======
+								<li th:each="class:${classes}" class="">
+									<a href="#!" th:onclick="'loadClassDetail('+${class.id}+')'">
+										<h5 class="f-s-19" th:text="${class.name}"></h5>
+										<span>
+											<i class="tiny material-icons">person_pin</i> <span th:text="${class.userList.size()}"> </span> Members
+										</span>
+									</a>
+								</li>
+							</ul>
+						</div>
+					</div>
+					<div class="col s12 m7 l9" id="class-detail">
+
+>>>>>>> trainer
 					</div>
 				</div>
 			</div>
@@ -759,6 +779,9 @@
 <script th:src="@{../assets/js/pages/mailbox.js}"></script>
 <script th:src="@{../assets/js/pages/form-wizard.js}"></script>
 <script th:src="@{../assets/js/admin-manage.js}"></script>
+<<<<<<< HEAD
 <script>
 	$("body").on('click','')
 </script>
+=======
+>>>>>>> trainer

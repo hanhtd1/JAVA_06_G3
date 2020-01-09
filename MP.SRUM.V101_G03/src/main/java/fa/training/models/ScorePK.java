@@ -1,4 +1,5 @@
 package fa.training.models;
+
 import java.io.Serializable;
 
 import javax.persistence.Column;
@@ -74,5 +75,4 @@ public class ScorePK implements Serializable{
     public String toString() {
         return "com.ScorePK[ subjectId=" + subjectId + ", userId=" + userId + " ]";
     }
-    
 }

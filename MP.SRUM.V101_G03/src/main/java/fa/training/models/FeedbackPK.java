@@ -1,4 +1,5 @@
 package fa.training.models;
+
 import java.io.Serializable;
 
 import javax.persistence.Column;
@@ -68,5 +69,4 @@ public class FeedbackPK implements Serializable{
         }
         return true;
     }
-
 }

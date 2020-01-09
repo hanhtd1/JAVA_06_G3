@@ -104,5 +104,4 @@ public class Feedback implements Serializable {
     public String toString() {
         return "com.Feedback[ feedbackPK=" + feedbackPK + " ]";
     }
-    
 }
