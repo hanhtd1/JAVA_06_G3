@@ -19,7 +19,7 @@ import fa.training.service.ClazzService;
 @RestController
 @RequestMapping(value = "/trainer/clazz")
 public class ClazzController {
-
+	
 	@Autowired
 	private ClazzService clazzService;
 

@@ -11,7 +11,7 @@ public interface TraineeService {
 	 * @return trainee by id
 	 */
 	User findTraineeById(Integer id);
-
+	
 	/**
 	 * @author ToanNT18
 	 * @return all trainee by top 10

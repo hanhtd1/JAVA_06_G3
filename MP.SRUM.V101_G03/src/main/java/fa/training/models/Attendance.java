@@ -7,7 +7,6 @@ package fa.training.models;
 
 import java.io.Serializable;
 import java.time.LocalDate;
-import java.util.Date;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -101,7 +100,7 @@ public class Attendance implements Serializable {
 	public void setUserList(List<User> userList) {
 		this.userList = userList;
 	}
-
+	
 	@Override
 	public int hashCode() {
 		int hash = 0;
