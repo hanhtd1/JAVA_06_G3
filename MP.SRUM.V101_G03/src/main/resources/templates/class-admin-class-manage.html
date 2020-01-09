@@ -5,22 +5,24 @@
 				<div class="col s12 m12 l12 p-h-md">
 					<h3>Classes Management</h3>
 					<div class="col m12 l12">
+						<div class="input-field col s6 m-t-md">
+							<form>
+								<div class="row">
+									<div class="input-field col s12">
+										<input th:onkeyup="loadClass()" id="find-class" type="text"
+											class="validate"> <label for="find-class"><i
+											class="tiny material-icons">search</i> Find class</label>
+									</div>
+								</div>
+							</form>
+						</div>
 						<div class="input-field col s12 m6 l6 m-t-sm">
 							<p class="f-s-16">View by status</p>
-							<select class="p-h-md">
-								<option value="0" selected>All</option>
-								<option value="1">In Coming</option>
-								<option value="2">Active</option>
-								<option value="3">Graduated</option>
-							</select>
-						</div>
-						<div class="input-field col s12  m6 l6  m-t-sm">
-							<p class="f-s-16">View by class type</p>
-							<select class="p-h-md">
-								<option value="0" selected>All</option>
-								<option value="1">Java</option>
-								<option value="2">.Net</option>
-								<option value="3">Test</option>
+							<select id="class-status" class="p-h-md">
+								<option value="" selected>All</option>
+								<option value="In Coming">In Coming</option>
+								<option value="Active">Active</option>
+								<option value="Graduated">Graduated</option>
 							</select>
 						</div>
 					</div>
@@ -28,116 +30,20 @@
 				<div class="row no-m-t no-m-b">
 					<div class="col s12 m5 l3">
 						<div class="mailbox-list">
-							<ul>
-								<li class=""><a href="">
-										<h5 class="f-s-19">HN19_FR_JAVA_06</h5>
-										<p>
-											<i class="tiny material-icons">person_pin</i> 20 persons
-										</p>
-								</a></li>
+							<ul id="list_classes">
+								<li th:each="class:${classes}" class="">
+									<a href="#!" th:onclick="'loadClassDetail('+${class.id}+')'">
+										<h5 class="f-s-19" th:text="${class.name}"></h5>
+										<span>
+											<i class="tiny material-icons">person_pin</i> <span th:text="${class.userList.size()}"> </span> Members
+										</span>
+									</a>
+								</li>
 							</ul>
 						</div>
 					</div>
-					<div class="col s12 m7 l9">
-						<div class="mailbox-view">
-							<div class="mailbox-view-header">
-								<div class="left">
-									<div class="left">
-										<img src="assets/images/profile-image-1.png" alt=""
-											class="circle mailbox-profile-image z-depth-1">
-									</div>
-									<div class="left">
-										<span class="mailbox-title">HN19_FR_JAVA_06</span> <span
-											class="mailbox-author"><i class="tiny material-icons">person_pin</i>
-											20 persons</span>
-									</div>
-								</div>
-								<div class="right mailbox-buttons">
-									<a
-										class="modal-trigger waves-effect waves-grey btn-flat m-t-xs"
-										href="#update-class-modal">Edit</a> <a
-										class="waves-effect waves-red btn-flat m-t-xs modal-trigger"
-										href="#update-class-status">Update</a>
-								</div>
-								<div class="divider mailbox-divider"></div>
-								<div class="mailbox-text">
-									<div class="mailbox-details">
-										<a href="javascript:void(0);" class="details-toggle">Show
-											Details Information</a>
-										<div class="row details-list">
-											<div class="col s1 first-col">
-												<span><i class="tiny material-icons">person_pin</i> </span>
-												<span><i class="tiny material-icons">work</i></span> <span><i
-													class="tiny material-icons">email</i></span>
-											</div>
-											<div class="col s8 second-col">
-												<span> 10/10/1997</span> <span> HN19_FR_JAVA_06</span> <span>
-													jonathansm@fsoft.com.vn</span>
-											</div>
-										</div>
-									</div>
-									<p>Trainee List</p>
-									<div class="class-actions m-t-md">
-										<a class="modal-trigger waves-effect waves-light btn blue"
-											href="#attendance-modal">Attendance</a> <a
-											class="waves-effect waves-light btn light-green modal-trigger "
-											href="#add-trainee-modal">Add Trainees</a> <a
-											class="modal-trigger waves-effect waves-light btn green"
-											href="#update-subject-modal">Update Subjects</a> <a
-											class="modal-trigger waves-effect waves-light btn orange"
-											href="#update-mark-modal">Update Marks</a> <a
-											class="modal-trigger waves-effect waves-light btn light-blue"
-											href="#update-trainer-modal">Update Trainers</a>
-									</div>
-									<div class="divider mailbox-divider"></div>
-									<div class="">
-										<table style="table-layout: fixed;"
-											class="responsive-table bordered striped p-h-md">
-											<thead>
-												<tr>
-													<th data-field="id">Account</th>
-													<th data-field="name">Full Name</th>
-													<th data-field="price">Birth Date</th>
-													<th data-field="price">Phone</th>
-													<th data-field="price">Joined Date</th>
-													<th data-field="price">Action</th>
-												</tr>
-											</thead>
-											<tbody>
-												<tr>
-													<td>trangdm2</td>
-													<td>Do Manh Trang</td>
-													<td>10/09/1997</td>
-													<td>0934560199</td>
-													<td>01/10/2019</td>
-													<td><a
-														class="waves-effect waves-light btn blue modal-trigger p-h-xs"
-														href="#trainee-info"><i class="material-icons">perm_identity</i></a>
-														<a class="waves-effect waves-light btn green p-h-xs"><i
-															class="material-icons">library_books</i></a> <a
-														class="waves-effect waves-light btn red p-h-xs"><i
-															class="material-icons">clear</i></a></td>
-												</tr>
-												<tr>
-													<td>trangdm2</td>
-													<td>Do Manh Trang</td>
-													<td>10/09/1997</td>
-													<td>0934560199</td>
-													<td>01/10/2019</td>
-													<td><a
-														class="waves-effect waves-light btn blue modal-trigger p-h-xs"
-														href="#trainee-info"><i class="material-icons">perm_identity</i></a>
-														<a class="waves-effect waves-light btn green p-h-xs"><i
-															class="material-icons">library_books</i></a> <a
-														class="waves-effect waves-light btn red p-h-xs"><i
-															class="material-icons">clear</i></a></td>
-												</tr>
-											</tbody>
-										</table>
-									</div>
-								</div>
-							</div>
-						</div>
+					<div class="col s12 m7 l9" id="class-detail">
+
 					</div>
 				</div>
 			</div>
@@ -285,8 +191,8 @@
 			<form>
 				<div class="row">
 					<div class="input-field col s12">
-						<input id="find-trainee" type="text" class="validate"> 
-						<label for="find-trainee">Find trainee</label>
+						<input id="find-trainee" type="text" class="validate"> <label
+							for="find-trainee">Find trainee</label>
 					</div>
 				</div>
 			</form>
@@ -779,17 +685,19 @@
 	</form>
 </div>
 
-<script src="assets/plugins/jquery/jquery-2.2.0.min.js"></script>
-<script src="assets/plugins/materialize/js/materialize.min.js"></script>
+<script th:src="@{../assets/plugins/jquery/jquery-2.2.0.min.js}"></script>
+<script th:src="@{../assets/plugins/materialize/js/materialize.min.js}"></script>
 <script
-	src="assets/plugins/material-preloader/js/materialPreloader.min.js"></script>
-<script src="assets/plugins/jquery-blockui/jquery.blockui.js"></script>
-<script src="assets/plugins/datatables/js/jquery.dataTables.min.js"></script>
-<script src="assets/plugins/simditor/scripts/module.js"></script>
-<script src="assets/plugins/simditor/scripts/hotkeys.js"></script>
-<script src="assets/plugins/simditor/scripts/uploader.js"></script>
-<script src="assets/plugins/simditor/scripts/simditor.js"></script>
-<script src="assets/js/alpha.min.js"></script>
-<script src="assets/js/pages/table-data.js"></script>
-<script src="assets/js/pages/mailbox.js"></script>
-<script src="assets/js/pages/form-wizard.js"></script>
+	th:src="@{../assets/plugins/material-preloader/js/materialPreloader.min.js}"></script>
+<script th:src="@{../assets/plugins/jquery-blockui/jquery.blockui.js}"></script>
+<script
+	th:src="@{../assets/plugins/datatables/js/jquery.dataTables.min.js}"></script>
+<script th:src="@{../assets/plugins/simditor/scripts/module.js}"></script>
+<script th:src="@{../assets/plugins/simditor/scripts/hotkeys.js}"></script>
+<script th:src="@{../assets/plugins/simditor/scripts/uploader.js}"></script>
+<script th:src="@{../assets/plugins/simditor/scripts/simditor.js}"></script>
+<script th:src="@{../assets/js/alpha.min.js}"></script>
+<script th:src="@{../assets/js/pages/table-data.js}"></script>
+<script th:src="@{../assets/js/pages/mailbox.js}"></script>
+<script th:src="@{../assets/js/pages/form-wizard.js}"></script>
+<script th:src="@{../assets/js/admin-manage.js}"></script>

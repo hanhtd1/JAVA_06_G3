@@ -11,114 +11,118 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 /**
  *
  * @author TrangDM2
  */
 @Entity
 @Table(name = "Score")
-@NamedQueries({
-    @NamedQuery(name = "Score.findAll", query = "SELECT s FROM Score s")})
+@NamedQueries({ @NamedQuery(name = "Score.findAll", query = "SELECT s FROM Score s") })
 public class Score implements Serializable {
 
-    private static final long serialVersionUID = 1L;
-    @EmbeddedId
-    protected ScorePK scorePK;
+	private static final long serialVersionUID = 1L;
+	@EmbeddedId
+	protected ScorePK scorePK;
 
-    @Column(name = "Name")
-    private String name;
+	@Column(name = "Theory")
+	private Float theory;
 
-    @Column(name = "Value")
-    private float value;
-    
-    @JoinColumn(name = "SubjectId", referencedColumnName = "Id", insertable = false, updatable = false)
-    @ManyToOne(optional = false)
-    private Subject subject;
-    
-    @JoinColumn(name = "UserId", referencedColumnName = "Id", insertable = false, updatable = false)
-    @ManyToOne(optional = false)
-    private User user;
+	@Column(name = "Practice")
+	private Float practice;
 
-    public Score() {
-    }
+	@JsonIgnore
+	@JoinColumn(name = "SubjectId", referencedColumnName = "Id", insertable = false, updatable = false)
+	@ManyToOne(optional = false)
+	private Subject subject;
 
-    public Score(ScorePK scorePK) {
-        this.scorePK = scorePK;
-    }
+	@JsonIgnore
+	@JoinColumn(name = "UserId", referencedColumnName = "Id", insertable = false, updatable = false)
+	@ManyToOne(optional = false)
+	private User user;
 
-    public Score(ScorePK scorePK, String name, float value) {
-        this.scorePK = scorePK;
-        this.name = name;
-        this.value = value;
-    }
+	public Score() {
+	}
 
-    public Score(int id, int subjectId, int userId) {
-        this.scorePK = new ScorePK(id, subjectId, userId);
-    }
+	public Score(ScorePK scorePK) {
+		this.scorePK = scorePK;
+	}
 
-    public ScorePK getScorePK() {
-        return scorePK;
-    }
+	public Score(ScorePK scorePK, Float theory, Float practice) {
+		this.scorePK = scorePK;
+		this.theory = theory;
+		this.practice = practice;
+	}
 
-    public void setScorePK(ScorePK scorePK) {
-        this.scorePK = scorePK;
-    }
+	public Score(int subjectId, int userId) {
+		this.scorePK = new ScorePK(subjectId, userId);
+	}
 
-    public String getName() {
-        return name;
-    }
+	public ScorePK getScorePK() {
+		return scorePK;
+	}
 
-    public void setName(String name) {
-        this.name = name;
-    }
+	public void setScorePK(ScorePK scorePK) {
+		this.scorePK = scorePK;
+	}
 
-    public float getValue() {
-        return value;
-    }
+	public Float getTheory() {
+		return theory;
+	}
 
-    public void setValue(float value) {
-        this.value = value;
-    }
+	public void setTheory(float value) {
+		this.theory = value;
+	}
 
-    public Subject getSubject() {
-        return subject;
-    }
+	public Float getPractice() {
+		return practice;
+	}
 
-    public void setSubject(Subject subject) {
-        this.subject = subject;
-    }
+	public void setPractice(float value) {
+		this.practice = value;
+	}
 
-    public User getUser() {
-        return user;
-    }
+	public Subject getSubject() {
+		return subject;
+	}
 
-    public void setUser(User user) {
-        this.user = user;
-    }
+	public void setSubject(Subject subject) {
+		this.subject = subject;
+	}
 
-    @Override
-    public int hashCode() {
-        int hash = 0;
-        hash += (scorePK != null ? scorePK.hashCode() : 0);
-        return hash;
-    }
+	public User getUser() {
+		return user;
+	}
 
-    @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Score)) {
-            return false;
-        }
-        Score other = (Score) object;
-        if ((this.scorePK == null && other.scorePK != null) || (this.scorePK != null && !this.scorePK.equals(other.scorePK))) {
-            return false;
-        }
-        return true;
-    }
+	public void setUser(User user) {
+		this.user = user;
+	}
 
-    @Override
-    public String toString() {
-        return "com.Score[ scorePK=" + scorePK + " ]";
-    }
-    
+	@Override
+	public int hashCode() {
+		int hash = 0;
+		hash += (scorePK != null ? scorePK.hashCode() : 0);
+		return hash;
+	}
+
+	@Override
+	public boolean equals(Object object) {
+		// TODO: Warning - this method won't work in the case the id fields are not set
+		if (!(object instanceof Score)) {
+			return false;
+		}
+		Score other = (Score) object;
+		if ((this.scorePK == null && other.scorePK != null)
+				|| (this.scorePK != null && !this.scorePK.equals(other.scorePK))) {
+			return false;
+		}
+		return true;
+	}
+
+	@Override
+	public String toString() {
+		return "Score [scorePK=" + scorePK + ", name=" + theory + ", value=" + practice + "]";
+	}
+
 }

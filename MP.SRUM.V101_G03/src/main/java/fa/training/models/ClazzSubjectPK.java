@@ -10,70 +10,69 @@ import javax.persistence.Embeddable;
  * @author TrangDM2
  */
 @Embeddable
-public class ClazzSubjectPK implements Serializable{
+public class ClazzSubjectPK implements Serializable {
 
-    /**
-   * 
-   */
-  private static final long serialVersionUID = 1L;
+	/**
+	  * 
+	  */
+	private static final long serialVersionUID = 1L;
 
-    @Column(name = "ClazzId")
-    private int clazzId;
- 
-    @Column(name = "SubjectId")
-    private int subjectId;
+	@Column(name = "ClazzId")
+	private Integer clazzId;
 
-    public ClazzSubjectPK() {
-    }
+	@Column(name = "SubjectId")
+	private Integer subjectId;
 
-    public ClazzSubjectPK(int clazzId, int subjectId) {
-        this.clazzId = clazzId;
-        this.subjectId = subjectId;
-    }
+	public ClazzSubjectPK() {
+	}
 
-    public int getClazzId() {
-        return clazzId;
-    }
+	public ClazzSubjectPK(Integer clazzId, Integer subjectId) {
+		this.clazzId = clazzId;
+		this.subjectId = subjectId;
+	}
 
-    public void setClazzId(int clazzId) {
-        this.clazzId = clazzId;
-    }
+	public Integer getClazzId() {
+		return clazzId;
+	}
 
-    public int getSubjectId() {
-        return subjectId;
-    }
+	public void setClazzId(Integer clazzId) {
+		this.clazzId = clazzId;
+	}
 
-    public void setSubjectId(int subjectId) {
-        this.subjectId = subjectId;
-    }
+	public Integer getSubjectId() {
+		return subjectId;
+	}
 
-    @Override
-    public int hashCode() {
-        int hash = 0;
-        hash += (int) clazzId;
-        hash += (int) subjectId;
-        return hash;
-    }
+	public void setSubjectId(Integer subjectId) {
+		this.subjectId = subjectId;
+	}
 
-    @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof ClazzSubjectPK)) {
-            return false;
-        }
-        ClazzSubjectPK other = (ClazzSubjectPK) object;
-        if (this.clazzId != other.clazzId) {
-            return false;
-        }
-        if (this.subjectId != other.subjectId) {
-            return false;
-        }
-        return true;
-    }
+	@Override
+	public int hashCode() {
+		int hash = 0;
+		hash += (int) clazzId;
+		hash += (int) subjectId;
+		return hash;
+	}
 
-    @Override
-    public String toString() {
-        return "com.ClazzSubjectPK[ clazzId=" + clazzId + ", subjectId=" + subjectId + " ]";
-    }
-    
+	@Override
+	public boolean equals(Object object) {
+		// TODO: Warning - this method won't work in the case the id fields are not set
+		if (!(object instanceof ClazzSubjectPK)) {
+			return false;
+		}
+		ClazzSubjectPK other = (ClazzSubjectPK) object;
+		if (this.clazzId != other.clazzId) {
+			return false;
+		}
+		if (this.subjectId != other.subjectId) {
+			return false;
+		}
+		return true;
+	}
+
+	@Override
+	public String toString() {
+		return "com.ClazzSubjectPK[ clazzId=" + clazzId + ", subjectId=" + subjectId + " ]";
+	}
 }
