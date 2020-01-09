@@ -34,8 +34,8 @@ public class Clazz implements Serializable {
   @Column(name = "Name")
   private String name;
 
-  @Column(name = "OpenLocalDate")
-  private LocalDate openLocalDate;
+  @Column(name = "openDate")
+  private LocalDate openDate;
 
   @Column(name = "Note")
   private String note;
@@ -63,7 +63,7 @@ public class Clazz implements Serializable {
   public Clazz(Integer id, String name, LocalDate openLocalDate, String note, String category, String status) {
     this.id = id;
     this.name = name;
-    this.openLocalDate = openLocalDate;
+    this.openDate = openLocalDate;
     this.note = note;
     this.category = category;
     this.status = status;
@@ -85,12 +85,12 @@ public class Clazz implements Serializable {
     this.name = name;
   }
 
-  public LocalDate getOpenLocalDate() {
-    return openLocalDate;
+  public LocalDate getOpenDate() {
+    return openDate;
   }
 
-  public void setOpenLocalDate(LocalDate openLocalDate) {
-    this.openLocalDate = openLocalDate;
+  public void setOpenDate(LocalDate openDate) {
+    this.openDate = openDate;
   }
 
   public String getNote() {

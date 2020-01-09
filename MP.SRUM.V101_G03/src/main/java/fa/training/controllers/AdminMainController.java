@@ -8,7 +8,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import fa.training.dto.UserDto;
 import fa.training.models.Clazz;
@@ -59,15 +58,6 @@ public class AdminMainController {
     return "class-admin-class-manage";
   }
   
-  /**
-   * @author TrangDM2
-   */
-  @GetMapping("class-detail")
-  public String classDetail(Model model, @RequestParam Integer id) {
-    Clazz clazz = adminClassService.getClass(id);
-    model.addAttribute("class", clazz);
-    return "class-detail";
-  }
   /**
    * @author TrangDM2
    */

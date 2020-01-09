@@ -48,7 +48,7 @@ public class AdminUserService implements IAdminUserService {
    */
   @Override
   public List<UserDto> getUsersByRole(String role) {
-    List<User> users = userRepository.getAllUserByRole(role);
+    List<User> users = userRepository.findAllByRole(role);
     List<UserDto> userDtos = new ArrayList<>();
     users.forEach(user -> {
       Clazz clazz = null;

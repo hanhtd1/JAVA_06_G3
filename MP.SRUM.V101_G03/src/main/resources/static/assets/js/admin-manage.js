@@ -1,7 +1,7 @@
 var currentTrainee;
 var currentClass;
 
-//Traineee
+// Traineee
 function loadTrainees(){
 	$("#list_trainees").html("");
 	$.get({
@@ -34,46 +34,6 @@ function showTraineeList(res, className){
 	);
 }
 
-//CLassss
-function loadClasses(){
-	$("#list_trainees").html("");
-	$.get({
-		url: "/admin/get-classes",
-		data: {
-			keyword: $("#find-class").val(),
-			status: $("#class-status").val()
-		},
-		success: (resp)=>{
-			resp.map((res)=>{
-				this.showClassList(res)
-			})
-		}
-	})
-	return false;
-}
-function showClassList(res){
-	$("#list_classes").append("<li>\n" +
-		"<a  href=\"#!\" onclick=\"loadTraineeInfo("+res.id+")\" >\n" +
-		"<h5 class=\"f-s-19\">"+res.name+"</h5>\n" +
-		"<span>\n" +
-		"<i class=\"tiny material-icons\">person_pin</i> <span>"+res.userList.length+"</span> Members\n" +
-		"</span>\n" +
-		"</a>\n" +
-		"</li>");
-}
-
-function loadClassDetail(id){
-	currentClass = id;
-	$.get({
-		url: "/admin/class-detail",
-		data: {
-			id: id
-		},
-		success: (resp)=>{
-			$("#class-detail").html(resp)
-		}
-	})
-}
 
 
 function loadTraineeInfo(id){
@@ -220,5 +180,97 @@ function changeTraineeStatus(){
 		success: (resp)=>{
 			Materialize.toast(resp, 4000)
 		}
+	})
+}
+
+// CLassss
+function loadClasses(){
+	$("#list_trainees").html("");
+	$.get({
+		url: "/admin/get-classes",
+		data: {
+			keyword: $("#find-class").val(),
+			status: $("#class-status").val()
+		},
+		success: (resp)=>{
+			resp.map((res)=>{
+				this.showClassList(res)
+			})
+		}
+	})
+	return false;
+}
+function showClassList(res){
+	$("#list_classes").append("<li>\n" +
+		"<a  href=\"#!\" onclick=\"loadTraineeInfo("+res.id+")\" >\n" +
+		"<h5 class=\"f-s-19\">"+res.name+"</h5>\n" +
+		"<span>\n" +
+		"<i class=\"tiny material-icons\">person_pin</i> <span>"+res.userList.length+"</span> Members\n" +
+		"</span>\n" +
+		"</a>\n" +
+		"</li>");
+}
+
+function loadClassInfo(id){
+	this.currentClass=id;
+	$("#list_trainees").html("")
+	$("#class-detail").show()
+	$.get({
+		url: "/admin/class-info",
+		data: {
+			id: id
+		},
+		success: (resp)=>{
+			$("#class_info_name").html(resp.name);
+			$("#class_trainees_number").html(resp.userList.length);
+			$("#class_openDate").html(resp.openDate);
+			$("#class_category").html(resp.category);
+			resp.userList.map((trainee)=>{
+				$("#list_trainees").append("<tr>\n" +
+					"<td>"+trainee.account+"</td>\n" +
+					"<td>"+trainee.firstName+" "+trainee.lastName+"</td>\n" +
+					"<td>"+trainee.birthDay+"</td>\n" +
+					"<td>"+trainee.phone+"</td>\n" +
+					"<td>"+trainee.status+"</td>\n" +
+					"<td><a onclick=\"loadClassTraineeInfo("+trainee.id+")\" class=\"waves-effect waves-light btn blue modal-trigger p-h-xs\"\n" +
+					"href=\"#trainee-info\">\n" +
+					"<i class=\"material-icons\">perm_identity</i>\n" +
+					"</a>\n" +
+					"<a onclick=\"viewTraineeReview("+trainee.id+")\" class=\"waves-effect waves-light btn green p-h-xs\"><i\n" +
+					"class=\"material-icons\">library_books</i></a>\n" +
+					"<a onclick=\"removeTraineeFromClass("+trainee.id+")\" class=\"waves-effect waves-light btn red p-h-xs\">\n" +
+					"<i class=\"material-icons\">clear</i></a>\n" +
+					"</td>\n" +
+					"</tr>")
+			})
+		}
+	})
+}
+
+function loadClassTraineeInfo(id){
+	
+}
+
+function viewTraineeReview(id){
+	
+}
+
+function removeTraineeFromClass(id){
+	
+}
+
+function editClassInfo(){
+	$.get({
+		url: "/admin/get-clazz-info",
+		data: {
+			id: this.currentClass
+		},
+		success: (resp)=>{
+			$("#update-clazzName").val(resp.name);
+			$('#update-category').val(resp.category)
+			$('#update-openDate').val(resp.openDate)
+			$("#update-note").val(resp.note)
+		}
+		
 	})
 }
