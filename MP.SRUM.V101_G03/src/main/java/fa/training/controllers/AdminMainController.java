@@ -3,14 +3,15 @@ package fa.training.controllers;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import fa.training.dto.UserDto;
 import fa.training.models.Clazz;
+import fa.training.models.User;
 import fa.training.services.IAdminClassService;
 import fa.training.services.IAdminUserService;
 
@@ -32,7 +33,10 @@ public class AdminMainController {
    * @author TrangDM2
    */
   @GetMapping("/")
-  public String home() {
+  public String home(Model model, Authentication auth) {
+    String account = auth.getName();
+    User trainee = adminUserService.getUserByAccount(account).get();
+    model.addAttribute("currentUser", trainee);
     return "index";
   }
   
@@ -54,15 +58,6 @@ public class AdminMainController {
     return "class-admin-class-manage";
   }
   
-  /**
-   * @author TrangDM2
-   */
-  @GetMapping("class-detail")
-  public String classDetail(Model model, @RequestParam Integer id) {
-    Clazz clazz = adminClassService.getClass(id);
-    model.addAttribute("class", clazz);
-    return "class-detail";
-  }
   /**
    * @author TrangDM2
    */

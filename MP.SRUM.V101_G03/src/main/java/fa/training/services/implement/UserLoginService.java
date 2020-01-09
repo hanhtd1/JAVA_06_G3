@@ -16,6 +16,9 @@ public class UserLoginService implements UserDetailsService {
   @Autowired
   private UserRepository userRepository;
 
+  /**
+   *@author TrangDM2
+   */
   @Override
   public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
     User user = userRepository.findByAccount(username).orElseThrow(() -> {
