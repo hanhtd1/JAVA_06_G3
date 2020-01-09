@@ -11,6 +11,15 @@ public class AuthorizationController {
   
   /**
    * @author TrangDM2
+   * @return
+   */
+  @GetMapping("/")
+  public String index() {
+    return "redirect:authorization";
+  }
+  
+  /**
+   * @author TrangDM2
    * @param req
    * @return
    */
