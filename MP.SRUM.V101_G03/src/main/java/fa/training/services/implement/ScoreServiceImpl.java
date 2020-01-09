@@ -8,7 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import fa.training.dto.TraineeScoreDTO;
-import fa.training.repositories.trainer.ScoreRepository;
+import fa.training.repositories.ScoreRepository;
 import fa.training.services.ScoreService;
 
 /**

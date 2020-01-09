@@ -1,4 +1,4 @@
-package fa.training.repositories.trainer;
+package fa.training.repositories;
 
 import java.util.List;
 

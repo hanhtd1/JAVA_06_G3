@@ -8,7 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import fa.training.models.Feedback;
-import fa.training.repositories.trainer.FeedbackRepository;
+import fa.training.repositories.FeedbackRepository;
 import fa.training.services.FeedbackService;
 
 /**

@@ -8,7 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import fa.training.models.Subject;
-import fa.training.repositories.trainer.SubjectRepository;
+import fa.training.repositories.SubjectRepository;
 import fa.training.services.SubjectService;
 
 /**

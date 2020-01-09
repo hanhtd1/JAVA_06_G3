@@ -9,7 +9,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import fa.training.models.Clazz;
-import fa.training.repositories.trainer.ClassRepository;
+import fa.training.repositories.ClassRepository;
 import fa.training.services.ClazzService;
 import fa.training.utils.Constant;
 

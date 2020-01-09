@@ -9,7 +9,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import fa.training.models.User;
-import fa.training.repositories.trainer.TraineeRepository;
+import fa.training.repositories.TraineeRepository;
 import fa.training.services.TraineeService;
 import fa.training.utils.Constant;
 

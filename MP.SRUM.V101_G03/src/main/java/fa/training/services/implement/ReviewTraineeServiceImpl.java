@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import fa.training.models.ReviewTrainee;
-import fa.training.repositories.trainer.ReviewTraineeRepository;
+import fa.training.repositories.ReviewTraineeRepository;
 import fa.training.services.ReviewTraineeService;
 
 /**
