@@ -17,36 +17,48 @@ import fa.training.services.ClazzService;
  */
 
 @RestController
-@RequestMapping(value = "/trainer/clazz")
+@RequestMapping(value = "/trainer")
 public class ClazzController {
-	
+
 	@Autowired
 	private ClazzService clazzService;
 
 	@GetMapping
 	public String getClazz(Model model) {
-		List<Clazz> clazzs = clazzService.findAllClazzByTrainerId(1, 1);
+		List<Clazz> clazzs = clazzService.findAllClazzByTrainerId(2, 0);
+		System.out.println(clazzs.size());
 		clazzs.forEach(System.out::println);
 		return "<h1>Success</h1>";
 	}
-
-	@RequestMapping(value = "/category")
+	
+	@RequestMapping(value = "/clazz/category")
 	public String getClazzByCategory(Model model) {
-		List<Clazz> clazzs = clazzService.findClazzByNameOrCategory(1, 1, "Java");
+		List<Clazz> clazzs = clazzService.findClazzByCategory(2, 0, "Java");
+		System.out.println(clazzs.size());
 		clazzs.forEach(System.out::println);
 		return "<h1>Success</h1>";
 	}
 
-	@RequestMapping(value = "/status")
+	@RequestMapping(value = "/clazz/content")
+	public String getClazzByNameOrCategory(Model model) {
+		List<Clazz> clazzs = clazzService.findClazzByNameOrCategory(2, 0, "Java");
+		System.out.println(clazzs.size());
+		clazzs.forEach(System.out::println);
+		return "<h1>Success</h1>";
+	}
+
+	@RequestMapping(value = "/clazz/status")
 	public String getClazzByStatus(Model model) {
-		List<Clazz> clazzs = clazzService.findClazzByStatus(1, 1, "Active");
+		List<Clazz> clazzs = clazzService.findClazzByStatus(2, 0, "Active");
+		System.out.println(clazzs.size());
 		clazzs.forEach(System.out::println);
 		return "<h1>Success</h1>";
 	}
-
-	@RequestMapping(value = "/status/**")
+	
+	@RequestMapping(value = "/clazz/status/**")
 	public String getClazzByStatusAndCategory(Model model) {
-		List<Clazz> clazzs = clazzService.findClazzByStatusAndContent(1, 1, "Active", "Java");
+		List<Clazz> clazzs = clazzService.findClazzByStatusAndContent(2, 0, "Active", "Java");
+		System.out.println(clazzs.size());
 		clazzs.forEach(System.out::println);
 		return "<h1>Success</h1>";
 	}

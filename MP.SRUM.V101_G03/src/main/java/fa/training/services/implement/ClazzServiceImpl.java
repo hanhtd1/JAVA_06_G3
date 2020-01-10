@@ -25,31 +25,32 @@ public class ClazzServiceImpl implements ClazzService {
 
 	@Override
 	public List<Clazz> findAllClazzByTrainerId(Integer userId, Integer pageIndex) {
-		return clazzRepository.findAllClazz(userId, PageRequest.of(pageIndex, Constant.PAGE_SIZE));
+		return clazzRepository.findAllClazz(userId, PageRequest.of(pageIndex, Constant.PAGE_SIZE)).getContent();
 	}
-
+	
 	@Override
-	public List<Clazz> findClazzByCategory(Integer userId, Integer pageIndex, String contentSearch) {
-		return clazzRepository.findClazzByCategory(userId, contentSearch,
-				PageRequest.of(pageIndex, Constant.PAGE_SIZE));
+	public List<Clazz> findClazzByCategory(Integer userId, Integer pageIndex, String category) {
+		return clazzRepository.findClazzByCategory(userId, category, PageRequest.of(pageIndex, Constant.PAGE_SIZE))
+				.getContent();
 	}
 
 	@Override
 	public List<Clazz> findClazzByNameOrCategory(Integer userId, Integer pageIndex, String contentSearch) {
-		return clazzRepository.findClazzByNameOrCategory(userId, contentSearch,
-				PageRequest.of(pageIndex, Constant.PAGE_SIZE));
+		return clazzRepository
+				.findClazzByNameOrCategory(userId, contentSearch, PageRequest.of(pageIndex, Constant.PAGE_SIZE))
+				.getContent();
 	}
 
 	@Override
 	public List<Clazz> findClazzByStatus(Integer userId, Integer pageIndex, String status) {
-		return clazzRepository.findClazzByStatus(userId, status, PageRequest.of(pageIndex, Constant.PAGE_SIZE));
+		return clazzRepository.findClazzByStatus(userId, status, PageRequest.of(pageIndex, Constant.PAGE_SIZE))
+				.getContent();
 	}
 
 	@Override
 	public List<Clazz> findClazzByStatusAndContent(Integer userId, Integer pageIndex, String status,
 			String contentSearch) {
 		return clazzRepository.findClazzByStatusAndContent(userId, status, contentSearch,
-				PageRequest.of(pageIndex, Constant.PAGE_SIZE));
+				PageRequest.of(pageIndex, Constant.PAGE_SIZE)).getContent();
 	}
-
 }

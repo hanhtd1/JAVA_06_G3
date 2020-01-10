@@ -1,7 +1,8 @@
 package fa.training.repositories;
 
-import java.util.List;
+import java.util.Optional;
 
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -23,15 +24,13 @@ public interface TraineeRepository extends JpaRepository<User, Integer> {
 	 * @return User
 	 * @return find User by user id.
 	 */
-	@Query(value = "SELECT * FROM uzer u WHERE u.id = :userId", nativeQuery = true)
-	List<User> findTraineeByUserId(@Param("userId") Integer userId);
-	
+	Optional<User> findById(Integer id);
+
 	/**
 	 * @author ToanNT18
 	 * @return top 10 trainee.
 	 */
-	@Query(value = "SELECT TOP 10 *  FROM uzer u WHERE u.role = :role", nativeQuery = true)
-	List<User> findTop10Trainee(@Param("role") String role);
+	Page<User> findAllByRole(String role, Pageable pageable);
 
 	/**
 	 * @author ToanNT18
@@ -39,9 +38,9 @@ public interface TraineeRepository extends JpaRepository<User, Integer> {
 	 * @return List<User>
 	 * @return all trainee by clazz.
 	 */
-	@Query(value = "SELECT * FROM [udf_findTraineeByClazz](:clazzId)", nativeQuery = true)
-	List<User> findTraineeByClazzId(@Param("clazzId") Integer clazzId, Pageable pageable);
-	
+	@Query(value = "SELECT * FROM udf_udf_findTraineeByClazz(:clazzId)", nativeQuery = true)
+	Page<User> findTraineeByClazzId(@Param("clazzId") Integer clazzId, Pageable pageable);
+
 	/**
 	 * @author ToanNT18
 	 * @param category
@@ -49,5 +48,5 @@ public interface TraineeRepository extends JpaRepository<User, Integer> {
 	 * @return All trainee by category
 	 */
 	@Query(value = "SELECT * FROM udf_findTraineeByCategory(:category, :role)", nativeQuery = true)
-	List<User> findTraineeByCategory(@Param("category") String category, Pageable pageable);
+	Page<User> findTraineeByCategory(@Param("category") String category, @Param("role") String role, Pageable pageable);
 }

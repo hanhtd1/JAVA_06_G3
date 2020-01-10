@@ -12,15 +12,14 @@ public interface ClazzService {
 	 * @return all clazz by trainer's id
 	 */
 	List<Clazz> findAllClazzByTrainerId(Integer userId, Integer pageIndex);
-	
-	
+
 	/**
 	 * @author ToanNT18
 	 * @param clazzName
 	 * @return find all clazz by clazz's name or category
 	 */
 	List<Clazz> findClazzByCategory(Integer userId, Integer pageIndex, String contentSearch);
-	
+
 	/**
 	 * @author ToanNT18
 	 * @param clazzName

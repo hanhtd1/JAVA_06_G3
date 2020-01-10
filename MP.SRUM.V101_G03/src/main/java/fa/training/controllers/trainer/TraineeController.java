@@ -14,13 +14,14 @@ import fa.training.models.User;
 import fa.training.services.ReviewTraineeService;
 import fa.training.services.ScoreService;
 import fa.training.services.TraineeService;
+import fa.training.utils.Constant;
 
 /**
  *
  * @author ToanNT18
  */
 @RestController
-@RequestMapping(value = "/trainer/trainee")
+@RequestMapping(value = "/trainer")
 public class TraineeController {
 	@Autowired
 	private TraineeService traineeService;
@@ -30,27 +31,43 @@ public class TraineeController {
 
 	@Autowired
 	private ScoreService scoreService;
-	
+
 	/**
+	 * @param model
 	 * @return
 	 */
-	@RequestMapping(value = "/score")
-	public String getScore() {
-		List<TraineeScoreDTO> scores = scoreService.findByIdUserId(1);
-		scores.stream().forEach(System.out::println);
+	@RequestMapping(value = "{id}")
+	public String findTraineeById(Model model) {
+		User trainee = traineeService.findTraineeById(2);
+		System.out.println(trainee.toString());
 		return "<h1>Success</h1>";
 	}
 	
 	/**
+	 * @param model
 	 * @return
 	 */
-	@RequestMapping(value = "/trainee-score")
-	public String getScoreTrainee() {
-		List<User> trainees = traineeService.findAllTrainee();
+	@RequestMapping(value = "/all")
+	public String findAll(Model model) {
+		List<User> trainee = traineeService.findAllTrainee();
+		System.out.println(trainee.toString());
+		return "<h1>Success</h1>";
+	}
+
+	@RequestMapping(value = "/clazz/{id}")
+	public String findTraineeByClazz(Model model) {
+		List<User> trainees = traineeService.findTraineeByClazz(1, 0);
 		trainees.forEach(System.out::println);
 		return "<h1>Success</h1>";
 	}
 
+	@RequestMapping(value = "/category")
+	public String findTraineeByCategory(Model model) {
+		List<User> trainees = traineeService.findTraineeByCategory(Constant.CLAZZ_CATEGORY, Constant.ROLE_TRAINER, 0);
+		trainees.forEach(System.out::println);
+		return "<h1>Success</h1>";
+	}
+	
 	/**
 	 * @return
 	 */
@@ -60,29 +77,14 @@ public class TraineeController {
 				.add(new ReviewTrainee(new ReviewTraineePK(1, 2), "A", "Hoc hanh tap trung, kien thuc tot"));
 		return "<h1>Success</h1>";
 	}
-	
-	@RequestMapping(value = "/category")
-	public String findTraineeByCategory(Model model) {
-		List<User> trainees = traineeService.findTraineeByCategory("Fresher", 1);
-		trainees.forEach(System.out::println);
-		return "<h1>Success</h1>";
-	}
 
 	/**
-	 * @param model
 	 * @return
 	 */
-	@RequestMapping(value = "{id}")
-	public String getHandler(Model model) {
-		User trainee = traineeService.findTraineeById(1);
-		System.out.println(trainee.toString());
-		return "<h1>Success</h1>";
-	}
-
-	@RequestMapping(value = "/clazz/{id}")
-	public String findTraineeByClazz(Model model) {
-		List<User> trainees = traineeService.findTraineeByClazz(1, 1);
-		trainees.forEach(System.out::println);
+	@RequestMapping(value = "/score")
+	public String getScore(Model model) {
+		List<TraineeScoreDTO> scores = scoreService.findByIdUserId(11);
+		model.addAttribute("scores", scores);
 		return "<h1>Success</h1>";
 	}
 

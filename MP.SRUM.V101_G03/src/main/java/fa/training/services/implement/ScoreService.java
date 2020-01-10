@@ -30,5 +30,6 @@ public class ScoreService implements IScoreService {
 		});
 		return scoreDtos;
 	}
+	
 
 }

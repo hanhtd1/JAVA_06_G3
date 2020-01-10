@@ -25,5 +25,4 @@ public class ScoreServiceImpl implements ScoreService {
 	public List<TraineeScoreDTO> findByIdUserId(Integer userId) {
 		return scoreRepository.findScoreByUserId(userId);
 	}
-
 }

@@ -10,12 +10,12 @@ public interface SubjectService {
 	 * @param clazzId
 	 * @return all subject by clazz
 	 */
-	List<Subject> findSubjectByClazz(Integer clazzId);
+	Subject findSubjectByClazz(Integer clazzId);
 
 	/**
 	 * @author ToanNT18
 	 * @param userId
 	 * @return all subject which is teaach by trainer
 	 */
-	List<Subject> findSubjectByUserId(Integer userId);
+	List<Subject> findSubjectByUserId(Integer userId, Integer pageIndex);
 }

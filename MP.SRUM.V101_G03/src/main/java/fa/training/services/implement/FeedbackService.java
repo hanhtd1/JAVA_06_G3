@@ -8,11 +8,11 @@ import fa.training.repositories.FeedbackRepository;
 import fa.training.services.IFeedbackService;
 
 @Service
-public class FeedbackService implements IFeedbackService{
+public class FeedbackService implements IFeedbackService {
 
 	@Autowired
 	private FeedbackRepository feedbackRepository;
-	
+
 	/**
 	 * @author HoangLV7
 	 * 

@@ -26,22 +26,24 @@ public class TraineeServiceImpl implements TraineeService {
 
 	@Override
 	public User findTraineeById(Integer id) {
-		return traineeRepository.findTraineeByUserId(id).get(0);
+		return traineeRepository.findById(id).orElse(new User());
 	}
 
 	@Override
 	public List<User> findAllTrainee() {
-		return traineeRepository.findTop10Trainee("Trainee");
+		return traineeRepository.findAllByRole(Constant.ROLE_TRAINER, PageRequest.of(0, Constant.PAGE_SIZE))
+				.getContent();
 	}
 
 	@Override
 	public List<User> findTraineeByClazz(Integer clazzId, Integer pageIndex) {
-		return traineeRepository.findTraineeByClazzId(clazzId, PageRequest.of(pageIndex, Constant.PAGE_SIZE));
+		return traineeRepository.findTraineeByClazzId(clazzId, PageRequest.of(pageIndex, Constant.PAGE_SIZE))
+				.getContent();
 	}
 
 	@Override
-	public List<User> findTraineeByCategory(String category, Integer pageIndex) {
-		return traineeRepository.findTraineeByCategory(category, PageRequest.of(pageIndex, Constant.PAGE_SIZE));
+	public List<User> findTraineeByCategory(String category, String role, Integer pageIndex) {
+		return traineeRepository.findTraineeByCategory(category, role, PageRequest.of(pageIndex, Constant.PAGE_SIZE))
+				.getContent();
 	}
-
 }

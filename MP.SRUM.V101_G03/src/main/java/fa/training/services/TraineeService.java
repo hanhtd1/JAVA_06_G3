@@ -11,7 +11,7 @@ public interface TraineeService {
 	 * @return trainee by id
 	 */
 	User findTraineeById(Integer id);
-	
+
 	/**
 	 * @author ToanNT18
 	 * @return all trainee by top 10
@@ -24,11 +24,11 @@ public interface TraineeService {
 	 * @return by all trainee who study in the clazz
 	 */
 	List<User> findTraineeByClazz(Integer clazzId, Integer pageIndex);
-
+	
 	/**
 	 * @author ToanNT18
 	 * @param clazzId
 	 * @return by all trainee by category
 	 */
-	List<User> findTraineeByCategory(String category, Integer pageIndex);
+	List<User> findTraineeByCategory(String category, String role, Integer pageIndex);
 }
