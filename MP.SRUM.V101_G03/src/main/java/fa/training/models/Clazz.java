@@ -4,7 +4,6 @@ import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.List;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -50,7 +49,7 @@ public class Clazz implements Serializable {
           @JoinColumn(name = "UserId", referencedColumnName = "Id") })
   @ManyToMany(fetch = FetchType.EAGER)
   private List<User> userList;
-  @OneToMany(cascade = CascadeType.ALL, mappedBy = "clazz")
+  @OneToMany(mappedBy = "clazz")
   private List<ClazzSubject> clazzSubjectList;
 
   public Clazz() {
@@ -155,7 +154,8 @@ public class Clazz implements Serializable {
 
   @Override
   public String toString() {
-    return "com.Clazz[ id=" + id + " ]";
+    return "Clazz [id=" + id + ", name=" + name + ", openDate=" + openDate + ", note=" + note + ", category=" + category
+        + ", status=" + status + "]";
   }
 
 }

@@ -1,5 +1,6 @@
 package fa.training.controllers;
 
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 
@@ -10,7 +11,10 @@ public class AuthenticationController {
    * @return
    */
   @GetMapping("login")
-  public String login() {
-    return "sign-in";
+  public String login(Authentication auth) {
+    if(null==auth) {
+      return "sign-in";      
+    }
+    return "redirect:/";
   }
 }

@@ -156,19 +156,7 @@ function updateTrainee(){
 	return false;
 }
 
-function generateAccountAndEmail(){
-	$.get({
-		url: "/admin/generate-account",
-		data: {
-			firstName: $("#add_first_name").val(),
-			lastName: $("#add_last_name").val()
-		},
-		success: (resp)=>{
-			$("#add_account").val(resp);
-			$("#add_email").val(resp+"@fsoft.com.vn");
-		}
-	})
-}
+
 
 function changeTraineeStatus(){
 	$.get({
@@ -185,7 +173,7 @@ function changeTraineeStatus(){
 
 // CLassss
 function loadClasses(){
-	$("#list_trainees").html("");
+	$("#list_classes").html("");
 	$.get({
 		url: "/admin/get-classes",
 		data: {
@@ -202,7 +190,7 @@ function loadClasses(){
 }
 function showClassList(res){
 	$("#list_classes").append("<li>\n" +
-		"<a  href=\"#!\" onclick=\"loadTraineeInfo("+res.id+")\" >\n" +
+		"<a  href=\"#!\" onclick=\"loadClassDetail("+res.id+")\" >\n" +
 		"<h5 class=\"f-s-19\">"+res.name+"</h5>\n" +
 		"<span>\n" +
 		"<i class=\"tiny material-icons\">person_pin</i> <span>"+res.userList.length+"</span> Members\n" +
@@ -211,12 +199,12 @@ function showClassList(res){
 		"</li>");
 }
 
-function loadClassInfo(id){
+function loadClassDetail(id){
 	this.currentClass=id;
-	$("#list_trainees").html("")
-	$("#class-detail").show()
+	$("#list_trainees").html("");
+	$("#class-detail").show();
 	$.get({
-		url: "/admin/class-info",
+		url: "/admin/class-detail",
 		data: {
 			id: id
 		},
@@ -232,7 +220,7 @@ function loadClassInfo(id){
 					"<td>"+trainee.birthDay+"</td>\n" +
 					"<td>"+trainee.phone+"</td>\n" +
 					"<td>"+trainee.status+"</td>\n" +
-					"<td><a onclick=\"loadClassTraineeInfo("+trainee.id+")\" class=\"waves-effect waves-light btn blue modal-trigger p-h-xs\"\n" +
+					"<td><a onclick=\"loadClassTraineeInfo("+trainee.id+")\" class=\"waves-effect waves-light btn blue modal-trigger p-h-xs trainee-info\"\n" +
 					"href=\"#trainee-info\">\n" +
 					"<i class=\"material-icons\">perm_identity</i>\n" +
 					"</a>\n" +
@@ -248,7 +236,7 @@ function loadClassInfo(id){
 }
 
 function loadClassTraineeInfo(id){
-	
+
 }
 
 function viewTraineeReview(id){
@@ -259,6 +247,19 @@ function removeTraineeFromClass(id){
 	
 }
 
+function addClass(){
+	let form = document.getElementById("add_class_form");
+	$.post({
+		url: "/admin/create-class",
+		data: Form2JsonMapper(form),
+		contentType: "application/json",
+		success: (resp)=>{
+			Materialize.toast(resp, 4000)
+		}
+	});
+	return false;
+}
+
 function editClassInfo(){
 	$.get({
 		url: "/admin/get-clazz-info",
@@ -266,11 +267,67 @@ function editClassInfo(){
 			id: this.currentClass
 		},
 		success: (resp)=>{
+			$("#update_class_id").val(currentClass);
 			$("#update-clazzName").val(resp.name);
-			$('#update-category').val(resp.category)
-			$('#update-openDate').val(resp.openDate)
+			$('#update-category').val(resp.category);
+			$('#update-openDate').val(resp.openDate);
 			$("#update-note").val(resp.note)
 		}
-		
+	})
+}
+function editClassInfoSubmit(){
+	let form = document.getElementById("update-class-form");
+	$.post({
+		url: "/admin/create-class",
+		data: Form2JsonMapper(form),
+		contentType: "application/json",
+		success: (resp)=>{
+			Materialize.toast(resp, 4000);
+		}
+	})
+	return false;
+}
+
+//Function dung chung
+/**
+ * @return {string}
+ */
+function Form2JsonMapper(form){
+	let formData = form.querySelectorAll("input, select, textarea");
+	let obj={};
+	formData.forEach(e=>{
+		let name = e.name;
+		let value = e.value;
+		if(name){
+			obj[name]=value;
+		}
+	});
+	return JSON.stringify(obj);
+}
+
+function generateAccountAndEmail(){
+	$.get({
+		url: "/admin/generate-account",
+		data: {
+			firstName: $("#add_first_name").val(),
+			lastName: $("#add_last_name").val()
+		},
+		success: (resp)=>{
+			$("#add_account").val(resp);
+			$("#add_email").val(resp+"@fsoft.com.vn");
+		}
+	})
+}
+function getClassName() {
+	$.get({
+		url: "/admin/get-classname",
+		data: {
+			location: $("#add-class-location").val(),
+			type: $("#add-class-type").val(),
+			category: $("#add-class-category").val()
+		},
+		success: (resp)=>{
+			$('#clazzName').val(resp)
+		}
 	})
 }

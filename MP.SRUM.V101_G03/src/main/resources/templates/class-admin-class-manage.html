@@ -9,11 +9,7 @@
 							<form>
 								<div class="row">
 									<div class="input-field col s12">
-<<<<<<< HEAD
 										<input th:onkeyup="loadClasses()" id="find-class" type="text"
-=======
-										<input th:onkeyup="loadClass()" id="find-class" type="text"
->>>>>>> trainer
 											class="validate"> <label for="find-class"><i
 											class="tiny material-icons">search</i> Find class</label>
 									</div>
@@ -22,7 +18,7 @@
 						</div>
 						<div class="input-field col s12 m6 l6 m-t-sm">
 							<p class="f-s-16">View by status</p>
-							<select id="class-status" class="p-h-md">
+							<select onchange="loadClasses()" id="class-status" class="p-h-md">
 								<option value="" selected>All</option>
 								<option value="In Coming">In Coming</option>
 								<option value="Active">Active</option>
@@ -31,99 +27,88 @@
 						</div>
 					</div>
 				</div>
-				<div class="row no-m-t no-m-b" >
-					<div class="col s12 m5 l3">
-						<div class="mailbox-list">
-							<ul id="list_classes">
-<<<<<<< HEAD
-								<li th:each="class:${classes}" class=""><a href="#!"
-									th:onclick="'loadClassInfo('+${class.id}+')'">
-										<h5 class="f-s-19" th:text="${class.name}"></h5> 
-										<span> <i class="tiny material-icons">person_pin</i> <span th:text="${class.userList.size()}"> </span> Members</span>
-								</a></li>
-							</ul>
+					<div class="row no-m-t no-m-b">
+						<div class="col s12 m5 l3">
+							<div class="mailbox-list">
+								<ul id="list_classes">
+									<li th:each="class:${classes}" class="">
+										<a href="#!" th:onclick="'loadClassDetail('+${class.id}+')'">
+										<h5 class="f-s-19" th:text="${class.name}"></h5>
+										<span> <i class="tiny material-icons">person_pin</i>
+											<span th:text="${class.userList.size()}"> </span> Members</span>
+										</a>
+									</li>
+								</ul>
+							</div>
 						</div>
-					</div>
-					<div class="col s12 m7 l9"  id="class-detail" style="display: none;">
-						<div class="mailbox-view">
-							<div class="mailbox-view-header">
-								<div class="left">
-									<div class="left">
-										<img th:src="@{../assets/images/profile-image-1.png}" alt=""
-											class="circle mailbox-profile-image z-depth-1">
-									</div>
-									<div class="left">
-										<span class="mailbox-title" id="class_info_name"></span> 
-										<span class="mailbox-author"><i class="tiny material-icons">person_pin</i></span>
-										<span id="class_trainees_number"> Members</span>
-									</div>
-								</div>
-								<div class="right mailbox-buttons">
-									<a onclick="editClassInfo()" class="modal-trigger waves-effect waves-grey btn-flat m-t-xs" href="#update-class-modal">Edit</a>
-								</div>
-								<div class="divider mailbox-divider"></div>
-								<div class="mailbox-text">
-									<div class="mailbox-details">
-										<a href="javascript:void(0);" class="details-toggle">Show
-											Details Information</a>
-										<div class="row details-list">
-											<div class="col s8 second-col">
-												<span><i class="tiny material-icons">person_pin</i> </span><span id="class_openDate"></span> <br> 
-												<span><i class="tiny material-icons">work</i></span><span id="class_category"></span>
+						<div id="selected-class-detail">
+							<div class="col s12 m7 l9"  id="class-detail"  style="display: none"  th:fragment="class-detail">
+								<div  class="mailbox-view">
+									<div class="mailbox-view-header">
+										<div class="left">
+											<div class="left">
+												<img th:src="@{../assets/images/profile-image-1.png}" alt=""
+														 class="circle mailbox-profile-image z-depth-1">
+											</div>
+											<div class="left">
+												<span class="mailbox-title" id="class_info_name"></span>
+												<span class="mailbox-author"><i class="tiny material-icons">person_pin</i></span>
+												<span id="class_trainees_number"> Members</span>
 											</div>
 										</div>
-									</div>
-									<p>Trainee List</p>
-									<div class="class-actions m-t-md">
-										<a class="modal-trigger waves-effect waves-light btn blue"
-											href="#attendance-modal">Attendance</a> <a
-											class="waves-effect waves-light btn light-green modal-trigger "
-											href="#add-trainee-modal">Add Trainees</a> <a
-											class="modal-trigger waves-effect waves-light btn green"
-											href="#update-subject-modal">Update Subjects</a> <a
-											class="modal-trigger waves-effect waves-light btn orange"
-											href="#update-mark-modal">Update Marks</a> <a
-											class="modal-trigger waves-effect waves-light btn light-blue"
-											href="#update-trainer-modal">Update Trainers</a>
-									</div>
-									<div class="divider mailbox-divider"></div>
-									<div class="list_trainees">
-										<table style="table-layout: fixed;"
-											class="responsive-table bordered striped p-h-md">
-											<thead>
-												<tr>
-													<th data-field="id">Account</th>
-													<th data-field="name">Full Name</th>
-													<th data-field="price">Birth Date</th>
-													<th data-field="price">Phone</th>
-													<th data-field="price">Status</th>
-													<th data-field="price">Action</th>
-												</tr>
-											</thead>
-											<tbody id="list_trainees">
-											</tbody>
-										</table>
+										<div class="right mailbox-buttons">
+											<a onclick="editClassInfo()" class="modal-trigger waves-effect waves-grey btn-flat m-t-xs" href="#update-class-modal">Edit</a>
+											<a onclick="editClassInfo()" class="modal-trigger waves-effect waves-grey btn-flat red-text m-t-xs" href="#update-class-status-modal">Update Status</a>
+										</div>
+										<div class="divider mailbox-divider"></div>
+										<div class="mailbox-text">
+											<div class="mailbox-details">
+												<a href="javascript:void(0);" class="details-toggle">Show
+													Details Information</a>
+												<div class="row details-list">
+													<div class="col s8 second-col">
+														<span><i class="tiny material-icons">person_pin</i> </span><span id="class_openDate"></span> <br>
+														<span><i class="tiny material-icons">work</i></span><span id="class_category"></span>
+													</div>
+												</div>
+											</div>
+											<p>Trainee List</p>
+											<div class="class-actions m-t-md">
+												<a class="modal-trigger waves-effect waves-light btn blue"
+													 href="#attendance-modal">Attendance</a> <a
+															class="waves-effect waves-light btn light-green modal-trigger "
+															href="#add-trainee-modal">Add Trainees</a> <a
+															class="modal-trigger waves-effect waves-light btn green"
+															href="#update-subject-modal">Update Subjects</a> <a
+															class="modal-trigger waves-effect waves-light btn orange"
+															href="#update-mark-modal">Update Marks</a> <a
+															class="modal-trigger waves-effect waves-light btn light-blue"
+															href="#update-trainer-modal">Update Trainers</a>
+											</div>
+											<div class="divider mailbox-divider"></div>
+											<div class="list_trainees">
+												<table style="table-layout: fixed;"
+															 class="responsive-table bordered striped p-h-md">
+													<thead>
+													<tr>
+														<th data-field="id">Account</th>
+														<th data-field="name">Full Name</th>
+														<th data-field="price">Birth Date</th>
+														<th data-field="price">Phone</th>
+														<th data-field="price">Status</th>
+														<th data-field="price">Action</th>
+													</tr>
+													</thead>
+													<tbody id="list_trainees">
+													</tbody>
+												</table>
+											</div>
+										</div>
 									</div>
 								</div>
 							</div>
 						</div>
-=======
-								<li th:each="class:${classes}" class="">
-									<a href="#!" th:onclick="'loadClassDetail('+${class.id}+')'">
-										<h5 class="f-s-19" th:text="${class.name}"></h5>
-										<span>
-											<i class="tiny material-icons">person_pin</i> <span th:text="${class.userList.size()}"> </span> Members
-										</span>
-									</a>
-								</li>
-							</ul>
-						</div>
 					</div>
-					<div class="col s12 m7 l9" id="class-detail">
-
->>>>>>> trainer
-					</div>
-				</div>
 			</div>
 		</div>
 	</div>
@@ -338,35 +323,52 @@
 </div>
 <!-- Modal add trainee to class -->
 <div id="add-class-modal" class="modal modal-fixed-footer">
-	<form class="col s12">
+	<form th:onsubmit="return addClass()" id="add_class_form" class="col s12" >
 		<div class="modal-content">
 			<h4>Add new class</h4>
 			<div class="row">
+				<input id="clazzName" name="name" type="text" class="validate" required readonly>
+				<label for="clazzName">Class Name</label>
 				<div class="row">
-					<div class="input-field col l12">
-						<input id="clazzName" type="text" class="validate" required>
-						<label for="clazzName">Class Name</label>
+					<div class="input-field col l6">
+						<select name="category" id="add-class-location" onchange="getClassName()" required>
+							<option value="" selected>Choose Location</option>
+							<option value="HN">Ha Noi</option>
+							<option value="DN">Da Nang</option>
+							<option value="HCM">TP. HO CHI MINH</option>
+						</select>
+					</div>
+					<div class="input-field col l6">
+						<select name="category" id="add-class-type" onchange="getClassName()" required>
+							<option value="" selected>Choose Type</option>
+							<option value="FR">Fresher</option>
+							<option value="TEST">Tester</option>
+							<option value="INT">Internship</option>
+						</select>
 					</div>
 				</div>
 				<div class="row">
 					<div class="input-field col s12">
-						<select required>
-							<option value="" selected>Choose Branch</option>
-							<option value="1">Java</option>
-							<option value="2">.Net</option>
-							<option value="3">Test</option>
+						<select name="category" id="add-class-category" onchange="getClassName()" required>
+							<option value="" selected>Choose Category</option>
+							<option value="Java">Java</option>
+							<option value=".Net">.Net</option>
+							<option value="Test">Test</option>
+							<option value="CCPP">C/C++</option>
+							<option value="Android">Android</option>
+							<option value="FRE">Front-End</option>
 						</select>
 					</div>
 				</div>
 				<div class="row">
 					<div class="input-field col s12">
 						<p for="openDate">Open Date</p>
-						<input id="openDate" type="date" required>
+						<input id="openDate" name="openDate" type="date" required>
 					</div>
 				</div>
 				<div class="row">
 					<div class="input-field col s12">
-						<input id="note" type="text" class="validate" required> <label
+						<input id="note" name="note" type="text" class="validate" required> <label
 							for="note">Note</label>
 					</div>
 				</div>
@@ -392,37 +394,33 @@
 		</div>
 	</form>
 </div>
-<!-- Modal update trainee information -->
+<!-- Modal update trainee information DONE-->
 <div id="update-class-modal" class="modal modal-fixed-footer">
-	<form class="col s12"  >
+	<form class="col s12" onsubmit="return editClassInfoSubmit()" id="update-class-form" >
 		<div class="modal-content">
-			<h4>Add new class</h4>
+			<h4>Update class information</h4>
 			<div class="row">
+				<input type="hidden" name="id" id="update_class_id"/>
 				<div class="row">
 					<div class="input-field col l12">
-						<input id="update-clazzName" type="text" class="validate" required>
-						<label for="update-clazzName">Class Name</label>
+						<input id="update-clazzName" type="text" name="name" class="validate" required readonly>
 					</div>
 				</div>
 				<div class="row">
 					<div class="update-category input-field col s12">
-						<select  id="update-category" name="update-category" required>
-							<option value="" selected>Choose Branch</option>
-							<option value="Java">Java</option>
-							<option value=".Net">.Net</option>
-							<option value="Test">Test</option>
-						</select>
+						<p>Category</p>
+						<input type="text" id="update-category" name="category" required readonly>
 					</div>
 				</div>
 				<div class="row">
 					<div class="input-field col s12">
 						<p for="update-openDate">Open Date</p>
-						<input id="update-openDate" type="date" required>
+						<input id="update-openDate" name="openDate" type="date" required>
 					</div>
 				</div>
 				<div class="row">
 					<div class="input-field col s12">
-						<input id="update-note" type="text" class="validate" required>
+						<input id="update-note" type="text" name="note" class="validate" required>
 						<label for="update-note">Note</label>
 					</div>
 				</div>
@@ -436,10 +434,19 @@
 	</form>
 </div>
 <!-- Modal delete trainee confirm -->
-<div id="update-class-status" class="modal l6">
+<div id="update-class-status-modal" class="modal l6">
 	<div class="modal-content">
 		<h4>Delete this trainee?</h4>
-		<p>Are you sure to delete this trainee?</p>
+		<div class="input-field col s12 m6 l6 m-t-sm">
+			<form>
+				<p class="f-s-16">Select status</p>
+				<select onchange="" id="update-class-status" class="p-h-md">
+					<option value="In Coming">In Coming</option>
+					<option value="Active">Active</option>
+					<option value="Graduated">Graduated</option>
+				</select>
+			</form>
+		</div>
 		<div class="modal-footer">
 			<a href="#!"
 				class=" modal-action modal-close waves-effect waves-green btn-flat">Cancel</a>
@@ -779,9 +786,4 @@
 <script th:src="@{../assets/js/pages/mailbox.js}"></script>
 <script th:src="@{../assets/js/pages/form-wizard.js}"></script>
 <script th:src="@{../assets/js/admin-manage.js}"></script>
-<<<<<<< HEAD
-<script>
-	$("body").on('click','')
-</script>
-=======
->>>>>>> trainer
+

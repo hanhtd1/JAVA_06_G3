@@ -17,4 +17,10 @@ public interface IAdminClassService {
 
   Clazz getClass(Integer id);
 
+  List<Clazz> findClazzByKeyword(String keyword, String status);
+
+  boolean saveClass(Clazz clazz);
+
+  String getClassName(String location, String type, String category);
+
 }

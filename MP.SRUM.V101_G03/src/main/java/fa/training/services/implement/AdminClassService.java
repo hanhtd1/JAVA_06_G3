@@ -1,5 +1,6 @@
 package fa.training.services.implement;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +21,16 @@ public class AdminClassService implements IAdminClassService {
   @Autowired
   private ClassRepository classRepository;
 
+  @Override
+  public boolean saveClass(Clazz clazz) {
+    //TODO validate
+    try {
+      classRepository.save(clazz);
+      return true;
+    } catch (Exception e) {      
+      return false;
+    }
+  }
   /**
    *@author TrangDM2
    */
@@ -28,6 +39,41 @@ public class AdminClassService implements IAdminClassService {
     return classRepository.findAll();
   }
   
+  /**
+   * @author TrangDM2
+   */
+  @Override
+  public List<Clazz> findClazzByKeyword(String keyword, String status){
+    return classRepository.findClassByKeyword("%"+keyword+"%", "%"+status+"%");
+  }
+  
+  /**
+   * @author TrangDM2
+   * @param 
+   * @return
+   */
+  @Override
+  public String getClassName(String location, String type, String category) {
+    String y =  Integer.toString(LocalDate.now().getYear());
+    String year = y.substring(2, 4);
+    StringBuilder clazzName=new StringBuilder();
+    
+    clazzName.append(location);
+    clazzName.append(year);
+    clazzName.append("_");
+    clazzName.append(type);
+    clazzName.append("_");
+    clazzName.append(category.toUpperCase());
+    clazzName.append("_");
+    
+    int count = classRepository.getClassNumber(clazzName+"%")+1;
+    if(count<10) {
+      clazzName.append("0");
+    }
+    
+    clazzName.append(count);
+    return clazzName.toString();
+  }
   /**
    *@author TrangDM2
    */

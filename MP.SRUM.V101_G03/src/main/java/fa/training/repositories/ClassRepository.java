@@ -12,6 +12,21 @@ import fa.training.models.Clazz;
 
 @Repository
 public interface ClassRepository extends JpaRepository<Clazz, Integer> {
+  
+  /**
+   * @author TrangDM2
+   * @return
+   */
+  @Query("select c from Clazz c where (c.name like :keyword or c.category like :keyword) and status like :status")
+  List<Clazz> findClassByKeyword(@Param("keyword") String keyword, @Param("status") String status);
+  
+  /**
+   * @author TrangDM2
+   * @param clazzName
+   * @return
+   */
+  @Query("select count(c) from Clazz c where c.name like :clazzName")
+  int getClassNumber(@Param("clazzName") String clazzName);
   /**
    * @author ToanNT18
    * @param clazzId
