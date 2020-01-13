@@ -21,6 +21,8 @@ public interface IAdminClassService {
 
   boolean saveClass(Clazz clazz);
 
-  String getClassName(String location, String type, String category);
+  String generateClassName(String location, String type, String category);
+
+  Clazz getClassByName(String name);
 
 }

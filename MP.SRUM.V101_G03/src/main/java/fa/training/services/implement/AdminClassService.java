@@ -53,7 +53,7 @@ public class AdminClassService implements IAdminClassService {
    * @return
    */
   @Override
-  public String getClassName(String location, String type, String category) {
+  public String generateClassName(String location, String type, String category) {
     String y =  Integer.toString(LocalDate.now().getYear());
     String year = y.substring(2, 4);
     StringBuilder clazzName=new StringBuilder();
@@ -80,5 +80,13 @@ public class AdminClassService implements IAdminClassService {
   @Override
   public Clazz getClass(Integer id) {
     return classRepository.findById(id).get();
+  }
+  
+  /**
+   *@author TrangDM2
+   */
+  @Override
+  public Clazz getClassByName(String name) {
+    return classRepository.findByName(name);
   }
 }

@@ -1,24 +1,22 @@
 package fa.training.controllers;
 
-import java.time.LocalDate;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 
 import fa.training.models.Clazz;
 import fa.training.services.IAdminClassService;
 import fa.training.services.IAdminUserService;
 
-@Controller
+@RestController
 @RequestMapping("admin")
 public class AdminClassManageRestController {
   
@@ -37,16 +35,6 @@ public class AdminClassManageRestController {
     return new ResponseEntity<Clazz>(clazz, HttpStatus.OK);
   }
   
-//  /**
-//   * @author TrangDM2
-//   */
-//  @GetMapping("class-detail")
-//  public String classDetail(@RequestParam Integer id, Model model) {
-//    Clazz clazz = adminClassService.getClass(id);
-//    model.addAttribute("class", clazz);
-//    return "class-admin-class-manage :: class-detail";
-//  }
-  
   @GetMapping("get-clazz-info")
   public ResponseEntity<Clazz> getClazz(@RequestParam Integer id){
     Clazz clazz = adminClassService.getClass(id);
@@ -62,21 +50,33 @@ public class AdminClassManageRestController {
   @PostMapping("create-class")
   public ResponseEntity<String> saveClass(@RequestBody Clazz clazz){
     if(clazz.getId()==null) {
+      if(null != adminClassService.getClassByName(clazz.getName())) {
+        return new ResponseEntity<String>("Failed to create class, class is already exist!", HttpStatus.BAD_REQUEST);
+      }
       clazz.setStatus("In Coming");
       adminClassService.saveClass(clazz);
       return new ResponseEntity<String>("Create class successfully!", HttpStatus.OK);
     } else {
       Clazz c = adminClassService.getClass(clazz.getId());
       clazz.setUserList(c.getUserList());
+      clazz.setStatus(c.getStatus());
       clazz.setClazzSubjectList(c.getClazzSubjectList());
       adminClassService.saveClass(clazz);
       return new ResponseEntity<String>("Update class successfully!", HttpStatus.OK);
     }
   }
   
+  @GetMapping("update-classstatus")
+  public ResponseEntity<String> updateStatus(@RequestParam String status,@RequestParam int id){
+    Clazz clazz = adminClassService.getClass(id);
+    clazz.setStatus(status);
+    adminClassService.saveClass(clazz);
+    return new ResponseEntity<String>("Update successfully!", HttpStatus.OK);
+  }
+  
   @GetMapping("get-classname")
   public ResponseEntity<String> getClassName(@RequestParam String location, @RequestParam String category, @RequestParam String type) {
-    String className = adminClassService.getClassName(location, type, category);
+    String className = adminClassService.generateClassName(location, type, category);
     return new ResponseEntity<String>(className, HttpStatus.CREATED);
   }
 }

@@ -78,4 +78,11 @@ public interface ClassRepository extends JpaRepository<Clazz, Integer> {
   @Query(value = "SELECT * FROM udf_findClazzByStatusAndNameOrCategory(:userId, :status, :content)", nativeQuery = true)
   List<Clazz> findClazzByStatusAndContent(@Param("userId") Integer userId, @Param("status") String status,
       @Param("content") String content, Pageable pageable);
+
+  /**
+   * @author TrangDM2
+   * @param name
+   * @return
+   */
+  Clazz findByName(String name);
 }

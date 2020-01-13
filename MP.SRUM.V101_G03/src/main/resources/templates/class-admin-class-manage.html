@@ -437,23 +437,26 @@
 <div id="update-class-status-modal" class="modal l6">
 	<div class="modal-content">
 		<h4>Delete this trainee?</h4>
-		<div class="input-field col s12 m6 l6 m-t-sm">
-			<form>
-				<p class="f-s-16">Status</p>
-				<input id="update-class-status" class="p-h-md" readonly>
-			</form>
+		<div class="input-field col s12 m-t-sm">
+				<p>Current Status</p>
+				<input type="text" class="" id="old-status" readonly>
+				<p class="f-s-16">Select status to update</p>
+				<select onchange="" id="update-class-status">
+					<option value="In Coming">In Coming</option>
+					<option value="Active">Active</option>
+					<option value="Graduated">Graduated</option>
+				</select>
 		</div>
 		<div class="modal-footer">
-			<a href="#!"
-				class=" modal-action modal-close waves-effect waves-green btn-flat">Cancel</a>
-			<a href="#!" class=" modal-action waves-effect waves-red btn-flat">Delete</a>
+			<a href="#!" class=" modal-action modal-close waves-effect waves-green btn-flat">Cancel</a>
+			<button onclick="updateClassStatus()" class=" modal-action waves-effect waves-red btn-flat">Update</button>
 		</div>
 	</div>
 </div>
 <!-- Modal attendance -->
 <div id="attendance-modal" class="modal modal-fixed-footer">
 	<div class="modal-content">
-		<p class="f-s-32">Attendance</p>
+		<p class="f-s-32">Attendance <span id="date-today"></span></p>
 		<div>
 			<table style="table-layout: fixed;"
 				class="responsive-table bordered striped p-h-md">
@@ -466,31 +469,7 @@
 						<th style="width: 25%" data-field="price">Note</th>
 					</tr>
 				</thead>
-				<tbody>
-					<tr>
-						<td>trangdm2</td>
-						<td>Do Manh Trang</td>
-						<td>0934560199</td>
-						<td><select class="p-h-md">
-								<option value="" selected>Choose</option>
-								<option value="1">Absent</option>
-								<option value="2">Present</option>
-								<option value="3">Late</option>
-						</select></td>
-						<td><input type="text" class="validate"></td>
-					</tr>
-					<tr>
-						<td>trangdm2</td>
-						<td>Do Manh Trang</td>
-						<td>0934560199</td>
-						<td><select class="p-h-md">
-								<option value="" selected>Choose</option>
-								<option value="1">Absent</option>
-								<option value="2">Present</option>
-								<option value="3">Late</option>
-						</select></td>
-						<td><input type="text" class="validate"></td>
-					</tr>
+				<tbody id="attendance-trainees">
 				</tbody>
 			</table>
 		</div>

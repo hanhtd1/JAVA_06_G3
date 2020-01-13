@@ -209,11 +209,27 @@ function loadClassDetail(id){
 			id: id
 		},
 		success: (resp)=>{
+			$("#date-today").html(new Date().getDate() +"/"+new Date().getUTCMonth()+"/"+new Date().getFullYear());
 			$("#class_info_name").html(resp.name);
 			$("#class_trainees_number").html(resp.userList.length);
 			$("#class_openDate").html(resp.openDate);
 			$("#class_category").html(resp.category);
+			$("#old-status").val(resp.status);
 			resp.userList.map((trainee)=>{
+				$('#attendance-trainees').append("<tr>" +
+					"<td>"+trainee.account+"</td>\n" +
+					"<td>"+trainee.firstName+" "+trainee.lastName+"</td>\n" +
+					"<td>"+trainee.phone+"</td>\n" +
+					"<td>" +
+						"<select class=\"p-h-md\">\n" +
+							"<option value=\"\" selected>Choose</option>\n" +
+							"<option value=\"Absent\">Absent</option>\n" +
+							"<option value=\"Present\">Present</option>\n" +
+							"<option value=\"Late\">Late</option>\n" +
+						"</select>" +
+					"</td>\n" +
+					"<td><input type=\"text\" name='note' class=\"validate\"></td>" +
+					"</tr>");
 				$("#list_trainees").append("<tr>\n" +
 					"<td>"+trainee.account+"</td>\n" +
 					"<td>"+trainee.firstName+" "+trainee.lastName+"</td>\n" +
@@ -247,6 +263,21 @@ function removeTraineeFromClass(id){
 	
 }
 
+function updateClassStatus() {
+	$.get({
+		url: "/admin/update-classstatus",
+		data: {
+			id: this.currentClass,
+			status: $('#update-class-status').val()
+		},
+		success: (resp)=>{
+			Materialize.toast(resp, 4000);
+			loadClassDetail(this.currentClass);
+			loadClasses();
+		}
+	})
+}
+
 function addClass(){
 	let form = document.getElementById("add_class_form");
 	$.post({
@@ -254,7 +285,11 @@ function addClass(){
 		data: Form2JsonMapper(form),
 		contentType: "application/json",
 		success: (resp)=>{
-			Materialize.toast(resp, 4000)
+			Materialize.toast(resp, 4000);
+			loadClasses();
+		},
+		error: (resp)=>{
+			Materialize.toast(resp, 4000);
 		}
 	});
 	return false;
