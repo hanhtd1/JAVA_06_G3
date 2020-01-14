@@ -10,7 +10,7 @@ public interface SubjectService {
 	 * @param clazzId
 	 * @return all subject by clazz
 	 */
-	List<Subject> findSubjectByClazz(Integer clazzId);
+	Subject findSubjectByClazz(Integer clazzId);
 
 	/**
 	 * @author ToanNT18
@@ -57,4 +57,11 @@ public interface SubjectService {
 	 * @return
 	 */
 	Subject findSubjectById(int id);
+
+	/**@author ToanNT18
+	 * @param userId
+	 * @param pageIndex
+	 * @return
+	 */
+	List<Subject> findSubjectByUserId(Integer userId, Integer pageIndex);
 }

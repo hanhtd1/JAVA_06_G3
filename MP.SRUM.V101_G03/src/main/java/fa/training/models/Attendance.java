@@ -97,8 +97,4 @@ public class Attendance implements Serializable {
     this.user = user;
   }
 
-  @Override
-	public String toString() {
-		return "com.Attendance[ date=" + date + " ]";
-	}
 }

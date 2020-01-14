@@ -63,6 +63,17 @@ public interface ClassRepository extends JpaRepository<Clazz, Integer> {
 
 	/**
 	 * @author ToanNT18
+	 * @param userId
+	 * @return all clazz's category
+	 */
+	@Query(value = "SELECT DISTINCT c.category FROM clazz c", nativeQuery = true)
+	List<String> findAllCategory();
+
+	@Query(value = "SELECT DISTINCT c.name FROM clazz c", nativeQuery = true)
+	List<String> findAllClazzName();
+
+	/**
+	 * @author ToanNT18
 	 * @param status
 	 * @return List<Clazz>
 	 * @return all clazz which is find by user id and status.

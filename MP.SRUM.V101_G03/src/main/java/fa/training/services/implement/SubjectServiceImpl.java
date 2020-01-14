@@ -5,6 +5,7 @@ import java.util.List;
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import fa.training.models.Subject;
@@ -23,13 +24,14 @@ public class SubjectServiceImpl implements SubjectService {
 	private SubjectRepository subjectRepository;
 
 	@Override
-	public List<Subject> findSubjectByClazz(Integer clazzId) {
+	public Subject findSubjectByClazz(Integer clazzId) {
 		return subjectRepository.findSubjectByClazzId(clazzId);
 	}
 
 	@Override
-	public List<Subject> findSubjectByUserId(Integer userId) {
-		return subjectRepository.findSubjectByUserId(userId);
+	public List<Subject> findSubjectByUserId(Integer userId, Integer pageIndex) {
+		return subjectRepository.findSubjectByUserId(userId, PageRequest.of(pageIndex, Constant.PAGE_SIZE))
+				.getContent();
 	}
 
 	@Override
@@ -57,5 +59,11 @@ public class SubjectServiceImpl implements SubjectService {
 	public Subject findSubjectById(int id) {
 		return subjectRepository.findSubjectById(id).orElse(new Subject());
 	}
+
+  @Override
+  public List<Subject> findSubjectByUserId(Integer userId) {
+    // TODO Auto-generated method stub
+    return null;
+  }
 
 }

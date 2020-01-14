@@ -1,7 +1,9 @@
 package fa.training.repositories;
 
 import java.util.List;
+import java.util.Optional;
 
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -18,20 +20,24 @@ import fa.training.models.User;
 public interface TraineeRepository extends JpaRepository<User, Integer> {
 
 	/**
+	 * @return list of trainee.
+	 */
+	@Query(value = "SELECT DISTINCT u.status FROM uzer u", nativeQuery = true)
+	List<String> findAllTraineeStatus();
+
+	/**
 	 * @author ToanNT18
 	 * @param userId
 	 * @return User
 	 * @return find User by user id.
 	 */
-	@Query(value = "SELECT * FROM uzer u WHERE u.id = :userId", nativeQuery = true)
-	List<User> findTraineeByUserId(@Param("userId") Integer userId);
-	
+	Optional<User> findById(Integer id);
+
 	/**
 	 * @author ToanNT18
 	 * @return top 10 trainee.
 	 */
-	@Query(value = "SELECT TOP 10 *  FROM uzer u WHERE u.role = :role", nativeQuery = true)
-	List<User> findTop10Trainee(@Param("role") String role);
+	Page<User> findAllByRole(String role, Pageable pageable);
 
 	/**
 	 * @author ToanNT18
@@ -39,15 +45,68 @@ public interface TraineeRepository extends JpaRepository<User, Integer> {
 	 * @return List<User>
 	 * @return all trainee by clazz.
 	 */
-	@Query(value = "SELECT * FROM [udf_findTraineeByClazz](:clazzId)", nativeQuery = true)
-	List<User> findTraineeByClazzId(@Param("clazzId") Integer clazzId, Pageable pageable);
-	
+	@Query(value = "SELECT * FROM udf_findTraineeByClazz(:clazzId)", nativeQuery = true)
+	Page<User> findTraineeByClazzId(@Param("clazzId") Integer clazzId, Pageable pageable);
+
 	/**
 	 * @author ToanNT18
 	 * @param category
 	 * @param role     : Trainee
 	 * @return All trainee by category
 	 */
-	@Query(value = "SELECT * FROM udf_findTraineeByCategory(:category, :role)", nativeQuery = true)
-	List<User> findTraineeByCategory(@Param("category") String category, Pageable pageable);
+	@Query(value = "SELECT * FROM udf_findTraineeByCategory(:category)", nativeQuery = true)
+	Page<User> findTraineeByCategory(@Param("category") String category, Pageable pageable);
+
+	/**
+	 * @author ToanNT18
+	 * @param clazzId
+	 * @return List<User>
+	 * @return all trainee by clazz.
+	 */
+	@Query(value = "SELECT * FROM udf_findTraineeByClazzName(:clazzName)", nativeQuery = true)
+	Page<User> findTraineeByClazzName(@Param("clazzName") String clazzName, Pageable pageable);
+
+	/**
+	 * @param status
+	 * @param pageable
+	 * @return all trainee by status.
+	 */
+	@Query(value = "SELECT * FROM uzer u WHERE u.status = :status", nativeQuery = true)
+	Page<User> findTraineeByStatus(@Param("status") String status, Pageable pageable);
+
+	/**
+	 * @param category
+	 * @param clazzName
+	 * @param pageable
+	 * @return
+	 */
+	@Query(value = "SELECT * FROM udf_findTraineeByCategoryAndClazz(:category, :clazzName)", nativeQuery = true)
+	Page<User> findTraineeByCategoryAndClazz(@Param("category") String category, @Param("clazzName") String clazzName,
+			Pageable pageable);
+
+	/**
+	 * @param category
+	 * @param status
+	 * @param pageable
+	 * @return
+	 */
+	@Query(value = "SELECT * FROM udf_findTraineeByCategoryAndStatus(:category, :status)", nativeQuery = true)
+	Page<User> findTraineeByCategoryAndStatus(@Param("category") String category, @Param("status") String status,
+			Pageable pageable);
+
+	@Query(value = "SELECT * FROM udf_findTraineeByClazzAndStatus(:clazz, :status)", nativeQuery = true)
+	Page<User> findTraineeByClazzAndStatus(@Param("clazz") String clazz, @Param("status") String status,
+			Pageable pageable);
+
+	/**
+	 * @param category
+	 * @param clazzName
+	 * @param status
+	 * @param pageable
+	 * @return
+	 */
+	@Query(value = "SELECT * FROM udf_findTraineeByCategoryAndClazzAndStatus(:category, :clazzName, :status)", nativeQuery = true)
+	Page<User> findTraineeByCategoryAndClazzAndStatus(@Param("category") String category,
+			@Param("clazzName") String clazzName, @Param("status") String status, Pageable pageable);
+
 }

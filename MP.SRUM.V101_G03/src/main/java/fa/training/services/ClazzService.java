@@ -7,21 +7,30 @@ import fa.training.models.User;
 
 public interface ClazzService {
 	/**
+	 * @return
+	 */
+	List<String> findAllClazzCategory();
+
+	/**
+	 * @return
+	 */
+	public List<String> findAllClazzName();
+
+	/**
 	 * @author ToanNT18
 	 * @param userId
 	 * @return List<Clazz>
 	 * @return all clazz by trainer's id
 	 */
 	List<Clazz> findAllClazzByTrainerId(Integer userId, Integer pageIndex);
-	
-	
+
 	/**
 	 * @author ToanNT18
 	 * @param clazzName
 	 * @return find all clazz by clazz's name or category
 	 */
 	List<Clazz> findClazzByCategory(Integer userId, Integer pageIndex, String contentSearch);
-	
+
 	/**
 	 * @author ToanNT18
 	 * @param clazzName

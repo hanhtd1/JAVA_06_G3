@@ -2,29 +2,16 @@ package fa.training.dto;
 
 public class TraineeScoreDto {
 	private String subjectName;
-
-	private Integer theory;
-
-	private Integer practice;
-
+	private Float theory;
+	private Float practice;
 	public TraineeScoreDto() {
 	}
 
-	public TraineeScoreDto(String subjectName, Integer theory, Integer practice) {
+	public TraineeScoreDto(String subjectName, Float theory, Float practice) {
 		super();
 		this.subjectName = subjectName;
 		this.theory = theory;
 		this.practice = practice;
-	}
-
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((practice == null) ? 0 : practice.hashCode());
-		result = prime * result + ((subjectName == null) ? 0 : subjectName.hashCode());
-		result = prime * result + ((theory == null) ? 0 : theory.hashCode());
-		return result;
 	}
 
 	public String getSubjectName() {
@@ -35,52 +22,20 @@ public class TraineeScoreDto {
 		this.subjectName = subjectName;
 	}
 
-	public Integer getTheory() {
+	public Float getTheory() {
 		return theory;
 	}
 
-	public void setTheory(Integer theory) {
+	public void setTheory(Float theory) {
 		this.theory = theory;
 	}
 
-	public Integer getPractice() {
+	public Float getPractice() {
 		return practice;
 	}
 
-	public void setPractice(Integer practice) {
+	public void setPractice(Float practice) {
 		this.practice = practice;
-	}
-
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		TraineeScoreDto other = (TraineeScoreDto) obj;
-		if (practice == null) {
-			if (other.practice != null)
-				return false;
-		} else if (!practice.equals(other.practice))
-			return false;
-		if (subjectName == null) {
-			if (other.subjectName != null)
-				return false;
-		} else if (!subjectName.equals(other.subjectName))
-			return false;
-		if (theory == null) {
-			if (other.theory != null)
-				return false;
-		} else if (!theory.equals(other.theory))
-			return false;
-		return true;
-	}
-
-	@Override
-	public String toString() {
-		return "TraineeScoreDTO [subjectName=" + subjectName + ", theory=" + theory + ", practice=" + practice + "]";
 	}
 
 }

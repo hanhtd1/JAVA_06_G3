@@ -57,3 +57,45 @@ $("#guide").click(()=>{
 		}
 	});
 });
+
+
+$("#grade-modal").click(()=>{
+	$.get({
+		url: "/admin/grade-modal",
+		success: (res)=>{
+			$("#main-content").html(res);
+		}
+	});
+});
+
+$("#feedback-modal").click(()=>{
+	$.get({
+		url: "/admin/feedback-modal/1",
+		success: (res)=>{
+			$("#feedback-modal").html(res);
+		}
+	});
+});
+
+function setId(id) {
+	$.get({
+		url: "/trainer/grade/" + id,
+		success: (res)=>{
+			$("#grade-modal").html(res);
+		}
+	});
+}
+
+function traineeChange() {
+	
+	var category = document.getElementById('category').value;
+	var class_name = document.getElementById('class-name').value;
+	var status = document.getElementById('status').value;
+	alert("category : " + category + ",clazz name : " + class_name + ", status : " + status);
+	$.get({
+		url: "/trainer/search?category="+category+"&clazzName="+class_name+"&status="+status,
+		success: (res)=>{
+			$("#trainees").html(res);
+		}
+	});
+}

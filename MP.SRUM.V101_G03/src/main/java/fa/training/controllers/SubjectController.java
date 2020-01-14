@@ -1,4 +1,4 @@
-package fa.training.controllers.trainer;
+package fa.training.controllers;
 
 import java.util.List;
 
@@ -17,7 +17,7 @@ import fa.training.services.SubjectService;
  * @author ToanNT18
  */
 @RestController
-@RequestMapping(value = "/trainer/subject")
+@RequestMapping(value = "/trainer")
 public class SubjectController {
 
 	@Autowired
@@ -25,6 +25,18 @@ public class SubjectController {
 
 	@Autowired
 	private FeedbackService feedbackService;
+	
+	/**
+	 * @param model
+	 * @param clazzId
+	 * @return
+	 */
+	@RequestMapping(value = "/clazzId")
+	public String findAll(Model model) {
+		Subject subjects = subjectService.findSubjectByClazz(2);
+		System.out.println(subjects);
+		return "<h1>Success</h1>";
+	}
 
 	/**
 	 * @param model
@@ -33,19 +45,7 @@ public class SubjectController {
 	 */
 	@RequestMapping(value = "/userId")
 	public String getHandler(Model model) {
-		List<Subject> subjects = subjectService.findSubjectByUserId(1);
-		subjects.forEach(System.out::println);
-		return "<h1>Success</h1>";
-	}
-
-	/**
-	 * @param model
-	 * @param clazzId
-	 * @return
-	 */
-	@RequestMapping(value = "/clazzId")
-	public String findAll(Model model) {
-		List<Subject> subjects = subjectService.findSubjectByClazz(1);
+		List<Subject> subjects = subjectService.findSubjectByUserId(1, 0);
 		subjects.forEach(System.out::println);
 		return "<h1>Success</h1>";
 	}
