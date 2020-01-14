@@ -2,9 +2,12 @@ package fa.training.controllers;
 
 import java.util.List;
 
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -19,6 +22,7 @@ import fa.training.models.Clazz;
 import fa.training.models.Feedback;
 import fa.training.models.FeedbackPK;
 import fa.training.models.User;
+import fa.training.services.ClazzService;
 import fa.training.services.IAttendanceService;
 import fa.training.services.IFeedbackService;
 import fa.training.services.IScoreService;
@@ -32,6 +36,8 @@ import fa.training.services.IUserService;
 @RequestMapping("trainee")
 public class TraineeUserController {
 
+	private static final Logger LOGGER = LogManager.getLogger(TraineeUserController.class);
+
 	@Autowired
 	private IUserService iUserService;
 
@@ -43,18 +49,20 @@ public class TraineeUserController {
 
 	@Autowired
 	private IScoreService iScoreService;
+	
+	@Autowired
+	private ClazzService clazzService;
 
 	@GetMapping("/")
-	public String index(Model model) {
-	  Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-		String account = auth.getName();
-		
+	public String index(Model model, Authentication auth) {
+		String account = ((UserDetails)auth.getPrincipal()).getUsername();
+		LOGGER.info(account + " login successful");
 		User trainee = iUserService.getUser(account);
-
+		//Handling null exception
+		Clazz classTrainee = clazzService.findClazzByTrainee(trainee);
 		List<User> users = iUserService.getMembers(trainee);
 		List<Attendance> attendances = iAttendanceService.getAttendancesByUser(trainee);
 		List<ScoreDto> scores = iScoreService.getScoreByUser(trainee.getId());
-		Clazz classTrainee = trainee.getClazzList().get(0);
 		model.addAttribute("class", classTrainee);
 		model.addAttribute("users", users);
 		model.addAttribute("trainee", trainee);

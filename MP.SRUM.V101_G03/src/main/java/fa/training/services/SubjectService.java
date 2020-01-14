@@ -18,4 +18,43 @@ public interface SubjectService {
 	 * @return all subject which is teaach by trainer
 	 */
 	List<Subject> findSubjectByUserId(Integer userId);
+	
+	/**
+	 * @author HoangLV7
+	 *
+	 * @return list of subject that be active
+	 */
+	List<Subject> findAll();
+	
+	/**
+	 * @author HoangLV7
+	 *
+	 * @param subject
+	 * @return
+	 */
+	Subject save(Subject subject);
+
+	/**
+	 * @author HoangLV7
+	 *
+	 * @param code
+	 * @return
+	 */
+	Subject findSubjectByCode(String code);
+	
+	/**
+	 * @author HoangLV7
+	 *
+	 * @param code
+	 * @return true is subject existed, or not return false
+	 */
+	Boolean checkSubjectExisted(String code);
+	
+	/**
+	 * @author HoangLV7
+	 *
+	 * @param id
+	 * @return
+	 */
+	Subject findSubjectById(int id);
 }

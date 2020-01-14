@@ -1,0 +1,111 @@
+<div class="mailbox-view">
+	<div class="mailbox-view-header">
+		<div class="left">
+			<div class="left">
+				<img src="@{../assets/images/profile-image-1.png}" alt=""
+					class="circle mailbox-profile-image z-depth-1">
+			</div>
+			<div class="left">
+				<span class="mailbox-title" th:text="${subject.name}"></span>
+				Code: <span class="mailbox-author" th:text="${subject.code}"></span><br>
+				Duration(days): <span class="mailbox-author" th:text="${subject.duration}" id="duration-id"></span>
+			</div>
+		</div>
+		<div class="right mailbox-buttons">
+			<a class="modal-trigger waves-effect waves-grey btn-flat m-t-xs"
+				href="#update-subject-modal">Edit</a> <a
+				class="waves-effect waves-red btn-flat m-t-xs modal-trigger"
+				href="#update-confirm">Delete</a>
+		</div>
+		<div class="divider mailbox-divider"></div>
+
+		<ul class="collapsible" data-collapsible="accordion"
+			th:each="className : ${usersByClass.keySet()}">
+			<li>
+				<div class="collapsible-header" th:text="${className}"></div>
+				<div class="collapsible-body">
+					<table style="table-layout: fixed;"
+						class="responsive-table bordered striped p-h-md">
+						<thead>
+							<tr>
+								<th data-field="id">Account</th>
+								<th data-field="name">Full Name</th>
+								<th data-field="price">Phone</th>
+								<th data-field="price">Feedback</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr th:each="user : ${usersByClass.get(className)}">
+								<td th:text="${user.account}"></td>
+								<td th:text="${user.firstName}+' ' + ${user.lastName}"></td>
+								<td th:text="${user.phone}"></td>
+								<td><a
+									class="modal-trigger waves-effect waves-blue btn m-t-xs"
+									href="#feedback-modal"
+									th:onclick="'load_feedback('+${user.id}+','+ ${subject.id}+')'">View
+										feedback</a></td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</li>
+		</ul>
+	</div>
+</div>
+<!-- Modal update -->
+<div id="update-subject-modal" class="modal modal-fixed-footer">
+	<form class="col s12" th:action="@{edit-subject}" method="POST">
+		<div class="modal-content">
+			<p class="f-s-32">Edit subject</p>
+			<div>
+				<div class="row">
+					<div class="input-field col s12">
+						<p>Subject Name</p>
+						<input id="subjectName" type="text" class="validate"
+							name="subjectName" required readonly th:value="${subject.name}">
+					</div>
+				</div>
+				<div class="row">
+					<div class="input-field col s12">
+						<p>Subject Code</p>
+						<input id="code" type="text" class="validate" name="subjectCode"
+							required readonly th:value="${subject.code}">
+					</div>
+				</div>
+				<div class="row">
+					<div class="input-field col s12">
+						<p>Duration (Days)</p>
+						<input id="duration" type="number" class="validate"
+							name="subjectDuration" required
+							th:placeholder="${subject.duration}">
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="modal-footer">
+			<input type="hidden" id="subjectId" th:value="${subject.id}">
+			<button type="button"
+				class="modal-action waves-effect waves-green btn-flat"
+				th:onclick="edit_subjects()">Commit</button>
+		</div>
+	</form>
+</div>
+
+<!-- Javascript -->
+<script th:src="@{../assets/plugins/jquery/jquery-2.2.0.min.js}"></script>
+<script th:src="@{../assets/plugins/materialize/js/materialize.min.js}"></script>
+<script
+	th:src="@{../assets/plugins/material-preloader/js/materialPreloader.min.js}"></script>
+<script th:src="@{../assets/plugins/jquery-blockui/jquery.blockui.js}"></script>
+<script
+	th:src="@{../assets/plugins/datatables/js/jquery.dataTables.min.js}"></script>
+<script th:src="@{../assets/plugins/simditor/scripts/module.js}"></script>
+<script th:src="@{../assets/plugins/simditor/scripts/hotkeys.js}"></script>
+<script th:src="@{../assets/plugins/simditor/scripts/uploader.js}"></script>
+<script th:src="@{../assets/plugins/simditor/scripts/simditor.js}"></script>
+<script th:src="@{../assets/js/alpha.min.js}"></script>
+<script th:src="@{../assets/js/pages/table-data.js}"></script>
+<script th:src="@{../assets/js/pages/mailbox.js}"></script>
+<script th:src="@{../assets/js/pages/form-wizard.js}"></script>
+
+<script th:src="@{../assets/js/admin-subject.js}"></script>

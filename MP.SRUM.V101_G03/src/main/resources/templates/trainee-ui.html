@@ -106,13 +106,6 @@
 					<div class="header-title col s3">
 						<span class="chapter-title">SRUM</span>
 					</div>
-					<!-- <form class="left search col s6 hide-on-small-and-down">
-                        <div class="input-field">
-                            <input id="search" type="search" placeholder="Search" autocomplete="off">
-                            <label for="search"><i class="material-icons search-icon">search</i></label>
-                        </div>
-                        <a href="javascript: void(0)" class="close-search"><i class="material-icons">close</i></a>
-                    </form> -->
 					<ul class="right col s9 m3 nav-right-menu">
 						<li><a href="javascript:void(0)"
 							data-activates="chat-sidebar" class="chat-button show-on-large"><i
@@ -636,7 +629,7 @@
 						<div class="card-content">
 							<div class="col s12 m12 l12">
 								<div class="row">
-									<ul>
+									<ul th:if="${users.size()} > 0">
 										<li>
 											<h4 th:text="${class.name}"></h4>
 										</li>

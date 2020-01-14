@@ -3,6 +3,7 @@ package fa.training.services;
 import java.util.List;
 
 import fa.training.models.Clazz;
+import fa.training.models.User;
 
 public interface ClazzService {
 	/**
@@ -45,4 +46,20 @@ public interface ClazzService {
 	 *         contentSearch
 	 */
 	List<Clazz> findClazzByStatusAndContent(Integer userId, Integer pageIndex, String status, String contentSearch);
+	
+	/**
+	 * @author HoangLV7
+	 *
+	 * @param subject
+	 * @return list of class which is found by code subject
+	 */
+	List<Clazz> findBySubject(int subjectId);
+	
+	/**
+	 * @author HoangLV7
+	 *
+	 * @param trainee
+	 * @return class of trainee
+	 */
+	Clazz findClazzByTrainee(User trainee);
 }

@@ -1,0 +1,59 @@
+2020-01-10 10:51:59 INFO  TraineeUserController:55 - hoanglv7 login successful
+2020-01-10 10:51:59 INFO  UserService:38 - Get User by Account hoanglv7
+2020-01-10 10:51:59 INFO  UserService:28 - Get classmate of user hoanglv7
+2020-01-10 10:52:00 INFO  AttendanceService:29 - Get list of Attendace by hoanglv7
+2020-01-10 10:52:00 INFO  ScoreService:30 - Get score by UserId 1
+2020-01-10 10:52:37 INFO  FeedbackService:26 - Get feedbacks of UserID 1 and SubjectID 1
+2020-01-10 10:53:01 INFO  FeedbackService:26 - Get feedbacks of UserID 1 and SubjectID 3
+2020-01-10 10:53:10 INFO  FeedbackService:36 - Save new feedback
+2020-01-10 10:53:10 INFO  TraineeUserController:55 - hoanglv7 login successful
+2020-01-10 10:53:10 INFO  UserService:38 - Get User by Account hoanglv7
+2020-01-10 10:53:10 INFO  UserService:28 - Get classmate of user hoanglv7
+2020-01-10 10:53:10 INFO  AttendanceService:29 - Get list of Attendace by hoanglv7
+2020-01-10 10:53:10 INFO  ScoreService:30 - Get score by UserId 1
+2020-01-10 11:22:15 INFO  TraineeUserController:55 - hoanglv7 login successful
+2020-01-10 14:17:27 INFO  TraineeUserController:55 - hoanglv7 login successful
+2020-01-10 14:17:27 INFO  UserService:38 - Get User by Account hoanglv7
+2020-01-10 14:17:27 INFO  UserService:28 - Get classmate of user hoanglv7
+2020-01-10 14:17:27 INFO  AttendanceService:29 - Get list of Attendace by hoanglv7
+2020-01-10 14:17:27 INFO  ScoreService:30 - Get score by UserId 1
+2020-01-10 14:18:53 INFO  TraineeUserController:55 - hoanglv7 login successful
+2020-01-10 14:18:53 INFO  UserService:38 - Get User by Account hoanglv7
+2020-01-10 14:18:53 INFO  UserService:28 - Get classmate of user hoanglv7
+2020-01-10 14:18:53 INFO  AttendanceService:29 - Get list of Attendace by hoanglv7
+2020-01-10 14:18:53 INFO  ScoreService:30 - Get score by UserId 1
+2020-01-13 16:16:13 INFO  TraineeUserController:55 - hoanglv7 login successful
+2020-01-13 16:16:13 INFO  UserService:42 - Get User by Account hoanglv7
+2020-01-13 16:16:13 INFO  UserService:32 - Get classmate of user hoanglv7
+2020-01-13 16:16:13 INFO  AttendanceService:29 - Get list of Attendace by hoanglv7
+2020-01-13 16:16:13 INFO  ScoreService:30 - Get score by UserId 1
+2020-01-13 20:51:03 INFO  TraineeUserController:59 - hoanglv7 login successful
+2020-01-13 20:51:03 INFO  UserService:42 - Get User by Account hoanglv7
+2020-01-13 20:52:00 INFO  TraineeUserController:59 - hoanglv7 login successful
+2020-01-13 20:52:00 INFO  UserService:42 - Get User by Account hoanglv7
+2020-01-13 20:52:00 INFO  UserService:32 - Get classmate of user hoanglv7
+2020-01-13 20:52:00 INFO  AttendanceService:29 - Get list of Attendace by hoanglv7
+2020-01-13 20:52:00 INFO  ScoreService:30 - Get score by UserId 1
+2020-01-13 20:55:17 INFO  TraineeUserController:59 - phuongnt79 login successful
+2020-01-13 20:55:17 INFO  UserService:42 - Get User by Account phuongnt79
+2020-01-13 20:55:17 INFO  UserService:32 - Get classmate of user phuongnt79
+2020-01-13 20:55:17 INFO  AttendanceService:29 - Get list of Attendace by phuongnt79
+2020-01-13 20:55:17 INFO  ScoreService:30 - Get score by UserId 13
+2020-01-13 21:00:12 INFO  TraineeUserController:59 - phuongnt79 login successful
+2020-01-13 21:00:12 INFO  UserService:42 - Get User by Account phuongnt79
+2020-01-13 21:00:12 INFO  UserService:32 - Get classmate of user phuongnt79
+2020-01-13 21:00:12 INFO  AttendanceService:29 - Get list of Attendace by phuongnt79
+2020-01-13 21:00:12 INFO  ScoreService:30 - Get score by UserId 13
+2020-01-13 21:01:05 INFO  TraineeUserController:59 - phuongnt79 login successful
+2020-01-13 21:01:05 INFO  UserService:42 - Get User by Account phuongnt79
+2020-01-13 21:01:05 INFO  UserService:32 - Get classmate of user phuongnt79
+2020-01-13 21:01:05 INFO  AttendanceService:29 - Get list of Attendace by phuongnt79
+2020-01-13 21:01:05 INFO  ScoreService:30 - Get score by UserId 13
+2020-01-13 21:06:40 INFO  TraineeUserController:59 - phuongnt79 login successful
+2020-01-13 21:06:40 INFO  UserService:42 - Get User by Account phuongnt79
+2020-01-13 21:06:40 INFO  UserService:32 - Get classmate of user phuongnt79
+2020-01-13 21:06:40 INFO  AttendanceService:29 - Get list of Attendace by phuongnt79
+2020-01-13 21:06:40 INFO  ScoreService:30 - Get score by UserId 13
+2020-01-14 15:33:58 INFO  FeedbackService:26 - Get feedbacks of UserID 1 and SubjectID 1
+2020-01-14 15:34:00 INFO  FeedbackService:26 - Get feedbacks of UserID 2 and SubjectID 1
+2020-01-14 15:34:02 INFO  FeedbackService:26 - Get feedbacks of UserID 4 and SubjectID 1

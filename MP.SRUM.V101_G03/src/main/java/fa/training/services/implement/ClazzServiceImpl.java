@@ -9,6 +9,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import fa.training.models.Clazz;
+import fa.training.models.User;
 import fa.training.repositories.ClassRepository;
 import fa.training.services.ClazzService;
 import fa.training.utils.Constant;
@@ -50,6 +51,16 @@ public class ClazzServiceImpl implements ClazzService {
 			String contentSearch) {
 		return clazzRepository.findClazzByStatusAndContent(userId, status, contentSearch,
 				PageRequest.of(pageIndex, Constant.PAGE_SIZE));
+	}
+
+	@Override
+	public List<Clazz> findBySubject(int subjectId) {
+		return clazzRepository.findBySubject(subjectId);
+	}
+
+	@Override
+	public Clazz findClazzByTrainee(User trainee) {
+		return clazzRepository.findClazzByTrainee(trainee.getId()).orElse(new Clazz());
 	}
 
 }

@@ -1,6 +1,7 @@
 package fa.training.services;
 
 import java.util.List;
+import java.util.Map;
 
 import fa.training.models.User;
 
@@ -9,9 +10,11 @@ import fa.training.models.User;
  *
  */
 public interface IUserService {
-  public List<User> getMembers(User user);
+	Map<String, User> findAllByRole(String role);
 
-  User getUser(String account);
+	List<User> getMembers(User user);
 
-  User getUserById(int userId);
+	User getUser(String account);
+
+	User getUserById(int userId);
 }
