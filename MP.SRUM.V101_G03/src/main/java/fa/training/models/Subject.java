@@ -4,7 +4,6 @@ import java.io.Serializable;
 import java.util.List;
 
 import javax.persistence.Basic;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -40,13 +39,13 @@ public class Subject implements Serializable {
 	@Column(name = "Status")
 	private String status;
 
-	@OneToMany(cascade = CascadeType.ALL, mappedBy = "subject")
+	@OneToMany(mappedBy = "subject")
 	private List<Score> scoreList;
 
-	@OneToMany(cascade = CascadeType.ALL, mappedBy = "subject")
+	@OneToMany(mappedBy = "subject")
 	private List<Feedback> feedbackList;
 
-	@OneToMany(cascade = CascadeType.ALL, mappedBy = "subject")
+	@OneToMany(mappedBy = "subject")
 	private List<ClazzSubject> clazzSubjectList;
 
 	public Subject() {

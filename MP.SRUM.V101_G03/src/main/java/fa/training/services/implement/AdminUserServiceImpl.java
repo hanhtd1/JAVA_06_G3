@@ -8,8 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
-import fa.training.dto.ScoreDto;
-import fa.training.dto.UserDto;
+import fa.training.dtos.ScoreDto;
+import fa.training.dtos.UserDto;
 import fa.training.models.Clazz;
 import fa.training.models.Score;
 import fa.training.models.User;

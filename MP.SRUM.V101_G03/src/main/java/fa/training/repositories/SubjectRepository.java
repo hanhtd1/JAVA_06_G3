@@ -57,5 +57,6 @@ public interface SubjectRepository extends JpaRepository<Subject, Integer> {
 	 * @param pageable
 	 * @return
 	 */
+	@Query(value = "SELECT * FROM udf_findSubjectByUser(:userId)", nativeQuery = true)
 	Page<Subject> findSubjectByUserId(@Param("userId") Integer userId, Pageable pageable);
 }

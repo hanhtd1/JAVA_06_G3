@@ -14,8 +14,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import fa.training.dto.ScoreDto;
-import fa.training.dto.UserDto;
+import fa.training.dtos.ScoreDto;
+import fa.training.dtos.UserDto;
 import fa.training.models.User;
 import fa.training.services.AdminUserService;
 import fa.training.utils.Constant;
@@ -100,7 +100,7 @@ public class AdminUserManageRestController {
     updateUser.setStatus(toUpdateUser.getStatus());
     adminUserService.saveUser(updateUser);
     
-    return new ResponseEntity<String>(Constant.CREATE_SUCCESS_MESSAGE,HttpStatus.OK);
+    return new ResponseEntity<String>(Constant.UPDATE_SUCCESS_MESSAGE,HttpStatus.OK);
   }
 
   /**
@@ -109,7 +109,7 @@ public class AdminUserManageRestController {
   @GetMapping("update-status")
   public ResponseEntity<String> updateStatus(@RequestParam int id, @RequestParam String status){
     adminUserService.updateUserStatus(id, status);
-    return new ResponseEntity<String>(Constant.CREATE_SUCCESS_MESSAGE,HttpStatus.OK);
+    return new ResponseEntity<String>(Constant.UPDATE_SUCCESS_MESSAGE,HttpStatus.OK);
   }
   
   /**

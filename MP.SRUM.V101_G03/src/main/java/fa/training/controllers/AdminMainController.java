@@ -9,7 +9,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import fa.training.dto.UserDto;
+import fa.training.dtos.UserDto;
 import fa.training.models.Clazz;
 import fa.training.models.Subject;
 import fa.training.models.User;

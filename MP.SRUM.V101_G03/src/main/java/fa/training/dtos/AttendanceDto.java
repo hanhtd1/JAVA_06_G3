@@ -1,4 +1,4 @@
-package fa.training.dto;
+package fa.training.dtos;
 
 import java.time.LocalDate;
 

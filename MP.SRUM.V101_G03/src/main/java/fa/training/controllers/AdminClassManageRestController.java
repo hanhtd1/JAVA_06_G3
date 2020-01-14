@@ -14,8 +14,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import fa.training.dto.AttendanceDto;
-import fa.training.dto.UserDto;
+import fa.training.dtos.AttendanceDto;
+import fa.training.dtos.UserDto;
 import fa.training.models.Attendance;
 import fa.training.models.Clazz;
 import fa.training.models.User;
@@ -75,9 +75,9 @@ public class AdminClassManageRestController {
       try {
         updateClazz.setStatus(Constant.CLASS_DEFAULT_STATUS);
         adminClassService.saveClass(clazz);
-        message = Constant.CREATE_SUCCESS_MESSAGE;
+        message = Constant.UPDATE_SUCCESS_MESSAGE;
       } catch (Exception e) {
-        return new ResponseEntity<String>(Constant.CREATE_FAIL_MESSAGE, HttpStatus.BAD_REQUEST);
+        return new ResponseEntity<String>(Constant.UPDATE_FAIL_MESSAGE, HttpStatus.BAD_REQUEST);
       }
     } else {
       Clazz toUpdateClazz = adminClassService.getClass(updateClazz.getId());

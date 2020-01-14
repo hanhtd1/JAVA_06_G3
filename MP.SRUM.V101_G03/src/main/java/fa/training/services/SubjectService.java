@@ -13,13 +13,6 @@ public interface SubjectService {
 	Subject findSubjectByClazz(Integer clazzId);
 
 	/**
-	 * @author ToanNT18
-	 * @param userId
-	 * @return all subject which is teaach by trainer
-	 */
-	List<Subject> findSubjectByUserId(Integer userId);
-	
-	/**
 	 * @author HoangLV7
 	 *
 	 * @return list of subject that be active

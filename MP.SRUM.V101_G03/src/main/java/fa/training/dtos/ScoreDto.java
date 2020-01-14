@@ -1,4 +1,4 @@
-package fa.training.dto;
+package fa.training.dtos;
 
 import fa.training.models.Score;
 

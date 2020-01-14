@@ -1,4 +1,4 @@
-package fa.training.dto;
+package fa.training.dtos;
 
 public class TraineeScoreDto {
 	private String subjectName;

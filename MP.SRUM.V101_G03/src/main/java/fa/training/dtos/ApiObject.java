@@ -1,4 +1,4 @@
-package fa.training.dto;
+package fa.training.dtos;
 
 /**
  * @author HoangLV7

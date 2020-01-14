@@ -18,7 +18,7 @@ import fa.training.services.SubjectService;
  */
 @RestController
 @RequestMapping(value = "/trainer")
-public class SubjectController {
+public class TrainerSubjectController {
 
 	@Autowired
 	private SubjectService subjectService;

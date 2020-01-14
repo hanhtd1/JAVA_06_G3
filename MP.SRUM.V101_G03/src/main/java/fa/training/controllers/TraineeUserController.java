@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import fa.training.dto.ScoreDto;
+import fa.training.dtos.ScoreDto;
 import fa.training.models.Attendance;
 import fa.training.models.Clazz;
 import fa.training.models.Feedback;
@@ -26,6 +26,7 @@ import fa.training.services.AttendanceService;
 import fa.training.services.FeedbackService;
 import fa.training.services.ScoreService;
 import fa.training.services.UserService;
+import fa.training.utils.Constant;
 
 /**
  * @author HoangLV7
@@ -74,7 +75,7 @@ public class TraineeUserController {
 	public @ResponseBody String viewFeedback(@RequestParam Integer userId,
 			@RequestParam Integer subjectId) {
 		Feedback feedback = iFeedbackService.getAllFeedback(userId, subjectId);
-		return feedback == null ? "You didn't commit feedback!" : feedback.getContent();
+		return feedback == null ? Constant.NOT_FOUND_MESSAGE: feedback.getContent();
 	}
 
 	@GetMapping("/feedback-info")

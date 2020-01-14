@@ -10,8 +10,8 @@ import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import fa.training.dto.ScoreDto;
-import fa.training.dto.TraineeScoreDto;
+import fa.training.dtos.ScoreDto;
+import fa.training.dtos.TraineeScoreDto;
 import fa.training.models.Score;
 import fa.training.repositories.ScoreRepository;
 import fa.training.services.ScoreService;

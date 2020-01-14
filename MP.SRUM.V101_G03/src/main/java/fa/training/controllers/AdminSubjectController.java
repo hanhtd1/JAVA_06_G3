@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import fa.training.dto.ApiObject;
+import fa.training.dtos.ApiObject;
 import fa.training.models.Clazz;
 import fa.training.models.Feedback;
 import fa.training.models.Subject;

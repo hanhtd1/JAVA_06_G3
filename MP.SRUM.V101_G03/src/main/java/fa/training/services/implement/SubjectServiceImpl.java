@@ -60,10 +60,5 @@ public class SubjectServiceImpl implements SubjectService {
 		return subjectRepository.findSubjectById(id).orElse(new Subject());
 	}
 
-  @Override
-  public List<Subject> findSubjectByUserId(Integer userId) {
-    // TODO Auto-generated method stub
-    return null;
-  }
 
 }

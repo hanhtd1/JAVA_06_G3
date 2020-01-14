@@ -18,7 +18,7 @@ import fa.training.services.ClazzService;
 
 @RestController
 @RequestMapping(value = "/trainer")
-public class ClazzController {
+public class TrainerClassController {
 
 	@Autowired
 	private ClazzService clazzService;
@@ -26,14 +26,6 @@ public class ClazzController {
 	@GetMapping
 	public String getClazz(Model model) {
 		List<Clazz> clazzs = clazzService.findAllClazzByTrainerId(2, 0);
-		System.out.println(clazzs.size());
-		clazzs.forEach(System.out::println);
-		return "<h1>Success</h1>";
-	}
-
-	@RequestMapping(value = "/category")
-	public String getClazzByCategory(Model model) {
-		List<Clazz> clazzs = clazzService.findClazzByCategory(2, 0, "Java");
 		System.out.println(clazzs.size());
 		clazzs.forEach(System.out::println);
 		return "<h1>Success</h1>";

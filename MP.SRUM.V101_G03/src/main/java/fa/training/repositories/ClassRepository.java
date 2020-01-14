@@ -104,7 +104,7 @@ public interface ClassRepository extends JpaRepository<Clazz, Integer> {
 	 * @param subject
 	 * @return list of class which is found by subject
 	 */
-	@Query(value = "SELECT c.id, c.category, c.name, c.note, open_local_date, c.status, c.open_date"
+	@Query(value = "SELECT c.id, c.category, c.name, c.note, open_date, c.status, c.open_date"
 			+ " FROM clazz c, clazz_subject sc, subject s"
 			+ " WHERE c.id = sc.clazz_id AND sc.subject_id = s.id AND c.status = 'Active'"
 			+ " AND s.id = :subjectId", nativeQuery = true)
@@ -116,7 +116,7 @@ public interface ClassRepository extends JpaRepository<Clazz, Integer> {
 	 * @param traineeId
 	 * @return Optional<Clazz> that find by trainee id
 	 */
-	@Query(value = "SELECT c.id, c.category, c.name, c.note, open_local_date, c.status, c.open_date"
+	@Query(value = "SELECT c.id, c.category, c.name, c.note, open_date, c.status, c.open_date"
 			+ " FROM clazz c, user_clazz uc"
 			+ " WHERE c.id = uc.clazz_id AND uc.user_id = :userId", 
 			nativeQuery = true)
