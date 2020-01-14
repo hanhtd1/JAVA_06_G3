@@ -1,5 +1,7 @@
 package fa.training.repositories;
 
+import java.util.List;
+
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -11,6 +13,16 @@ import fa.training.models.Clazz;
 
 @Repository
 public interface ClassRepository extends JpaRepository<Clazz, Integer> {
+	/**
+	 * @param userId
+	 * @return all clazz's category
+	 */
+	@Query(value = "SELECT DISTINCT c.category FROM clazz c", nativeQuery = true)
+	List<String> findAllCategory();
+
+	@Query(value = "SELECT DISTINCT c.name FROM clazz c", nativeQuery = true)
+	List<String> findAllClazzName();
+
 	/**
 	 * @author ToanNT18
 	 * @param clazzId
@@ -62,4 +74,5 @@ public interface ClassRepository extends JpaRepository<Clazz, Integer> {
 	@Query(value = "SELECT * FROM udf_findClazzByStatusAndNameOrCategory(:userId, :status, :content)", nativeQuery = true)
 	Page<Clazz> findClazzByStatusAndContent(@Param("userId") Integer userId, @Param("status") String status,
 			@Param("content") String content, Pageable pageable);
+
 }

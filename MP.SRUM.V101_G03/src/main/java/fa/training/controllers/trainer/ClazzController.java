@@ -30,8 +30,8 @@ public class ClazzController {
 		clazzs.forEach(System.out::println);
 		return "<h1>Success</h1>";
 	}
-	
-	@RequestMapping(value = "/clazz/category")
+
+	@RequestMapping(value = "/category")
 	public String getClazzByCategory(Model model) {
 		List<Clazz> clazzs = clazzService.findClazzByCategory(2, 0, "Java");
 		System.out.println(clazzs.size());
@@ -39,7 +39,7 @@ public class ClazzController {
 		return "<h1>Success</h1>";
 	}
 
-	@RequestMapping(value = "/clazz/content")
+	@RequestMapping(value = "/content")
 	public String getClazzByNameOrCategory(Model model) {
 		List<Clazz> clazzs = clazzService.findClazzByNameOrCategory(2, 0, "Java");
 		System.out.println(clazzs.size());
@@ -47,15 +47,15 @@ public class ClazzController {
 		return "<h1>Success</h1>";
 	}
 
-	@RequestMapping(value = "/clazz/status")
+	@RequestMapping(value = "/status")
 	public String getClazzByStatus(Model model) {
 		List<Clazz> clazzs = clazzService.findClazzByStatus(2, 0, "Active");
 		System.out.println(clazzs.size());
 		clazzs.forEach(System.out::println);
 		return "<h1>Success</h1>";
 	}
-	
-	@RequestMapping(value = "/clazz/status/**")
+
+	@RequestMapping(value = "/status/**")
 	public String getClazzByStatusAndCategory(Model model) {
 		List<Clazz> clazzs = clazzService.findClazzByStatusAndContent(2, 0, "Active", "Java");
 		System.out.println(clazzs.size());

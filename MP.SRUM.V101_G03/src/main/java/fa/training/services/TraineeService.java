@@ -5,6 +5,8 @@ import java.util.List;
 import fa.training.models.User;
 
 public interface TraineeService {
+	List<String> findAllTraineeStatus();
+
 	/**
 	 * @author ToanNT18
 	 * @param id
@@ -21,14 +23,50 @@ public interface TraineeService {
 	/**
 	 * @author ToanNT18
 	 * @param clazzId
+	 * @return by all trainee by category
+	 */
+	List<User> findTraineeByCategory(String category, Integer pageIndex);
+
+	/**
+	 * @author ToanNT18
+	 * @param clazzId
 	 * @return by all trainee who study in the clazz
 	 */
-	List<User> findTraineeByClazz(Integer clazzId, Integer pageIndex);
-	
+	List<User> findTraineeByClazzName(String clazzName, Integer pageIndex);
+
 	/**
 	 * @author ToanNT18
 	 * @param clazzId
 	 * @return by all trainee by category
 	 */
-	List<User> findTraineeByCategory(String category, String role, Integer pageIndex);
+	List<User> findTraineeByStatus(String status, Integer pageIndex);
+
+	/**
+	 * @author ToanNT18
+	 * @param clazzId
+	 * @return by all trainee by category
+	 */
+	List<User> findTraineeByCategoryAndClazz(String category, String clazzName, Integer pageIndex);
+
+	/**
+	 * @author ToanNT18
+	 * @param clazzId
+	 * @return by all trainee by category
+	 */
+	List<User> findTraineeByCategoryAndStatus(String category, String status, Integer pageIndex);
+
+	/**
+	 * @author ToanNT18
+	 * @param clazzId
+	 * @return by all trainee by category
+	 */
+	List<User> findTraineeByClazzAndStatus(String clazzName, String status, Integer pageIndex);
+
+	/**
+	 * @author ToanNT18
+	 * @param clazzId
+	 * @return by all trainee by category
+	 */
+	List<User> findTraineeByCategoryAndClazzAndStatus(String category, String clazzName, String status,
+			Integer pageIndex);
 }

@@ -1,5 +1,6 @@
 package fa.training.repositories;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.data.domain.Page;
@@ -17,6 +18,12 @@ import fa.training.models.User;
  */
 @Repository
 public interface TraineeRepository extends JpaRepository<User, Integer> {
+
+	/**
+	 * @return list of trainee.
+	 */
+	@Query(value = "SELECT DISTINCT u.status FROM uzer u", nativeQuery = true)
+	List<String> findAllTraineeStatus();
 
 	/**
 	 * @author ToanNT18
@@ -38,7 +45,7 @@ public interface TraineeRepository extends JpaRepository<User, Integer> {
 	 * @return List<User>
 	 * @return all trainee by clazz.
 	 */
-	@Query(value = "SELECT * FROM udf_udf_findTraineeByClazz(:clazzId)", nativeQuery = true)
+	@Query(value = "SELECT * FROM udf_findTraineeByClazz(:clazzId)", nativeQuery = true)
 	Page<User> findTraineeByClazzId(@Param("clazzId") Integer clazzId, Pageable pageable);
 
 	/**
@@ -47,6 +54,59 @@ public interface TraineeRepository extends JpaRepository<User, Integer> {
 	 * @param role     : Trainee
 	 * @return All trainee by category
 	 */
-	@Query(value = "SELECT * FROM udf_findTraineeByCategory(:category, :role)", nativeQuery = true)
-	Page<User> findTraineeByCategory(@Param("category") String category, @Param("role") String role, Pageable pageable);
+	@Query(value = "SELECT * FROM udf_findTraineeByCategory(:category)", nativeQuery = true)
+	Page<User> findTraineeByCategory(@Param("category") String category, Pageable pageable);
+
+	/**
+	 * @author ToanNT18
+	 * @param clazzId
+	 * @return List<User>
+	 * @return all trainee by clazz.
+	 */
+	@Query(value = "SELECT * FROM udf_findTraineeByClazzName(:clazzName)", nativeQuery = true)
+	Page<User> findTraineeByClazzName(@Param("clazzName") String clazzName, Pageable pageable);
+
+	/**
+	 * @param status
+	 * @param pageable
+	 * @return all trainee by status.
+	 */
+	@Query(value = "SELECT * FROM uzer u WHERE u.status = :status", nativeQuery = true)
+	Page<User> findTraineeByStatus(@Param("status") String status, Pageable pageable);
+
+	/**
+	 * @param category
+	 * @param clazzName
+	 * @param pageable
+	 * @return
+	 */
+	@Query(value = "SELECT * FROM udf_findTraineeByCategoryAndClazz(:category, :clazzName)", nativeQuery = true)
+	Page<User> findTraineeByCategoryAndClazz(@Param("category") String category, @Param("clazzName") String clazzName,
+			Pageable pageable);
+
+	/**
+	 * @param category
+	 * @param status
+	 * @param pageable
+	 * @return
+	 */
+	@Query(value = "SELECT * FROM udf_findTraineeByCategoryAndStatus(:category, :status)", nativeQuery = true)
+	Page<User> findTraineeByCategoryAndStatus(@Param("category") String category, @Param("status") String status,
+			Pageable pageable);
+
+	@Query(value = "SELECT * FROM udf_findTraineeByClazzAndStatus(:clazz, :status)", nativeQuery = true)
+	Page<User> findTraineeByClazzAndStatus(@Param("clazz") String clazz, @Param("status") String status,
+			Pageable pageable);
+
+	/**
+	 * @param category
+	 * @param clazzName
+	 * @param status
+	 * @param pageable
+	 * @return
+	 */
+	@Query(value = "SELECT * FROM udf_findTraineeByCategoryAndClazzAndStatus(:category, :clazzName, :status)", nativeQuery = true)
+	Page<User> findTraineeByCategoryAndClazzAndStatus(@Param("category") String category,
+			@Param("clazzName") String clazzName, @Param("status") String status, Pageable pageable);
+
 }

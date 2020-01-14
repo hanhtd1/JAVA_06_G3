@@ -1,4 +1,4 @@
-
+<html xmlns:th="http://www.thymeleaf.org">
 <div class="col s12 m12 l12 no-p-h">
 	<div class="card mailbox-content">
 		<div class="card-content">
@@ -18,17 +18,17 @@
 									class="responsive-table bordered striped p-h-md">
 									<thead>
 										<tr>
-											<th data-field="id">Subject Name</th>
-											<th data-field="name">Subject Code</th>
-											<th data-field="price">Duration</th>
-											<th data-field="price">Feedback</th>
+											<th data-field="name">Subject Name</th>
+											<th data-field="code">Subject Code</th>
+											<th data-field="duration">Duration</th>
+											<th data-field="feedback">Feedback</th>
 										</tr>
 									</thead>
 									<tbody>
-										<tr>
-											<td>trangdm2</td>
-											<td>Do Manh Trang</td>
-											<td>HN19_FR_JAVA_06</td>
+										<tr th:each="subject : ${subjects}">
+											<td th:text="${subject.name}"></td>
+											<td th:text="${subject.code}"></td>
+											<td th:text="${subject.duration}"></td>
 											<td><a
 												class="modal-trigger waves-effect waves-blue btn m-t-xs"
 												href="#feedback-modal"><i class="material-icons dp48">chat</i></a></td>
@@ -69,61 +69,6 @@
 		</div>
 	</form>
 </div>
-<!-- Modal delete trainee confirm -->
-<div id="update-confirm" class="modal l6">
-	<div class="modal-content">
-		<h4>Delete this trainee?</h4>
-		<p>Are you sure to delete this trainee?</p>
-		<div class="modal-footer">
-			<a href="#!"
-				class=" modal-action modal-close waves-effect waves-green btn-flat">Cancel</a>
-			<a href="#!" class=" modal-action waves-effect waves-red btn-flat">Delete</a>
-		</div>
-	</div>
-</div>
-<!-- Modal attendance -->
-<div id="add-subject-modal" class="modal">
-	<form class="col s12">
-		<div class="modal-content">
-			<p class="f-s-32">Add new subject</p>
-			<div>
-				<div class="row">
-					<div class="input-field col s12">
-						<input id="subjectName" type="text" class="validate"> <label
-							for="subjectName">Subject Name</label>
-					</div>
-				</div>
-				<div class="row">
-					<div class="input-field col s12">
-						<input id="code" type="text" class="validate"> <label
-							for="code">Subject Code</label>
-					</div>
-				</div>
-				<div class="row">
-					<div class="input-field col s12">
-						<input id="duration" type="number" class="validate"> <label
-							for="duration">Duration (Days)</label>
-					</div>
-				</div>
-			</div>
-		</div>
-		<div class="modal-footer">
-			<button type="submit"
-				class="modal-action modal-close waves-effect waves-green btn-flat ">Agree</button>
-		</div>
-	</form>
-</div>
-<!-- Modal attendance -->
-<div id="update-subject-modal" class="modal modal-fixed-footer">
-	<div class="modal-content">
-		<h4>Modal Header</h4>
-		<p>A bunch of text</p>
-	</div>
-	<div class="modal-footer">
-		<a href="#!"
-			class="modal-action modal-close waves-effect waves-green btn-flat ">Agree</a>
-	</div>
-</div>
 <!-- Javascripts -->
 <script src="assets/plugins/jquery/jquery-2.2.0.min.js"></script>
 <script src="assets/plugins/materialize/js/materialize.min.js"></script>
@@ -136,3 +81,4 @@
 <script src="assets/plugins/simditor/scripts/simditor.js"></script>
 <script src="assets/js/alpha.min.js"></script>
 <script src="assets/js/pages/mailbox.js"></script>
+</html>

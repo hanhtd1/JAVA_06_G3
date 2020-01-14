@@ -7,11 +7,10 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
-import fa.training.models.Clazz;
 import fa.training.models.Subject;
 
 @Repository
-public interface SubjectRepository extends JpaRepository<Clazz, Integer> {
+public interface SubjectRepository extends JpaRepository<Subject, Integer> {
 	/**
 	 * @author ToanNT18
 	 * @param clazzId

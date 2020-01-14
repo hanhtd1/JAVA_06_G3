@@ -1,3 +1,4 @@
+<html xmlns:th="https://www.thymeleaf.org">
 <div id="main-content" class="row no-m-t no-m-b">
 	<div class="col s12 m12 l12 no-p-h">
 		<div class="card mailbox-content">
@@ -55,31 +56,10 @@
 					</tr>
 				</thead>
 				<tbody>
-					<tr>
-						<td>Class Name</td>
-						<td>Category</td>
-						<td>Open Date</td>
-						<td><a id="" href=""><i class="material-icons dp48">person_pin</i></a><a
-							id="" href=""><i class="material-icons dp48">view_list</i></a></td>
-					</tr>
-					<tr>
-						<td>Alan</td>
-						<td>Jellybean</td>
-						<td>Jellybean</td>
-						<td><a id="" href=""><i class="material-icons dp48">person_pin</i></a><a
-							id="" href=""><i class="material-icons dp48">view_list</i></a></td>
-					</tr>
-					<tr>
-						<td>Jonathan</td>
-						<td>Lollipop</td>
-						<td>Jellybean</td>
-						<td><a id="" href=""><i class="material-icons dp48">person_pin</i></a><a
-							id="" href=""><i class="material-icons dp48">view_list</i></a></td>
-					</tr>
-					<tr>
-						<td>Shannon</td>
-						<td>Jellybean</td>
-						<td>KitKat</td>
+					<tr th:each="clazz : ${clazzs}">
+						<td th:text="${clazz.name}"></td>
+						<td th:text="${clazz.category}"></td>
+						<td th:text="${clazz.openLocalDate}"></td>
 						<td><a id="" href=""><i class="material-icons dp48">person_pin</i></a><a
 							id="" href=""><i class="material-icons dp48">view_list</i></a></td>
 					</tr>
@@ -740,3 +720,4 @@
 <script th:src="@{../assets/js/pages/mailbox.js}"></script>
 <script th:src="@{../assets/js/pages/form-wizard.js}"></script>
 <script th:src="@{../assets/js/admin-manage.js}"></script>
+</html>

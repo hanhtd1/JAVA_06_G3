@@ -24,10 +24,20 @@ public class ClazzServiceImpl implements ClazzService {
 	private ClassRepository clazzRepository;
 
 	@Override
+	public List<String> findAllClazzCategory() {
+		return clazzRepository.findAllCategory();
+	}
+
+	@Override
+	public List<String> findAllClazzName() {
+		return clazzRepository.findAllClazzName();
+	}
+
+	@Override
 	public List<Clazz> findAllClazzByTrainerId(Integer userId, Integer pageIndex) {
 		return clazzRepository.findAllClazz(userId, PageRequest.of(pageIndex, Constant.PAGE_SIZE)).getContent();
 	}
-	
+
 	@Override
 	public List<Clazz> findClazzByCategory(Integer userId, Integer pageIndex, String category) {
 		return clazzRepository.findClazzByCategory(userId, category, PageRequest.of(pageIndex, Constant.PAGE_SIZE))

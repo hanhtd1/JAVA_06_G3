@@ -6,6 +6,16 @@ import fa.training.models.Clazz;
 
 public interface ClazzService {
 	/**
+	 * @return
+	 */
+	List<String> findAllClazzCategory();
+
+	/**
+	 * @return
+	 */
+	public List<String> findAllClazzName();
+
+	/**
 	 * @author ToanNT18
 	 * @param userId
 	 * @return List<Clazz>
