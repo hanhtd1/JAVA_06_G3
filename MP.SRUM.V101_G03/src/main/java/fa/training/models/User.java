@@ -7,7 +7,6 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -40,13 +39,13 @@ public class User implements Serializable {
   @Column(name = "Phone")
   private String phone;
 
-  @Column(name = "Email")
+  @Column(name = "Email", unique = true)
   private String email;
 
   @Column(name = "Password")
   private String password;
 
-  @Column(name = "Account")
+  @Column(name = "Account", unique = true)
   private String account;
 
   @Column(name = "BirthDay")
@@ -78,27 +77,27 @@ public class User implements Serializable {
   private String status;
 
   @JsonIgnore
-  @ManyToMany(mappedBy = "userList")
+  @OneToMany(mappedBy = "user")
   private List<Attendance> attendanceList;
 
   @JsonIgnore
-  @ManyToMany(mappedBy = "userList", fetch = FetchType.EAGER)
+  @ManyToMany(mappedBy = "userList", cascade = CascadeType.MERGE)
   private List<Clazz> clazzList;
 
   @JsonIgnore
-  @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
+  @OneToMany(cascade = CascadeType.MERGE, mappedBy = "user")
   private List<Score> scoreList;
 
   @JsonIgnore
-  @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
+  @OneToMany(cascade = CascadeType.MERGE, mappedBy = "user")
   private List<Feedback> feedbackList;
 
   @JsonIgnore
-  @OneToMany(cascade = CascadeType.ALL, mappedBy = "trainer")
+  @OneToMany(cascade = CascadeType.MERGE, mappedBy = "trainer")
   private List<ReviewTrainee> reviewTraineeList;
 
   @JsonIgnore
-  @OneToMany(cascade = CascadeType.ALL, mappedBy = "trainee")
+  @OneToMany(cascade = CascadeType.MERGE, mappedBy = "trainee")
   private List<ReviewTrainee> reviewTraineeList1;
 
   public User() {

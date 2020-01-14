@@ -33,9 +33,6 @@ function showTraineeList(res, className){
 			"</li>"
 	);
 }
-
-
-
 function loadTraineeInfo(id){
 	$("#scores").html("")
 	$("#trainee-information").show();
@@ -81,15 +78,12 @@ function showScoreList(res, feedbackBtn){
 		"<td>"+feedbackBtn+"</td>\n" +
 		"</tr>")
 }
-
 function openModal(){
 	$("#feedback-modal").show();
 }
-
 $("#exit-feedback").click(()=>{
 	$("#feedback-modal").hide();
 })
-
 function editTraineeInfo(){
 	$.get({
 		url: "/admin/trainee-info",
@@ -107,7 +101,6 @@ function editTraineeInfo(){
 		}
 	});
 }
-
 function addTrainee(){
 	let createForm = {}
 	createForm["firstName"]=$("#add_first_name").val()
@@ -131,7 +124,6 @@ function addTrainee(){
 	})
 	return false;
 }
-
 function updateTrainee(){
 	let updateForm = {}
 	updateForm["id"]=$("#update_id").val()
@@ -155,9 +147,6 @@ function updateTrainee(){
 	})
 	return false;
 }
-
-
-
 function changeTraineeStatus(){
 	$.get({
 		url: "/admin/update-status",
@@ -208,46 +197,110 @@ function loadClassDetail(id){
 		data: {
 			id: id
 		},
-		success: (resp)=>{
-			$("#date-today").html(new Date().getDate() +"/"+new Date().getUTCMonth()+"/"+new Date().getFullYear());
+		success: (resp)=> {
+			$("#date-today").html(new Date().getDate() + "/" + new Date().getUTCMonth() + 1 + "/" + new Date().getFullYear());
 			$("#class_info_name").html(resp.name);
 			$("#class_trainees_number").html(resp.userList.length);
 			$("#class_openDate").html(resp.openDate);
 			$("#class_category").html(resp.category);
 			$("#old-status").val(resp.status);
-			resp.userList.map((trainee)=>{
-				$('#attendance-trainees').append("<tr>" +
-					"<td>"+trainee.account+"</td>\n" +
-					"<td>"+trainee.firstName+" "+trainee.lastName+"</td>\n" +
-					"<td>"+trainee.phone+"</td>\n" +
-					"<td>" +
-						"<select class=\"p-h-md\">\n" +
-							"<option value=\"\" selected>Choose</option>\n" +
-							"<option value=\"Absent\">Absent</option>\n" +
-							"<option value=\"Present\">Present</option>\n" +
-							"<option value=\"Late\">Late</option>\n" +
-						"</select>" +
-					"</td>\n" +
-					"<td><input type=\"text\" name='note' class=\"validate\"></td>" +
-					"</tr>");
-				$("#list_trainees").append("<tr>\n" +
-					"<td>"+trainee.account+"</td>\n" +
-					"<td>"+trainee.firstName+" "+trainee.lastName+"</td>\n" +
-					"<td>"+trainee.birthDay+"</td>\n" +
-					"<td>"+trainee.phone+"</td>\n" +
-					"<td>"+trainee.status+"</td>\n" +
-					"<td><a onclick=\"loadClassTraineeInfo("+trainee.id+")\" class=\"waves-effect waves-light btn blue modal-trigger p-h-xs trainee-info\"\n" +
-					"href=\"#trainee-info\">\n" +
-					"<i class=\"material-icons\">perm_identity</i>\n" +
-					"</a>\n" +
-					"<a onclick=\"viewTraineeReview("+trainee.id+")\" class=\"waves-effect waves-light btn green p-h-xs\"><i\n" +
-					"class=\"material-icons\">library_books</i></a>\n" +
-					"<a onclick=\"removeTraineeFromClass("+trainee.id+")\" class=\"waves-effect waves-light btn red p-h-xs\">\n" +
-					"<i class=\"material-icons\">clear</i></a>\n" +
-					"</td>\n" +
-					"</tr>")
-			})
+			loadClassListTraineeToAttendance(resp.userList);
+			loadClassListTraineeToClassDetail(resp.userList);
 		}
+	})
+}
+
+function addTraineesToClass() {
+	$('#list-trainees-to-add').html("");
+	$.get({
+		url: '/admin/add-trainees',
+		data: {
+			id: this.currentClass,
+			keyword: $('#find-trainee').val()
+		},
+		success: (resp)=>{
+			loadListTraineeToAddToClass(resp);
+		}
+	})
+}
+function addTraineeToClass(id) {
+	$.get({
+		url: '/admin/add-trainee-toclass',
+		data: {
+			traineeId: id,
+			classId: this.currentClass
+		},
+		success: (resp)=>{
+			loadClasses();
+			loadClassDetail(this.currentClass);
+			addTraineesToClass();
+			Materialize.toast(resp, 4000);
+		}
+	})
+}
+function loadListTraineeToAddToClass(trainees) {
+	trainees.map(trainee=>{
+		$('#list-trainees-to-add').append("<tr>\n" +
+			"<td>"+trainee.name+"</td>\n" +
+			"<td>"+trainee.account+"</td>\n" +
+			"<td>"+trainee.phone+"</td>\n" +
+			"<td>\n" +
+			"<button onclick='addTraineeToClass("+trainee.id+")' class=\"btn waves-effect blue p-h-xs\">\n" +
+			"<i class=\"material-icons\">add</i>\n" +
+			"</button>\n" +
+			"</td>\n" +
+			"</tr>")
+	})
+}
+
+function loadClassListTraineeToClassDetail(trainees){
+	$("#list_trainees").html("");
+	trainees.map((trainee)=>{
+		$("#list_trainees").append("<tr>\n" +
+			"<td>"+trainee.account+"</td>\n" +
+			"<td>"+trainee.firstName+" "+trainee.lastName+"</td>\n" +
+			"<td>"+trainee.birthDay+"</td>\n" +
+			"<td>"+trainee.phone+"</td>\n" +
+			"<td>"+trainee.status+"</td>\n" +
+			"<td><a onclick=\"loadClassTraineeInfo("+trainee.id+")\" class=\"waves-effect waves-light btn blue modal-trigger p-h-xs trainee-info\"\n" +
+			"href=\"#trainee-info\">\n" +
+			"<i class=\"material-icons\">perm_identity</i>\n" +
+			"</a>\n" +
+			"<a onclick=\"removeTraineeFromClass("+trainee.id+")\" class=\"waves-effect sweetalert-cancel waves-light btn red p-h-xs\">\n" +
+			"<i class=\"material-icons\">clear</i></a>\n" +
+			"</td>\n" +
+			"</tr>")
+	})
+}
+//TODO
+function loadClassListTraineeToUpdateMark(trainees){
+	$("#list_trainees").html("");
+	trainees.map((trainee)=>{
+		$("#list-trainees-marks").append("<tr>\n" +
+			"<td>"+trainee.name+"</td>\n" +
+			"<td>Do Manh Trang</td>\n" +
+			"<td>0934560199</td>\n" +
+			"<td><input type=\"number\" class=\"validate\"></td>\n" +
+			"<td><input type=\"number\" class=\"validate\"></td>\n" +
+			"</tr>");
+	})
+}
+function loadClassListTraineeToAttendance(trainees){
+	$('#attendance-trainees').html("");
+	trainees.map((trainee)=>{
+		$('#attendance-trainees').append("<tr class='attendance-form'>" +
+			"<td>"+trainee.account+"</td>\n" +
+			"<td>"+trainee.firstName+" "+trainee.lastName+"</td>\n" +
+			"<td>"+trainee.phone+"</td>\n" +
+			"<td><input type=\"hidden\" name='userId' value='"+trainee.id+"' class=\"validate\">" +
+			"<select name='type' style='display: block'>\n" +
+			"<option value=\"\" selected>Choose</option>\n" +
+			"<option value=\"Absent\">Absent</option>\n" +
+			"<option value=\"Present\">Present</option>\n" +
+			"<option value=\"Late\">Late</option>\n" +
+			"</select>" +
+			"</td>\n" +
+			"<td><input type=\"text\" name='note' class=\"validate\"></td></tr>");
 	})
 }
 
@@ -260,7 +313,24 @@ function viewTraineeReview(id){
 }
 
 function removeTraineeFromClass(id){
-	
+	let cf = confirm("Are you sure??");
+	if(cf){
+		$.get({
+			url: '/admin/remove-trainee',
+			data: {
+				traineeId: id,
+				classId: this.currentClass
+			},
+			success: (resp)=>{
+				loadClasses();
+				loadClassDetail(this.currentClass);
+				Materialize.toast(resp, 4000);
+			}
+		})
+	} else {
+		Materialize.toast("Canceled!", 4000);
+		return null;
+	}
 }
 
 function updateClassStatus() {
@@ -295,7 +365,7 @@ function addClass(){
 	return false;
 }
 
-function editClassInfo(){
+function loadClassInfoToEdit(){
 	$.get({
 		url: "/admin/get-clazz-info",
 		data: {
@@ -314,13 +384,27 @@ function editClassInfoSubmit(){
 	let form = document.getElementById("update-class-form");
 	$.post({
 		url: "/admin/create-class",
-		data: Form2JsonMapper(form),
+		data: JSON.stringify(Form2JsonMapper(form)),
 		contentType: "application/json",
 		success: (resp)=>{
 			Materialize.toast(resp, 4000);
 		}
-	})
+	});
 	return false;
+}
+
+function submitAttendance() {
+	let attendances = document.getElementById("attendance-trainees");
+	$.post({
+		url: '/admin/do-attendance',
+		data: JSON.stringify(generateFormArray(attendances)),
+		contentType: "application/json",
+		success: (resp)=>{
+			Materialize.toast(resp, 4000);
+			console.log(JSON.parse(JSON.stringify(generateFormArray(attendances))));
+			console.log(resp);
+		}
+	});
 }
 
 //Function dung chung
@@ -337,7 +421,16 @@ function Form2JsonMapper(form){
 			obj[name]=value;
 		}
 	});
-	return JSON.stringify(obj);
+	return obj;
+}
+
+function generateFormArray(attendances) {
+	let listAttendance = attendances.querySelectorAll(".attendance-form");
+	let attendanceArray=[];
+	listAttendance.forEach(form=>{
+		attendanceArray.push(Form2JsonMapper(form));
+	});
+	return attendanceArray;
 }
 
 function generateAccountAndEmail(){
@@ -353,7 +446,8 @@ function generateAccountAndEmail(){
 		}
 	})
 }
-function getClassName() {
+
+function generateClassName() {
 	$.get({
 		url: "/admin/get-classname",
 		data: {

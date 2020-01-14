@@ -13,4 +13,6 @@ public interface IAttendanceService {
 
 	public List<Attendance> getAttendancesByUser(User user);
 
+  List<Attendance> saveAttendances(List<Attendance> attendances);
+
 }

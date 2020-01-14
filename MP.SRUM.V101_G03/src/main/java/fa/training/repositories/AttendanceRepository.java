@@ -17,6 +17,6 @@ public interface AttendanceRepository extends JpaRepository<Attendance, Integer>
 	 * @param user
 	 * @return list of attendance of trainee
 	 */
-	@Query("SELECT a FROM Attendance a INNER JOIN a.userList ua ON ua.id = :user")
+	@Query("SELECT a FROM Attendance a INNER JOIN a.user ua ON ua.id = :user")
 	public List<Attendance> findAttendanceByUser(int user);
 }

@@ -57,8 +57,8 @@
 											</div>
 										</div>
 										<div class="right mailbox-buttons">
-											<a onclick="editClassInfo()" class="modal-trigger waves-effect waves-grey btn-flat m-t-xs" href="#update-class-modal">Edit</a>
-											<a onclick="editClassInfo()" class="modal-trigger waves-effect waves-grey btn-flat red-text m-t-xs" href="#update-class-status-modal">Update Status</a>
+											<a onclick="loadClassInfoToEdit()" class="modal-trigger waves-effect waves-grey btn-flat m-t-xs" href="#update-class-modal">Edit</a>
+											<a onclick="loadClassInfoToEdit()" class="modal-trigger waves-effect waves-grey btn-flat red-text m-t-xs" href="#update-class-status-modal">Update Status</a>
 										</div>
 										<div class="divider mailbox-divider"></div>
 										<div class="mailbox-text">
@@ -75,7 +75,7 @@
 											<p>Trainee List</p>
 											<div class="class-actions m-t-md">
 												<a class="modal-trigger waves-effect waves-light btn blue"
-													 href="#attendance-modal">Attendance</a> <a
+													 href="#attendance-modal">Attendance</a> <a onclick="addTraineesToClass()"
 															class="waves-effect waves-light btn light-green modal-trigger "
 															href="#add-trainee-modal">Add Trainees</a> <a
 															class="modal-trigger waves-effect waves-light btn green"
@@ -254,7 +254,7 @@
 			<form>
 				<div class="row">
 					<div class="input-field col s12">
-						<input id="find-trainee" type="text" class="validate"> <label
+						<input onkeyup="addTraineesToClass()" id="find-trainee" type="text" class="validate"> <label
 							for="find-trainee">Find trainee</label>
 					</div>
 				</div>
@@ -270,47 +270,7 @@
 							<th class="w-25" data-field="price">Action</th>
 						</tr>
 					</thead>
-					<tbody>
-						<tr>
-							<td>Trainee Abc Def</td>
-							<td>trainerad2</td>
-							<td>0987654321</td>
-							<td>
-								<button class="btn waves-effect blue p-h-xs">
-									<i class="material-icons">add</i>
-								</button>
-							</td>
-						</tr>
-						<tr>
-							<td>Trainee Abc Def</td>
-							<td>trainerad2</td>
-							<td>0987654321</td>
-							<td>
-								<button class="btn waves-effect blue p-h-xs">
-									<i class="material-icons">add</i>
-								</button>
-							</td>
-						</tr>
-						<tr>
-							<td>Trainee Abc Def</td>
-							<td>trainerad2</td>
-							<td>0987654321</td>
-							<td>
-								<button class="btn waves-effect blue p-h-xs">
-									<i class="material-icons">add</i>
-								</button>
-							</td>
-						</tr>
-						<tr>
-							<td>Trainee Abc Def</td>
-							<td>trainerad2</td>
-							<td>0987654321</td>
-							<td>
-								<button class="btn waves-effect blue p-h-xs">
-									<i class="material-icons">add</i>
-								</button>
-							</td>
-						</tr>
+					<tbody id="list-trainees-to-add">
 					</tbody>
 				</table>
 			</div>
@@ -331,7 +291,7 @@
 				<label for="clazzName">Class Name</label>
 				<div class="row">
 					<div class="input-field col l6">
-						<select name="category" id="add-class-location" onchange="getClassName()" required>
+						<select name="category" id="add-class-location" onchange="generateClassName()" required>
 							<option value="" selected>Choose Location</option>
 							<option value="HN">Ha Noi</option>
 							<option value="DN">Da Nang</option>
@@ -339,7 +299,7 @@
 						</select>
 					</div>
 					<div class="input-field col l6">
-						<select name="category" id="add-class-type" onchange="getClassName()" required>
+						<select name="category" id="add-class-type" onchange="generateClassName()" required>
 							<option value="" selected>Choose Type</option>
 							<option value="FR">Fresher</option>
 							<option value="TEST">Tester</option>
@@ -349,7 +309,7 @@
 				</div>
 				<div class="row">
 					<div class="input-field col s12">
-						<select name="category" id="add-class-category" onchange="getClassName()" required>
+						<select name="category" id="add-class-category" onchange="generateClassName()" required>
 							<option value="" selected>Choose Category</option>
 							<option value="Java">Java</option>
 							<option value=".Net">.Net</option>
@@ -475,7 +435,7 @@
 		</div>
 	</div>
 	<div class="modal-footer">
-		<a href="#!"
+		<a href="#!" onclick="submitAttendance()"
 			class="modal-action modal-close waves-effect waves-green btn-flat ">Agree</a>
 	</div>
 </div>
@@ -590,14 +550,7 @@
 						<th style="width: 15%" data-field="price">Practice Marks</th>
 					</tr>
 				</thead>
-				<tbody>
-					<tr>
-						<td>trangdm2</td>
-						<td>Do Manh Trang</td>
-						<td>0934560199</td>
-						<td><input type="number" class="validate"></td>
-						<td><input type="number" class="validate"></td>
-					</tr>
+				<tbody id="list-trainees-marks">
 					<tr>
 						<td>trangdm2</td>
 						<td>Do Manh Trang</td>

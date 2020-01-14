@@ -6,6 +6,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import fa.training.utils.Constant;
+
 @Controller
 public class AuthorizationController {
   
@@ -25,7 +27,7 @@ public class AuthorizationController {
    */
   @RequestMapping("authorization")
   public String authorization(HttpServletRequest req) {
-    return req.isUserInRole("ROLE_ADMIN")?"redirect:admin/":req.isUserInRole("ROLE_TRAINER")?"redirect:trainer/":"redirect:trainee/";
+    return req.isUserInRole(Constant.ADMIN)?"redirect:admin/":req.isUserInRole(Constant.TRAINER)?"redirect:trainer/":"redirect:trainee/";
   }
   
   /**

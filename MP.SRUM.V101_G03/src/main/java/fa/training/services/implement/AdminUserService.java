@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import fa.training.dto.ScoreDto;
@@ -15,6 +16,7 @@ import fa.training.models.User;
 import fa.training.repositories.ScoreRepository;
 import fa.training.repositories.UserRepository;
 import fa.training.services.IAdminUserService;
+import fa.training.utils.Constant;
 
 /**
  * @author TrangDM2
@@ -32,7 +34,9 @@ public class AdminUserService implements IAdminUserService {
    */
   @Override
   public User getUser(int id) {
-    return userRepository.findById(id).get();
+    return userRepository.findById(id).orElseThrow(()->{
+      throw new UsernameNotFoundException(Constant.NOT_FOUND_MESSAGE);
+    });
   }
 
   /**
@@ -65,10 +69,9 @@ public class AdminUserService implements IAdminUserService {
    *@author TrangDM2
    */
   @Override
-  public boolean saveUser(User user) {
+  public User saveUser(User user) {
     //TODO Validate
-    userRepository.save(user);
-    return true;
+    return userRepository.save(user);
   }
 
   /**
@@ -78,8 +81,8 @@ public class AdminUserService implements IAdminUserService {
   public List<ScoreDto> getScore(Integer id) {
     List<Score> scores = scoreRepository.findAllScoreByUserId(id);
     List<ScoreDto> scoresDto = new ArrayList<>();
-    scores.forEach(x -> {
-      scoresDto.add(new ScoreDto(x));
+    scores.forEach(score -> {
+      scoresDto.add(new ScoreDto(score));
     });
     return scoresDto;
   }
@@ -122,19 +125,18 @@ public class AdminUserService implements IAdminUserService {
    *@author TrangDM2
    */
   @Override
-  public String generateAccount(String firstName, String lastName) {
-    String account = lastName;
+  public String generateAccount(String firstName, StringBuilder lastName) {
+    StringBuilder account = lastName;
     for (int i = 0; i < firstName.length(); i++) {
       char c = firstName.charAt(i);
       if ((int)c <= 90 && (int)c >64) {
-        account += c;
+        account.append(c);
       }
     }
     int number = userRepository.getNumberOfAccount(account + "%");;
     if(number==0) {
-      account += "";
-    } else account += String.valueOf(number);
-    return account;
+      account.append("");
+    } else account.append(String.valueOf(number));
+    return account.toString();
   }
-
 }

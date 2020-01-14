@@ -31,7 +31,7 @@ public class TraineeServiceImpl implements TraineeService {
 
 	@Override
 	public List<User> findAllTrainee() {
-		return traineeRepository.findTop10Trainee("Trainee");
+		return traineeRepository.findTop10Trainee(Constant.TRAINEE);
 	}
 
 	@Override

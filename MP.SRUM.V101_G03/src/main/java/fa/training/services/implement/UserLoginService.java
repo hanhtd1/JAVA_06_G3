@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import fa.training.models.User;
 import fa.training.repositories.UserRepository;
+import fa.training.utils.Constant;
 
 @Service
 public class UserLoginService implements UserDetailsService {
@@ -22,7 +23,7 @@ public class UserLoginService implements UserDetailsService {
   @Override
   public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
     User user = userRepository.findByAccount(username).orElseThrow(() -> {
-      throw new UsernameNotFoundException("Account not found");
+      throw new UsernameNotFoundException(Constant.NOT_FOUND_MESSAGE);
     });
     UserDetails userDetails = new org.springframework.security.core.userdetails.User(user.getAccount(),
         user.getPassword(), AuthorityUtils.createAuthorityList(user.getRole()));

@@ -7,7 +7,6 @@ package fa.training.models;
 
 import java.io.Serializable;
 import java.time.LocalDate;
-import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -15,8 +14,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 /**
@@ -41,11 +39,9 @@ public class Attendance implements Serializable {
 	@Column(name = "Note")
 	private String note;
 
-	@JoinTable(name = "AttendanceUser", joinColumns = {
-			@JoinColumn(name = "AttendanceId", referencedColumnName = "id") }, inverseJoinColumns = {
-					@JoinColumn(name = "UserId", referencedColumnName = "Id") })
-	@ManyToMany
-	private List<User> userList;
+	@JoinColumn(name = "UserId", referencedColumnName = "Id", insertable = false, updatable = false)
+  @ManyToOne(optional = false)
+	private User user;
 
 	public Attendance() {
 	}
@@ -93,35 +89,15 @@ public class Attendance implements Serializable {
 		this.note = note;
 	}
 
-	public List<User> getUserList() {
-		return userList;
-	}
+	public User getUser() {
+    return user;
+  }
 
-	public void setUserList(List<User> userList) {
-		this.userList = userList;
-	}
+  public void setUser(User user) {
+    this.user = user;
+  }
 
-	@Override
-	public int hashCode() {
-		int hash = 0;
-		hash += (date != null ? date.hashCode() : 0);
-		return hash;
-	}
-
-	@Override
-	public boolean equals(Object object) {
-		// TODO: Warning - this method won't work in the case the id fields are not set
-		if (!(object instanceof Attendance)) {
-			return false;
-		}
-		Attendance other = (Attendance) object;
-		if ((this.date == null && other.date != null) || (this.date != null && !this.date.equals(other.date))) {
-			return false;
-		}
-		return true;
-	}
-
-	@Override
+  @Override
 	public String toString() {
 		return "com.Attendance[ date=" + date + " ]";
 	}

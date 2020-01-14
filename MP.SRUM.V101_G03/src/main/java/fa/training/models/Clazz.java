@@ -30,7 +30,7 @@ public class Clazz implements Serializable {
   @Column(name = "Id")
   private Integer id;
 
-  @Column(name = "Name")
+  @Column(name = "Name", unique = true)
   private String name;
 
   @Column(name = "openDate")

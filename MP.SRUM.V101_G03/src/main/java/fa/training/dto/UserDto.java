@@ -14,6 +14,7 @@ public class UserDto {
   private String name;
   private String email;
   private String account;
+  private String phone;
   private LocalDate birthDay;
   private String className;
   private int classId;
@@ -24,6 +25,7 @@ public class UserDto {
     this.name = user.getFirstName() + " " + user.getLastName();
     this.email = user.getEmail();
     this.account = user.getAccount();
+    this.phone = user.getPhone();
     this.birthDay = user.getBirthDay();
     if(clazz!=null) {
       this.classId = clazz.getId();
@@ -33,6 +35,14 @@ public class UserDto {
 
   public LocalDate getBirthDay() {
     return birthDay;
+  }
+
+  public String getPhone() {
+    return phone;
+  }
+
+  public void setPhone(String phone) {
+    this.phone = phone;
   }
 
   public void setBirthDay(LocalDate birthDay) {

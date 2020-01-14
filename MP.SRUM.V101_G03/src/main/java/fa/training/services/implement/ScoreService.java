@@ -25,8 +25,8 @@ public class ScoreService implements IScoreService {
 	public List<ScoreDto> getScoreByUser(Integer userId) {
 		List<Score> scores = scoreRepository.findAllScoreByUserId(userId);
 		List<ScoreDto> scoreDtos = new ArrayList<ScoreDto>();
-		scores.forEach(x -> {
-			scoreDtos.add(new ScoreDto(x));
+		scores.forEach(score -> {
+			scoreDtos.add(new ScoreDto(score));
 		});
 		return scoreDtos;
 	}

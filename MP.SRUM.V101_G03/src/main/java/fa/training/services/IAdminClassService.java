@@ -19,7 +19,7 @@ public interface IAdminClassService {
 
   List<Clazz> findClazzByKeyword(String keyword, String status);
 
-  boolean saveClass(Clazz clazz);
+  Clazz saveClass(Clazz clazz);
 
   String generateClassName(String location, String type, String category);
 

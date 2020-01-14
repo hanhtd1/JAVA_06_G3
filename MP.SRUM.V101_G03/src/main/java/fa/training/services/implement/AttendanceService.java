@@ -24,5 +24,15 @@ public class AttendanceService implements IAttendanceService{
 	public List<Attendance> getAttendancesByUser(User user) {
 		return attendanceRepository.findAttendanceByUser(user.getId());
 	}
+	
+	/**
+	 * @author TrangDM2
+	 * @param attendances
+	 * @return
+	 */
+	@Override
+	public List<Attendance> saveAttendances(List<Attendance> attendances) {
+	  return attendanceRepository.saveAll(attendances);
+	}
 
 }

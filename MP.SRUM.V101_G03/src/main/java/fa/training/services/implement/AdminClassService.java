@@ -21,15 +21,12 @@ public class AdminClassService implements IAdminClassService {
   @Autowired
   private ClassRepository classRepository;
 
+  /**
+   *@author TrangDM2
+   */
   @Override
-  public boolean saveClass(Clazz clazz) {
-    //TODO validate
-    try {
-      classRepository.save(clazz);
-      return true;
-    } catch (Exception e) {      
-      return false;
-    }
+  public Clazz saveClass(Clazz clazz) {
+      return classRepository.save(clazz);
   }
   /**
    *@author TrangDM2

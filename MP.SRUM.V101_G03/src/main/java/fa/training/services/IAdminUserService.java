@@ -20,13 +20,13 @@ public interface IAdminUserService {
 
   List<UserDto> getUsersByRole(String role);
 
-  boolean saveUser(User user);
+  User saveUser(User user);
 
   List<User> getAllUsers();
 
   List<ScoreDto> getScore(Integer id);
 
-  String generateAccount(String firstName, String lastName);
+  String generateAccount(String firstName, StringBuilder lastName);
 
   Optional<User> getUserByAccount(String account);
 

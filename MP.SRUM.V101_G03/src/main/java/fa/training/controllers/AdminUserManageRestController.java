@@ -18,6 +18,7 @@ import fa.training.dto.ScoreDto;
 import fa.training.dto.UserDto;
 import fa.training.models.User;
 import fa.training.services.IAdminUserService;
+import fa.training.utils.Constant;
 
 /**
  * @author TrangDM2
@@ -46,7 +47,7 @@ public class AdminUserManageRestController {
    */
   @GetMapping("get-trainees")
   public ResponseEntity<List<UserDto>> getTrainees(@RequestParam String keyword, @RequestParam String status) {
-    List<UserDto> trainees = adminUserService.findUserByKeyword(keyword, "ROLE_TRAINEE", status);
+    List<UserDto> trainees = adminUserService.findUserByKeyword(keyword, Constant.TRAINEE, status);
     return new ResponseEntity<List<UserDto>>(trainees, HttpStatus.OK);
   }
 
@@ -65,15 +66,23 @@ public class AdminUserManageRestController {
   @PostMapping("create-user")
   public ResponseEntity<String> createUser(@RequestBody User user) {
     byte role = Byte.parseByte(user.getRole());
-    if (!adminUserService.getUserByAccount(user.getAccount()).isPresent()) {
-      user.setRole(role==1?"ROLE_TRAINEE":"ROLE_TRAINER");
-      user.setStatus("Active");
-      user.setPassword(bcrypt.encode("123456789"));
-      adminUserService.saveUser(user);
-      return new ResponseEntity<String>("Add trainee Success", HttpStatus.CREATED);
-    } else {
-      return new ResponseEntity<String>("Add trainee failed, trainee already exist!", HttpStatus.BAD_REQUEST);
+    User requestUser = user;
+    String message = new String();
+    HttpStatus status = null;
+    
+    try {
+      requestUser.setRole(role==1?Constant.TRAINEE:Constant.TRAINER);
+      requestUser.setStatus(Constant.DEFAULT_TRAINEE_STATUS);
+      requestUser.setPassword(bcrypt.encode(Constant.DEFAULT_PASSWORD));
+      adminUserService.saveUser(requestUser);
+      message = Constant.CREATE_SUCCESS_MESSAGE;
+      status = HttpStatus.OK;
+    } catch (Exception e) {
+      message = Constant.CREATE_FAIL_MESSAGE;
+      status = HttpStatus.BAD_REQUEST;
     }
+    
+    return new ResponseEntity<String>(message, status);
   }
 
   /**
@@ -81,14 +90,17 @@ public class AdminUserManageRestController {
    */
   @PostMapping("update-user")
   public ResponseEntity<String> updaterUser(@RequestBody User user){
-    User u = adminUserService.getUserByAccount(user.getAccount()).orElseThrow(() -> {
-      throw new UsernameNotFoundException("Account not found");
+    User updateUser = user;
+    User toUpdateUser = adminUserService.getUserByAccount(user.getAccount()).orElseThrow(() -> {
+      throw new UsernameNotFoundException(Constant.NOT_FOUND_MESSAGE);
     });
-    user.setPassword(u.getPassword());
-    user.setRole(u.getRole());
-    user.setStatus(u.getStatus());
-    adminUserService.saveUser(user);
-    return new ResponseEntity<String>("Update information success",HttpStatus.OK);
+    
+    updateUser.setPassword(toUpdateUser.getPassword());
+    updateUser.setRole(toUpdateUser.getRole());
+    updateUser.setStatus(toUpdateUser.getStatus());
+    adminUserService.saveUser(updateUser);
+    
+    return new ResponseEntity<String>(Constant.UPDATE_SUCCESS_MESSAGE,HttpStatus.OK);
   }
 
   /**
@@ -97,14 +109,14 @@ public class AdminUserManageRestController {
   @GetMapping("update-status")
   public ResponseEntity<String> updateStatus(@RequestParam int id, @RequestParam String status){
     adminUserService.updateUserStatus(id, status);
-    return new ResponseEntity<String>("Update successfully!",HttpStatus.OK);
+    return new ResponseEntity<String>(Constant.UPDATE_SUCCESS_MESSAGE,HttpStatus.OK);
   }
   
   /**
    *@author TrangDM2
    */
   @GetMapping("generate-account")
-  public ResponseEntity<String> generateAccount(@RequestParam String firstName, @RequestParam String lastName) {
+  public ResponseEntity<String> generateAccount(@RequestParam String firstName, @RequestParam StringBuilder lastName) {
     String account = adminUserService.generateAccount(firstName, lastName);
     return new ResponseEntity<String>(account, HttpStatus.CREATED);
   }
