@@ -10,12 +10,12 @@ import org.springframework.stereotype.Service;
 import fa.training.models.Attendance;
 import fa.training.models.User;
 import fa.training.repositories.AttendanceRepository;
-import fa.training.services.IAttendanceService;
+import fa.training.services.AttendanceService;
 
 @Service
-public class AttendanceService implements IAttendanceService{
+public class AttendanceServiceImpl implements AttendanceService{
 	
-	private static final Logger LOGGER = LogManager.getLogger(AttendanceService.class);
+	private static final Logger LOGGER = LogManager.getLogger(AttendanceServiceImpl.class);
 
 	@Autowired
 	private AttendanceRepository attendanceRepository;

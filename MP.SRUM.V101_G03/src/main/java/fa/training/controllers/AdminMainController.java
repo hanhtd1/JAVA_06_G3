@@ -13,8 +13,8 @@ import fa.training.dto.UserDto;
 import fa.training.models.Clazz;
 import fa.training.models.Subject;
 import fa.training.models.User;
-import fa.training.services.IAdminClassService;
-import fa.training.services.IAdminUserService;
+import fa.training.services.AdminClassService;
+import fa.training.services.AdminUserService;
 import fa.training.services.SubjectService;
 
 /**
@@ -26,10 +26,10 @@ import fa.training.services.SubjectService;
 public class AdminMainController {
   
   @Autowired
-  private IAdminUserService adminUserService;
+  private AdminUserService adminUserService;
   
   @Autowired
-  private IAdminClassService adminClassService;
+  private AdminClassService adminClassService;
   
   @Autowired
   private SubjectService subjectService;

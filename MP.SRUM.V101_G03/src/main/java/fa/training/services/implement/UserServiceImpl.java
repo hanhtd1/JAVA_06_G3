@@ -10,12 +10,12 @@ import org.springframework.stereotype.Service;
 
 import fa.training.models.User;
 import fa.training.repositories.UserRepository;
-import fa.training.services.IUserService;
+import fa.training.services.UserService;
 
 @Service
-public class UserService implements IUserService {
+public class UserServiceImpl implements UserService {
 	
-	private static final Logger LOGGER = LogManager.getLogger(UserService.class);
+	private static final Logger LOGGER = LogManager.getLogger(UserServiceImpl.class);
 
 	@Autowired
 	private UserRepository userRepository;

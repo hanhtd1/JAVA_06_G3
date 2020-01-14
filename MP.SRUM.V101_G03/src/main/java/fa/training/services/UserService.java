@@ -9,7 +9,7 @@ import fa.training.models.User;
  * @author HoangLV7
  *
  */
-public interface IUserService {
+public interface UserService {
 	Map<String, User> findAllByRole(String role);
 
 	List<User> getMembers(User user);

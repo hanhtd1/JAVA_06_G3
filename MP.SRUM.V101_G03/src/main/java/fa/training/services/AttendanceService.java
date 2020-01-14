@@ -9,7 +9,7 @@ import fa.training.models.User;
  * @author HoangLV7
  *
  */
-public interface IAttendanceService {
+public interface AttendanceService {
 
 	public List<Attendance> getAttendancesByUser(User user);
 

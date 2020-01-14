@@ -20,7 +20,7 @@ import fa.training.models.Feedback;
 import fa.training.models.Subject;
 import fa.training.models.User;
 import fa.training.services.ClazzService;
-import fa.training.services.IFeedbackService;
+import fa.training.services.FeedbackService;
 import fa.training.services.SubjectService;
 import fa.training.utils.Constant;
 
@@ -39,11 +39,11 @@ public class AdminSubjectController {
 	public ClazzService clazzService;
 	
 	@Autowired
-	private IFeedbackService iFeedbackService;
+	private FeedbackService iFeedbackService;
 
 	@RequestMapping(path = "add-subject", method = RequestMethod.POST)
-	public @ResponseBody ApiObject<Subject> addSubject(@RequestParam("subjectName") String subjectName,
-			@RequestParam("subjectCode") String subjectCode, @RequestParam("subjectDuration") float subjectDuration) {
+	public @ResponseBody ApiObject<Subject> addSubject(@RequestParam String subjectName,
+			@RequestParam("subjectCode") String subjectCode, @RequestParam Float subjectDuration) {
 		ApiObject<Subject> apiObject = new ApiObject<Subject>();
 		boolean checkExisted = subjectService.checkSubjectExisted(subjectCode);
 		if (checkExisted) {
@@ -58,7 +58,7 @@ public class AdminSubjectController {
 	}
 
 	@RequestMapping(path = "class-by-subject", method = RequestMethod.GET)
-	public String getSubjectDetails(Model model, @RequestParam("subjectId") int subjectId) {
+	public String getSubjectDetails(Model model, @RequestParam Integer subjectId) {
 		List<Clazz> classes = clazzService.findBySubject(subjectId);
 		Subject subject = subjectService.findSubjectById(subjectId);
 		Map<String, List<User>> usersByClass = classes.stream()
@@ -76,8 +76,8 @@ public class AdminSubjectController {
 	}
 	
 	@RequestMapping(path = "edit-subject",  method = RequestMethod.POST)
-	public @ResponseBody ApiObject<Subject> updateSubject(@RequestParam("subjectId") int subjectId, @RequestParam("subjectName") String subjectName,
-			@RequestParam("subjectCode") String subjectCode, @RequestParam("subjectDuration") float subjectDuration) {
+	public @ResponseBody ApiObject<Subject> updateSubject(@RequestParam Integer subjectId, @RequestParam String subjectName,
+			@RequestParam("subjectCode") String subjectCode, @RequestParam Float subjectDuration) {
 		ApiObject<Subject> apiObject = new ApiObject<Subject>();
 		Subject subject = new Subject(subjectId, subjectName, subjectCode, subjectDuration);
 		subject = subjectService.save(subject);
@@ -87,7 +87,7 @@ public class AdminSubjectController {
 	}
 	
 	@RequestMapping(path = "del-subject", method = RequestMethod.DELETE)
-	public @ResponseBody List<Subject> delSubject(@RequestParam("subjectId") int subjectId){
+	public @ResponseBody List<Subject> delSubject(@RequestParam Integer subjectId){
 		List<Subject> subjects = new ArrayList<Subject>();
 		//TODO something
 		return subjects;

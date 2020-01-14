@@ -19,9 +19,9 @@ import fa.training.dto.UserDto;
 import fa.training.models.Attendance;
 import fa.training.models.Clazz;
 import fa.training.models.User;
-import fa.training.services.IAdminClassService;
-import fa.training.services.IAdminUserService;
-import fa.training.services.IAttendanceService;
+import fa.training.services.AdminClassService;
+import fa.training.services.AdminUserService;
+import fa.training.services.AttendanceService;
 import fa.training.utils.Constant;
 
 @RestController
@@ -29,13 +29,13 @@ import fa.training.utils.Constant;
 public class AdminClassManageRestController {
 
   @Autowired
-  private IAdminClassService adminClassService;
+  private AdminClassService adminClassService;
 
   @Autowired
-  private IAdminUserService adminUserService;
+  private AdminUserService adminUserService;
 
   @Autowired
-  private IAttendanceService attendanceService;
+  private AttendanceService attendanceService;
   /**
    * @author TrangDM2
    */

@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 import fa.training.dto.ScoreDto;
 import fa.training.dto.UserDto;
 import fa.training.models.User;
-import fa.training.services.IAdminUserService;
+import fa.training.services.AdminUserService;
 import fa.training.utils.Constant;
 
 /**
@@ -29,7 +29,7 @@ import fa.training.utils.Constant;
 public class AdminUserManageRestController {
 
   @Autowired
-  private IAdminUserService adminUserService;
+  private AdminUserService adminUserService;
 
   @Autowired
   private BCryptPasswordEncoder bcrypt;

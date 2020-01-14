@@ -14,7 +14,7 @@ import fa.training.models.User;
  *
  */
 @Service
-public interface IAdminUserService {
+public interface AdminUserService {
 
   User getUser(int id);
 

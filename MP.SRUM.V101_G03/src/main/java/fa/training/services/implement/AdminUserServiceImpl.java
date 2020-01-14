@@ -15,7 +15,7 @@ import fa.training.models.Score;
 import fa.training.models.User;
 import fa.training.repositories.ScoreRepository;
 import fa.training.repositories.UserRepository;
-import fa.training.services.IAdminUserService;
+import fa.training.services.AdminUserService;
 import fa.training.utils.Constant;
 
 /**
@@ -23,7 +23,7 @@ import fa.training.utils.Constant;
  *
  */
 @Service
-public class AdminUserService implements IAdminUserService {
+public class AdminUserServiceImpl implements AdminUserService {
   @Autowired
   private UserRepository userRepository;
   @Autowired

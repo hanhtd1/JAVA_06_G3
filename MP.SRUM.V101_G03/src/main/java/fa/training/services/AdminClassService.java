@@ -11,7 +11,7 @@ import fa.training.models.Clazz;
  *
  */
 @Service
-public interface IAdminClassService {
+public interface AdminClassService {
 
   List<Clazz> getClasses();
 

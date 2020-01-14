@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 
 import fa.training.models.Clazz;
 import fa.training.repositories.ClassRepository;
-import fa.training.services.IAdminClassService;
+import fa.training.services.AdminClassService;
 
 
 /**
@@ -16,7 +16,7 @@ import fa.training.services.IAdminClassService;
  *
  */
 @Service
-public class AdminClassService implements IAdminClassService {
+public class AdminClassServiceImpl implements AdminClassService {
   
   @Autowired
   private ClassRepository classRepository;

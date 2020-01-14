@@ -22,10 +22,10 @@ import fa.training.models.Feedback;
 import fa.training.models.FeedbackPK;
 import fa.training.models.User;
 import fa.training.services.ClazzService;
-import fa.training.services.IAttendanceService;
-import fa.training.services.IFeedbackService;
-import fa.training.services.IScoreService;
-import fa.training.services.IUserService;
+import fa.training.services.AttendanceService;
+import fa.training.services.FeedbackService;
+import fa.training.services.ScoreService;
+import fa.training.services.UserService;
 
 /**
  * @author HoangLV7
@@ -38,16 +38,16 @@ public class TraineeUserController {
 	private static final Logger LOGGER = LogManager.getLogger(TraineeUserController.class);
 
 	@Autowired
-	private IUserService iUserService;
+	private UserService iUserService;
 
 	@Autowired
-	private IAttendanceService iAttendanceService;
+	private AttendanceService iAttendanceService;
 
 	@Autowired
-	private IFeedbackService iFeedbackService;
+	private FeedbackService iFeedbackService;
 
 	@Autowired
-	private IScoreService iScoreService;
+	private ScoreService iScoreService;
 	
 	@Autowired
 	private ClazzService clazzService;
@@ -71,27 +71,27 @@ public class TraineeUserController {
 	}
 
 	@GetMapping("/view-feedback")
-	public @ResponseBody String viewFeedback(@RequestParam("userId") int userId,
-			@RequestParam("subjectId") int subjectId) {
+	public @ResponseBody String viewFeedback(@RequestParam Integer userId,
+			@RequestParam Integer subjectId) {
 		Feedback feedback = iFeedbackService.getAllFeedback(userId, subjectId);
 		return feedback == null ? "You didn't commit feedback!" : feedback.getContent();
 	}
 
 	@GetMapping("/feedback-info")
-	public @ResponseBody Feedback feedbackInfo(@RequestParam("userId") int userId,
-			@RequestParam("subjectId") int subjectId) {
+	public @ResponseBody Feedback feedbackInfo(@RequestParam Integer userId,
+			@RequestParam Integer subjectId) {
 		return new Feedback(subjectId, userId);
 	}
 
 	@RequestMapping(path = "/add-feedback", method = RequestMethod.POST)
-	public String addFeedback(Model model, @RequestParam("feedbackContent") String feedback,
-			@RequestParam("userId") int userId, @RequestParam("subjectId") int subjectId) {
-		iFeedbackService.save(new Feedback(new FeedbackPK(subjectId, userId), feedback));
+	public String addFeedback(Model model, @RequestParam String feedbackContent,
+			@RequestParam Integer userId, @RequestParam Integer subjectId) {
+		iFeedbackService.save(new Feedback(new FeedbackPK(subjectId, userId), feedbackContent));
 		return "redirect:/trainee/";
 	}
 
 	@GetMapping("/member-info")
-	public String memberInfo(Model model, @RequestParam("userId") int userId) {
+	public String memberInfo(Model model, @RequestParam Integer userId) {
 		User user = iUserService.getUserById(userId);
 		List<ScoreDto> scores = iScoreService.getScoreByUser(userId);
 		model.addAttribute("user", user);
