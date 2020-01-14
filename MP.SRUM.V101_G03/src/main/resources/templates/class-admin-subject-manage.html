@@ -8,18 +8,19 @@
 			<div class="row no-m-t no-m-b">
 				<div class="col s12 m5 l3">
 					<div class="mailbox-list">
-						<ul>
-							<li class=""><a href="">
-									<h5 class="f-s-19">JAVA PROGRAMING LANGUAGE</h5>
-									<p>
-										<i class="tiny material-icons">person_pin</i> JPL
+						<ul th:each="subject : ${subjects}" id="listSubjects">
+							<li><a href="#!" class="waves-effect waves-light"
+								th:onclick="'load_subjectDetails('+${subject.id}+')'">
+									<h5 class="f-s-19" th:text=${subject.name}></h5>
+									<p th:text="${subject.code}">
+										<i class="tiny material-icons">person_pin</i>
 									</p>
 							</a></li>
 						</ul>
 					</div>
 				</div>
-				<div class="col s12 m7 l9">
-					<div class="mailbox-view">
+				<div class="col s12 m7 l9" id="subjectDetails">
+					<!-- <div class="mailbox-view">
 						<div class="mailbox-view-header">
 							<div class="left">
 								<div class="left">
@@ -69,7 +70,7 @@
 								</table>
 							</div>
 						</div>
-					</div>
+					</div> -->
 				</div>
 			</div>
 		</div>
@@ -90,23 +91,16 @@
 </div>
 <!-- Modal feedback-->
 <div id="feedback-modal" class="modal">
-	<form class="col s12">
-		<div class="modal-content">
-			<h4>Add new trainee</h4>
-			<div class="row">Feed backkkkkkkkkk</div>
-		</div>
-		<div class="modal-footer">
-			<a href="#!"
-				class=" modal-action modal-close waves-effect waves-green btn-flat">Cancel</a>
-			<button type="submit" class="modal-action waves-effect red btn ">Submit</button>
-		</div>
-	</form>
+	<div class="modal-content">
+		<h4>Feedback</h4>
+		<p id="feedback-content"></p>
+	</div>
 </div>
 <!-- Modal delete trainee confirm -->
 <div id="update-confirm" class="modal l6">
 	<div class="modal-content">
-		<h4>Delete this trainee?</h4>
-		<p>Are you sure to delete this trainee?</p>
+		<h4>Delete this Subject?</h4>
+		<p>Are you sure to delete this Subject?</p>
 		<div class="modal-footer">
 			<a href="#!"
 				class=" modal-action modal-close waves-effect waves-green btn-flat">Cancel</a>
@@ -116,53 +110,48 @@
 </div>
 <!-- Modal attendance -->
 <div id="add-subject-modal" class="modal">
-	<form class="col s12">
+	<form class="col s12" th:action="@{add-subject}" method="POST">
 		<div class="modal-content">
 			<p class="f-s-32">Add new subject</p>
 			<div>
 				<div class="row">
 					<div class="input-field col s12">
-						<input id="subjectName" type="text" class="validate"> <label
-							for="subjectName">Subject Name</label>
+						<input id="subjectName" type="text" class="validate"
+							name="subjectName" required> <label for="subjectName">Subject
+							Name</label>
 					</div>
 				</div>
 				<div class="row">
 					<div class="input-field col s12">
-						<input id="code" type="text" class="validate"> <label
-							for="code">Subject Code</label>
+						<input id="code" type="text" class="validate" name="subjectCode"
+							required> <label for="code">Subject Code</label>
 					</div>
 				</div>
 				<div class="row">
 					<div class="input-field col s12">
-						<input id="duration" type="number" class="validate"> <label
-							for="duration">Duration (Days)</label>
+						<input id="duration" type="number" class="validate"
+							name="subjectDuration" required> <label for="duration">Duration
+							(Days)</label>
 					</div>
 				</div>
 			</div>
 		</div>
 		<div class="modal-footer">
-			<button type="submit"
-				class="modal-action modal-close waves-effect waves-green btn-flat ">Agree</button>
+			<button type="button"
+				class="modal-action waves-effect waves-green btn-flat"
+				th:onclick="load_subjects()">Commit</button>
 		</div>
 	</form>
 </div>
-<!-- Modal attendance -->
-<div id="update-subject-modal" class="modal modal-fixed-footer">
-	<div class="modal-content">
-		<h4>Modal Header</h4>
-		<p>A bunch of text</p>
-	</div>
-	<div class="modal-footer">
-		<a href="#!"
-			class="modal-action modal-close waves-effect waves-green btn-flat ">Agree</a>
-	</div>
-</div>
+
 <!-- Javascript -->
 <script th:src="@{../assets/plugins/jquery/jquery-2.2.0.min.js}"></script>
 <script th:src="@{../assets/plugins/materialize/js/materialize.min.js}"></script>
-<script th:src="@{../assets/plugins/material-preloader/js/materialPreloader.min.js}"></script>
+<script
+	th:src="@{../assets/plugins/material-preloader/js/materialPreloader.min.js}"></script>
 <script th:src="@{../assets/plugins/jquery-blockui/jquery.blockui.js}"></script>
-<script th:src="@{../assets/plugins/datatables/js/jquery.dataTables.min.js}"></script>
+<script
+	th:src="@{../assets/plugins/datatables/js/jquery.dataTables.min.js}"></script>
 <script th:src="@{../assets/plugins/simditor/scripts/module.js}"></script>
 <script th:src="@{../assets/plugins/simditor/scripts/hotkeys.js}"></script>
 <script th:src="@{../assets/plugins/simditor/scripts/uploader.js}"></script>
@@ -171,3 +160,5 @@
 <script th:src="@{../assets/js/pages/table-data.js}"></script>
 <script th:src="@{../assets/js/pages/mailbox.js}"></script>
 <script th:src="@{../assets/js/pages/form-wizard.js}"></script>
+
+<script th:src="@{../assets/js/admin-subject.js}"></script>

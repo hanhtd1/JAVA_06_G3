@@ -37,6 +37,9 @@ public class Subject implements Serializable {
 	@Column(name = "Duration")
 	private float duration;
 
+	@Column(name = "Status")
+	private String status;
+
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "subject")
 	private List<Score> scoreList;
 
@@ -58,6 +61,29 @@ public class Subject implements Serializable {
 		this.name = name;
 		this.code = code;
 		this.duration = duration;
+	}
+
+	public Subject(String name, String code, float duration) {
+		super();
+		this.name = name;
+		this.code = code;
+		this.duration = duration;
+	}
+
+	public Subject(String name, String code, float duration, String status) {
+		super();
+		this.name = name;
+		this.code = code;
+		this.duration = duration;
+		this.status = status;
+	}
+
+	public String getStatus() {
+		return status;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
 	}
 
 	public Integer getId() {

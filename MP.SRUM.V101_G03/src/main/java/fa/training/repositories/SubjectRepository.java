@@ -1,17 +1,17 @@
 package fa.training.repositories;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
-import fa.training.models.Clazz;
 import fa.training.models.Subject;
 
 @Repository
-public interface SubjectRepository extends JpaRepository<Clazz, Integer> {
+public interface SubjectRepository extends JpaRepository<Subject, Integer> {
 	/**
 	 * @author ToanNT18
 	 * @param clazzId
@@ -27,4 +27,25 @@ public interface SubjectRepository extends JpaRepository<Clazz, Integer> {
 	 */
 	@Query(value = "SELECT * FROM udf_findSubjectByUser(:userId)", nativeQuery = true)
 	List<Subject> findSubjectByUserId(@Param("userId") Integer userId);
+
+	/**
+	 * @author HoangLV7
+	 */
+	List<Subject> findByStatus(String status);
+
+	/**
+	 * @author HoangLV7
+	 *
+	 * @param code
+	 * @return
+	 */
+	Optional<Subject> findSubjectByCode(String code);
+
+	/**
+	 * @author HoangLV7
+	 *
+	 * @param id
+	 * @return
+	 */
+	Optional<Subject> findSubjectById(int id);
 }

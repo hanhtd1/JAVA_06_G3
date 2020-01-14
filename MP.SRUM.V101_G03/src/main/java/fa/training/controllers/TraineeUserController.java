@@ -2,9 +2,12 @@ package fa.training.controllers;
 
 import java.util.List;
 
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -19,6 +22,7 @@ import fa.training.models.Clazz;
 import fa.training.models.Feedback;
 import fa.training.models.FeedbackPK;
 import fa.training.models.User;
+import fa.training.services.ClazzService;
 import fa.training.services.IAttendanceService;
 import fa.training.services.IFeedbackService;
 import fa.training.services.IScoreService;
@@ -32,29 +36,33 @@ import fa.training.services.IUserService;
 @RequestMapping("trainee")
 public class TraineeUserController {
 
+	private static final Logger LOGGER = LogManager.getLogger(TraineeUserController.class);
+
 	@Autowired
 	private IUserService iUserService;
-	
+
 	@Autowired
 	private IAttendanceService iAttendanceService;
-	
+
 	@Autowired
 	private IFeedbackService iFeedbackService;
-	
+
 	@Autowired
 	private IScoreService iScoreService;
+	
+	@Autowired
+	private ClazzService clazzService;
 
 	@GetMapping("/")
-	public String index(Model model) {
-	  Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-		String account = auth.getName();
-		
+	public String index(Model model, Authentication auth) {
+		String account = ((UserDetails)auth.getPrincipal()).getUsername();
+		LOGGER.info(account + " login successful");
 		User trainee = iUserService.getUser(account);
-		
+		//Handling null exception
+		Clazz classTrainee = clazzService.findClazzByTrainee(trainee);
 		List<User> users = iUserService.getMembers(trainee);
 		List<Attendance> attendances = iAttendanceService.getAttendancesByUser(trainee);
 		List<ScoreDto> scores = iScoreService.getScoreByUser(trainee.getId());
-		Clazz classTrainee = trainee.getClazzList().get(0);
 		model.addAttribute("class", classTrainee);
 		model.addAttribute("users", users);
 		model.addAttribute("trainee", trainee);
@@ -62,25 +70,27 @@ public class TraineeUserController {
 		model.addAttribute("scores", scores);
 		return "trainee-ui";
 	}
-	
+
 	@GetMapping("/view-feedback")
-	public @ResponseBody String viewFeedback(@RequestParam("userId") int userId, @RequestParam("subjectId") int subjectId) {
+	public @ResponseBody String viewFeedback(@RequestParam("userId") int userId,
+			@RequestParam("subjectId") int subjectId) {
 		Feedback feedback = iFeedbackService.getAllFeedback(userId, subjectId);
-		return feedback == null? "You didn't commit feedback!" : feedback.getContent();
+		return feedback == null ? "You didn't commit feedback!" : feedback.getContent();
 	}
-	
+
 	@GetMapping("/feedback-info")
-	public @ResponseBody Feedback feedbackInfo(@RequestParam("userId") int userId, @RequestParam("subjectId") int subjectId) {
+	public @ResponseBody Feedback feedbackInfo(@RequestParam("userId") int userId,
+			@RequestParam("subjectId") int subjectId) {
 		return new Feedback(subjectId, userId);
 	}
-	
+
 	@RequestMapping(path = "/add-feedback", method = RequestMethod.POST)
 	public String addFeedback(Model model, @RequestParam("feedbackContent") String feedback,
-			@RequestParam("userId" ) int userId, @RequestParam("subjectId") int subjectId) {
+			@RequestParam("userId") int userId, @RequestParam("subjectId") int subjectId) {
 		iFeedbackService.save(new Feedback(new FeedbackPK(subjectId, userId), feedback));
 		return "redirect:/trainee/";
 	}
-	
+
 	@GetMapping("/member-info")
 	public String memberInfo(Model model, @RequestParam("userId") int userId) {
 		User user = iUserService.getUserById(userId);
