@@ -73,7 +73,7 @@ public class AdminClassManageRestController {
 
     if (clazz.getId() == null) {
       try {
-        updateClazz.setStatus(Constant.DEFAULT_CLASS_STATUS);
+        updateClazz.setStatus(Constant.CLASS_DEFAULT_STATUS);
         adminClassService.saveClass(clazz);
         message = Constant.CREATE_SUCCESS_MESSAGE;
       } catch (Exception e) {
@@ -85,7 +85,7 @@ public class AdminClassManageRestController {
       updateClazz.setStatus(toUpdateClazz.getStatus());
       updateClazz.setClazzSubjectList(toUpdateClazz.getClazzSubjectList());
       adminClassService.saveClass(updateClazz);
-      message = Constant.UPDATE_SUCCESS_MESSAGE;
+      message = Constant.CREATE_SUCCESS_MESSAGE;
     }
 
     return new ResponseEntity<String>(message, HttpStatus.OK);
@@ -112,7 +112,7 @@ public class AdminClassManageRestController {
     
     try {
       attendanceService.saveAttendances(attendanceList);
-      message = Constant.UPDATE_SUCCESS_MESSAGE;
+      message = Constant.CREATE_SUCCESS_MESSAGE;
     } catch (Exception e) {
      message = Constant.UPDATE_FAIL_MESSAGE; 
     }
@@ -128,7 +128,7 @@ public class AdminClassManageRestController {
     Clazz clazz = adminClassService.getClass(id);
     clazz.setStatus(status);
     adminClassService.saveClass(clazz);
-    return new ResponseEntity<String>(Constant.UPDATE_SUCCESS_MESSAGE, HttpStatus.OK);
+    return new ResponseEntity<String>(Constant.CREATE_SUCCESS_MESSAGE, HttpStatus.OK);
   }
 
   /**
@@ -140,7 +140,7 @@ public class AdminClassManageRestController {
    */
   @GetMapping("add-trainees")
   public ResponseEntity<List<UserDto>> addTrainees(@RequestParam Integer id, @RequestParam String keyword) {
-    List<UserDto> trainees = adminUserService.findUserByKeyword(keyword, Constant.TRAINEE, Constant.DEFAULT_TRAINEE_STATUS);
+    List<UserDto> trainees = adminUserService.findUserByKeyword(keyword, Constant.TRAINEE, Constant.TRAINEE_DEFAULT_STATUS);
     return new ResponseEntity<List<UserDto>>(trainees, HttpStatus.OK);
   }
 
@@ -156,14 +156,14 @@ public class AdminClassManageRestController {
     User user = adminUserService.getUser(traineeId);
     String message = new String();
     
-    user.setStatus(Constant.ACTIVE_TRAINEE_STATUS);
+    user.setStatus(Constant.TRAINEE_ACTIVE_STATUS);
     user.getClazzList().add(clazz);
     clazz.getUserList().add(user);
     
     try {
       adminClassService.saveClass(clazz);
       adminUserService.saveUser(user); 
-      message = Constant.UPDATE_SUCCESS_MESSAGE;
+      message = Constant.CREATE_SUCCESS_MESSAGE;
     } catch(Exception e) {
       message = Constant.UPDATE_FAIL_MESSAGE;
     }
@@ -183,14 +183,14 @@ public class AdminClassManageRestController {
     User user = adminUserService.getUser(traineeId);
     String message = new String();
     
-    user.setStatus(Constant.DEFAULT_TRAINEE_STATUS);
+    user.setStatus(Constant.TRAINEE_DEFAULT_STATUS);
     user.getClazzList().remove(clazz);
     clazz.getUserList().remove(user);
     
     try {
       adminClassService.saveClass(clazz);
       adminUserService.saveUser(user); 
-      message = Constant.UPDATE_SUCCESS_MESSAGE;
+      message = Constant.CREATE_SUCCESS_MESSAGE;
     } catch(Exception e) {
       message = Constant.UPDATE_FAIL_MESSAGE;
     }

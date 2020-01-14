@@ -7,7 +7,7 @@ import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import fa.training.dto.TraineeScoreDTO;
+import fa.training.dto.TraineeScoreDto;
 import fa.training.repositories.ScoreRepository;
 import fa.training.services.ScoreService;
 
@@ -22,7 +22,7 @@ public class ScoreServiceImpl implements ScoreService {
 	private ScoreRepository scoreRepository;
 
 	@Override
-	public List<TraineeScoreDTO> findByIdUserId(Integer userId) {
+	public List<TraineeScoreDto> findByIdUserId(Integer userId) {
 		return scoreRepository.findScoreByUserId(userId);
 	}
 

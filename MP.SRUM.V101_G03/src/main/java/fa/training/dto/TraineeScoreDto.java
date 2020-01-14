@@ -1,16 +1,16 @@
 package fa.training.dto;
 
-public class TraineeScoreDTO {
+public class TraineeScoreDto {
 	private String subjectName;
 
 	private Integer theory;
 
 	private Integer practice;
 
-	public TraineeScoreDTO() {
+	public TraineeScoreDto() {
 	}
 
-	public TraineeScoreDTO(String subjectName, Integer theory, Integer practice) {
+	public TraineeScoreDto(String subjectName, Integer theory, Integer practice) {
 		super();
 		this.subjectName = subjectName;
 		this.theory = theory;
@@ -59,7 +59,7 @@ public class TraineeScoreDTO {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		TraineeScoreDTO other = (TraineeScoreDTO) obj;
+		TraineeScoreDto other = (TraineeScoreDto) obj;
 		if (practice == null) {
 			if (other.practice != null)
 				return false;

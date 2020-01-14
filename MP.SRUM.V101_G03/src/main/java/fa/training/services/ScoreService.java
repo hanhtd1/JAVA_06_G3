@@ -2,8 +2,8 @@ package fa.training.services;
 
 import java.util.List;
 
-import fa.training.dto.TraineeScoreDTO;
+import fa.training.dto.TraineeScoreDto;
 
 public interface ScoreService {
-	List<TraineeScoreDTO> findByIdUserId(Integer userId);
+	List<TraineeScoreDto> findByIdUserId(Integer userId);
 }

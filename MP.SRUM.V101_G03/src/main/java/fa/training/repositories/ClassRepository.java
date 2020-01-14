@@ -13,8 +13,7 @@ import fa.training.models.Clazz;
 
 @Repository
 public interface ClassRepository extends JpaRepository<Clazz, Integer> {
-<<<<<<< HEAD
-  
+
   /**
    * @author TrangDM2
    * @return
@@ -39,18 +38,6 @@ public interface ClassRepository extends JpaRepository<Clazz, Integer> {
    */
   @Query(value = "SELECT * FROM udf_findClazzByUserId(:userId)", nativeQuery = true)
   List<Clazz> findAllClazz(@Param("userId") Integer userId, Pageable pageable);
-=======
-	/**
-	 * @author ToanNT18
-	 * @param clazzId
-	 * @param status
-	 * @param category
-	 * @return List<Clazz>. Return all of the clazz which trainee participate to
-	 *         teach.
-	 */
-	@Query(value = "SELECT * FROM udf_findClazzByUserId(:userId)", nativeQuery = true)
-	List<Clazz> findAllClazz(@Param("userId") Integer userId, Pageable pageable);
->>>>>>> 3f9f247e78ad453d4f34bfa546d8c31334c4bc32
 
 	/**
 	 * @author ToanNT18
@@ -83,7 +70,6 @@ public interface ClassRepository extends JpaRepository<Clazz, Integer> {
 	@Query(value = "SELECT * FROM udf_findClazzByStatus(:userId, :status)", nativeQuery = true)
 	List<Clazz> findClazzByStatus(@Param("userId") Integer userId, @Param("status") String status, Pageable pageable);
 
-<<<<<<< HEAD
   /**
    * @author ToanNT18
    * @param userId
@@ -100,16 +86,6 @@ public interface ClassRepository extends JpaRepository<Clazz, Integer> {
    * @return
    */
   Clazz findByName(String name);
-=======
-	/**
-	 * @author ToanNT18
-	 * @param userId
-	 * @param status
-	 * @return
-	 */
-	@Query(value = "SELECT * FROM udf_findClazzByStatusAndNameOrCategory(:userId, :status, :content)", nativeQuery = true)
-	List<Clazz> findClazzByStatusAndContent(@Param("userId") Integer userId, @Param("status") String status,
-			@Param("content") String content, Pageable pageable);
 
 	/**
 	 * @author HoangLV7
@@ -134,5 +110,4 @@ public interface ClassRepository extends JpaRepository<Clazz, Integer> {
 			+ " WHERE c.id = uc.clazz_id AND uc.user_id = :userId", 
 			nativeQuery = true)
 	Optional<Clazz> findClazzByTrainee(@Param("userId") int traineeId);
->>>>>>> 3f9f247e78ad453d4f34bfa546d8c31334c4bc32
 }

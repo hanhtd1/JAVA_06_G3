@@ -7,7 +7,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
-import fa.training.dto.TraineeScoreDTO;
+import fa.training.dto.TraineeScoreDto;
 import fa.training.models.Score;
 
 /**
@@ -31,5 +31,5 @@ public interface ScoreRepository extends JpaRepository<Score, Integer> {
    * @return
    */
   @Query(value = "SELECT * FROM udf_findScoreByUserId(:userId)", nativeQuery = true)
-  List<TraineeScoreDTO> findScoreByUserId(@Param("userId") Integer userId);
+  List<TraineeScoreDto> findScoreByUserId(@Param("userId") Integer userId);
 }

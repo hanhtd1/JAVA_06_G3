@@ -7,7 +7,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import fa.training.dto.TraineeScoreDTO;
+import fa.training.dto.TraineeScoreDto;
 import fa.training.models.ReviewTrainee;
 import fa.training.models.ReviewTraineePK;
 import fa.training.models.User;
@@ -36,7 +36,7 @@ public class TraineeController {
 	 */
 	@RequestMapping(value = "/score")
 	public String getScore() {
-		List<TraineeScoreDTO> scores = scoreService.findByIdUserId(1);
+		List<TraineeScoreDto> scores = scoreService.findByIdUserId(1);
 		scores.stream().forEach(System.out::println);
 		return "<h1>Success</h1>";
 	}

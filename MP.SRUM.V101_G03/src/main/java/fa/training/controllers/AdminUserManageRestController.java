@@ -72,7 +72,7 @@ public class AdminUserManageRestController {
     
     try {
       requestUser.setRole(role==1?Constant.TRAINEE:Constant.TRAINER);
-      requestUser.setStatus(Constant.DEFAULT_TRAINEE_STATUS);
+      requestUser.setStatus(Constant.TRAINEE_DEFAULT_STATUS);
       requestUser.setPassword(bcrypt.encode(Constant.DEFAULT_PASSWORD));
       adminUserService.saveUser(requestUser);
       message = Constant.CREATE_SUCCESS_MESSAGE;
@@ -100,7 +100,7 @@ public class AdminUserManageRestController {
     updateUser.setStatus(toUpdateUser.getStatus());
     adminUserService.saveUser(updateUser);
     
-    return new ResponseEntity<String>(Constant.UPDATE_SUCCESS_MESSAGE,HttpStatus.OK);
+    return new ResponseEntity<String>(Constant.CREATE_SUCCESS_MESSAGE,HttpStatus.OK);
   }
 
   /**
@@ -109,7 +109,7 @@ public class AdminUserManageRestController {
   @GetMapping("update-status")
   public ResponseEntity<String> updateStatus(@RequestParam int id, @RequestParam String status){
     adminUserService.updateUserStatus(id, status);
-    return new ResponseEntity<String>(Constant.UPDATE_SUCCESS_MESSAGE,HttpStatus.OK);
+    return new ResponseEntity<String>(Constant.CREATE_SUCCESS_MESSAGE,HttpStatus.OK);
   }
   
   /**

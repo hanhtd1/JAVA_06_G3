@@ -13,7 +13,6 @@ import fa.training.dto.UserDto;
 import fa.training.models.Clazz;
 import fa.training.models.Subject;
 import fa.training.models.User;
-import fa.training.services.ClazzService;
 import fa.training.services.IAdminClassService;
 import fa.training.services.IAdminUserService;
 import fa.training.services.SubjectService;
@@ -34,9 +33,6 @@ public class AdminMainController {
   
   @Autowired
   private SubjectService subjectService;
-  
-  @Autowired
-  private ClazzService clazzService;
   
   /**
    * @author TrangDM2

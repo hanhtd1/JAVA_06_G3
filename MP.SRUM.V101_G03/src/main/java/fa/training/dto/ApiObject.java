@@ -5,15 +5,15 @@ package fa.training.dto;
  *
  * @param <T>
  */
-public class APIObject<T> {
+public class ApiObject<T> {
 	private T t;
 	private String message;
 
-	public APIObject() {
+	public ApiObject() {
 		super();
 	}
 
-	public APIObject(T t, String message) {
+	public ApiObject(T t, String message) {
 		super();
 		this.t = t;
 		this.message = message;

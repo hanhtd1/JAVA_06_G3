@@ -34,7 +34,7 @@ public class SubjectServiceImpl implements SubjectService {
 
 	@Override
 	public List<Subject> findAll() {
-		String status = Constant.SUBJECT_STATUS_ACTIVE;
+		String status = Constant.SUBJECT_ACTIVE_STATUS;
 		return subjectRepository.findByStatus(status);
 	}
 
