@@ -1,6 +1,5 @@
 package fa.training.services.implement;
 
-import java.sql.SQLException;
 import java.util.List;
 
 import javax.transaction.Transactional;
@@ -22,71 +21,67 @@ import fa.training.utils.Constant;
 @Service
 @Transactional
 public class SubjectServiceImpl implements SubjectService {
-	@Autowired
-	private SubjectRepository subjectRepository;
+  @Autowired
+  private SubjectRepository subjectRepository;
 
-	@Override
-	public Subject findSubjectByClazz(Integer clazzId) {
-		return subjectRepository.findSubjectByClazzId(clazzId);
-	}
+  @Override
+  public Subject findSubjectByClazz(Integer clazzId) {
+    return subjectRepository.findSubjectByClazzId(clazzId);
+  }
 
-	@Override
-	public List<Subject> findSubjectByUserId(Integer userId, Integer pageIndex) {
-		return subjectRepository.findSubjectByUserId(userId, PageRequest.of(pageIndex, Constant.PAGE_SIZE))
-				.getContent();
-	}
+  @Override
+  public List<Subject> findSubjectByUserId(Integer userId, Integer pageIndex) {
+    return subjectRepository.findSubjectByUserId(userId, PageRequest.of(pageIndex, Constant.PAGE_SIZE)).getContent();
+  }
 
-	@Override
-	public List<Subject> findAll() {
-		return subjectRepository.findByStatus(Constant.SUBJECT_ACTIVE_STATUS);
-	}
+  @Override
+  public List<Subject> findAll() {
+    return subjectRepository.findByStatus(Constant.SUBJECT_ACTIVE_STATUS);
+  }
 
-	@Override
-	public Subject save(Subject subject) {
-		return subjectRepository.save(subject);
-	}
+  @Override
+  public Subject save(Subject subject) {
+    return subjectRepository.save(subject);
+  }
 
-	@Override
-	public Subject findSubjectByCode(String code) {
-		//TODO edit orElse
-		return subjectRepository.findSubjectByCode(code).orElse(new Subject());
-	}
+  @Override
+  public Subject findSubjectByCode(String code) {
+    // TODO edit orElse
+    return subjectRepository.findSubjectByCode(code).orElse(new Subject());
+  }
 
-	@Override
-	public Boolean checkSubjectExisted(String code) {
-		return subjectRepository.findSubjectByCode(code).isPresent();
-	}
+  @Override
+  public Boolean checkSubjectExisted(String code) {
+    return subjectRepository.findSubjectByCode(code).isPresent();
+  }
 
-	@Override
-	public Subject findSubjectById(int id) {
-		return subjectRepository.findSubjectById(id).orElse(new Subject());
-	}
+  @Override
+  public Subject findSubjectById(int id) {
+    return subjectRepository.findSubjectById(id).orElse(new Subject());
+  }
 
-<<<<<<< HEAD
-	/**
-	 * @author TrangDM2
-	 * @param clazz
-	 * @return
-	 */
-	@Override
-	public List<Subject> findSubjectsByClass(Clazz clazz){
-	  return subjectRepository.findSubjectsByClass(clazz);
-	}
-=======
-	@Override
-	public Subject delSubject(int id) {
-		Subject subject = subjectRepository.findSubjectById(id).orElse(null);
-		//TODO edit orElse null
-		subject.setStatus(Constant.SUBJECT_DISABLED_STATUS);
-		return subjectRepository.save(subject);
-	}
+  /**
+   * @author TrangDM2
+   * @param clazz
+   * @return
+   */
+  @Override
+  public List<Subject> findSubjectsByClass(Clazz clazz) {
+    return subjectRepository.findSubjectsByClass(clazz);
+  }
 
-	@Override
-	public List<Subject> findByStatus(String status) {
-		//TODO edit orElse null
-		return subjectRepository.findSubjectByStatus(status);
-	}
+  @Override
+  public Subject delSubject(int id) {
+    Subject subject = subjectRepository.findSubjectById(id).orElse(null);
+    // TODO edit orElse null
+    subject.setStatus(Constant.SUBJECT_DISABLED_STATUS);
+    return subjectRepository.save(subject);
+  }
 
->>>>>>> ffc10e42682fc56e7d4fe93acdb0324f39b6f462
+  @Override
+  public List<Subject> findByStatus(String status) {
+    // TODO edit orElse null
+    return subjectRepository.findSubjectByStatus(status);
+  }
 
 }

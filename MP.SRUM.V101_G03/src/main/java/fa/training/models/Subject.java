@@ -4,7 +4,6 @@ import java.io.Serializable;
 import java.util.List;
 
 import javax.persistence.Basic;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -46,21 +45,12 @@ public class Subject implements Serializable {
 	@OneToMany(mappedBy = "subject")
 	private List<Score> scoreList;
 
-<<<<<<< HEAD
   @JsonIgnore
-	@OneToMany(mappedBy = "subject")
-	private List<Feedback> feedbackList;
-
-  @JsonIgnore
-	@OneToMany(mappedBy = "subject", cascade = CascadeType.MERGE)
-=======
-	@JsonIgnore
 	@OneToMany(mappedBy = "subject")
 	private List<Feedback> feedbackList;
 
 	@JsonIgnore
 	@OneToMany(mappedBy = "subject")
->>>>>>> ffc10e42682fc56e7d4fe93acdb0324f39b6f462
 	private List<ClazzSubject> clazzSubjectList;
 
 	public Subject() {

@@ -60,7 +60,6 @@ public interface SubjectRepository extends JpaRepository<Subject, Integer> {
 	 */
 	@Query(value = "SELECT * FROM udf_findSubjectByUser(:userId)", nativeQuery = true)
 	Page<Subject> findSubjectByUserId(@Param("userId") Integer userId, Pageable pageable);
-<<<<<<< HEAD
 	
 	/**
 	 * @author TrangDM2
@@ -69,7 +68,6 @@ public interface SubjectRepository extends JpaRepository<Subject, Integer> {
 	 */
 	@Query("select cs.subject from ClazzSubject cs where cs.clazz= :clazz")
 	List<Subject> findSubjectsByClass(@Param("clazz") Clazz clazz);
-=======
 
 	/**
 	 * @author HoangLV7
@@ -78,5 +76,4 @@ public interface SubjectRepository extends JpaRepository<Subject, Integer> {
 	 * @return
 	 */
 	List<Subject> findSubjectByStatus(String status);
->>>>>>> ffc10e42682fc56e7d4fe93acdb0324f39b6f462
 }

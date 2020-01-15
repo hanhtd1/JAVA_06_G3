@@ -16,21 +16,7 @@ public class Constant {
 
 	// Status
 	public static final String CLASS_DEFAULT_STATUS = "In Comming";
-<<<<<<< HEAD
   public static final String USER_DEFAULT_STATUS = "New";
-  public static final String TRAINEE_ACTIVE_STATUS = "Active";
-  public static final String TRAINEE_DISABLED_STATUS = "In Active";
-  public static final String TRAINEE_GRADUATED_STATUS = "Graduated";
-  public static final String SUBJECT_DEFAULT_STATUS = "New";
-  public static final String SUBJECT_ACTIVE_STATUS = "Active";
-	
-	//Message
-  public static final String UPDATE_SUCCESS_MESSAGE = "Update successfully!";
-  public static final String UPDATE_FAIL_MESSAGE = "Update failed, please try again!";
-  public static final String CREATE_SUCCESS_MESSAGE = "Created successfully!";
-  public static final String CREATE_FAIL_MESSAGE = "Failed to create, this is already exist!";
-  public static final String NOT_FOUND_MESSAGE = "Not found!";
-=======
 	public static final String TRAINEE_DEFAULT_STATUS = "New";
 	public static final String TRAINEE_ACTIVE_STATUS = "Active";
 	public static final String TRAINEE_DISABLED_STATUS = "In Active";
@@ -46,8 +32,7 @@ public class Constant {
 	public static final String CREATE_SUCCESS_MESSAGE = "Created successfully!";
 	public static final String CREATE_FAIL_MESSAGE = "Failed to create, this is already exist!";
 	public static final String NOT_FOUND_MESSAGE = "Not found!";
->>>>>>> ffc10e42682fc56e7d4fe93acdb0324f39b6f462
-
+	
 	public static final String CLAZZ_CATEGORY = "Java";
 
 	public static final String TRAINEE_SEARCH_ALL = "All";
