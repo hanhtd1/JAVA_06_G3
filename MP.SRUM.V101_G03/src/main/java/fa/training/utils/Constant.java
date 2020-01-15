@@ -19,6 +19,8 @@ public class Constant {
   public static final String TRAINEE_GRADUATED_STATUS = "Graduated";
   public static final String SUBJECT_DEFAULT_STATUS = "New";
   public static final String SUBJECT_ACTIVE_STATUS = "Active";
+  public static final String SUBJECT_DISABLED_STATUS = "In Active";
+  public static final String CLASS_ACTIVE_STATUS = "Active";
 	
 	//Message
   public static final String UPDATE_SUCCESS_MESSAGE = "Update successfully!";

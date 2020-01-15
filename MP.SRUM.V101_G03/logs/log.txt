@@ -67,3 +67,46 @@
 2020-01-14 23:39:07 INFO  UserServiceImpl:39 - Get User by Account trangdm1
 2020-01-14 23:45:53 INFO  TraineeUserController:58 - trangdm1 login successful
 2020-01-14 23:45:53 INFO  UserServiceImpl:39 - Get User by Account trangdm1
+2020-01-15 09:28:55 INFO  TraineeUserController:59 - hoanglv7 login successful
+2020-01-15 09:28:55 INFO  UserServiceImpl:41 - Get User by Account hoanglv7
+2020-01-15 09:28:55 INFO  UserServiceImpl:30 - Get classmate of user hoanglv7
+2020-01-15 09:28:55 INFO  AttendanceServiceImpl:29 - Get list of Attendace by hoanglv7
+2020-01-15 09:28:55 INFO  ScoreServiceImpl:43 - Get score by UserId 1
+2020-01-15 09:29:09 INFO  FeedbackServiceImpl:28 - Get feedbacks of UserID 1 and SubjectID 1
+2020-01-15 09:29:11 INFO  FeedbackServiceImpl:28 - Get feedbacks of UserID 1 and SubjectID 2
+2020-01-15 09:29:13 INFO  FeedbackServiceImpl:28 - Get feedbacks of UserID 1 and SubjectID 3
+2020-01-15 09:32:30 INFO  TraineeUserController:59 - hoanglv7 login successful
+2020-01-15 09:32:30 INFO  UserServiceImpl:42 - Get User by Account hoanglv7
+2020-01-15 09:32:30 INFO  UserServiceImpl:30 - Get classmate of user hoanglv7
+2020-01-15 09:32:30 INFO  AttendanceServiceImpl:29 - Get list of Attendace by hoanglv7
+2020-01-15 09:32:30 INFO  ScoreServiceImpl:43 - Get score by UserId 1
+2020-01-15 09:32:37 INFO  UserServiceImpl:51 - Get User by UserID 2
+2020-01-15 09:32:37 INFO  ScoreServiceImpl:43 - Get score by UserId 2
+2020-01-15 09:32:42 INFO  UserServiceImpl:51 - Get User by UserID 4
+2020-01-15 09:32:42 INFO  ScoreServiceImpl:43 - Get score by UserId 4
+2020-01-15 09:32:45 INFO  UserServiceImpl:51 - Get User by UserID 5
+2020-01-15 09:32:45 INFO  ScoreServiceImpl:43 - Get score by UserId 5
+2020-01-15 09:32:46 INFO  UserServiceImpl:51 - Get User by UserID 5
+2020-01-15 09:32:46 INFO  ScoreServiceImpl:43 - Get score by UserId 5
+2020-01-15 09:32:48 INFO  UserServiceImpl:51 - Get User by UserID 2
+2020-01-15 09:32:48 INFO  ScoreServiceImpl:43 - Get score by UserId 2
+2020-01-15 09:33:01 INFO  UserServiceImpl:51 - Get User by UserID 2
+2020-01-15 09:33:01 INFO  ScoreServiceImpl:43 - Get score by UserId 2
+2020-01-15 09:33:52 INFO  UserServiceImpl:51 - Get User by UserID 2
+2020-01-15 09:33:52 INFO  ScoreServiceImpl:43 - Get score by UserId 2
+2020-01-15 09:33:57 INFO  FeedbackServiceImpl:28 - Get feedbacks of UserID 2 and SubjectID 1
+2020-01-15 09:35:59 INFO  FeedbackServiceImpl:28 - Get feedbacks of UserID 1 and SubjectID 1
+2020-01-15 09:36:06 INFO  FeedbackServiceImpl:28 - Get feedbacks of UserID 1 and SubjectID 2
+2020-01-15 14:02:32 INFO  FeedbackServiceImpl:28 - Get feedbacks of UserID 1 and SubjectID 1
+2020-01-15 14:02:34 INFO  FeedbackServiceImpl:28 - Get feedbacks of UserID 2 and SubjectID 1
+2020-01-15 14:02:36 INFO  FeedbackServiceImpl:28 - Get feedbacks of UserID 2 and SubjectID 1
+2020-01-15 14:02:38 INFO  FeedbackServiceImpl:28 - Get feedbacks of UserID 3 and SubjectID 1
+2020-01-15 14:02:39 INFO  FeedbackServiceImpl:28 - Get feedbacks of UserID 4 and SubjectID 1
+2020-01-15 14:02:40 INFO  FeedbackServiceImpl:28 - Get feedbacks of UserID 8 and SubjectID 1
+2020-01-15 14:05:12 INFO  FeedbackServiceImpl:28 - Get feedbacks of UserID 4 and SubjectID 1
+2020-01-15 14:05:14 INFO  FeedbackServiceImpl:28 - Get feedbacks of UserID 5 and SubjectID 1
+2020-01-15 14:51:41 INFO  TraineeUserController:59 - hoanglv7 login successful
+2020-01-15 14:51:41 INFO  UserServiceImpl:42 - Get User by Account hoanglv7
+2020-01-15 14:51:41 INFO  UserServiceImpl:30 - Get classmate of user hoanglv7
+2020-01-15 14:51:41 INFO  AttendanceServiceImpl:29 - Get list of Attendace by hoanglv7
+2020-01-15 14:51:41 INFO  ScoreServiceImpl:43 - Get score by UserId 1

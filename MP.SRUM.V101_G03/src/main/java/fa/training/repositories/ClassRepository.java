@@ -106,9 +106,9 @@ public interface ClassRepository extends JpaRepository<Clazz, Integer> {
 	 */
 	@Query(value = "SELECT c.id, c.category, c.name, c.note, open_date, c.status, c.open_date"
 			+ " FROM clazz c, clazz_subject sc, subject s"
-			+ " WHERE c.id = sc.clazz_id AND sc.subject_id = s.id AND c.status = 'Active'"
+			+ " WHERE c.id = sc.clazz_id AND sc.subject_id = s.id AND c.status = :status"
 			+ " AND s.id = :subjectId", nativeQuery = true)
-	List<Clazz> findBySubject(@Param("subjectId") int subjectId);
+	List<Clazz> findBySubject(@Param("status") String status, @Param("subjectId") int subjectId);
 
 	/**
 	 * @author HoangLV7

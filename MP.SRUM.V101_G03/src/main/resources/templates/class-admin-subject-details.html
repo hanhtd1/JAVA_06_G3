@@ -11,11 +11,11 @@
 				Duration(days): <span class="mailbox-author" th:text="${subject.duration}" id="duration-id"></span>
 			</div>
 		</div>
-		<div class="right mailbox-buttons">
+		<div class="right mailbox-buttons" th:if="${subject.status} != 'In Active'">
 			<a class="modal-trigger waves-effect waves-grey btn-flat m-t-xs"
 				href="#update-subject-modal">Edit</a> <a
 				class="waves-effect waves-red btn-flat m-t-xs modal-trigger"
-				href="#update-confirm">Delete</a>
+				href="#update-confirm" th:onclick="'get_subject('+ ${subject.id} +')'">Delete</a>
 		</div>
 		<div class="divider mailbox-divider"></div>
 
@@ -84,6 +84,7 @@
 		</div>
 		<div class="modal-footer">
 			<input type="hidden" id="subjectId" th:value="${subject.id}">
+			<input type="hidden" id="subjectStatus" th:value="${subject.status}">
 			<button type="button"
 				class="modal-action waves-effect waves-green btn-flat"
 				th:onclick="edit_subjects()">Commit</button>

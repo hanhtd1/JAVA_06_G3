@@ -72,24 +72,32 @@ public class AdminSubjectController {
 	public @ResponseBody String viewFeedback(@RequestParam("userId") int userId,
 			@RequestParam("subjectId") int subjectId) {
 		Feedback feedback = iFeedbackService.getAllFeedback(userId, subjectId);
-		return feedback == null ? "You didn't commit feedback!" : feedback.getContent();
+		return feedback == null ? Constant.NOT_FOUND_MESSAGE : feedback.getContent();
 	}
 	
 	@RequestMapping(path = "edit-subject",  method = RequestMethod.POST)
 	public @ResponseBody ApiObject<Subject> updateSubject(@RequestParam Integer subjectId, @RequestParam String subjectName,
-			@RequestParam("subjectCode") String subjectCode, @RequestParam Float subjectDuration) {
+			@RequestParam("subjectCode") String subjectCode, @RequestParam Float subjectDuration, @RequestParam String subjectStatus) {
 		ApiObject<Subject> apiObject = new ApiObject<Subject>();
-		Subject subject = new Subject(subjectId, subjectName, subjectCode, subjectDuration);
+		Subject subject = new Subject(subjectId, subjectName, subjectCode, subjectDuration, subjectStatus);
 		subject = subjectService.save(subject);
 		apiObject.setT(subject);
 		apiObject.setMessage(Constant.UPDATE_SUCCESS_MESSAGE);
 		return apiObject;
 	}
 	
+	@RequestMapping(path = "search", method = RequestMethod.GET)
+	public String seachSubject(Model model, @RequestParam("subjectStatus") String subjectStatus){
+		List<Subject> subjects = subjectService.findByStatus(subjectStatus);
+		model.addAttribute("subjects", subjects);
+		return "class-admin-subject-list";
+	}
+	
 	@RequestMapping(path = "del-subject", method = RequestMethod.DELETE)
 	public @ResponseBody List<Subject> delSubject(@RequestParam Integer subjectId){
 		List<Subject> subjects = new ArrayList<Subject>();
 		//TODO something
+		Subject subject = subjectService.delSubject(subjectId);
 		return subjects;
 	}
 }

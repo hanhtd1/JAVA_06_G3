@@ -1,13 +1,23 @@
-
 <div class="col s12 m12 l12 no-p-h">
 	<div class="card mailbox-content">
 		<div class="card-content">
-			<div class="col s12 m12 l12 p-h-md">
-				<h3>Subjects Management</h3>
+			<div class="row">
+				<div class="col s12 m12 l6 p-h-md">
+					<h3>Subjects Management</h3>
+				</div>
+				<div class="input-field col s12 m6 l6 m-t-sm">
+					<p class="f-s-16">View by status</p>
+					<select onchange="load_Classes()" id="class-status" class="p-h-md">
+						<option value="In Active">In Active</option>
+						<option value="Active" selected>Active</option>
+						<option value="New">New</option>
+					</select>
+				</div>
 			</div>
+
 			<div class="row no-m-t no-m-b">
 				<div class="col s12 m5 l3">
-					<div class="mailbox-list">
+					<div class="mailbox-list" id="list-subject">
 						<ul th:each="subject : ${subjects}" id="listSubjects">
 							<li><a href="#!" class="waves-effect waves-light"
 								th:onclick="'load_subjectDetails('+${subject.id}+')'">
@@ -19,59 +29,7 @@
 						</ul>
 					</div>
 				</div>
-				<div class="col s12 m7 l9" id="subjectDetails">
-					<!-- <div class="mailbox-view">
-						<div class="mailbox-view-header">
-							<div class="left">
-								<div class="left">
-									<img src="assets/images/profile-image-1.png" alt=""
-										class="circle mailbox-profile-image z-depth-1">
-								</div>
-								<div class="left">
-									<span class="mailbox-title">JAVA PROGRAMING LANGUAGE</span> <span
-										class="mailbox-author"><i class="tiny material-icons">person_pin</i>
-										JPL</span><br> <span class="mailbox-author"><i
-										class="tiny material-icons">today</i> 9 days</span>
-								</div>
-							</div>
-							<div class="right mailbox-buttons">
-								<a class="modal-trigger waves-effect waves-grey btn-flat m-t-xs"
-									href="#update-subject-modal">Edit</a> <a
-									class="waves-effect waves-red btn-flat m-t-xs modal-trigger"
-									href="#update-confirm">Update</a>
-							</div>
-							<div class="divider mailbox-divider"></div>
-							<h5>Feedback List</h5>
-							<div class="class-actions m-t-md"></div>
-							<div class="divider mailbox-divider"></div>
-							<div class="">
-								<table style="table-layout: fixed;"
-									class="responsive-table bordered striped p-h-md">
-									<thead>
-										<tr>
-											<th data-field="id">Account</th>
-											<th data-field="name">Full Name</th>
-											<th data-field="price">Phone</th>
-											<th data-field="price">Class</th>
-											<th data-field="price">Feedback</th>
-										</tr>
-									</thead>
-									<tbody>
-										<tr>
-											<td>trangdm2</td>
-											<td>Do Manh Trang</td>
-											<td>0934560199</td>
-											<td>HN19_FR_JAVA_06</td>
-											<td><a
-												class="modal-trigger waves-effect waves-blue btn m-t-xs"
-												href="#feedback-modal">View feedback</a></td>
-										</tr>
-									</tbody>
-								</table>
-							</div>
-						</div>
-					</div> -->
-				</div>
+				<div class="col s12 m7 l9" id="subjectDetails"></div>
 			</div>
 		</div>
 	</div>
@@ -89,7 +47,7 @@
 				class="material-icons">description</i></a></li>
 	</ul>
 </div>
-<!-- Modal feedback-->
+<!-- Modal feedback -->
 <div id="feedback-modal" class="modal">
 	<div class="modal-content">
 		<h4>Feedback</h4>
@@ -104,7 +62,9 @@
 		<div class="modal-footer">
 			<a href="#!"
 				class=" modal-action modal-close waves-effect waves-green btn-flat">Cancel</a>
-			<a href="#!" class=" modal-action waves-effect waves-red btn-flat">Delete</a>
+			<a href="#!"
+				class=" modal-action modal-close waves-effect waves-red btn-flat"
+				th:onclick="del_subject()">Delete</a>
 		</div>
 	</div>
 </div>

@@ -12,6 +12,8 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 /**
  *
  * @author TrangDM2
@@ -39,12 +41,15 @@ public class Subject implements Serializable {
 	@Column(name = "Status")
 	private String status;
 
+	@JsonIgnore
 	@OneToMany(mappedBy = "subject")
 	private List<Score> scoreList;
 
+	@JsonIgnore
 	@OneToMany(mappedBy = "subject")
 	private List<Feedback> feedbackList;
 
+	@JsonIgnore
 	@OneToMany(mappedBy = "subject")
 	private List<ClazzSubject> clazzSubjectList;
 
@@ -71,6 +76,15 @@ public class Subject implements Serializable {
 
 	public Subject(String name, String code, float duration, String status) {
 		super();
+		this.name = name;
+		this.code = code;
+		this.duration = duration;
+		this.status = status;
+	}
+
+	public Subject(Integer id, String name, String code, float duration, String status) {
+		super();
+		this.id = id;
 		this.name = name;
 		this.code = code;
 		this.duration = duration;

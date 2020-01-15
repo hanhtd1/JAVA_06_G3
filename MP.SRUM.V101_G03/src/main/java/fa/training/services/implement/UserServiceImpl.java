@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import fa.training.models.User;
 import fa.training.repositories.UserRepository;
 import fa.training.services.UserService;
+import fa.training.utils.Constant;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -27,7 +28,9 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public List<User> getMembers(User user) {
 		LOGGER.info("Get classmate of user " + user.getAccount());
-		return userRepository.getMembers(user);
+		String role = Constant.TRAINEE;
+		String status = Constant.TRAINEE_ACTIVE_STATUS;
+		return userRepository.getMembers(role, status, user);
 	}
 
 	/**

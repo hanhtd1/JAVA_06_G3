@@ -57,4 +57,20 @@ public interface SubjectService {
 	 * @return
 	 */
 	List<Subject> findSubjectByUserId(Integer userId, Integer pageIndex);
+	
+	/**
+	 * @author HoangLV7
+	 *
+	 * @param id
+	 * @return change status of subject
+	 */
+	Subject delSubject(int id);
+	
+	/**
+	 * @author HoangLV7
+	 *
+	 * @param status
+	 * @return get subjects by status
+	 */
+	List<Subject> findByStatus(String status);
 }

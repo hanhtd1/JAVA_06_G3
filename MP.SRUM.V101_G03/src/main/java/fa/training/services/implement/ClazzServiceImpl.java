@@ -64,7 +64,8 @@ public class ClazzServiceImpl implements ClazzService {
 	
 	@Override
 	public List<Clazz> findBySubject(int subjectId) {
-		return clazzRepository.findBySubject(subjectId);
+		String status = Constant.CLASS_ACTIVE_STATUS;
+		return clazzRepository.findBySubject(status, subjectId);
 	}
 
 	@Override
