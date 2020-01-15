@@ -1,3 +1,16 @@
+function load_subjectDetails(subjectId){
+	$.ajax({
+		type: "GET",
+		url: "/admin/class-by-subject",
+		data: {
+			subjectId : subjectId
+		},
+		success: (data)=>{
+			$('#subjectDetails').html(data)
+		}
+	})
+}
+
 function load_subjects(){
 	$.ajax({
 		type: "POST",
@@ -14,15 +27,21 @@ function load_subjects(){
 				Materialize.toast(data.message, 4000)
 			}else{
 				Materialize.toast(data.message, 4000);
-				$('#listSubjects').append('<li>\n'
-									+'<a href="" class="waves-effect waves-light"> \n'
-									+'	<h5 class="f-s-19">' + subject.name +'</h5>'
-									+'	<p> \n'
-									+ subject.code
-									+'	</p> \n'
-									+'</a> \n'
-									+'</li>')
 			}
+		}
+	})
+}
+
+function load_Classes(){
+	var status = $('#class-status').val();
+	$.ajax({
+		type: "GET",
+		url : "/admin/search",
+		data:{
+			subjectStatus: status
+		},
+		success: (data)=>{
+			$('#list-subject').html(data)
 		}
 	})
 }
@@ -36,7 +55,8 @@ function edit_subjects(){
 			subjectId : $('#subjectId').val(),
 			subjectName : $('#subjectName').val(),
 			subjectCode : $('#code').val(),
-			subjectDuration : $('#duration').val()
+			subjectDuration : $('#duration').val(),
+			subjectStatus : $('#subjectStatus').val()
 		},
 		success: (data)=>{
 			Materialize.toast(data.message, 4000);
@@ -59,15 +79,61 @@ function load_feedback(userId, subjectId){
 	})
 }
 
-function load_subjectDetails(subjectId){
+
+
+var subId;
+function get_subject(subjectId) {
+	subId = subjectId;
+}
+
+function del_subject() {
 	$.ajax({
-		type: "GET",
-		url: "/admin/class-by-subject",
-		data: {
-			subjectId : subjectId
+		type: "DELETE",
+		url : "/admin/del-subject",
+		data : {
+			subjectId : subId
 		},
 		success: (data)=>{
-			$('#subjectDetails').html(data)
+			console.log('del success')
 		}
 	})
 }
+
+$("#subject-new").click(()=>{
+	$.get({
+		url: "/admin/search",
+		data:{
+			subjectStatus : "New"
+		},
+		success: (res)=>{
+			console.log(res);
+			$('#list-subject').html(res)
+		}
+	});
+});
+
+$("#subject-active").click(()=>{
+	$.get({
+		url: "/admin/search",
+		data:{
+			subjectStatus : "Active"
+		},
+		success: (res)=>{
+			console.log(res);
+			$('#list-subject').html(res)
+		}
+	});
+});
+
+$("#subject-del").click(()=>{
+	$.get({
+		url: "/admin/search",
+		data:{
+			subjectStatus : "In Active"
+		},
+		success: (res)=>{
+			console.log(res);
+			$('#list-subject').html(res)
+		}
+	});
+});

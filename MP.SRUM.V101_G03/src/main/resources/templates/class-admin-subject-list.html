@@ -1,0 +1,9 @@
+<ul th:each="subject : ${subjects}">
+	<li><a href="#!" class="waves-effect waves-light"
+		th:onclick="'load_subjectDetails('+${subject.id}+')'">
+			<h5 class="f-s-19" th:text=${subject.name}></h5>
+			<p th:text="${subject.code}">
+				<i class="tiny material-icons">person_pin</i>
+			</p>
+	</a></li>
+</ul>

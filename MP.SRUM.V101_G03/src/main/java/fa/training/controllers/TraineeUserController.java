@@ -58,7 +58,6 @@ public class TraineeUserController {
 		String account = ((UserDetails)auth.getPrincipal()).getUsername();
 		LOGGER.info(account + " login successful");
 		User trainee = iUserService.getUser(account);
-		//Handling null exception
 		Clazz classTrainee = clazzService.findClazzByTrainee(trainee);
 		List<User> users = iUserService.getMembers(trainee);
 		List<Attendance> attendances = iAttendanceService.getAttendancesByUser(trainee);

@@ -1,5 +1,6 @@
 package fa.training.services.implement;
 
+import java.sql.SQLException;
 import java.util.List;
 
 import javax.transaction.Transactional;
@@ -47,12 +48,13 @@ public class SubjectServiceImpl implements SubjectService {
 
 	@Override
 	public Subject findSubjectByCode(String code) {
+		//TODO edit orElse
 		return subjectRepository.findSubjectByCode(code).orElse(new Subject());
 	}
 
 	@Override
 	public Boolean checkSubjectExisted(String code) {
-		return findSubjectByCode(code).getId() != null? true : false;
+		return subjectRepository.findSubjectByCode(code).isPresent();
 	}
 
 	@Override
@@ -60,6 +62,7 @@ public class SubjectServiceImpl implements SubjectService {
 		return subjectRepository.findSubjectById(id).orElse(new Subject());
 	}
 
+<<<<<<< HEAD
 	/**
 	 * @author TrangDM2
 	 * @param clazz
@@ -69,5 +72,21 @@ public class SubjectServiceImpl implements SubjectService {
 	public List<Subject> findSubjectsByClass(Clazz clazz){
 	  return subjectRepository.findSubjectsByClass(clazz);
 	}
+=======
+	@Override
+	public Subject delSubject(int id) {
+		Subject subject = subjectRepository.findSubjectById(id).orElse(null);
+		//TODO edit orElse null
+		subject.setStatus(Constant.SUBJECT_DISABLED_STATUS);
+		return subjectRepository.save(subject);
+	}
+
+	@Override
+	public List<Subject> findByStatus(String status) {
+		//TODO edit orElse null
+		return subjectRepository.findSubjectByStatus(status);
+	}
+
+>>>>>>> ffc10e42682fc56e7d4fe93acdb0324f39b6f462
 
 }

@@ -46,12 +46,21 @@ public class Subject implements Serializable {
 	@OneToMany(mappedBy = "subject")
 	private List<Score> scoreList;
 
+<<<<<<< HEAD
   @JsonIgnore
 	@OneToMany(mappedBy = "subject")
 	private List<Feedback> feedbackList;
 
   @JsonIgnore
 	@OneToMany(mappedBy = "subject", cascade = CascadeType.MERGE)
+=======
+	@JsonIgnore
+	@OneToMany(mappedBy = "subject")
+	private List<Feedback> feedbackList;
+
+	@JsonIgnore
+	@OneToMany(mappedBy = "subject")
+>>>>>>> ffc10e42682fc56e7d4fe93acdb0324f39b6f462
 	private List<ClazzSubject> clazzSubjectList;
 
 	public Subject() {
@@ -77,6 +86,15 @@ public class Subject implements Serializable {
 
 	public Subject(String name, String code, float duration, String status) {
 		super();
+		this.name = name;
+		this.code = code;
+		this.duration = duration;
+		this.status = status;
+	}
+
+	public Subject(Integer id, String name, String code, float duration, String status) {
+		super();
+		this.id = id;
 		this.name = name;
 		this.code = code;
 		this.duration = duration;

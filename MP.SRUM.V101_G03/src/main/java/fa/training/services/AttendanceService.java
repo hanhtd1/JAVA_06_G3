@@ -11,8 +11,8 @@ import fa.training.models.User;
  */
 public interface AttendanceService {
 
-	public List<Attendance> getAttendancesByUser(User user);
+	List<Attendance> getAttendancesByUser(User user);
 
-  List<Attendance> saveAttendances(List<Attendance> attendances);
+	List<Attendance> saveAttendances(List<Attendance> attendances);
 
 }
