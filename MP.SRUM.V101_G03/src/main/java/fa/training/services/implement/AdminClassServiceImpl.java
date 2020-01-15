@@ -86,4 +86,14 @@ public class AdminClassServiceImpl implements AdminClassService {
   public Clazz getClassByName(String name) {
     return classRepository.findByName(name);
   }
+  
+  /**
+   * @author TrangDM2
+   * @param userId
+   * @return
+   */
+  @Override
+  public List<Clazz> getClassByUser(Integer userId){
+    return classRepository.findClazzsByUser(userId);
+  }
 }

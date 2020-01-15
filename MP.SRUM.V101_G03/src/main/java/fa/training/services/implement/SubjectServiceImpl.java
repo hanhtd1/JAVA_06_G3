@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
+import fa.training.models.Clazz;
 import fa.training.models.Subject;
 import fa.training.repositories.SubjectRepository;
 import fa.training.services.SubjectService;
@@ -36,8 +37,7 @@ public class SubjectServiceImpl implements SubjectService {
 
 	@Override
 	public List<Subject> findAll() {
-		String status = Constant.SUBJECT_ACTIVE_STATUS;
-		return subjectRepository.findByStatus(status);
+		return subjectRepository.findByStatus(Constant.SUBJECT_ACTIVE_STATUS);
 	}
 
 	@Override
@@ -60,5 +60,14 @@ public class SubjectServiceImpl implements SubjectService {
 		return subjectRepository.findSubjectById(id).orElse(new Subject());
 	}
 
+	/**
+	 * @author TrangDM2
+	 * @param clazz
+	 * @return
+	 */
+	@Override
+	public List<Subject> findSubjectsByClass(Clazz clazz){
+	  return subjectRepository.findSubjectsByClass(clazz);
+	}
 
 }

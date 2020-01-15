@@ -36,7 +36,7 @@ public class AdminUserManageRestController {
   /**
    *@author TrangDM2
    */
-  @GetMapping("trainee-info")
+  @GetMapping("user-info")
   public ResponseEntity<User> getTraineeInfo(@RequestParam int id) {
     User user = adminUserService.getUser(id);
     return new ResponseEntity<User>(user, HttpStatus.OK);
@@ -45,9 +45,10 @@ public class AdminUserManageRestController {
   /**
    *@author TrangDM2
    */
-  @GetMapping("get-trainees")
-  public ResponseEntity<List<UserDto>> getTrainees(@RequestParam String keyword, @RequestParam String status) {
-    List<UserDto> trainees = adminUserService.findUserByKeyword(keyword, Constant.TRAINEE, status);
+  @GetMapping("get-users")
+  public ResponseEntity<List<UserDto>> getTrainees(@RequestParam String keyword, @RequestParam String status, @RequestParam Integer role) {
+    String userRole = role==1?Constant.TRAINEE:Constant.TRAINER;
+    List<UserDto> trainees = adminUserService.findUserByKeyword(keyword, userRole, status);
     return new ResponseEntity<List<UserDto>>(trainees, HttpStatus.OK);
   }
 
@@ -72,7 +73,7 @@ public class AdminUserManageRestController {
     
     try {
       requestUser.setRole(role==1?Constant.TRAINEE:Constant.TRAINER);
-      requestUser.setStatus(Constant.TRAINEE_DEFAULT_STATUS);
+      requestUser.setStatus(Constant.USER_DEFAULT_STATUS);
       requestUser.setPassword(bcrypt.encode(Constant.DEFAULT_PASSWORD));
       adminUserService.saveUser(requestUser);
       message = Constant.CREATE_SUCCESS_MESSAGE;
@@ -90,6 +91,7 @@ public class AdminUserManageRestController {
    */
   @PostMapping("update-user")
   public ResponseEntity<String> updaterUser(@RequestBody User user){
+    String message = new String();
     User updateUser = user;
     User toUpdateUser = adminUserService.getUserByAccount(user.getAccount()).orElseThrow(() -> {
       throw new UsernameNotFoundException(Constant.NOT_FOUND_MESSAGE);
@@ -98,9 +100,15 @@ public class AdminUserManageRestController {
     updateUser.setPassword(toUpdateUser.getPassword());
     updateUser.setRole(toUpdateUser.getRole());
     updateUser.setStatus(toUpdateUser.getStatus());
-    adminUserService.saveUser(updateUser);
     
-    return new ResponseEntity<String>(Constant.UPDATE_SUCCESS_MESSAGE,HttpStatus.OK);
+    try {
+      adminUserService.saveUser(updateUser);  
+      message = Constant.UPDATE_SUCCESS_MESSAGE;
+    } catch (Exception e) {
+      message = Constant.UPDATE_FAIL_MESSAGE;
+    }
+    
+    return new ResponseEntity<String>(message,HttpStatus.OK);
   }
 
   /**

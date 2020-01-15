@@ -12,7 +12,7 @@ import fa.training.repositories.UserRepository;
 import fa.training.utils.Constant;
 
 @Service
-public class UserLoginServiceImpl implements UserDetailsService {
+public class UserLoginService implements UserDetailsService {
 
   @Autowired
   private UserRepository userRepository;

@@ -75,13 +75,13 @@
 											<p>Trainee List</p>
 											<div class="class-actions m-t-md">
 												<a class="modal-trigger waves-effect waves-light btn blue"
-													 href="#attendance-modal">Attendance</a> <a onclick="addTraineesToClass()"
+													 href="#attendance-modal">Attendance</a> <a onclick="loadTraineesToAddToClass()"
 															class="waves-effect waves-light btn light-green modal-trigger "
 															href="#add-trainee-modal">Add Trainees</a> <a
 															class="modal-trigger waves-effect waves-light btn green"
 															href="#update-subject-modal">Update Subjects</a> <a
 															class="modal-trigger waves-effect waves-light btn orange"
-															href="#update-mark-modal">Update Marks</a> <a
+															href="#update-mark-modal">Update Marks</a> <a onclick="loadTrainersToUpdate()"
 															class="modal-trigger waves-effect waves-light btn light-blue"
 															href="#update-trainer-modal">Update Trainers</a>
 											</div>
@@ -254,7 +254,7 @@
 			<form>
 				<div class="row">
 					<div class="input-field col s12">
-						<input onkeyup="addTraineesToClass()" id="find-trainee" type="text" class="validate"> <label
+						<input onkeyup="loadTraineesToAddToClass()" id="find-trainee" type="text" class="validate"> <label
 							for="find-trainee">Find trainee</label>
 					</div>
 				</div>
@@ -455,27 +455,7 @@
 							<th class="w-25" data-field="price">Action</th>
 						</tr>
 					</thead>
-					<tbody>
-						<tr>
-							<td>Java Programing Language</td>
-							<td>JPL</td>
-							<td>9</td>
-							<td>
-								<button class="btn waves-effect orange p-h-xs">
-									<i class="material-icons">remove</i>
-								</button>
-							</td>
-						</tr>
-						<tr>
-							<td>Java Programing Language</td>
-							<td>JPL</td>
-							<td>9</td>
-							<td>
-								<button class="btn waves-effect orange p-h-xs">
-									<i class="material-icons">remove</i>
-								</button>
-							</td>
-						</tr>
+					<tbody id="added_subjects">
 					</tbody>
 				</table>
 			</div>
@@ -491,27 +471,7 @@
 							<th class="w-25" data-field="price">Action</th>
 						</tr>
 					</thead>
-					<tbody>
-						<tr>
-							<td>Java Programing Language</td>
-							<td>JPL</td>
-							<td>9</td>
-							<td>
-								<button class="btn waves-effect blue p-h-xs">
-									<i class="material-icons">add</i>
-								</button>
-							</td>
-						</tr>
-						<tr>
-							<td>Java Programing Language</td>
-							<td>JPL</td>
-							<td>9</td>
-							<td>
-								<button class="btn waves-effect blue p-h-xs">
-									<i class="material-icons">add</i>
-								</button>
-							</td>
-						</tr>
+					<tbody id="subjects_for_add">
 					</tbody>
 				</table>
 			</div>
@@ -526,17 +486,8 @@
 <div id="update-mark-modal" class="modal modal-fixed-footer">
 	<div class="modal-content">
 		<h3>Update Mark</h3>
-		<div class="input-field col s4">
-			<p class="f-s-16">Select subject</p>
-			<select class="p-h-md">
-				<option value="" selected>Choose</option>
-				<option value="1">JPL</option>
-				<option value="2">SQL</option>
-				<option value="3">ORM</option>
-				<option value="4">CNU</option>
-				<option value="5">JWEB</option>
-				<option value="6">JSF</option>
-			</select>
+		<div class="col s12" id="filter-subjects">
+
 		</div>
 		<div>
 			<table style="table-layout: fixed;"
@@ -551,19 +502,12 @@
 					</tr>
 				</thead>
 				<tbody id="list-trainees-marks">
-					<tr>
-						<td>trangdm2</td>
-						<td>Do Manh Trang</td>
-						<td>0934560199</td>
-						<td><input type="number" class="validate"></td>
-						<td><input type="number" class="validate"></td>
-					</tr>
 				</tbody>
 			</table>
 		</div>
 	</div>
 	<div class="modal-footer">
-		<a href="#!" class="modal-action modal-close waves-effect green btn ">Submit</a>
+		<a href="#!" onclick="submitMarks()" class="modal-action modal-close waves-effect green btn ">Submit</a>
 	</div>
 </div>
 <!-- Modal attendance -->
@@ -582,17 +526,7 @@
 							<th class="w-25" data-field="price">Action</th>
 						</tr>
 					</thead>
-					<tbody>
-						<tr>
-							<td>Trainer Abc Def</td>
-							<td>trainerad2</td>
-							<td>0987654321</td>
-							<td>
-								<button class="btn waves-effect orange p-h-xs">
-									<i class="material-icons">remove</i>
-								</button>
-							</td>
-						</tr>
+					<tbody id="inclass-trainer">
 					</tbody>
 				</table>
 			</div>
@@ -608,47 +542,8 @@
 							<th class="w-25" data-field="price">Action</th>
 						</tr>
 					</thead>
-					<tbody>
-						<tr>
-							<td>Trainer Abc Def</td>
-							<td>trainerad2</td>
-							<td>0987654321</td>
-							<td>
-								<button class="btn waves-effect blue p-h-xs">
-									<i class="material-icons">add</i>
-								</button>
-							</td>
-						</tr>
-						<tr>
-							<td>Trainer Abc Def</td>
-							<td>trainerad2</td>
-							<td>0987654321</td>
-							<td>
-								<button class="btn waves-effect blue p-h-xs">
-									<i class="material-icons">add</i>
-								</button>
-							</td>
-						</tr>
-						<tr>
-							<td>Trainer Abc Def</td>
-							<td>trainerad2</td>
-							<td>0987654321</td>
-							<td>
-								<button class="btn waves-effect blue p-h-xs">
-									<i class="material-icons">add</i>
-								</button>
-							</td>
-						</tr>
-						<tr>
-							<td>Trainer Abc Def</td>
-							<td>trainerad2</td>
-							<td>0987654321</td>
-							<td>
-								<button class="btn waves-effect blue p-h-xs">
-									<i class="material-icons">add</i>
-								</button>
-							</td>
-						</tr>
+					<tbody id="list-trainers">
+
 					</tbody>
 				</table>
 			</div>

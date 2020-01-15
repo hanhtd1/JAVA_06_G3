@@ -10,6 +10,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
+import fa.training.models.Clazz;
 import fa.training.models.Subject;
 
 @Repository
@@ -59,4 +60,12 @@ public interface SubjectRepository extends JpaRepository<Subject, Integer> {
 	 */
 	@Query(value = "SELECT * FROM udf_findSubjectByUser(:userId)", nativeQuery = true)
 	Page<Subject> findSubjectByUserId(@Param("userId") Integer userId, Pageable pageable);
+	
+	/**
+	 * @author TrangDM2
+	 * @param clazz
+	 * @return
+	 */
+	@Query("select cs.subject from ClazzSubject cs where cs.clazz= :clazz")
+	List<Subject> findSubjectsByClass(@Param("clazz") Clazz clazz);
 }

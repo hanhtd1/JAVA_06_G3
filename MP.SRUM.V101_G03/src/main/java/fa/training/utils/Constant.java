@@ -13,7 +13,7 @@ public class Constant {
 	
 	//Status
 	public static final String CLASS_DEFAULT_STATUS = "In Comming";
-  public static final String TRAINEE_DEFAULT_STATUS = "New";
+  public static final String USER_DEFAULT_STATUS = "New";
   public static final String TRAINEE_ACTIVE_STATUS = "Active";
   public static final String TRAINEE_DISABLED_STATUS = "In Active";
   public static final String TRAINEE_GRADUATED_STATUS = "Graduated";

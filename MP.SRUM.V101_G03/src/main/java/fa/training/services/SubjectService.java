@@ -2,6 +2,7 @@ package fa.training.services;
 
 import java.util.List;
 
+import fa.training.models.Clazz;
 import fa.training.models.Subject;
 
 public interface SubjectService {
@@ -57,4 +58,7 @@ public interface SubjectService {
 	 * @return
 	 */
 	List<Subject> findSubjectByUserId(Integer userId, Integer pageIndex);
+
+  List<Subject> findSubjectsByClass(Clazz clazz);
+
 }

@@ -26,6 +26,8 @@ public interface UserRepository extends JpaRepository<User, Integer> {
 	@Query("update User u set u.status= :status where u.id= :id")
 	void updateUserStatus(@Param("status") String status, @Param("id") int id);
 
+	@Query(value= "SELECT * FROM uzer u WHERE u.id IN (SELECT uc.user_id FROM user_clazz uc WHERE uc.clazz_id = :clazzId) AND u.role= :role ", nativeQuery= true)
+	List<User> findUserByClazzAndRole(@Param("clazzId") Integer clazzId, @Param("role") String role);
 	/**
 	 * @author TrangDM2
 	 * 

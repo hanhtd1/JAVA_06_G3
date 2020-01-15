@@ -25,4 +25,6 @@ public interface AdminClassService {
 
   Clazz getClassByName(String name);
 
+  List<Clazz> getClassByUser(Integer userId);
+
 }

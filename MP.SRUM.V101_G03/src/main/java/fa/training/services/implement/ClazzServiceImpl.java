@@ -69,6 +69,6 @@ public class ClazzServiceImpl implements ClazzService {
 
 	@Override
 	public Clazz findClazzByTrainee(User trainee) {
-		return clazzRepository.findClazzByTrainee(trainee.getId()).orElse(new Clazz());
+		return clazzRepository.findClazzByUser(trainee.getId()).orElse(new Clazz());
 	}
 }

@@ -1,14 +1,16 @@
 var currentTrainee;
 var currentClass;
-
-// Traineee
+var currentTrainer;
+//=========================================================================
+// Trainee
 function loadTrainees(){
 	$("#list_trainees").html("");
 	$.get({
-		url: "/admin/get-trainees",
+		url: "/admin/get-users",
 		data: {
 			keyword: $("#find-trainee").val(),
-			status: $("#trainee-status").val()
+			status: $("#trainee-status").val(),
+			role: 1
 		},
 		success: (resp)=>{
 			resp.map((res)=>{
@@ -19,7 +21,7 @@ function loadTrainees(){
 				}
 			})
 		}
-	})
+	});
 	return false;
 }
 function showTraineeList(res, className){
@@ -38,7 +40,7 @@ function loadTraineeInfo(id){
 	$("#trainee-information").show();
 	this.currentTrainee = id;
 	$.get({
-		url: "/admin/trainee-info",
+		url: "/admin/user-info",
 		data: {
 			id: id
 		},
@@ -78,26 +80,28 @@ function showScoreList(res, feedbackBtn){
 		"<td>"+feedbackBtn+"</td>\n" +
 		"</tr>")
 }
+//unexpected
 function openModal(){
 	$("#feedback-modal").show();
 }
 $("#exit-feedback").click(()=>{
 	$("#feedback-modal").hide();
-})
+});
+//unexpected
 function editTraineeInfo(){
 	$.get({
-		url: "/admin/trainee-info",
+		url: "/admin/user-info",
 		data: {
 			id: this.currentTrainee
 		},
 		success: (resp)=>{
-			$("#update_first_name").val(resp.firstName)
-			$("#update_last_name").val(resp.lastName)
-			$("#update_email").val(resp.email)
-			$("#update_phone").val(resp.phone)
-			$("#update_birthday").val(resp.birthDay)
-			$("#update_account").val(resp.account)
-			$('#update_gender').val(resp.gender)
+			$("#update_first_name").val(resp.firstName);
+			$("#update_last_name").val(resp.lastName);
+			$("#update_email").val(resp.email);
+			$("#update_phone").val(resp.phone);
+			$("#update_birthday").val(resp.birthDay);
+			$("#update_account").val(resp.account);
+			$('#update_gender').val(resp.gender);
 		}
 	});
 }
@@ -160,7 +164,8 @@ function changeTraineeStatus(){
 	})
 }
 
-// CLassss
+//=========================================================================
+// CLass
 function loadClasses(){
 	$("#list_classes").html("");
 	$.get({
@@ -174,9 +179,10 @@ function loadClasses(){
 				this.showClassList(res)
 			})
 		}
-	})
+	});
 	return false;
 }
+
 function showClassList(res){
 	$("#list_classes").append("<li>\n" +
 		"<a  href=\"#!\" onclick=\"loadClassDetail("+res.id+")\" >\n" +
@@ -206,14 +212,18 @@ function loadClassDetail(id){
 			$("#old-status").val(resp.status);
 			loadClassListTraineeToAttendance(resp.userList);
 			loadClassListTraineeToClassDetail(resp.userList);
+			loadClassListTraineeToUpdateMark(resp.userList);
+			loadSubjects();
+			loadAllSubjectsExist();
+			loadAddedSubjects();
 		}
 	})
 }
 
-function addTraineesToClass() {
+function loadTraineesToAddToClass() {
 	$('#list-trainees-to-add').html("");
 	$.get({
-		url: '/admin/add-trainees',
+		url: '/admin/load-add-trainees',
 		data: {
 			id: this.currentClass,
 			keyword: $('#find-trainee').val()
@@ -223,6 +233,7 @@ function addTraineesToClass() {
 		}
 	})
 }
+
 function addTraineeToClass(id) {
 	$.get({
 		url: '/admin/add-trainee-toclass',
@@ -233,11 +244,12 @@ function addTraineeToClass(id) {
 		success: (resp)=>{
 			loadClasses();
 			loadClassDetail(this.currentClass);
-			addTraineesToClass();
+			loadTraineesToAddToClass();
 			Materialize.toast(resp, 4000);
 		}
 	})
 }
+
 function loadListTraineeToAddToClass(trainees) {
 	trainees.map(trainee=>{
 		$('#list-trainees-to-add').append("<tr>\n" +
@@ -266,25 +278,120 @@ function loadClassListTraineeToClassDetail(trainees){
 			"href=\"#trainee-info\">\n" +
 			"<i class=\"material-icons\">perm_identity</i>\n" +
 			"</a>\n" +
-			"<a onclick=\"removeTraineeFromClass("+trainee.id+")\" class=\"waves-effect sweetalert-cancel waves-light btn red p-h-xs\">\n" +
+			"<a onclick=\"removeTraineeFromClass("+trainee.id+")\" class=\"waves-effect waves-light btn red p-h-xs\">\n" +
 			"<i class=\"material-icons\">clear</i></a>\n" +
 			"</td>\n" +
-			"</tr>")
-	})
-}
-//TODO
-function loadClassListTraineeToUpdateMark(trainees){
-	$("#list_trainees").html("");
-	trainees.map((trainee)=>{
-		$("#list-trainees-marks").append("<tr>\n" +
-			"<td>"+trainee.name+"</td>\n" +
-			"<td>Do Manh Trang</td>\n" +
-			"<td>0934560199</td>\n" +
-			"<td><input type=\"number\" class=\"validate\"></td>\n" +
-			"<td><input type=\"number\" class=\"validate\"></td>\n" +
 			"</tr>");
 	})
 }
+
+//TODO
+function loadClassListTraineeToUpdateMark(trainees){
+	$("#list-trainees-marks").html("");
+	trainees.map((trainee)=>{
+		$("#list-trainees-marks").append("<tr class='trainee-list'>\n" +
+			"<td>"+trainee.account+"</td>\n" +
+			"<td>"+trainee.firstName+" "+trainee.lastName+"</td>\n" +
+			"<td>"+trainee.phone+"</td>\n" +
+			"<td><input type=\"hidden\" name='userId' class=\"validate\"><input type=\"number\" name='theory' class=\"validate\"></td>\n" +
+			"<td><input type=\"number\" name='practice' class=\"validate\"></td>\n" +
+			"</tr>");
+	})
+}
+
+function loadAllSubjectsExist() {
+	$.get({
+		url: '/admin/load-all-subjects',
+		success: (resp)=>{
+			loadClassListSubjectToAddSubject(resp);
+		}
+	})
+}
+
+function loadAddedSubjects() {
+	$.get({
+		url: '/admin/load-added-subjects',
+		data: {
+			clazzId: this.currentClass
+		},
+		success: (resp)=>{
+			loadClassListAddedSubjects(resp);
+		}
+	})
+}
+
+function loadSubjects() {
+	$.get({
+		url: '/admin/load-subjects-in-class',
+		data: {
+			classId: this.currentClass
+		},
+		success: (resp)=>{
+			loadClassListSubjectToUpdateMark(resp);
+		}
+	})
+}
+
+function loadClassListSubjectToAddSubject(subjects){
+	$("#subjects_for_add").html("");
+	subjects.map((subject)=>{
+		$("#subjects_for_add").append("<tr>\n" +
+			"<td>"+subject.name+"</td>\n" +
+			"<td>"+subject.code+"</td>\n" +
+			"<td>"+subject.duration+"</td>\n" +
+			"<td>\n" +
+			"<button onclick='addSubjectToClass("+subject.id+")' class=\"btn waves-effect blue p-h-xs\">\n" +
+			"<i class=\"material-icons\">add</i>\n" +
+			"</button>\n" +
+			"</td>\n" +
+			"</tr>");
+	})
+}
+
+function loadClassListAddedSubjects(subjects){
+	$("#added_subjects").html("");
+	subjects.map((subject)=>{
+		$("#added_subjects").append("<tr>\n" +
+			"<td>"+subject.name+"</td>\n" +
+			"<td>"+subject.code+"</td>\n" +
+			"<td>"+subject.duration+"</td>\n" +
+			"<td>\n" +
+			"<button onclick='addSubjectToClass("+subject.id+")' class=\"btn waves-effect orange p-h-xs\">\n" +
+			"<i class=\"material-icons\">remove</i>\n" +
+			"</button>\n" +
+			"</td>\n" +
+			"</tr>");
+	})
+}
+
+function addSubjectToClass(id) {
+	$.get({
+		url: '/admin/add-subject-to-class',
+		data: {
+			subjectId: id,
+			classId: this.currentClass
+		},
+		success: (resp)=>{
+			Materialize.toast(resp, 4000);
+			loadClassDetail(this.currentClass);
+		},
+		error: (error)=>{
+			Materialize.toast(error, 4000);
+		}
+
+	})
+}
+
+function loadClassListSubjectToUpdateMark(subjects){
+	$("#filter-subjects").html("");
+	subjects.map((subject)=>{
+		$("#filter-subjects").append("<div>\n" +
+			"<input id=\"subject"+subject.id+"\" value='"+subject.id+"' name=\"subjectId\" type=\"radio\" class=\"validate\" required>\n" +
+			"<label for=\"subject"+subject.id+"\">"+subject.name+"</label>\n" +
+			"</div>");
+	})
+}
+
 function loadClassListTraineeToAttendance(trainees){
 	$('#attendance-trainees').html("");
 	trainees.map((trainee)=>{
@@ -305,11 +412,7 @@ function loadClassListTraineeToAttendance(trainees){
 }
 
 function loadClassTraineeInfo(id){
-
-}
-
-function viewTraineeReview(id){
-	
+	//TODO
 }
 
 function removeTraineeFromClass(id){
@@ -380,6 +483,7 @@ function loadClassInfoToEdit(){
 		}
 	})
 }
+
 function editClassInfoSubmit(){
 	let form = document.getElementById("update-class-form");
 	$.post({
@@ -395,18 +499,248 @@ function editClassInfoSubmit(){
 
 function submitAttendance() {
 	let attendances = document.getElementById("attendance-trainees");
+	let elements = attendances.querySelectorAll(".attendance-form");
 	$.post({
 		url: '/admin/do-attendance',
-		data: JSON.stringify(generateFormArray(attendances)),
+		data: JSON.stringify(generateFormArray(elements)),
 		contentType: "application/json",
 		success: (resp)=>{
 			Materialize.toast(resp, 4000);
-			console.log(JSON.parse(JSON.stringify(generateFormArray(attendances))));
-			console.log(resp);
+		},
+		error: (error)=>{
+			Materialize.toast(error, 4000);
 		}
 	});
 }
 
+function submitMarks() {
+	let marks = document.getElementById("list-trainees-marks");
+	let elements = marks.querySelectorAll(".trainee-list");
+	$.post({
+		url: '/admin/update-marks',
+		data: JSON.stringify(generateFormArray(elements)),
+		contentType: "application/json",
+		success: (resp)=>{
+			Materialize.toast(resp, 4000);
+		},
+		error: (error)=>{
+			Materialize.toast(error, 4000);
+		}
+	});
+}
+
+function loadTrainersToUpdate() {
+	$('#inclass-trainer').html("");
+	$('#list-trainers').html("");
+	$.get({
+		url: "/admin/get-users",
+		data: {
+			keyword: '',
+			status: 'Active',
+			role: 0
+		},
+		success: (resp)=>{
+			resp.map((res)=>{
+				$('#list-trainers').append("<tr>\n" +
+					"<td>"+res.name+"</td>\n" +
+					"<td>"+res.account+"</td>\n" +
+					"<td>"+res.phone+"</td>\n" +
+					"<td>\n" +
+					"<button onclick='addTrainerToClass("+res.id+")' class=\"btn waves-effect blue p-h-xs\">\n" +
+					"<i class=\"material-icons\">add</i>\n" +
+					"</button>\n" +
+					"</td>\n" +
+					"</tr>")
+			})
+		}
+	});
+	$.get({
+		url: '/admin/get-inclass-trainer', //TODO
+		data: {
+			clazzId: this.currentClass
+		},
+		success: (resp)=>{
+			resp.map((res)=>{
+				$('#inclass-trainer').append("<tr>\n" +
+					"<td>"+res.firstName +" "+res.lastName+"</td>\n" +
+					"<td>"+res.account+"</td>\n" +
+					"<td>"+res.phone+"</td>\n" +
+					"<td>\n" +
+					"<button onclick='removeTrainerFromClass("+res.id+")' class=\"btn waves-effect red p-h-xs\">\n" +
+					"<i class=\"material-icons\">remove</i>\n" +
+					"</button>\n" +
+					"</td>\n" +
+					"</tr>")
+			})
+		}
+	})
+}
+
+function addTrainerToClass(id) {
+	$.get({
+		url: '/admin/add-trainer-toclass',
+		data: {
+			clazzId: this.currentClass,
+			trainerId: id
+		},
+		success: resp=>{
+
+			loadTrainersToUpdate();
+			//TODO
+		}
+	});
+}
+
+function removeTrainerFromClass(id) {
+	$.get({
+		url: '/admin/remove-trainer-fromclass',
+		data: {
+			clazzId: this.currentClass,
+			trainerId: id
+		},
+		success: resp=>{
+			loadTrainersToUpdate();
+			//TODO
+		}
+	});
+}
+//=========================================================================
+//Trainer
+function loadTrainers(){
+	$("#list_trainers").html("");
+	$.get({
+		url: "/admin/get-users",
+		data: {
+			keyword: $("#find-trainer").val(),
+			status: $("#trainer-status").val(),
+			role: 0
+		},
+		success: (resp)=>{
+			resp.map((res)=>{
+				this.showTrainerList(res);
+			})
+		}
+	});
+	return false;
+}
+
+function showTrainerList(res){
+	$("#list_trainers").append("<li>\n" +
+		"<a href=\"#!\" onclick=\"loadTrainerInfo("+res.id+")\">\n" +
+		"<h5 class=\"f-s-19\">"+res.name+"</h5>\n" +
+		"<p><i class=\"tiny material-icons\">cake</i> "+res.birthDay+"</p>\n" +
+		"<p><i class=\"tiny material-icons\">email</i> "+res.email+"</p>\n" +
+		"</a>\n" +
+		"</li>"
+	);
+}
+
+function loadTrainerInfo(id){
+	this.currentTrainer = id;
+	$("#trainer-information").show();
+	$.get({
+		url: '/admin/user-info',
+		data: {
+			id: id
+		},
+		success: (resp)=> {
+			$(".trainerId").val(id);
+			$("#trainer-name").html(resp.firstName + " " + resp.lastName);
+			$("#trainer-email").html(resp.email);
+			$("#trainer-birthday").html(resp.birthDay);
+			$("#trainer-phone").html(resp.phone);
+		}
+	});
+	$.get({
+		url: "/admin/trainer-class",
+		data: {
+			id: id
+		},
+		success: (resp)=>{
+			trainerClassList(resp);
+		}
+	});
+}
+
+function trainerClassList(classes) {
+	$('#list-classes').html("");
+	classes.map(clazz=>{
+		$('#list-classes').append("<li>\n" +
+			"<div class=\"collapsible-header\">"+clazz.name+"</div>\n" +
+			"<div class=\"collapsible-body\">\n" +
+			"<p>"+clazz.note+"</p>\n" +
+			"</div>\n" +
+			"</li>")
+	})
+}
+
+function editTrainerInfo(){
+	$.get({
+		url: "/admin/user-info",
+		data: {
+			id: this.currentTrainer
+		},
+		success: (resp)=>{
+			$("#update_first_name").val(resp.firstName);
+			$("#update_last_name").val(resp.lastName);
+			$("#update_email").val(resp.email);
+			$("#update_phone").val(resp.phone);
+			$("#update_birthday").val(resp.birthDay);
+			$("#update_account").val(resp.account);
+			$('#update_gender').val(resp.gender);
+		}
+	});
+}
+
+function addTrainer(){
+	let form = document.getElementById("add_trainer_form");
+	$.post({
+		url: "/admin/create-user",
+		contentType: "application/json",
+		data: JSON.stringify(Form2JsonMapper(form)),
+		success: (resp)=>{
+			Materialize.toast(resp, 4000);
+		},
+		error: (resp)=>{
+			Materialize.toast(resp.responseText, 4000);
+		}
+	});
+	return false;
+}
+
+function updateTrainer(){
+	let form = document.getElementById('update_trainer_form');
+	console.log(JSON.stringify(Form2JsonMapper(form)));
+	$.post({
+		url: "/admin/update-user",
+		contentType: "application/json",
+		data: JSON.stringify(Form2JsonMapper(form)),
+		success: (resp)=>{
+			Materialize.toast(resp, 4000)
+		},
+		error: (resp)=>{
+			Materialize.toast(resp.responseText, 4000)
+		}
+	});
+	return false;
+}
+
+function changeTrainerStatus(){
+	$.get({
+		url: "/admin/update-status",
+		data: {
+			id: this.currentTrainer,
+			status: $("#trainerStatus").val()
+		},
+		success: (resp)=>{
+			Materialize.toast(resp, 4000)
+		}
+	})
+}
+
+
+
+//=========================================================================
 //Function dung chung
 /**
  * @return {string}
@@ -423,14 +757,12 @@ function Form2JsonMapper(form){
 	});
 	return obj;
 }
-
-function generateFormArray(attendances) {
-	let listAttendance = attendances.querySelectorAll(".attendance-form");
-	let attendanceArray=[];
-	listAttendance.forEach(form=>{
-		attendanceArray.push(Form2JsonMapper(form));
+function generateFormArray(elements) {
+	let listElement=[];
+	elements.forEach(form=>{
+		listElement.push(Form2JsonMapper(form));
 	});
-	return attendanceArray;
+	return listElement;
 }
 
 function generateAccountAndEmail(){

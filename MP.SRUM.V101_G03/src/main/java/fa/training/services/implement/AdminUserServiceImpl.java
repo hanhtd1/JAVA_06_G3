@@ -120,6 +120,17 @@ public class AdminUserServiceImpl implements AdminUserService {
   public void updateUserStatus(int id, String status) {
     userRepository.updateUserStatus(status, id);
   }
+  
+  /**
+   * @author TrangDM2
+   * @param clazzId
+   * @param role
+   * @return
+   */
+  @Override
+  public List<User> getUserByClazzAndRole(Integer clazzId, String role){
+    return userRepository.findUserByClazzAndRole(clazzId, role);
+  }
 
   /**
    *@author TrangDM2

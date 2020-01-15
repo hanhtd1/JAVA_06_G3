@@ -34,4 +34,6 @@ public interface AdminUserService {
 
   void updateUserStatus(int id, String status);
 
+  List<User> getUserByClazzAndRole(Integer clazzId, String role);
+
 }

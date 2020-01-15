@@ -16,6 +16,7 @@ import fa.training.models.User;
 import fa.training.services.AdminClassService;
 import fa.training.services.AdminUserService;
 import fa.training.services.SubjectService;
+import fa.training.utils.Constant;
 
 /**
  * @author TrangDM2
@@ -89,7 +90,9 @@ public class AdminMainController {
    * @author TrangDM2
    */
   @GetMapping("trainer-manage")
-  public String trainerManage() {
+  public String trainerManage(Model model) {
+    List<UserDto> trainers = adminUserService.getUsersByRole(Constant.TRAINER);
+    model.addAttribute("trainers", trainers);
     return "class-admin-trainer-manage";
   }
   
