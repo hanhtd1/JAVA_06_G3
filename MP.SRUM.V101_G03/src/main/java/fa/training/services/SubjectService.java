@@ -2,6 +2,8 @@ package fa.training.services;
 
 import java.util.List;
 
+import org.springframework.data.domain.Pageable;
+
 import fa.training.models.Subject;
 
 public interface SubjectService {
@@ -10,7 +12,7 @@ public interface SubjectService {
 	 * @param clazzId
 	 * @return all subject by clazz
 	 */
-	Subject findSubjectByClazz(Integer clazzId);
+	List<Subject> findSubjectByClazz(Integer clazzId, Pageable pageable);
 
 	/**
 	 * @author HoangLV7
@@ -18,7 +20,7 @@ public interface SubjectService {
 	 * @return list of subject that be active
 	 */
 	List<Subject> findAll();
-	
+
 	/**
 	 * @author HoangLV7
 	 *
@@ -34,7 +36,7 @@ public interface SubjectService {
 	 * @return
 	 */
 	Subject findSubjectByCode(String code);
-	
+
 	/**
 	 * @author HoangLV7
 	 *
@@ -42,7 +44,7 @@ public interface SubjectService {
 	 * @return true is subject existed, or not return false
 	 */
 	Boolean checkSubjectExisted(String code);
-	
+
 	/**
 	 * @author HoangLV7
 	 *
@@ -51,10 +53,10 @@ public interface SubjectService {
 	 */
 	Subject findSubjectById(int id);
 
-	/**@author ToanNT18
+	/**
+	 * @author ToanNT18
 	 * @param userId
-	 * @param pageIndex
-	 * @return
+	 * @return all subject which is teaach by trainer
 	 */
-	List<Subject> findSubjectByUserId(Integer userId, Integer pageIndex);
+	List<Subject> findSubjectByUserId(Integer userId, Pageable pageable);
 }

@@ -5,6 +5,7 @@ import java.util.List;
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
@@ -21,6 +22,7 @@ import fa.training.utils.Constant;
 @Service
 @Transactional
 public class ClazzServiceImpl implements ClazzService {
+	public static int totalPage;
 	@Autowired
 	private ClassRepository clazzRepository;
 
@@ -36,39 +38,54 @@ public class ClazzServiceImpl implements ClazzService {
 
 	@Override
 	public List<Clazz> findAllClazzByTrainerId(Integer userId, Integer pageIndex) {
-		return clazzRepository.findAllClazz(userId, PageRequest.of(pageIndex, Constant.PAGE_SIZE));
+		Page<Clazz> pageClazz = clazzRepository.findAllClazz(userId, PageRequest.of(pageIndex, Constant.PAGE_SIZE));
+		totalPage = pageClazz.getTotalPages();
+		return pageClazz.getContent();
 	}
 
 	@Override
 	public List<Clazz> findClazzByCategory(Integer userId, Integer pageIndex, String category) {
-		return clazzRepository.findClazzByCategory(userId, category, PageRequest.of(pageIndex, Constant.PAGE_SIZE));
+
+		Page<Clazz> pageClazz = clazzRepository.findClazzByCategory(userId, category,
+				PageRequest.of(pageIndex - 1, Constant.PAGE_SIZE));
+		totalPage = pageClazz.getTotalPages();
+		return pageClazz.getContent();
 	}
 
 	@Override
 	public List<Clazz> findClazzByNameOrCategory(Integer userId, Integer pageIndex, String contentSearch) {
-		return clazzRepository
-				.findClazzByNameOrCategory(userId, contentSearch, PageRequest.of(pageIndex, Constant.PAGE_SIZE));
+		Page<Clazz> pageClazz = clazzRepository.findClazzByNameOrCategory(userId, contentSearch,
+				PageRequest.of(pageIndex - 1, Constant.PAGE_SIZE));
+		totalPage = pageClazz.getTotalPages();
+		return pageClazz.getContent();
 	}
 
 	@Override
 	public List<Clazz> findClazzByStatus(Integer userId, Integer pageIndex, String status) {
-		return clazzRepository.findClazzByStatus(userId, status, PageRequest.of(pageIndex, Constant.PAGE_SIZE));
+		Page<Clazz> pageClazz = clazzRepository.findClazzByStatus(userId, status,
+				PageRequest.of(pageIndex - 1, Constant.PAGE_SIZE));
+		totalPage = pageClazz.getTotalPages();
+		return pageClazz.getContent();
 	}
 
 	@Override
 	public List<Clazz> findClazzByStatusAndContent(Integer userId, Integer pageIndex, String status,
 			String contentSearch) {
-		return clazzRepository.findClazzByStatusAndContent(userId, status, contentSearch,
-				PageRequest.of(pageIndex, Constant.PAGE_SIZE));
+		Page<Clazz> pageClazz = clazzRepository.findClazzByStatusAndContent(userId, status, contentSearch,
+				PageRequest.of(pageIndex - 1, Constant.PAGE_SIZE));
+		totalPage = pageClazz.getTotalPages();
+		return pageClazz.getContent();
 	}
-	
+
 	@Override
 	public List<Clazz> findBySubject(int subjectId) {
-		return clazzRepository.findBySubject(subjectId);
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 	@Override
 	public Clazz findClazzByTrainee(User trainee) {
-		return clazzRepository.findClazzByTrainee(trainee.getId()).orElse(new Clazz());
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

@@ -8,5 +8,5 @@ import fa.training.dtos.TraineeScoreDto;
 public interface ScoreService {
 	List<TraineeScoreDto> findByIdUserId(Integer userId);
 
-  List<ScoreDto> getScoreByUser(Integer userId);
+	List<ScoreDto> getScoreByUser(Integer userId);
 }

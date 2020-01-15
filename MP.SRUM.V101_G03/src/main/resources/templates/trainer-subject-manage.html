@@ -1,6 +1,6 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <div class="col s12 m12 l12 no-p-h">
-	<div class="card mailbox-content">
+	<div class="card mailbox-content" th:fragment="content-all">
 		<div class="card-content">
 			<div class="col s12 m12 l12 p-h-md">
 				<h3>Subjects Management</h3>
@@ -31,7 +31,9 @@
 											<td th:text="${subject.duration}"></td>
 											<td><a
 												class="modal-trigger waves-effect waves-blue btn m-t-xs"
-												href="#feedback-modal"><i class="material-icons dp48">chat</i></a></td>
+												href="#feedback-modal"
+												th:onclick="'getFeedback(' + ${subject.id} + ')'"><i
+													class="material-icons dp48">chat</i></a></td>
 										</tr>
 									</tbody>
 								</table>
@@ -57,11 +59,11 @@
 	</ul>
 </div>
 <!-- Modal feedback-->
-<div id="feedback-modal" class="modal">
+<div id="feedback-modal" class="modal" th:fragment="feedback">
 	<form class="col s12">
 		<div class="modal-content">
 			<h4>Add new trainee</h4>
-			<div class="row">Feed backkkkkkkkkk</div>
+			<div class="row" th:text="${feedbacks}">Feedback</div>
 		</div>
 		<div class="modal-footer">
 			<a href="#!"

@@ -18,7 +18,7 @@ public interface TraineeService {
 	 * @author ToanNT18
 	 * @return all trainee by top 10
 	 */
-	List<User> findAllTrainee();
+	List<User> findAllTrainee(int page);
 
 	/**
 	 * @author ToanNT18
@@ -33,6 +33,8 @@ public interface TraineeService {
 	 * @return by all trainee who study in the clazz
 	 */
 	List<User> findTraineeByClazzName(String clazzName, Integer pageIndex);
+
+	List<User> findTraineeByClazzId(int clazzId, Integer pageIndex);
 
 	/**
 	 * @author ToanNT18

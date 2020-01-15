@@ -1,7 +1,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <body>
 	<div class="col s12 m12 l12 no-p-h">
-		<div class="card mailbox-content">
+		<div class="card mailbox-content" th:fragment="content-all">
 			<div class="card-content">
 				<div class="col s12 m12 l12 p-h-md">
 					<h3>Trainees Management</h3>
@@ -26,7 +26,7 @@
 					<div class="input-field col s4 m-t-sm">
 						<p class="f-s-16">View by status</p>
 						<select class="p-h-md" name="status" id="status"
-							onchange="traineeChange()">
+							onchange="loadClass()">
 							<th:block th:each="status : ${statuss}">
 								<option th:value="${status}" th:text="${status}"></option>
 							</th:block>
@@ -67,6 +67,7 @@
 														th:onclick="'setId('+${trainee.id}+')'"> <i
 															class="material-icons dp48">grade</i>
 													</a> <a href="#feedback-modal"
+														th:style="${clazz} ? 'display: inline-block' : 'display: none' "
 														class="modal-trigger waves-effect waves-blue btn m-t-xs"
 														type="submit"> <i class="material-icons dp48">chat</i>
 													</a></td>
@@ -77,6 +78,21 @@
 								</div>
 							</div>
 						</div>
+						<nav aria-label="Page navigation example"
+							th:if="${totalPages > 1}">
+							<ul class="pagination" id="paging">
+								<li class="page-item"><a class="page-link" id="#previous"
+									onclick="changePage(this)">Previous</a></li>
+								<th:block th:each="page: ${#numbers.sequence(1, totalPages)}">
+									<li th:class="page-item"
+										th:classappend="${page == index ? active : ''}"><a
+										class="page-link" th:text="${page}" th:id="${page}"
+										onclick="appendClass(this)"></a></li>
+								</th:block>
+								<li class="page-item"><a class="page-link" id="#next"
+									onclick="changePage(this)">Next</a></li>
+							</ul>
+						</nav>
 					</div>
 				</div>
 			</div>

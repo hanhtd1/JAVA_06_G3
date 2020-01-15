@@ -5,12 +5,13 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
 
 import fa.training.dtos.TraineeScoreDto;
 import fa.training.models.Clazz;
@@ -21,6 +22,7 @@ import fa.training.services.ClazzService;
 import fa.training.services.ReviewTraineeService;
 import fa.training.services.ScoreService;
 import fa.training.services.TraineeService;
+import fa.training.services.implement.TraineeServiceImpl;
 import fa.training.utils.Constant;
 import fa.training.utils.SearchType;
 
@@ -28,132 +30,105 @@ import fa.training.utils.SearchType;
  *
  * @author ToanNT18
  */
-@RestController
+@Controller
 @RequestMapping(value = "/trainer")
 public class TrainerUserController {
-  @Autowired
-  private TraineeService traineeService;
+	@Autowired
+	private TraineeService traineeService;
 
-  @Autowired
-  private ReviewTraineeService reviewTraineeService;
+	@Autowired
+	private ReviewTraineeService reviewTraineeService;
 
-  @Autowired
-  private ScoreService scoreService;
+	@Autowired
+	private ScoreService scoreService;
 
-  @Autowired
-  private ClazzService clazzService;
+	@Autowired
+	private ClazzService clazzService;
 
-  /**
-   * @param model
-   * @return
-   */
-  @RequestMapping(value = "{id}")
-  public String findTraineeById(Model model) {
-    User trainee = traineeService.findTraineeById(2);
-    System.out.println(trainee.toString());
-    return "<h1>Success</h1>";
-  }
+	@GetMapping("search-all")
+	public String traineeManage(@RequestParam(name = "page", defaultValue = Constant.FIRST_PAGE_STRING) int page,
+			Model model) {
 
-  /**
-   * @param model
-   * @return
-   */
-  @RequestMapping(value = "/all")
-  public String findAll(Model model) {
-    List<User> trainee = traineeService.findAllTrainee();
-    System.out.println(trainee.toString());
-    return "<h1>Success</h1>";
-  }
+		List<User> trainees = traineeService.findAllTrainee(page - 1);
 
-  @RequestMapping(value = "/clazz/{id}")
-  public String findTraineeByClazz(Model model) {
-    return "<h1>Success</h1>";
-  }
+		List<Clazz> clazzs = clazzService.findAllClazzByTrainerId(2, Constant.FIRST_PAGE);
 
-  @GetMapping("search-all")
-  public String traineeManage(Model model) {
-    List<User> trainees = traineeService.findAllTrainee();
-    List<Clazz> clazzs = clazzService.findAllClazzByTrainerId(2, Constant.FIRST_PAGE);
+		List<String> categories = clazzs.parallelStream().map(clazz -> clazz.getCategory()).distinct()
+				.collect(Collectors.toList());
 
-    List<String> categories = clazzs.parallelStream().map(clazz -> clazz.getCategory()).distinct()
-        .collect(Collectors.toList());
+		List<String> names = clazzs.parallelStream().map(clazz -> clazz.getName()).distinct()
+				.collect(Collectors.toList());
+		List<String> statuss = trainees.parallelStream().map(trainee -> trainee.getStatus()).distinct()
+				.collect(Collectors.toList());
 
-    List<String> names = clazzs.parallelStream().map(clazz -> clazz.getName()).distinct().collect(Collectors.toList());
-    List<String> statuss = trainees.parallelStream().map(trainee -> trainee.getStatus()).distinct()
-        .collect(Collectors.toList());
+		categories.add(0, Constant.TRAINEE_SEARCH_ALL);
+		names.add(0, Constant.TRAINEE_SEARCH_ALL);
+		statuss.add(0, Constant.TRAINEE_SEARCH_ALL);
 
-    categories.add(0, Constant.TRAINEE_SEARCH_ALL);
-    names.add(0, Constant.TRAINEE_SEARCH_ALL);
-    statuss.add(0, Constant.TRAINEE_SEARCH_ALL);
+		model.addAttribute("index", page);
+		model.addAttribute("totalPages", TraineeServiceImpl.numberOfPage);
+		model.addAttribute("categories", categories);
+		model.addAttribute("names", names);
+		model.addAttribute("statuss", statuss);
+		model.addAttribute("trainees", trainees);
+		return "class-admin-trainee-manage :: trainees";
+	}
 
-    model.addAttribute("categories", categories);
-    model.addAttribute("names", names);
-    model.addAttribute("statuss", statuss);
-    model.addAttribute("trainees", trainees);
-    return "class-admin-trainee-manage :: trainees";
-  }
+	@RequestMapping(value = "/search", method = RequestMethod.GET)
+	public String findTraineeAll(
+			@RequestParam(name = "category", defaultValue = Constant.TRAINEE_SEARCH_ALL) String category,
+			@RequestParam(name = "clazzName", defaultValue = Constant.TRAINEE_SEARCH_ALL) String clazzName,
+			@RequestParam(name = "status", defaultValue = Constant.TRAINEE_SEARCH_ALL) String status,
+			@RequestParam(name = "page", defaultValue = Constant.FIRST_PAGE_STRING) int page, Model model) {
+		List<User> trainees;
+		if (category.equals(Constant.TRAINEE_SEARCH_ALL) && clazzName.equals(Constant.TRAINEE_SEARCH_ALL)
+				&& status.equals(Constant.TRAINEE_SEARCH_ALL)) {
+			return "redirect:search-all?page=" + page;
+		}
+		String searchType = SearchType.searchType(category, clazzName, status);
 
-  @RequestMapping(value = "/search")
-  public String findTraineeAll(
-      @RequestParam(name = "category", defaultValue = Constant.TRAINEE_SEARCH_ALL) String category,
-      @RequestParam(name = "clazzName", defaultValue = Constant.TRAINEE_SEARCH_ALL) String clazzName,
-      @RequestParam(name = "status", defaultValue = Constant.TRAINEE_SEARCH_ALL) String status, Model model) {
-    List<User> trainees;
-    if (category.equals(Constant.TRAINEE_SEARCH_ALL) && clazzName.equals(Constant.TRAINEE_SEARCH_ALL)
-        && status.equals(Constant.TRAINEE_SEARCH_ALL)) {
-      return "redirect:search-all";
-    }
-    String searchType = SearchType.searchType(category, clazzName, status);
+		switch (searchType) {
+		case Constant.CATEGORY:
+			trainees = traineeService.findTraineeByCategory(category, page - 1);
+			break;
+		case Constant.CLAZZ:
+			trainees = traineeService.findTraineeByClazzName(clazzName, page - 1);
+			break;
+		case Constant.STATUS:
+			trainees = traineeService.findTraineeByClazzName(clazzName, page - 1);
+			break;
+		case Constant.CATEGORY_CLAZZ:
+			trainees = traineeService.findTraineeByCategoryAndClazz(category, clazzName, page - 1);
+			break;
+		case Constant.CATEGORY_STATUS:
+			trainees = traineeService.findTraineeByCategoryAndStatus(category, status, page - 1);
+			break;
+		case Constant.CLAZZ_STATUS:
+			trainees = traineeService.findTraineeByClazzAndStatus(clazzName, status, page - 1);
+			break;
+		case Constant.CATEGORY_CLAZZ_STATUS:
+			trainees = traineeService.findTraineeByCategoryAndClazzAndStatus(category, clazzName, status, page - 1);
+			break;
+		default:
+			trainees = new ArrayList<>();
+			break;
+		}
+		model.addAttribute("index", page);
+		System.out.println("page : " + page);
+		model.addAttribute("totalPages", TraineeServiceImpl.numberOfPage);
+		model.addAttribute("trainees", trainees);
+		return "class-admin-trainee-manage :: trainees";
+	}
 
-    System.out.println("search type : " + searchType);
 
-    switch (searchType) {
-    case Constant.CATEGORY:
-      trainees = traineeService.findTraineeByCategory(category, Constant.FIRST_PAGE);
-      break;
-    case Constant.CLAZZ:
-      trainees = traineeService.findTraineeByClazzName(clazzName, Constant.FIRST_PAGE);
-      break;
-    case Constant.STATUS:
-      trainees = traineeService.findTraineeByClazzName(clazzName, Constant.FIRST_PAGE);
-      break;
-    case Constant.CATEGORY_CLAZZ:
-      trainees = traineeService.findTraineeByCategoryAndClazz(category, clazzName, Constant.FIRST_PAGE);
-      break;
-    case Constant.CATEGORY_STATUS:
-      trainees = traineeService.findTraineeByCategoryAndStatus(category, status, Constant.FIRST_PAGE);
-      break;
-    case Constant.CLAZZ_STATUS:
-      trainees = traineeService.findTraineeByClazzAndStatus(clazzName, status, Constant.FIRST_PAGE);
-      break;
-    case Constant.CATEGORY_CLAZZ_STATUS:
-      trainees = traineeService.findTraineeByCategoryAndClazzAndStatus(category, clazzName, status,
-          Constant.FIRST_PAGE);
-      break;
-    default:
-      trainees = new ArrayList<>();
-      break;
-    }
-    model.addAttribute("trainees", trainees);
-    return "class-admin-trainee-manage :: trainees";
-  }
-
-  /**
-   * @return
-   */
-  @RequestMapping(value = "/trainee-feedback/{id}")
-  public String addReview(@PathVariable("id") Integer id) {
-    reviewTraineeService.add(new ReviewTrainee(new ReviewTraineePK(1, 2), "A", "Hoc hanh tap trung, kien thuc tot"));
-    return "<h1>Success</h1>";
-  }
-
-  /**
-   * @return
-   */
-  @RequestMapping(value = "/grade/{id}")
-  public String getScore(Model model, @PathVariable("id") Integer id) {
-    List<TraineeScoreDto> scores = scoreService.findByIdUserId(id);
-    model.addAttribute("scores", scores);
-    return "class-admin-trainee-manage :: scoreModal";
-  }
+	/**
+	 * @return
+	 */
+	@RequestMapping(value = "/grade/{id}")
+	public String getScore(Model model, @PathVariable("id") Integer id) {
+		System.out.println("----------------------BEGIN----------------------");
+		List<TraineeScoreDto> scores = scoreService.findByIdUserId(id);
+		model.addAttribute("scores", scores);
+		return "class-admin-trainee-manage :: scoreModal";
+	}
 }
