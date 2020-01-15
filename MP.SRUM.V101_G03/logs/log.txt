@@ -110,3 +110,31 @@
 2020-01-15 14:51:41 INFO  UserServiceImpl:30 - Get classmate of user hoanglv7
 2020-01-15 14:51:41 INFO  AttendanceServiceImpl:29 - Get list of Attendace by hoanglv7
 2020-01-15 14:51:41 INFO  ScoreServiceImpl:43 - Get score by UserId 1
+2020-01-15 14:56:50 INFO  FeedbackServiceImpl:28 - Get feedbacks of UserID 1 and SubjectID 4
+2020-01-15 17:05:41 INFO  FeedbackServiceImpl:28 - Get feedbacks of UserID 1 and SubjectID 1
+2020-01-15 17:05:42 INFO  FeedbackServiceImpl:28 - Get feedbacks of UserID 1 and SubjectID 1
+2020-01-15 17:05:42 INFO  FeedbackServiceImpl:28 - Get feedbacks of UserID 1 and SubjectID 1
+2020-01-15 17:05:43 INFO  FeedbackServiceImpl:28 - Get feedbacks of UserID 1 and SubjectID 1
+2020-01-15 17:05:43 INFO  FeedbackServiceImpl:28 - Get feedbacks of UserID 2 and SubjectID 1
+2020-01-15 17:05:44 INFO  FeedbackServiceImpl:28 - Get feedbacks of UserID 2 and SubjectID 1
+2020-01-15 17:05:44 INFO  FeedbackServiceImpl:28 - Get feedbacks of UserID 2 and SubjectID 1
+2020-01-15 17:05:44 INFO  FeedbackServiceImpl:28 - Get feedbacks of UserID 1 and SubjectID 1
+2020-01-15 21:37:36 INFO  FeedbackServiceImpl:28 - Get feedbacks of UserID 1 and SubjectID 4
+2020-01-15 22:19:15 INFO  TraineeUserController:59 - hoanglv7 login successful
+2020-01-15 22:19:15 INFO  UserServiceImpl:42 - Get User by Account hoanglv7
+2020-01-15 22:19:15 INFO  UserServiceImpl:30 - Get classmate of user hoanglv7
+2020-01-15 22:19:15 INFO  AttendanceServiceImpl:29 - Get list of Attendace by hoanglv7
+2020-01-15 22:19:15 INFO  ScoreServiceImpl:43 - Get score by UserId 1
+2020-01-15 22:49:55 INFO  FeedbackServiceImpl:28 - Get feedbacks of UserID 1 and SubjectID 1
+2020-01-15 22:49:55 INFO  FeedbackServiceImpl:28 - Get feedbacks of UserID 1 and SubjectID 1
+2020-01-15 22:49:55 INFO  FeedbackServiceImpl:28 - Get feedbacks of UserID 1 and SubjectID 1
+2020-01-15 22:56:39 INFO  FeedbackServiceImpl:28 - Get feedbacks of UserID 1 and SubjectID 1
+2020-01-15 22:56:41 INFO  FeedbackServiceImpl:28 - Get feedbacks of UserID 2 and SubjectID 1
+2020-01-15 23:03:08 INFO  TraineeUserController:59 - hoanglv7 login successful
+2020-01-15 23:04:19 INFO  TraineeUserController:59 - hoanglv7 login successful
+2020-01-15 23:06:48 INFO  TraineeUserController:59 - hoanglv7 login successful
+2020-01-15 23:06:48 INFO  UserServiceImpl:30 - Get classmate of user null
+2020-01-15 23:06:48 INFO  AttendanceServiceImpl:29 - Get list of Attendace by null
+2020-01-15 23:06:48 INFO  ScoreServiceImpl:43 - Get score by UserId 0
+2020-01-15 23:10:41 INFO  TraineeUserController:59 - hoanglv7 login successful
+2020-01-15 23:10:41 INFO  UserServiceImpl:30 - Get classmate of user null

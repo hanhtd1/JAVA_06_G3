@@ -94,10 +94,8 @@ public class AdminSubjectController {
 	}
 	
 	@RequestMapping(path = "del-subject", method = RequestMethod.DELETE)
-	public @ResponseBody List<Subject> delSubject(@RequestParam Integer subjectId){
-		List<Subject> subjects = new ArrayList<Subject>();
-		//TODO something
+	public @ResponseBody Subject delSubject(@RequestParam Integer subjectId){
 		Subject subject = subjectService.delSubject(subjectId);
-		return subjects;
+		return subject;
 	}
 }

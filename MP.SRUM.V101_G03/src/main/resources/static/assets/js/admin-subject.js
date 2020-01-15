@@ -27,14 +27,6 @@ function load_subjects(){
 				Materialize.toast(data.message, 4000)
 			}else{
 				Materialize.toast(data.message, 4000);
-//				$('#listSubjects').append('<li>\n'
-//									+'<a href="" class="waves-effect waves-light"> \n'
-//									+'	<h5 class="f-s-19">' + subject.name +'</h5>'
-//									+'	<p> \n'
-//									+ subject.code
-//									+'	</p> \n'
-//									+'</a> \n'
-//									+'</li>')
 			}
 		}
 	})
@@ -49,7 +41,6 @@ function load_Classes(){
 			subjectStatus: status
 		},
 		success: (data)=>{
-			console.log(data);
 			$('#list-subject').html(data)
 		}
 	})
@@ -107,3 +98,42 @@ function del_subject() {
 		}
 	})
 }
+
+$("#subject-new").click(()=>{
+	$.get({
+		url: "/admin/search",
+		data:{
+			subjectStatus : "New"
+		},
+		success: (res)=>{
+			console.log(res);
+			$('#list-subject').html(res)
+		}
+	});
+});
+
+$("#subject-active").click(()=>{
+	$.get({
+		url: "/admin/search",
+		data:{
+			subjectStatus : "Active"
+		},
+		success: (res)=>{
+			console.log(res);
+			$('#list-subject').html(res)
+		}
+	});
+});
+
+$("#subject-del").click(()=>{
+	$.get({
+		url: "/admin/search",
+		data:{
+			subjectStatus : "In Active"
+		},
+		success: (res)=>{
+			console.log(res);
+			$('#list-subject').html(res)
+		}
+	});
+});

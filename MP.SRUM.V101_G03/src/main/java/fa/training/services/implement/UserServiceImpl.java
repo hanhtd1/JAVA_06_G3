@@ -40,7 +40,7 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public User getUser(String account) {
 		LOGGER.info("Get User by Account " + account);
-		return userRepository.findByAccount(account).get();
+		return userRepository.findByAccount(account).orElse(new User(Constant.DEFAULT_ID));
 	}
 
 	/**
