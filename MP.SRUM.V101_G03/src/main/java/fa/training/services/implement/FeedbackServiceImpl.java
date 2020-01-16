@@ -12,13 +12,13 @@ import fa.training.repositories.FeedbackRepository;
 import fa.training.services.FeedbackService;
 
 @Service
-public class FeedbackServiceImpl implements FeedbackService{
-	
+public class FeedbackServiceImpl implements FeedbackService {
+
 	private static final Logger LOGGER = LogManager.getLogger(FeedbackServiceImpl.class);
 
 	@Autowired
 	private FeedbackRepository feedbackRepository;
-	
+
 	/**
 	 * @author HoangLV7
 	 * 
@@ -26,7 +26,7 @@ public class FeedbackServiceImpl implements FeedbackService{
 	@Override
 	public Feedback getAllFeedback(int userId, int subjectId) {
 		LOGGER.info("Get feedbacks of UserID " + userId + " and SubjectID " + subjectId);
-		return feedbackRepository.findByUserIdAndSubjectId(userId, subjectId);
+		return feedbackRepository.findByUserIdAndSubjectId(userId, subjectId).orElse(new Feedback(subjectId, userId));
 	}
 
 	/**
@@ -40,12 +40,12 @@ public class FeedbackServiceImpl implements FeedbackService{
 	}
 
 	@Override
-  public List<Feedback> findFeedbackBySubjectIdAndClazzId(Integer subjectId, Integer clazzId) {
-    return feedbackRepository.findFeedbackBySubjectAndClazz(subjectId, clazzId);
-  }
+	public List<Feedback> findFeedbackBySubjectIdAndClazzId(Integer subjectId, Integer clazzId) {
+		return feedbackRepository.findFeedbackBySubjectAndClazz(subjectId, clazzId);
+	}
 
-  @Override
-  public List<Feedback> findFeedbackByfindBySubjecId(Integer subjectId) {
-    return feedbackRepository.findFeedbackBySubjectId(subjectId);
-  }
+	@Override
+	public List<Feedback> findFeedbackByfindBySubjecId(Integer subjectId) {
+		return feedbackRepository.findFeedbackBySubjectId(subjectId);
+	}
 }

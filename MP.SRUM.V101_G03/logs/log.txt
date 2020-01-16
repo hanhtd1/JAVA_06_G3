@@ -138,6 +138,7 @@
 2020-01-15 23:06:48 INFO  ScoreServiceImpl:43 - Get score by UserId 0
 2020-01-15 23:10:41 INFO  TraineeUserController:59 - hoanglv7 login successful
 2020-01-15 23:10:41 INFO  UserServiceImpl:30 - Get classmate of user null
+<<<<<<< HEAD
 2020-01-16 00:38:43 INFO  FeedbackServiceImpl:28 - Get feedbacks of UserID 12 and SubjectID 2
 2020-01-16 10:06:02 INFO  TraineeUserController:59 - trangdm1 login successful
 2020-01-16 10:06:02 INFO  UserServiceImpl:42 - Get User by Account trangdm1
@@ -232,3 +233,6 @@
 2020-01-16 15:03:48 INFO  ScoreServiceImpl:55 - Get score by UserId 5
 2020-01-16 15:03:51 INFO  UserServiceImpl:51 - Get User by UserID 4
 2020-01-16 15:03:51 INFO  ScoreServiceImpl:55 - Get score by UserId 4
+=======
+2020-01-16 09:59:42 INFO  FeedbackServiceImpl:28 - Get feedbacks of UserID 0 and SubjectID 0
+>>>>>>> 9a26496b25edc6aa4995b4588148d4d8587cd722

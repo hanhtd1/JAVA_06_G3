@@ -1,6 +1,7 @@
 package fa.training.repositories;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -16,7 +17,7 @@ public interface FeedbackRepository extends JpaRepository<Feedback, Integer> {
 	 * @author HoangLV7
 	 * 
 	 */
-	public Feedback findByUserIdAndSubjectId(int userId, int subjectId);
+	public Optional<Feedback> findByUserIdAndSubjectId(int userId, int subjectId);
 
 	/**
 	 * @author ToanNT18
