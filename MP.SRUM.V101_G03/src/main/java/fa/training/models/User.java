@@ -16,11 +16,7 @@ import javax.persistence.Table;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 
-import org.hibernate.validator.constraints.Range;
-
 import com.fasterxml.jackson.annotation.JsonIgnore;
-
-import fa.training.utils.Constant;
 
 /**
  *
@@ -36,7 +32,7 @@ public class User implements Serializable {
   @Column(name = "Id")
   private Integer id;
 
-  @NotBlank(message = Constant.VALID_FIRST_NAME)
+  @NotBlank
   @Column(name = "FirstName")
   private String firstName;
 

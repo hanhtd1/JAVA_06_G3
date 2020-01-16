@@ -39,8 +39,9 @@ public class AdminUserManageRestController {
 
   @Autowired
   private BCryptPasswordEncoder bcrypt;
+
   /**
-   *@author TrangDM2
+   * @author TrangDM2
    */
   @GetMapping("user-info")
   public ResponseEntity<User> getTraineeInfo(@RequestParam int id) {
@@ -49,26 +50,27 @@ public class AdminUserManageRestController {
   }
 
   /**
-   *@author TrangDM2
+   * @author TrangDM2
    */
   @GetMapping("get-users")
-  public ResponseEntity<List<UserDto>> getUsers(@RequestParam String keyword, @RequestParam String status, @RequestParam Integer role) {
-    String userRole = role==1?Constant.TRAINEE:Constant.TRAINER;
+  public ResponseEntity<List<UserDto>> getUsers(@RequestParam String keyword, @RequestParam String status,
+      @RequestParam Integer role) {
+    String userRole = role == 1 ? Constant.TRAINEE : Constant.TRAINER;
     List<UserDto> trainees = adminUserService.findUserByKeyword(keyword, userRole, status);
     return new ResponseEntity<List<UserDto>>(trainees, HttpStatus.OK);
   }
 
   /**
-   *@author TrangDM2
+   * @author TrangDM2
    */
   @GetMapping("get-trainers-toadd")
   public ResponseEntity<List<User>> getTrainers(@RequestParam Integer classId) {
     List<User> trainees = adminUserService.findUserNotInClass(classId, Constant.TRAINER);
     return new ResponseEntity<List<User>>(trainees, HttpStatus.OK);
   }
-  
+
   /**
-   *@author TrangDM2
+   * @author TrangDM2
    */
   @GetMapping("trainee-score")
   public ResponseEntity<List<ScoreDto>> getScores(@RequestParam int id) {
@@ -77,21 +79,21 @@ public class AdminUserManageRestController {
   }
 
   /**
-   *@author TrangDM2
+   * @author TrangDM2
    */
   @PostMapping("create-user")
   public ResponseEntity<?> createUser(@Valid @RequestBody User user, BindingResult result) {
-    if(result.hasErrors()) {
+    if (result.hasErrors()) {
       Map<String, String> errors = result.getFieldErrors().stream()
           .collect(Collectors.toMap(FieldError::getField, FieldError::getDefaultMessage));
       return ResponseEntity.badRequest().body(errors);
-    } else {      
+    } else {
       byte role = Byte.parseByte(user.getRole());
       User requestUser = user;
       String message = new String();
       HttpStatus status = null;
       try {
-        requestUser.setRole(role==1?Constant.TRAINEE:Constant.TRAINER);
+        requestUser.setRole(role == 1 ? Constant.TRAINEE : Constant.TRAINER);
         requestUser.setStatus(Constant.USER_DEFAULT_STATUS);
         requestUser.setPassword(bcrypt.encode(Constant.DEFAULT_PASSWORD));
         adminUserService.saveUser(requestUser);
@@ -101,47 +103,53 @@ public class AdminUserManageRestController {
         message = Constant.CREATE_FAIL_MESSAGE;
         status = HttpStatus.BAD_REQUEST;
       }
-      
+
       return new ResponseEntity<String>(message, status);
     }
   }
 
   /**
-   *@author TrangDM2
+   * @author TrangDM2
    */
   @PostMapping("update-user")
-  public ResponseEntity<String> updaterUser(@RequestBody User user){
-    String message = new String();
-    User updateUser = user;
-    User toUpdateUser = adminUserService.getUserByAccount(user.getAccount()).orElseThrow(() -> {
-      throw new UsernameNotFoundException(Constant.NOT_FOUND_MESSAGE);
-    });
-    
-    updateUser.setPassword(toUpdateUser.getPassword());
-    updateUser.setRole(toUpdateUser.getRole());
-    updateUser.setStatus(toUpdateUser.getStatus());
-    
-    try {
-      adminUserService.saveUser(updateUser);  
-      message = Constant.UPDATE_SUCCESS_MESSAGE;
-    } catch (Exception e) {
-      message = Constant.UPDATE_FAIL_MESSAGE;
+  public ResponseEntity<?> updaterUser(@Valid @RequestBody User user, BindingResult result) {
+    if (result.hasErrors()) {
+      Map<String, String> errors = result.getFieldErrors().stream()
+          .collect(Collectors.toMap(FieldError::getField, FieldError::getDefaultMessage));
+      return ResponseEntity.badRequest().body(errors);
+    } else {
+      String message = new String();
+      User updateUser = user;
+      User toUpdateUser = adminUserService.getUserByAccount(user.getAccount()).orElseThrow(() -> {
+        throw new UsernameNotFoundException(Constant.NOT_FOUND_MESSAGE);
+      });
+
+      updateUser.setPassword(toUpdateUser.getPassword());
+      updateUser.setRole(toUpdateUser.getRole());
+      updateUser.setStatus(toUpdateUser.getStatus());
+
+      try {
+        adminUserService.saveUser(updateUser);
+        message = Constant.UPDATE_SUCCESS_MESSAGE;
+      } catch (Exception e) {
+        message = Constant.UPDATE_FAIL_MESSAGE;
+      }
+
+      return new ResponseEntity<String>(message, HttpStatus.OK);
     }
-    
-    return new ResponseEntity<String>(message,HttpStatus.OK);
   }
 
   /**
-   *@author TrangDM2
+   * @author TrangDM2
    */
   @GetMapping("update-status")
-  public ResponseEntity<String> updateStatus(@RequestParam int id, @RequestParam String status){
+  public ResponseEntity<String> updateStatus(@RequestParam int id, @RequestParam String status) {
     adminUserService.updateUserStatus(id, status);
-    return new ResponseEntity<String>(Constant.UPDATE_SUCCESS_MESSAGE,HttpStatus.OK);
+    return new ResponseEntity<String>(Constant.UPDATE_SUCCESS_MESSAGE, HttpStatus.OK);
   }
-  
+
   /**
-   *@author TrangDM2
+   * @author TrangDM2
    */
   @GetMapping("generate-account")
   public ResponseEntity<String> generateAccount(@RequestParam String firstName, @RequestParam StringBuilder lastName) {

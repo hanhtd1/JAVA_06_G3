@@ -124,10 +124,10 @@ function addTrainee(){
 		},
 		error: (resp)=>{
 			$.each(resp.responseJSON, (key, value)=>{
-				Materialize.toast(key + ": " + value , 7000);
+				Materialize.toast(key.toUpperCase() + ": " + value , 7000);
 			})
 		}
-	})
+	});
 	return false;
 }
 function updateTrainee(){
@@ -148,9 +148,11 @@ function updateTrainee(){
 			Materialize.toast(resp, 4000)
 		},
 		error: (resp)=>{
-			Materialize.toast(resp.responseText, 4000)
+			$.each(resp.responseJSON, (key, value)=>{
+				Materialize.toast(key.toUpperCase() + ": " + value , 7000);
+			})
 		}
-	})
+	});
 	return false;
 }
 function changeTraineeStatus(){
