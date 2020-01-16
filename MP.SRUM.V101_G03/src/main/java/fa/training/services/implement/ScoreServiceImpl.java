@@ -29,11 +29,23 @@ public class ScoreServiceImpl implements ScoreService {
   @Autowired
   private ScoreRepository scoreRepository;
 
+  /**
+   *@author TrangDM2
+   */
   @Override
   public List<TraineeScoreDto> findByIdUserId(Integer userId) {
     return scoreRepository.findScoreByUserId(userId);
   }
 
+  /**
+   * @author TrangDM2
+   * @param score
+   * @return
+   */
+  @Override
+  public Score saveScore(Score score) {
+    return scoreRepository.save(score);
+  }
   /**
    * @author HoangLV7
    * 

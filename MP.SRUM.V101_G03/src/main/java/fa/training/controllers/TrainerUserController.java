@@ -15,8 +15,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import fa.training.dtos.TraineeScoreDto;
 import fa.training.models.Clazz;
-import fa.training.models.ReviewTrainee;
-import fa.training.models.ReviewTraineePK;
 import fa.training.models.User;
 import fa.training.services.ClazzService;
 import fa.training.services.ReviewTraineeService;

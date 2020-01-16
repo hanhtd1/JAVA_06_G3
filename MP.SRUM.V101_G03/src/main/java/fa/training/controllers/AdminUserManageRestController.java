@@ -1,12 +1,18 @@
 package fa.training.controllers;
 
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
+
+import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -74,25 +80,30 @@ public class AdminUserManageRestController {
    *@author TrangDM2
    */
   @PostMapping("create-user")
-  public ResponseEntity<String> createUser(@RequestBody User user) {
-    byte role = Byte.parseByte(user.getRole());
-    User requestUser = user;
-    String message = new String();
-    HttpStatus status = null;
-    
-    try {
-      requestUser.setRole(role==1?Constant.TRAINEE:Constant.TRAINER);
-      requestUser.setStatus(Constant.USER_DEFAULT_STATUS);
-      requestUser.setPassword(bcrypt.encode(Constant.DEFAULT_PASSWORD));
-      adminUserService.saveUser(requestUser);
-      message = Constant.CREATE_SUCCESS_MESSAGE;
-      status = HttpStatus.OK;
-    } catch (Exception e) {
-      message = Constant.CREATE_FAIL_MESSAGE;
-      status = HttpStatus.BAD_REQUEST;
+  public ResponseEntity<?> createUser(@Valid @RequestBody User user, BindingResult result) {
+    if(result.hasErrors()) {
+      Map<String, String> errors = result.getFieldErrors().stream()
+          .collect(Collectors.toMap(FieldError::getField, FieldError::getDefaultMessage));
+      return ResponseEntity.badRequest().body(errors);
+    } else {      
+      byte role = Byte.parseByte(user.getRole());
+      User requestUser = user;
+      String message = new String();
+      HttpStatus status = null;
+      try {
+        requestUser.setRole(role==1?Constant.TRAINEE:Constant.TRAINER);
+        requestUser.setStatus(Constant.USER_DEFAULT_STATUS);
+        requestUser.setPassword(bcrypt.encode(Constant.DEFAULT_PASSWORD));
+        adminUserService.saveUser(requestUser);
+        message = Constant.CREATE_SUCCESS_MESSAGE;
+        status = HttpStatus.OK;
+      } catch (Exception e) {
+        message = Constant.CREATE_FAIL_MESSAGE;
+        status = HttpStatus.BAD_REQUEST;
+      }
+      
+      return new ResponseEntity<String>(message, status);
     }
-    
-    return new ResponseEntity<String>(message, status);
   }
 
   /**

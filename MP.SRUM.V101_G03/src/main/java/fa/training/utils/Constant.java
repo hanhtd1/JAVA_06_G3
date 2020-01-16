@@ -60,5 +60,8 @@ public class Constant {
 	public static final String CLAZZ_NAME_AND_CATEGORY_AND_STATUS = "CLAZZ_NAME_AND_CATEGORY_AND_STATUS";
 
   public static final int FIRST_RESULT = 0;
+  
+  //Validate messages
+  public static final String VALID_FIRST_NAME = "First name Deo dc phep blank!";
 
 }

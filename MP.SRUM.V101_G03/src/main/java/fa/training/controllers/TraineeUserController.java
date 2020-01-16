@@ -58,11 +58,11 @@ public class TraineeUserController {
 		String account = ((UserDetails)auth.getPrincipal()).getUsername();
 		LOGGER.info(account + " login successful");
 		User trainee = iUserService.getUser(account);
-		List<Clazz> classTrainee = clazzService.findClazzByTrainee(trainee);
+		Clazz classTrainee = clazzService.findClazzByTrainee(trainee, Constant.TRAINEE);
 		List<User> users = iUserService.getMembers(trainee);
 		List<Attendance> attendances = iAttendanceService.getAttendancesByUser(trainee);
 		List<ScoreDto> scores = iScoreService.getScoreByUser(trainee.getId());
-		model.addAttribute("class", classTrainee.get(Constant.FIRST_RESULT));
+		model.addAttribute("class", classTrainee);
 		model.addAttribute("users", users);
 		model.addAttribute("trainee", trainee);
 		model.addAttribute("attendances", attendances);

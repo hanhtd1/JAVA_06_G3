@@ -13,8 +13,14 @@ import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
+
+import org.hibernate.validator.constraints.Range;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+
+import fa.training.utils.Constant;
 
 /**
  *
@@ -30,21 +36,27 @@ public class User implements Serializable {
   @Column(name = "Id")
   private Integer id;
 
+  @NotBlank(message = Constant.VALID_FIRST_NAME)
   @Column(name = "FirstName")
   private String firstName;
 
+  @NotBlank
   @Column(name = "LastName")
   private String lastName;
 
+  @NotBlank
   @Column(name = "Phone")
   private String phone;
 
+  @NotBlank
+  @Email
   @Column(name = "Email", unique = true)
   private String email;
 
   @Column(name = "Password")
   private String password;
 
+  @NotBlank
   @Column(name = "Account", unique = true)
   private String account;
 

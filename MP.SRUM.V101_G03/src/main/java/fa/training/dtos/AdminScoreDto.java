@@ -37,7 +37,10 @@ public class AdminScoreDto {
   public void setPractice(Float practice) {
     this.practice = practice;
   }
+  @Override
+  public String toString() {
+    return "AdminScoreDto [subjectId=" + subjectId + ", userId=" + userId + ", theory=" + theory + ", practice="
+        + practice + "]";
+  }
   
-  
-
 }

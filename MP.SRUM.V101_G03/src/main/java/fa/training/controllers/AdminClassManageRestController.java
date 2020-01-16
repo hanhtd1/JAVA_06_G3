@@ -19,11 +19,14 @@ import fa.training.dtos.AttendanceDto;
 import fa.training.dtos.UserDto;
 import fa.training.models.Attendance;
 import fa.training.models.Clazz;
+import fa.training.models.Score;
+import fa.training.models.ScorePK;
 import fa.training.models.Subject;
 import fa.training.models.User;
 import fa.training.services.AdminClassService;
 import fa.training.services.AdminUserService;
 import fa.training.services.AttendanceService;
+import fa.training.services.ScoreService;
 import fa.training.services.SubjectService;
 import fa.training.utils.Constant;
 
@@ -42,6 +45,9 @@ public class AdminClassManageRestController {
 
   @Autowired
   private SubjectService subjectService;
+
+  @Autowired
+  private ScoreService scoreService;
 
   /**
    * @author TrangDM2
@@ -351,11 +357,26 @@ public class AdminClassManageRestController {
     }
     return new ResponseEntity<String>(message, HttpStatus.OK);
   }
-  
+
   @PostMapping("update-marks")
-  public ResponseEntity<String> updateMarks(@RequestBody List<AdminScoreDto> scores){
-    System.out.println(scores);
-    return new ResponseEntity<String>(HttpStatus.OK); //TODO
+  public ResponseEntity<String> updateMarks(@RequestBody List<AdminScoreDto> scoreDtos) {
+    String message = new String();
+    HttpStatus status = null;
+    
+    try {
+      scoreDtos.forEach(scoreDto -> {
+        ScorePK scorePk = new ScorePK(scoreDto.getSubjectId(), scoreDto.getUserId());
+        Score score = new Score(scorePk, scoreDto.getTheory(), scoreDto.getPractice());
+        scoreService.saveScore(score);
+      });
+      message = Constant.UPDATE_SUCCESS_MESSAGE;
+      status = HttpStatus.CREATED;
+    } catch (Exception e) {
+      message = Constant.UPDATE_FAIL_MESSAGE;
+      status = HttpStatus.BAD_REQUEST;
+    }
+
+    return new ResponseEntity<String>(message, status);
   }
 
   /**

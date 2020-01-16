@@ -123,7 +123,9 @@ function addTrainee(){
 			Materialize.toast(resp, 4000)
 		},
 		error: (resp)=>{
-			Materialize.toast(resp.responseText, 4000)
+			$.each(resp.responseJSON, (key, value)=>{
+				Materialize.toast(key + ": " + value , 7000);
+			})
 		}
 	})
 	return false;
@@ -310,7 +312,7 @@ function MarkForm2JsonMapper(form){
 		let value = e.value;
 		if(name){
 			obj[name]=value;
-			obj["subjectId"]=$("input[name=subjectIdToMarks]").val();
+			obj["subjectId"]=$("input[name=subjectIdToMarks]:checked").val();
 		}
 	});
 	return obj;
@@ -327,6 +329,7 @@ function markGenerateFormArray(elements) {
 function submitMarks() {
 	let marks = document.getElementById("list-trainees-marks");
 	let elements = marks.querySelectorAll(".trainee-list");
+	console.log(markGenerateFormArray(elements));
 	$.post({
 		url: '/admin/update-marks',
 		data: JSON.stringify(markGenerateFormArray(elements)),

@@ -70,5 +70,5 @@ public interface ClazzService {
 	 * @param trainee
 	 * @return class of trainee
 	 */
-	List<Clazz> findClazzByTrainee(User trainee);
+	Clazz findClazzByTrainee(User trainee, String role);
 }
