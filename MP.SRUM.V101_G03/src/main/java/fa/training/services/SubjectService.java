@@ -2,7 +2,7 @@ package fa.training.services;
 
 import java.util.List;
 
-import org.springframework.boot.autoconfigure.data.web.SpringDataWebProperties.Pageable;
+import org.springframework.data.domain.Pageable;
 
 import fa.training.models.Clazz;
 import fa.training.models.Subject;

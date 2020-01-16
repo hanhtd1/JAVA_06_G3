@@ -5,6 +5,7 @@ import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import fa.training.models.Clazz;
 import fa.training.models.Subject;
 import fa.training.models.User;
+import fa.training.services.AdminUserService;
 import fa.training.services.ClazzService;
 import fa.training.services.ScoreService;
 import fa.training.services.SubjectService;
@@ -38,6 +40,9 @@ public class TrainerMainController {
 	@Autowired
 	private ClazzService clazzService;
 
+  @Autowired
+  private AdminUserService adminUserService;
+
 	@GetMapping("grade-modal")
 	public String gradeModal() {
 		scoreService.findByIdUserId(1);
@@ -50,13 +55,11 @@ public class TrainerMainController {
 	}
 
 	@GetMapping("/")
-	public String home() {
-		return "index";
-	}
-
-	@GetMapping("home")
-	public String classAdmin() {
-		return "class-admin-dashboard";
+	public String home(Model model, Authentication auth) {
+	  String account = auth.getName();
+    User trainee = adminUserService.getUserByAccount(account).get();
+    model.addAttribute("currentUser", trainee);
+		return "trainer";
 	}
 
 	@GetMapping("class-manage")
@@ -69,7 +72,7 @@ public class TrainerMainController {
 		model.addAttribute("totalPages", ClazzServiceImpl.totalPage);
 		model.addAttribute("statuss", statuss);
 		model.addAttribute("clazzs", clazzs);
-		return "class-admin-class-manage";
+		return "trainer-class-manage";
 	}
 
 	@GetMapping("trainee-manage")
@@ -93,7 +96,7 @@ public class TrainerMainController {
 		model.addAttribute("names", names);
 		model.addAttribute("statuss", statuss);
 		model.addAttribute("trainees", trainees);
-		return "class-admin-trainee-manage";
+		return "trainer-trainee-manage";
 	}
 
 	@GetMapping("trainee-manage/{clazzName}")
@@ -116,7 +119,7 @@ public class TrainerMainController {
 		model.addAttribute("names", names);
 		model.addAttribute("statuss", statuss);
 		model.addAttribute("trainees", trainees);
-		return "class-admin-trainee-manage";
+		return "trainer-trainee-manage";
 	}
 
 	@GetMapping("subject-manage")
@@ -124,7 +127,7 @@ public class TrainerMainController {
 		List<Subject> subjects = subjectService.findSubjectByUserId(Constant.USER_ID_DEFAULT - 1,
 				PageRequest.of(Constant.FIRST_PAGE, Constant.PAGE_SIZE));
 		model.addAttribute("subjects", subjects);
-		return "class-admin-subject-manage";
+		return "trainer-subject-manage";
 	}
 
 	@GetMapping("trainer-manage")

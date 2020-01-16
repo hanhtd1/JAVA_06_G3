@@ -1,4 +1,3 @@
-<html xmlns:th="https://www.thymeleaf.org">
 <div class="row no-m-t no-m-b">
 	<div class="col s12 m12 l12 no-p-h">
 		<div class="card mailbox-content" id="main-content">
@@ -60,7 +59,7 @@
 						<tr th:each="clazz : ${clazzs}">
 							<td th:text="${clazz.name}"></td>
 							<td th:text="${clazz.category}"></td>
-							<td th:text="${clazz.openLocalDate}"></td>
+							<td th:text="${clazz.openDate}"></td>
 							<td><a th:onclick=" 'loadTrainee(' + ${clazz.id} + ')' "><i
 									class="material-icons dp48">person_pin</i></a> <a
 								th:onclick="'loadSubject('+${clazz.id}+')'"><i
@@ -151,4 +150,3 @@
 <script th:src="@{../assets/js/pages/mailbox.js}"></script>
 <script th:src="@{../assets/js/pages/form-wizard.js}"></script>
 <script th:src="@{../assets/js/admin-manage.js}"></script>
-</html>

@@ -86,7 +86,7 @@ public class TrainerUserController {
 			return "redirect:search-all?page=" + page;
 		}
 		String searchType = SearchType.searchType(category, clazzName, status);
-
+		System.out.println("search type : " + searchType);
 		switch (searchType) {
 		case Constant.CATEGORY:
 			trainees = traineeService.findTraineeByCategory(category, page - 1);
@@ -113,8 +113,9 @@ public class TrainerUserController {
 			trainees = new ArrayList<>();
 			break;
 		}
+		System.out.println("-------------------");
+		System.out.println(trainees);
 		model.addAttribute("index", page);
-		System.out.println("page : " + page);
 		model.addAttribute("totalPages", TraineeServiceImpl.numberOfPage);
 		model.addAttribute("trainees", trainees);
 		return "class-admin-trainee-manage :: trainees";

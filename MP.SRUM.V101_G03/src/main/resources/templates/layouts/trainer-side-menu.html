@@ -1,0 +1,45 @@
+<aside th:fragment="side-menu" id="slide-out"
+	class="side-nav white fixed">
+	<div class="side-nav-wrapper">
+		<div class="sidebar-profile">
+			<div class="sidebar-profile-image">
+				<img th:src="@{../assets/images/profile-image.png}" class="circle"
+					alt="">
+			</div>
+			<div class="sidebar-profile-info">
+				<a href="javascript:void(0);" class="account-settings-link">
+					<p th:text="${currentUser.firstName} +' '+ ${currentUser.lastName}"></p>
+					<span th:text="${currentUser.email}"></span>
+				</a>
+			</div>
+		</div>
+		<ul class="sidebar-menu collapsible collapsible-accordion"
+			data-collapsible="accordion">
+			<li class="no-padding "><a class="waves-effect waves-grey"
+				href="" onclick="location.reload()"> <i class="material-icons">settings_input_svideo</i>
+					Dashboard
+			</a></li>
+			<li class="no-padding active"><a id="trainer-trainee-manage"
+				class="collapsible-header waves-effect waves-grey"><i
+					class="material-icons">supervisor_account</i>Trainees Manage</a></li>
+			<li class="no-padding"><a id="trainer-class-manage"
+				class="collapsible-header waves-effect waves-grey"><i
+					class="material-icons">recent_actors</i>Classes Manage</a></li>
+			<li class="no-padding"><a id="trainer-subject-manage"
+				class="collapsible-header waves-effect waves-grey"><i
+					class="material-icons">view_carousel</i>Subjects Manage</a></li>
+			<li class="no-padding"><a id="guide"
+				class="collapsible-header waves-effect waves-grey"><i
+					class="material-icons">info</i>Guide</a></li>
+
+			<li class="divider"></li>
+			<li class="no-padding"><a href="/logout"
+				class="waves-effect waves-grey"><i class="material-icons">exit_to_app</i>Sign
+					Out</a></li>
+		</ul>
+		<div class="footer">
+			<p class="copyright">Group 3 ©</p>
+			<a href="#!">Privacy</a> &amp; <a href="#!">Terms</a>
+		</div>
+	</div>
+</aside>

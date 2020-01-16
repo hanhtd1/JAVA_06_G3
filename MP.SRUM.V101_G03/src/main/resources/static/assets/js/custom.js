@@ -194,3 +194,29 @@ function getFeedback(id) {
 		}
 	});
 }
+
+$("#trainer-class-manage").click(()=>{
+	$.get({
+		url: "/trainer/class-manage",
+		success: (res)=>{
+			$("#main-content").html(res);
+		}
+	});
+});
+$("#trainer-trainee-manage").click(()=>{
+
+	$.get({
+		url: "/trainer/trainee-manage",
+		success: (res)=>{
+			$("#main-content").html(res);
+		}
+	});
+});
+$("#trainer-subject-manage").click(()=>{
+	$.get({
+		url: "/trainer/subject-manage",
+		success: (res)=>{
+			$("#main-content").html(res);
+		}
+	});
+});
