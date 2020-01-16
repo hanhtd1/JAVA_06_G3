@@ -9,7 +9,6 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import fa.training.models.Clazz;
 import fa.training.models.Subject;
 import fa.training.repositories.SubjectRepository;
 import fa.training.services.SubjectService;
@@ -58,8 +57,8 @@ public class SubjectServiceImpl implements SubjectService {
    * @return
    */
   @Override
-  public List<Subject> findSubjectsByClass(Clazz clazz) {
-    return subjectRepository.findSubjectsByClass(clazz);
+  public List<Subject> findSubjectsByClass(Integer clazzId) {
+    return subjectRepository.findSubjectsByClass(clazzId);
   }
 
   @Override

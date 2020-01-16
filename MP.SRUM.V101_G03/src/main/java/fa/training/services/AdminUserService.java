@@ -36,4 +36,8 @@ public interface AdminUserService {
 
   List<User> getUserByClazzAndRole(Integer clazzId, String role);
 
+  List<User> saveUsers(List<User> traineeList);
+
+  List<User> findUserNotInClass(Integer classId, String role);
+
 }

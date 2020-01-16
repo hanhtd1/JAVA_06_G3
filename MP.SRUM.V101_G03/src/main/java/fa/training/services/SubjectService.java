@@ -4,7 +4,6 @@ import java.util.List;
 
 import org.springframework.data.domain.Pageable;
 
-import fa.training.models.Clazz;
 import fa.training.models.Subject;
 
 public interface SubjectService {
@@ -59,7 +58,7 @@ public interface SubjectService {
    * @param clazz
    * @return
    */
-  List<Subject> findSubjectsByClass(Clazz clazz);
+  List<Subject> findSubjectsByClass(Integer clazzId);
 
   /**
    * @author HoangLV7

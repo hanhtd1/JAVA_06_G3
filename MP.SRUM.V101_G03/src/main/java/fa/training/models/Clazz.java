@@ -4,7 +4,6 @@ import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.List;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -13,10 +12,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
 
 /**
  *
@@ -52,10 +48,12 @@ public class Clazz implements Serializable {
           @JoinColumn(name = "UserId", referencedColumnName = "Id") })
   @ManyToMany
   private List<User> userList;
-
-  @JsonIgnore
-  @OneToMany(mappedBy = "clazz", cascade = CascadeType.MERGE)
-  private List<ClazzSubject> clazzSubjectList;
+  
+  @JoinTable(name = "ClazzSubject", joinColumns = {
+      @JoinColumn(name = "ClazzId", referencedColumnName = "Id") }, inverseJoinColumns = {
+          @JoinColumn(name = "SubjectId", referencedColumnName = "Id") })
+  @ManyToMany
+  private List<Subject> subjectList;
 
   public Clazz() {
   }
@@ -71,6 +69,14 @@ public class Clazz implements Serializable {
     this.note = note;
     this.category = category;
     this.status = status;
+  }
+
+  public List<Subject> getSubjectList() {
+    return subjectList;
+  }
+
+  public void setSubjectList(List<Subject> subjectList) {
+    this.subjectList = subjectList;
   }
 
   public Integer getId() {
@@ -127,14 +133,6 @@ public class Clazz implements Serializable {
 
   public void setUserList(List<User> userList) {
     this.userList = userList;
-  }
-
-  public List<ClazzSubject> getClazzSubjectList() {
-    return clazzSubjectList;
-  }
-
-  public void setClazzSubjectList(List<ClazzSubject> clazzSubjectList) {
-    this.clazzSubjectList = clazzSubjectList;
   }
 
   @Override

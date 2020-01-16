@@ -112,6 +112,16 @@ public class AdminUserServiceImpl implements AdminUserService {
     });
     return userDtos;
   }
+  
+  /**
+   * @author TrangDM2
+   * @param classId
+   * @return
+   */
+  @Override
+  public List<User> findUserNotInClass(Integer classId, String role){
+    return userRepository.findTrainerNotInClassByClassId(classId, role);
+  }
 
   /**
    *@author TrangDM2
@@ -136,6 +146,14 @@ public class AdminUserServiceImpl implements AdminUserService {
    *@author TrangDM2
    */
   @Override
+  public List<User> saveUsers(List<User> traineeList) {
+    return userRepository.saveAll(traineeList);
+  }
+
+  /**
+   *@author TrangDM2
+   */
+  @Override
   public String generateAccount(String firstName, StringBuilder lastName) {
     StringBuilder account = lastName;
     for (int i = 0; i < firstName.length(); i++) {
@@ -150,4 +168,5 @@ public class AdminUserServiceImpl implements AdminUserService {
     } else account.append(String.valueOf(number));
     return account.toString();
   }
+
 }

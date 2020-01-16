@@ -39,7 +39,7 @@ public class Attendance implements Serializable {
 	@Column(name = "Note")
 	private String note;
 
-	@JoinColumn(name = "UserId", referencedColumnName = "Id", insertable = false, updatable = false)
+	@JoinColumn(name = "UserId", referencedColumnName = "Id")
   @ManyToOne(optional = false)
 	private User user;
 
@@ -95,6 +95,11 @@ public class Attendance implements Serializable {
 
   public void setUser(User user) {
     this.user = user;
+  }
+
+  @Override
+  public String toString() {
+    return "Attendance [id=" + id + ", date=" + date + ", type=" + type + ", note=" + note + ", user=" + user + "]";
   }
 
 }

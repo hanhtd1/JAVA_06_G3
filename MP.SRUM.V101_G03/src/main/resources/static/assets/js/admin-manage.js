@@ -2,7 +2,7 @@ var currentTrainee;
 var currentClass;
 var currentTrainer;
 //=========================================================================
-// Trainee
+// Trainee @Author TrangDM2
 function loadTrainees(){
 	$("#list_trainees").html("");
 	$.get({
@@ -165,7 +165,7 @@ function changeTraineeStatus(){
 }
 
 //=========================================================================
-// CLass
+// CLass @Author TrangDM2
 function loadClasses(){
 	$("#list_classes").html("");
 	$.get({
@@ -268,35 +268,76 @@ function loadListTraineeToAddToClass(trainees) {
 function loadClassListTraineeToClassDetail(trainees){
 	$("#list_trainees").html("");
 	trainees.map((trainee)=>{
-		$("#list_trainees").append("<tr>\n" +
-			"<td>"+trainee.account+"</td>\n" +
-			"<td>"+trainee.firstName+" "+trainee.lastName+"</td>\n" +
-			"<td>"+trainee.birthDay+"</td>\n" +
-			"<td>"+trainee.phone+"</td>\n" +
-			"<td>"+trainee.status+"</td>\n" +
-			"<td><a onclick=\"loadClassTraineeInfo("+trainee.id+")\" class=\"waves-effect waves-light btn blue modal-trigger p-h-xs trainee-info\"\n" +
-			"href=\"#trainee-info\">\n" +
-			"<i class=\"material-icons\">perm_identity</i>\n" +
-			"</a>\n" +
-			"<a onclick=\"removeTraineeFromClass("+trainee.id+")\" class=\"waves-effect waves-light btn red p-h-xs\">\n" +
-			"<i class=\"material-icons\">clear</i></a>\n" +
-			"</td>\n" +
-			"</tr>");
+		if(trainee.role==="ROLE_TRAINEE"){
+			$("#list_trainees").append("<tr>\n" +
+				"<td>"+trainee.account+"</td>\n" +
+				"<td>"+trainee.firstName+" "+trainee.lastName+"</td>\n" +
+				"<td>"+trainee.birthDay+"</td>\n" +
+				"<td>"+trainee.phone+"</td>\n" +
+				"<td>"+trainee.status+"</td>\n" +
+				"<td><a onclick=\"loadClassTraineeInfo("+trainee.id+")\" class=\"waves-effect waves-light btn blue modal-trigger p-h-xs trainee-info\"\n" +
+				"href=\"#trainee-info\">\n" +
+				"<i class=\"material-icons\">perm_identity</i>\n" +
+				"</a>\n" +
+				"<a onclick=\"removeTraineeFromClass("+trainee.id+")\" class=\"waves-effect waves-light btn red p-h-xs\">\n" +
+				"<i class=\"material-icons\">clear</i></a>\n" +
+				"</td>\n" +
+				"</tr>");
+		}
 	})
 }
 
-//TODO
 function loadClassListTraineeToUpdateMark(trainees){
 	$("#list-trainees-marks").html("");
 	trainees.map((trainee)=>{
-		$("#list-trainees-marks").append("<tr class='trainee-list'>\n" +
-			"<td>"+trainee.account+"</td>\n" +
-			"<td>"+trainee.firstName+" "+trainee.lastName+"</td>\n" +
-			"<td>"+trainee.phone+"</td>\n" +
-			"<td><input type=\"hidden\" name='userId' class=\"validate\"><input type=\"number\" name='theory' class=\"validate\"></td>\n" +
-			"<td><input type=\"number\" name='practice' class=\"validate\"></td>\n" +
-			"</tr>");
+		if(trainee.role==="ROLE_TRAINEE") {
+			$("#list-trainees-marks").append("<tr class='trainee-list'>\n" +
+				"<td>" + trainee.account + "</td>\n" +
+				"<td>" + trainee.firstName + " " + trainee.lastName + "</td>\n" +
+				"<td>" + trainee.phone + "</td>\n" +
+				"<td><input type=\"hidden\" name='userId' value='"+trainee.id+"' class=\"validate\"><input type=\"number\" name='theory' class=\"validate\"></td>\n" +
+				"<td><input type=\"number\" name='practice' class=\"validate\"></td>\n" +
+				"</tr>");
+		}
 	})
+}
+
+function MarkForm2JsonMapper(form){
+	let formData = form.querySelectorAll("input, select, textarea");
+	let obj={};
+	formData.forEach(e=>{
+		let name = e.name;
+		let value = e.value;
+		if(name){
+			obj[name]=value;
+			obj["subjectId"]=$("input[name=subjectIdToMarks]").val();
+		}
+	});
+	return obj;
+}
+
+function markGenerateFormArray(elements) {
+	let listElement=[];
+	elements.forEach(form=>{
+		listElement.push(MarkForm2JsonMapper(form));
+	});
+	return listElement;
+}
+
+function submitMarks() {
+	let marks = document.getElementById("list-trainees-marks");
+	let elements = marks.querySelectorAll(".trainee-list");
+	$.post({
+		url: '/admin/update-marks',
+		data: JSON.stringify(markGenerateFormArray(elements)),
+		contentType: "application/json",
+		success: (resp)=>{
+			Materialize.toast(resp, 4000);
+		},
+		error: (error)=>{
+			Materialize.toast(error, 4000);
+		}
+	});
 }
 
 function loadAllSubjectsExist() {
@@ -322,9 +363,9 @@ function loadAddedSubjects() {
 
 function loadSubjects() {
 	$.get({
-		url: '/admin/load-subjects-in-class',
+		url: '/admin/load-added-subjects',
 		data: {
-			classId: this.currentClass
+			clazzId: this.currentClass
 		},
 		success: (resp)=>{
 			loadClassListSubjectToUpdateMark(resp);
@@ -356,7 +397,7 @@ function loadClassListAddedSubjects(subjects){
 			"<td>"+subject.code+"</td>\n" +
 			"<td>"+subject.duration+"</td>\n" +
 			"<td>\n" +
-			"<button onclick='addSubjectToClass("+subject.id+")' class=\"btn waves-effect orange p-h-xs\">\n" +
+			"<button onclick='removeSubjectFromClass("+subject.id+")' class=\"btn waves-effect orange p-h-xs\">\n" +
 			"<i class=\"material-icons\">remove</i>\n" +
 			"</button>\n" +
 			"</td>\n" +
@@ -364,7 +405,24 @@ function loadClassListAddedSubjects(subjects){
 	})
 }
 
+function removeSubjectFromClass(id) {
+	$.get({
+		url: '/admin/remove-subject-fromclass',
+		data: {
+			clazzId: this.currentClass,
+			subjectId: id
+		},
+		success: resp=>{
+			loadAllSubjectsExist();
+			loadAddedSubjects();
+			Materialize.toast(resp, 4000);
+		}
+	});
+}
+
 function addSubjectToClass(id) {
+	console.log(id);
+	console.log(this.currentClass);
 	$.get({
 		url: '/admin/add-subject-to-class',
 		data: {
@@ -386,7 +444,7 @@ function loadClassListSubjectToUpdateMark(subjects){
 	$("#filter-subjects").html("");
 	subjects.map((subject)=>{
 		$("#filter-subjects").append("<div>\n" +
-			"<input id=\"subject"+subject.id+"\" value='"+subject.id+"' name=\"subjectId\" type=\"radio\" class=\"validate\" required>\n" +
+			"<input id=\"subject"+subject.id+"\" value='"+subject.id+"' name=\"subjectIdToMarks\" type=\"radio\" class=\"validate subjectIdToMarks\" required>\n" +
 			"<label for=\"subject"+subject.id+"\">"+subject.name+"</label>\n" +
 			"</div>");
 	})
@@ -395,19 +453,22 @@ function loadClassListSubjectToUpdateMark(subjects){
 function loadClassListTraineeToAttendance(trainees){
 	$('#attendance-trainees').html("");
 	trainees.map((trainee)=>{
-		$('#attendance-trainees').append("<tr class='attendance-form'>" +
-			"<td>"+trainee.account+"</td>\n" +
-			"<td>"+trainee.firstName+" "+trainee.lastName+"</td>\n" +
-			"<td>"+trainee.phone+"</td>\n" +
-			"<td><input type=\"hidden\" name='userId' value='"+trainee.id+"' class=\"validate\">" +
-			"<select name='type' style='display: block'>\n" +
-			"<option value=\"\" selected>Choose</option>\n" +
-			"<option value=\"Absent\">Absent</option>\n" +
-			"<option value=\"Present\">Present</option>\n" +
-			"<option value=\"Late\">Late</option>\n" +
-			"</select>" +
-			"</td>\n" +
-			"<td><input type=\"text\" name='note' class=\"validate\"></td></tr>");
+
+		if(trainee.role==="ROLE_TRAINEE") {
+			$('#attendance-trainees').append("<tr class='attendance-form'>" +
+				"<td>" + trainee.account + "</td>\n" +
+				"<td>" + trainee.firstName + " " + trainee.lastName + "</td>\n" +
+				"<td>" + trainee.phone + "</td>\n" +
+				"<td><input type=\"hidden\" name='userId' value='" + trainee.id + "' class=\"validate\">" +
+				"<select name='type' style='display: block'>\n" +
+				"<option value=\"\" selected>Choose</option>\n" +
+				"<option value=\"Absent\">Absent</option>\n" +
+				"<option value=\"Present\">Present</option>\n" +
+				"<option value=\"Late\">Late</option>\n" +
+				"</select>" +
+				"</td>\n" +
+				"<td><input type=\"text\" name='note' class=\"validate\"></td></tr>");
+		}
 	})
 }
 
@@ -455,7 +516,7 @@ function addClass(){
 	let form = document.getElementById("add_class_form");
 	$.post({
 		url: "/admin/create-class",
-		data: Form2JsonMapper(form),
+		data: JSON.stringify(Form2JsonMapper(form)),
 		contentType: "application/json",
 		success: (resp)=>{
 			Materialize.toast(resp, 4000);
@@ -513,36 +574,18 @@ function submitAttendance() {
 	});
 }
 
-function submitMarks() {
-	let marks = document.getElementById("list-trainees-marks");
-	let elements = marks.querySelectorAll(".trainee-list");
-	$.post({
-		url: '/admin/update-marks',
-		data: JSON.stringify(generateFormArray(elements)),
-		contentType: "application/json",
-		success: (resp)=>{
-			Materialize.toast(resp, 4000);
-		},
-		error: (error)=>{
-			Materialize.toast(error, 4000);
-		}
-	});
-}
-
 function loadTrainersToUpdate() {
 	$('#inclass-trainer').html("");
 	$('#list-trainers').html("");
 	$.get({
-		url: "/admin/get-users",
+		url: "/admin/get-trainers-toadd",
 		data: {
-			keyword: '',
-			status: 'Active',
-			role: 0
+			classId: this.currentClass
 		},
 		success: (resp)=>{
 			resp.map((res)=>{
 				$('#list-trainers').append("<tr>\n" +
-					"<td>"+res.name+"</td>\n" +
+					"<td>"+res.firstName+" "+res.lastName+"</td>\n" +
 					"<td>"+res.account+"</td>\n" +
 					"<td>"+res.phone+"</td>\n" +
 					"<td>\n" +
@@ -550,12 +593,12 @@ function loadTrainersToUpdate() {
 					"<i class=\"material-icons\">add</i>\n" +
 					"</button>\n" +
 					"</td>\n" +
-					"</tr>")
-			})
+					"</tr>");
+			});
 		}
 	});
 	$.get({
-		url: '/admin/get-inclass-trainer', //TODO
+		url: '/admin/get-inclass-trainer',
 		data: {
 			clazzId: this.currentClass
 		},
@@ -600,12 +643,12 @@ function removeTrainerFromClass(id) {
 		},
 		success: resp=>{
 			loadTrainersToUpdate();
-			//TODO
+			Materialize.toast(resp, 4000);
 		}
 	});
 }
 //=========================================================================
-//Trainer
+//Trainer @Author TrangDM2
 function loadTrainers(){
 	$("#list_trainers").html("");
 	$.get({
@@ -741,7 +784,7 @@ function changeTrainerStatus(){
 
 
 //=========================================================================
-//Function dung chung
+//Function dung chung @Author TrangDM2
 /**
  * @return {string}
  */
@@ -757,6 +800,7 @@ function Form2JsonMapper(form){
 	});
 	return obj;
 }
+
 function generateFormArray(elements) {
 	let listElement=[];
 	elements.forEach(form=>{

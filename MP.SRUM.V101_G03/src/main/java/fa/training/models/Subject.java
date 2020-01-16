@@ -4,11 +4,13 @@ import java.io.Serializable;
 import java.util.List;
 
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -50,9 +52,9 @@ public class Subject implements Serializable {
 	private List<Feedback> feedbackList;
 
 	@JsonIgnore
-	@OneToMany(mappedBy = "subject")
-	private List<ClazzSubject> clazzSubjectList;
-
+  @ManyToMany(mappedBy = "subjectList", cascade = CascadeType.MERGE)
+  private List<Clazz> clazzList;
+	
 	public Subject() {
 	}
 
@@ -147,15 +149,15 @@ public class Subject implements Serializable {
 		this.feedbackList = feedbackList;
 	}
 
-	public List<ClazzSubject> getClazzSubjectList() {
-		return clazzSubjectList;
-	}
+	public List<Clazz> getClazzList() {
+    return clazzList;
+  }
 
-	public void setClazzSubjectList(List<ClazzSubject> clazzSubjectList) {
-		this.clazzSubjectList = clazzSubjectList;
-	}
+  public void setClazzList(List<Clazz> clazzList) {
+    this.clazzList = clazzList;
+  }
 
-	@Override
+  @Override
 	public int hashCode() {
 		int hash = 0;
 		hash += (id != null ? id.hashCode() : 0);

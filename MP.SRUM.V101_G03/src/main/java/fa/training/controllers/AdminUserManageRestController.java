@@ -46,12 +46,21 @@ public class AdminUserManageRestController {
    *@author TrangDM2
    */
   @GetMapping("get-users")
-  public ResponseEntity<List<UserDto>> getTrainees(@RequestParam String keyword, @RequestParam String status, @RequestParam Integer role) {
+  public ResponseEntity<List<UserDto>> getUsers(@RequestParam String keyword, @RequestParam String status, @RequestParam Integer role) {
     String userRole = role==1?Constant.TRAINEE:Constant.TRAINER;
     List<UserDto> trainees = adminUserService.findUserByKeyword(keyword, userRole, status);
     return new ResponseEntity<List<UserDto>>(trainees, HttpStatus.OK);
   }
 
+  /**
+   *@author TrangDM2
+   */
+  @GetMapping("get-trainers-toadd")
+  public ResponseEntity<List<User>> getTrainers(@RequestParam Integer classId) {
+    List<User> trainees = adminUserService.findUserNotInClass(classId, Constant.TRAINER);
+    return new ResponseEntity<List<User>>(trainees, HttpStatus.OK);
+  }
+  
   /**
    *@author TrangDM2
    */

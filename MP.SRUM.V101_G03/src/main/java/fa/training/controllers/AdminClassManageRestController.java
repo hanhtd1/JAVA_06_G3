@@ -14,18 +14,16 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import fa.training.dtos.AdminScoreDto;
 import fa.training.dtos.AttendanceDto;
 import fa.training.dtos.UserDto;
 import fa.training.models.Attendance;
 import fa.training.models.Clazz;
-import fa.training.models.ClazzSubject;
-import fa.training.models.ClazzSubjectPK;
 import fa.training.models.Subject;
 import fa.training.models.User;
 import fa.training.services.AdminClassService;
 import fa.training.services.AdminUserService;
 import fa.training.services.AttendanceService;
-import fa.training.services.ClazzSubjectService;
 import fa.training.services.SubjectService;
 import fa.training.utils.Constant;
 
@@ -44,9 +42,6 @@ public class AdminClassManageRestController {
 
   @Autowired
   private SubjectService subjectService;
-
-  @Autowired
-  private ClazzSubjectService clazzSubjectService;
 
   /**
    * @author TrangDM2
@@ -81,26 +76,30 @@ public class AdminClassManageRestController {
   @PostMapping("create-class")
   public ResponseEntity<String> saveClass(@RequestBody Clazz clazz) {
     String message = new String();
+    HttpStatus status = null;
     Clazz updateClazz = clazz;
 
-    if (clazz.getId() == null) {
-      try {
+    try {
+      if (clazz.getId() == null) {
         updateClazz.setStatus(Constant.CLASS_DEFAULT_STATUS);
         adminClazzService.saveClass(clazz);
         message = Constant.UPDATE_SUCCESS_MESSAGE;
-      } catch (Exception e) {
-        return new ResponseEntity<String>(Constant.UPDATE_FAIL_MESSAGE, HttpStatus.BAD_REQUEST);
+        status = HttpStatus.OK;
+      } else {
+        Clazz toUpdateClazz = adminClazzService.getClass(updateClazz.getId());
+        updateClazz.setUserList(toUpdateClazz.getUserList());
+        updateClazz.setStatus(toUpdateClazz.getStatus());
+        updateClazz.setSubjectList(toUpdateClazz.getSubjectList());
+        adminClazzService.saveClass(updateClazz);
+        message = Constant.CREATE_SUCCESS_MESSAGE;
+        status = HttpStatus.CREATED;
       }
-    } else {
-      Clazz toUpdateClazz = adminClazzService.getClass(updateClazz.getId());
-      updateClazz.setUserList(toUpdateClazz.getUserList());
-      updateClazz.setStatus(toUpdateClazz.getStatus());
-      updateClazz.setClazzSubjectList(toUpdateClazz.getClazzSubjectList());
-      adminClazzService.saveClass(updateClazz);
-      message = Constant.CREATE_SUCCESS_MESSAGE;
+    } catch (Exception e) {
+      message = Constant.UPDATE_FAIL_MESSAGE;
+      status = HttpStatus.BAD_REQUEST;
     }
 
-    return new ResponseEntity<String>(message, HttpStatus.OK);
+    return new ResponseEntity<String>(message, status);
   }
 
   /**
@@ -114,12 +113,14 @@ public class AdminClassManageRestController {
     String message = new String();
 
     attendances.forEach(attend -> {
+      User trainee = adminUserService.getUser(attend.getUserId());
       Attendance attendace = new Attendance();
       attendace.setDate(LocalDate.now());
       attendace.setType(attend.getType());
       attendace.setNote(attend.getNote());
-      attendace.setUser(adminUserService.getUser(attend.getUserId()));
+      attendace.setUser(trainee);
       attendanceList.add(attendace);
+      System.out.println(attendace);
     });
 
     try {
@@ -214,18 +215,6 @@ public class AdminClassManageRestController {
    * @param classId
    * @return
    */
-  @GetMapping("load-subjects-in-class")
-  public ResponseEntity<List<Subject>> getSubjects(@RequestParam Integer classId) {
-    Clazz clazz = adminClazzService.getClass(classId);
-    List<Subject> subjects = clazzSubjectService.findSubjectsByClass(clazz);
-    return new ResponseEntity<List<Subject>>(subjects, HttpStatus.OK);
-  }
-
-  /**
-   * @author TrangDM2
-   * @param classId
-   * @return
-   */
   @GetMapping("load-all-subjects")
   public ResponseEntity<List<Subject>> getAllSubjects() {
     List<Subject> subjects = subjectService.findAll();
@@ -239,8 +228,7 @@ public class AdminClassManageRestController {
    */
   @GetMapping("load-added-subjects")
   public ResponseEntity<List<Subject>> getAddedSubjects(@RequestParam Integer clazzId) {
-    Clazz clazz = adminClazzService.getClass(clazzId);
-    List<Subject> subjects = clazzSubjectService.getSubjectByClazz(clazz);
+    List<Subject> subjects = subjectService.findSubjectsByClass(clazzId);
     return new ResponseEntity<List<Subject>>(subjects, HttpStatus.OK);
   }
 
@@ -254,22 +242,43 @@ public class AdminClassManageRestController {
   public ResponseEntity<String> addSubjectToClass(@RequestParam Integer subjectId, @RequestParam Integer classId) {
     Subject subject = subjectService.findSubjectById(subjectId);
     Clazz clazz = adminClazzService.getClass(classId);
-
-    ClazzSubjectPK clazzSubjectPK = new ClazzSubjectPK(subjectId, classId);
-    ClazzSubject clazzSubject = new ClazzSubject();
     String message = new String();
 
-    clazzSubject.setClazzSubjectPK(clazzSubjectPK);
-    clazzSubject.setClazz(clazz);
-    clazzSubject.setSubject(subject);
+    subject.getClazzList().add(clazz);
+    clazz.getSubjectList().add(subject);
 
     try {
-      clazzSubjectService.saveClazzSubject(clazzSubject);
+      subjectService.save(subject);
+      adminClazzService.saveClass(clazz);
       message = Constant.UPDATE_SUCCESS_MESSAGE;
     } catch (Exception e) {
       message = Constant.UPDATE_FAIL_MESSAGE;
     }
-    // TODO
+    return new ResponseEntity<String>(message, HttpStatus.OK);
+  }
+
+  /**
+   * @author TrangDM2
+   * @param clazzId
+   * @param trainerId
+   * @return
+   */
+  @GetMapping("remove-subject-fromclass")
+  public ResponseEntity<String> removeSubject(@RequestParam Integer subjectId, @RequestParam Integer clazzId) {
+    Subject subject = subjectService.findSubjectById(subjectId);
+    Clazz clazz = adminClazzService.getClass(clazzId);
+    String message = new String();
+
+    subject.getClazzList().remove(clazz);
+    clazz.getSubjectList().remove(subject);
+
+    try {
+      subjectService.save(subject);
+      adminClazzService.saveClass(clazz);
+      message = Constant.UPDATE_SUCCESS_MESSAGE;
+    } catch (Exception e) {
+      message = Constant.UPDATE_FAIL_MESSAGE;
+    }
     return new ResponseEntity<String>(message, HttpStatus.OK);
   }
 
@@ -341,6 +350,12 @@ public class AdminClassManageRestController {
       message = Constant.UPDATE_FAIL_MESSAGE;
     }
     return new ResponseEntity<String>(message, HttpStatus.OK);
+  }
+  
+  @PostMapping("update-marks")
+  public ResponseEntity<String> updateMarks(@RequestBody List<AdminScoreDto> scores){
+    System.out.println(scores);
+    return new ResponseEntity<String>(HttpStatus.OK); //TODO
   }
 
   /**

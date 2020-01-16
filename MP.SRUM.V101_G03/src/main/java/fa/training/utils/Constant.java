@@ -59,4 +59,6 @@ public class Constant {
 	public static final String CLAZZ_NAME_AND_CATEGORY = "CLAZZ_NAME_AND_CATEGORY";
 	public static final String CLAZZ_NAME_AND_CATEGORY_AND_STATUS = "CLAZZ_NAME_AND_CATEGORY_AND_STATUS";
 
+  public static final int FIRST_RESULT = 0;
+
 }
