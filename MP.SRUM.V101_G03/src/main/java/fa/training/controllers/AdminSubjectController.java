@@ -49,7 +49,7 @@ public class AdminSubjectController {
 		if (checkExisted) {
 			apiObject.setMessage(Constant.CREATE_FAIL_MESSAGE);
 		} else {
-			Subject subject = new Subject(subjectName, subjectCode, subjectDuration, Constant.SUBJECT_DEFAULT_STATUS);
+			Subject subject = new Subject(subjectName, subjectCode, subjectDuration, Constant.SUBJECT_ACTIVE_STATUS);
 			subject = subjectService.save(subject);
 			apiObject.setMessage(Constant.CREATE_SUCCESS_MESSAGE);
 			apiObject.setT(subject);

@@ -1,6 +1,9 @@
 package fa.training.services.implement;
 
 import static org.junit.Assert.*;
+import static org.hamcrest.CoreMatchers.any;
+
+import java.util.ArrayList;
 
 import org.junit.After;
 import org.junit.Before;
@@ -9,6 +12,8 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
+import fa.training.models.Attendance;
+import fa.training.models.User;
 import fa.training.repositories.AttendanceRepository;
 
 public class AttendanceServiceImplTest {
@@ -29,8 +34,8 @@ public class AttendanceServiceImplTest {
 	}
 
 	@Test
-	public void test() {
-		fail("Not yet implemented");
+	public void test_getAttendancesByUser() {
+//		when(attendanceRepository.findAttendanceByUser(any(User.class))).thenReturn(new ArrayList<Attendance>());
 	}
 
 }

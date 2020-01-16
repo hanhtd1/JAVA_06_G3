@@ -7,11 +7,11 @@ import fa.training.models.Feedback;
 public interface FeedbackService {
 
 	public Feedback getAllFeedback(int userId, int subjectId);
-	
+
 	public Feedback save(Feedback feedback);
 
-  List<Feedback> findFeedbackBySubjectIdAndClazzId(Integer subjectId, Integer clazzId);
+	List<Feedback> findFeedbackBySubjectIdAndClazzId(Integer subjectId, Integer clazzId);
 
-  List<Feedback> findFeedbackByfindBySubjecId(Integer subjectId);
-	
+	List<Feedback> findFeedbackByfindBySubjecId(Integer subjectId);
+
 }

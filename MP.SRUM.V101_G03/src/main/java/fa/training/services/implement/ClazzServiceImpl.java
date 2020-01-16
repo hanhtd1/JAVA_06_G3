@@ -62,12 +62,18 @@ public class ClazzServiceImpl implements ClazzService {
 				PageRequest.of(pageIndex, Constant.PAGE_SIZE));
 	}
 	
+	/**
+	 * @author HoangLV7
+	 */
 	@Override
 	public List<Clazz> findBySubject(int subjectId) {
 		String status = Constant.CLASS_ACTIVE_STATUS;
 		return clazzRepository.findBySubject(status, subjectId);
 	}
 
+	/**
+	 * @author HoangLV7
+	 */
 	@Override
 	public Clazz findClazzByTrainee(User trainee) {
 		return clazzRepository.findClazzByTrainee(trainee.getId()).orElse(new Clazz());

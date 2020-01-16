@@ -43,6 +43,9 @@ public class SubjectServiceImpl implements SubjectService {
 
 	@Override
 	public Subject save(Subject subject) {
+		float duration = subject.getDuration();
+		
+//		if()
 		return subjectRepository.save(subject);
 	}
 
