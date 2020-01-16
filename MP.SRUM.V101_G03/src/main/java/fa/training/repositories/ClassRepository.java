@@ -118,7 +118,6 @@ public interface ClassRepository extends JpaRepository<Clazz, Integer> {
 	 * @return Optional<Clazz> that find by trainee id
 	 */
 	@Query(value = "SELECT c.id, c.category, c.name, c.note, open_date, c.status, c.open_date"
-<<<<<<< HEAD
 			+ " FROM clazz c, user_clazz uc"
 			+ " WHERE c.id = uc.clazz_id AND uc.user_id = :userId", 
 			nativeQuery = true)
@@ -134,8 +133,4 @@ public interface ClassRepository extends JpaRepository<Clazz, Integer> {
       + "(SELECT uc.clazz_id FROM user_clazz uc WHERE uc.user_id= :userId )", 
       nativeQuery = true)
   List<Clazz> findClazzsByUser(@Param("userId") int userId);
-=======
-			+ " FROM clazz c, user_clazz uc" + " WHERE c.id = uc.clazz_id AND uc.user_id = :userId", nativeQuery = true)
-	Optional<Clazz> findClazzByTrainee(@Param("userId") int traineeId);
->>>>>>> 36d4f5fa9d7d0a596d3942ecc3b15737de5c55d0
 }

@@ -3,8 +3,8 @@ package fa.training.repositories;
 import java.util.List;
 import java.util.Optional;
 
+import org.springframework.boot.autoconfigure.data.web.SpringDataWebProperties.Pageable;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -47,7 +47,7 @@ public interface SubjectRepository extends JpaRepository<Subject, Integer> {
 	/**
 	 * @author ToanNT18
 	 * @param userId
-	 * @param pageable
+	 * @param pageRequest
 	 * @return
 	 */
 	@Query(value = "SELECT * FROM udf_findSubjectByUser(:userId)", nativeQuery = true)

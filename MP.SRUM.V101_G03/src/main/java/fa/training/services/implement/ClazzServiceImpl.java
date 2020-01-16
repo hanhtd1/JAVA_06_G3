@@ -79,22 +79,12 @@ public class ClazzServiceImpl implements ClazzService {
 
 	@Override
 	public List<Clazz> findBySubject(int subjectId) {
-<<<<<<< HEAD
 		String status = Constant.CLASS_ACTIVE_STATUS;
 		return clazzRepository.findBySubject(status, subjectId);
-=======
-		// TODO Auto-generated method stub
-		return null;
->>>>>>> 36d4f5fa9d7d0a596d3942ecc3b15737de5c55d0
 	}
 
 	@Override
 	public Clazz findClazzByTrainee(User trainee) {
-<<<<<<< HEAD
 		return clazzRepository.findClazzByUser(trainee.getId()).orElse(new Clazz());
-=======
-		// TODO Auto-generated method stub
-		return null;
->>>>>>> 36d4f5fa9d7d0a596d3942ecc3b15737de5c55d0
 	}
 }
