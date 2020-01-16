@@ -22,7 +22,8 @@ public class ScoreDto {
 		this.subjectName = score.getSubject().getName();
 		this.theory = score.getTheory();
 		this.practice = score.getPractice();
-		this.status = score.getTheory() == null ? score.getPractice() == null ? "In Coming" : "In Progress" : score.getPractice() == null ? "In Progress" : "Done";
+		this.status = score.getTheory() == null ? score.getPractice() == null ? "In Coming" : "In Progress"
+				: score.getPractice() == null ? "In Progress" : "Done";
 	}
 
 	public Integer getSubjectId() {

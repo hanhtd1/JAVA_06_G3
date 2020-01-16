@@ -25,4 +25,19 @@ public class SearchType {
 			return Constant.CATEGORY_CLAZZ_STATUS;
 		}
 	}
+
+	public static String clazzSearchType(final String contentSearch, final String status) {
+		if (contentSearch.equals(Constant.CLAZZ_CONTENT_SEARCH_DEFAULT)
+				&& status.equals(Constant.CLAZZ_STATUS_DEFAULT)) {
+			return Constant.CLAZZ_SEARCH_BY_TRAINER_ID;
+		} else if (!contentSearch.equals(Constant.CLAZZ_CONTENT_SEARCH_DEFAULT)
+				&& status.equals(Constant.CLAZZ_STATUS_DEFAULT)) {
+			return Constant.CLAZZ_NAME_AND_CATEGORY;
+		} else if (contentSearch.equals(Constant.CLAZZ_CONTENT_SEARCH_DEFAULT)
+				&& !status.equals(Constant.CLAZZ_STATUS_DEFAULT)) {
+			return Constant.STATUS;
+		} else {
+			return Constant.CLAZZ_NAME_AND_CATEGORY_AND_STATUS;
+		}
+	}
 }

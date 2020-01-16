@@ -55,7 +55,7 @@ public interface ClazzService {
 	 *         contentSearch
 	 */
 	List<Clazz> findClazzByStatusAndContent(Integer userId, Integer pageIndex, String status, String contentSearch);
-	
+
 	/**
 	 * @author HoangLV7
 	 *
@@ -63,7 +63,7 @@ public interface ClazzService {
 	 * @return list of class which is found by code subject
 	 */
 	List<Clazz> findBySubject(int subjectId);
-	
+
 	/**
 	 * @author HoangLV7
 	 *

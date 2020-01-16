@@ -37,9 +37,9 @@ public class TraineeServiceImpl implements TraineeService {
 	}
 
 	@Override
-	public List<User> findAllTrainee() {
-		Page<User> users = traineeRepository.findAllByRole(Constant.TRAINER,
-				PageRequest.of(Constant.FIRST_PAGE, Constant.PAGE_SIZE));
+	public List<User> findAllTrainee(int page) {
+		Page<User> users = traineeRepository.findAllByRole(Constant.ROLE_TRAINEE,
+				PageRequest.of(page, Constant.PAGE_SIZE));
 		numberOfPage = users.getTotalPages();
 		return users.getContent();
 	}
@@ -61,10 +61,19 @@ public class TraineeServiceImpl implements TraineeService {
 	}
 
 	@Override
+	public List<User> findTraineeByClazzId(int clazzId, Integer pageIndex) {
+		Page<User> users = traineeRepository.findTraineeByClazzId(clazzId,
+				PageRequest.of(pageIndex, Constant.PAGE_SIZE));
+		numberOfPage = users.getTotalPages();
+		return users.getContent();
+	}
+
+	@Override
 	public List<User> findTraineeByStatus(String status, Integer pageIndex) {
 		Page<User> users = traineeRepository.findTraineeByStatus(status, PageRequest.of(pageIndex, Constant.PAGE_SIZE));
 		numberOfPage = users.getTotalPages();
 		return users.getContent();
+
 	}
 
 	@Override
