@@ -66,7 +66,7 @@ public interface UserRepository extends JpaRepository<User, Integer> {
    * @author TrangDM2
    * @return
    */
-  @Query("select u from User u Where (u.firstName like :keyword or u.lastName like :keyword or u.account like :keyword) and role= :role and status like :status")
+  @Query("select u from User u Where (u.firstName like :keyword or u.lastName like :keyword or u.account like :keyword) and role= :role and status like :status order by id DESC")
   List<User> findUsersByKeyword(@Param("keyword") String keyword, @Param("role") String role,
       @Param("status") String status);
 

@@ -2,6 +2,7 @@ package fa.training.controllers;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -60,7 +61,7 @@ public class AdminSubjectController {
 	public String getSubjectDetails(Model model, @RequestParam Integer subjectId) {
 		List<Clazz> classes = clazzService.findBySubject(subjectId);
 		Subject subject = subjectService.findSubjectById(subjectId);
-		Map<String, List<User>> usersByClass = classes.stream()
+		Map<String, Set<User>> usersByClass = classes.stream()
 				.collect(Collectors.toMap(Clazz::getName, Clazz::getUserList));
 		model.addAttribute("usersByClass", usersByClass);
 		model.addAttribute("subject", subject);

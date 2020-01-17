@@ -2,7 +2,7 @@ package fa.training.models;
 
 import java.io.Serializable;
 import java.time.LocalDate;
-import java.util.List;
+import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -50,13 +50,13 @@ public class Clazz implements Serializable {
       @JoinColumn(name = "ClazzId", referencedColumnName = "Id") }, inverseJoinColumns = {
           @JoinColumn(name = "UserId", referencedColumnName = "Id") })
   @ManyToMany
-  private List<User> userList;
+  private Set<User> userList;
   
   @JoinTable(name = "ClazzSubject", joinColumns = {
       @JoinColumn(name = "ClazzId", referencedColumnName = "Id") }, inverseJoinColumns = {
           @JoinColumn(name = "SubjectId", referencedColumnName = "Id") })
   @ManyToMany
-  private List<Subject> subjectList;
+  private Set<Subject> subjectList;
 
   public Clazz() {
   }
@@ -74,11 +74,11 @@ public class Clazz implements Serializable {
     this.status = status;
   }
 
-  public List<Subject> getSubjectList() {
+  public Set<Subject> getSubjectList() {
     return subjectList;
   }
 
-  public void setSubjectList(List<Subject> subjectList) {
+  public void setSubjectList(Set<Subject> subjectList) {
     this.subjectList = subjectList;
   }
 
@@ -130,11 +130,11 @@ public class Clazz implements Serializable {
     this.status = status;
   }
 
-  public List<User> getUserList() {
+  public Set<User> getUserList() {
     return userList;
   }
 
-  public void setUserList(List<User> userList) {
+  public void setUserList(Set<User> userList) {
     this.userList = userList;
   }
 

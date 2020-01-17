@@ -3,6 +3,7 @@ package fa.training.services.implement;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -56,9 +57,9 @@ public class AdminUserServiceImpl implements AdminUserService {
     List<UserDto> userDtos = new ArrayList<>();
     users.forEach(user -> {
       Clazz clazz = null;
-      List<Clazz> clazzs = user.getClazzList();
+      Set<Clazz> clazzs = user.getClazzList();
       if (!clazzs.isEmpty()) {
-        clazz = clazzs.get(0);
+        clazz = clazzs.iterator().next();
       }
       userDtos.add(new UserDto(user, clazz));
     });
@@ -70,7 +71,6 @@ public class AdminUserServiceImpl implements AdminUserService {
    */
   @Override
   public User saveUser(User user) {
-    //TODO Validate
     return userRepository.save(user);
   }
 
@@ -104,9 +104,9 @@ public class AdminUserServiceImpl implements AdminUserService {
     List<UserDto> userDtos = new ArrayList<>();
     users.forEach(user -> {
       Clazz clazz = null;
-      List<Clazz> clazzs = user.getClazzList();
+      Set<Clazz> clazzs = user.getClazzList();
       if (!clazzs.isEmpty()) {
-        clazz = clazzs.get(0);
+        clazz = clazzs.iterator().next();
       }
       userDtos.add(new UserDto(user, clazz));
     });

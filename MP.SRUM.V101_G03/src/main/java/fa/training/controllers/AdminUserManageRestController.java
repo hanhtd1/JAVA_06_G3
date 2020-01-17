@@ -22,8 +22,10 @@ import org.springframework.web.bind.annotation.RestController;
 
 import fa.training.dtos.ScoreDto;
 import fa.training.dtos.UserDto;
+import fa.training.models.Feedback;
 import fa.training.models.User;
 import fa.training.services.AdminUserService;
+import fa.training.services.FeedbackService;
 import fa.training.utils.Constant;
 
 /**
@@ -38,6 +40,8 @@ public class AdminUserManageRestController {
   private AdminUserService adminUserService;
 
   @Autowired
+  private FeedbackService feedbackService;
+  @Autowired
   private BCryptPasswordEncoder bcrypt;
 
   /**
@@ -47,6 +51,18 @@ public class AdminUserManageRestController {
   public ResponseEntity<User> getTraineeInfo(@RequestParam int id) {
     User user = adminUserService.getUser(id);
     return new ResponseEntity<User>(user, HttpStatus.OK);
+  }
+  
+  /**
+   * @author TrangDM2
+   * @param userId
+   * @param subjectId
+   * @return
+   */
+  @GetMapping("get-user-feedback")
+  public ResponseEntity<Feedback> getUserFeedback(@RequestParam Integer userId, @RequestParam Integer subjectId){
+    Feedback feedback = feedbackService.findBySubjectAndUser(userId, subjectId);
+    return new ResponseEntity<Feedback>(feedback, HttpStatus.OK);
   }
 
   /**

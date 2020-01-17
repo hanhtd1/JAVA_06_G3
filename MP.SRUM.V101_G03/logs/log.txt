@@ -236,3 +236,43 @@
 =======
 2020-01-16 09:59:42 INFO  FeedbackServiceImpl:28 - Get feedbacks of UserID 0 and SubjectID 0
 >>>>>>> 9a26496b25edc6aa4995b4588148d4d8587cd722
+2020-01-17 10:15:05 INFO  TraineeUserController:59 - TrangDM2 login successful
+2020-01-17 10:15:05 INFO  UserServiceImpl:42 - Get User by Account TrangDM2
+2020-01-17 10:15:05 INFO  UserServiceImpl:30 - Get classmate of user TrangDM2
+2020-01-17 10:15:05 INFO  AttendanceServiceImpl:29 - Get list of Attendace by TrangDM2
+2020-01-17 10:15:05 INFO  ScoreServiceImpl:55 - Get score by UserId 6
+2020-01-17 10:15:11 INFO  UserServiceImpl:51 - Get User by UserID 12
+2020-01-17 10:15:11 INFO  ScoreServiceImpl:55 - Get score by UserId 12
+2020-01-17 10:15:15 INFO  UserServiceImpl:51 - Get User by UserID 5
+2020-01-17 10:15:15 INFO  ScoreServiceImpl:55 - Get score by UserId 5
+2020-01-17 10:15:17 INFO  FeedbackServiceImpl:28 - Get feedbacks of UserID 5 and SubjectID 3
+2020-01-17 10:15:21 INFO  UserServiceImpl:51 - Get User by UserID 4
+2020-01-17 10:15:21 INFO  ScoreServiceImpl:55 - Get score by UserId 4
+2020-01-17 10:15:24 INFO  UserServiceImpl:51 - Get User by UserID 5
+2020-01-17 10:15:24 INFO  ScoreServiceImpl:55 - Get score by UserId 5
+2020-01-17 10:15:27 INFO  FeedbackServiceImpl:28 - Get feedbacks of UserID 6 and SubjectID 3
+2020-01-17 10:15:29 INFO  UserServiceImpl:51 - Get User by UserID 4
+2020-01-17 10:15:29 INFO  ScoreServiceImpl:55 - Get score by UserId 4
+2020-01-17 10:15:33 INFO  UserServiceImpl:51 - Get User by UserID 4
+2020-01-17 10:15:33 INFO  ScoreServiceImpl:55 - Get score by UserId 4
+2020-01-17 10:15:37 INFO  UserServiceImpl:51 - Get User by UserID 4
+2020-01-17 10:15:37 INFO  ScoreServiceImpl:55 - Get score by UserId 4
+2020-01-17 14:42:23 INFO  FeedbackServiceImpl:28 - Get feedbacks of UserID 2 and SubjectID 3
+2020-01-17 14:42:24 INFO  FeedbackServiceImpl:28 - Get feedbacks of UserID 3 and SubjectID 3
+2020-01-17 14:42:25 INFO  FeedbackServiceImpl:28 - Get feedbacks of UserID 7 and SubjectID 3
+2020-01-17 14:42:27 INFO  FeedbackServiceImpl:28 - Get feedbacks of UserID 8 and SubjectID 3
+2020-01-17 14:42:30 INFO  FeedbackServiceImpl:28 - Get feedbacks of UserID 16 and SubjectID 3
+2020-01-17 14:42:31 INFO  FeedbackServiceImpl:28 - Get feedbacks of UserID 13 and SubjectID 3
+2020-01-17 14:42:33 INFO  FeedbackServiceImpl:28 - Get feedbacks of UserID 14 and SubjectID 3
+2020-01-17 14:42:36 INFO  FeedbackServiceImpl:28 - Get feedbacks of UserID 3 and SubjectID 3
+2020-01-17 14:42:37 INFO  FeedbackServiceImpl:28 - Get feedbacks of UserID 4 and SubjectID 3
+2020-01-17 14:42:38 INFO  FeedbackServiceImpl:28 - Get feedbacks of UserID 5 and SubjectID 3
+2020-01-17 14:42:39 INFO  FeedbackServiceImpl:28 - Get feedbacks of UserID 5 and SubjectID 3
+2020-01-17 14:42:41 INFO  FeedbackServiceImpl:28 - Get feedbacks of UserID 6 and SubjectID 3
+2020-01-17 14:42:42 INFO  FeedbackServiceImpl:28 - Get feedbacks of UserID 6 and SubjectID 3
+2020-01-17 14:43:09 INFO  FeedbackServiceImpl:28 - Get feedbacks of UserID 6 and SubjectID 4
+2020-01-17 14:43:12 INFO  FeedbackServiceImpl:28 - Get feedbacks of UserID 12 and SubjectID 4
+2020-01-17 14:43:13 INFO  FeedbackServiceImpl:28 - Get feedbacks of UserID 6 and SubjectID 4
+2020-01-17 14:43:14 INFO  FeedbackServiceImpl:28 - Get feedbacks of UserID 3 and SubjectID 4
+2020-01-17 14:43:20 INFO  FeedbackServiceImpl:28 - Get feedbacks of UserID 14 and SubjectID 4
+2020-01-17 14:43:24 INFO  FeedbackServiceImpl:28 - Get feedbacks of UserID 6 and SubjectID 3

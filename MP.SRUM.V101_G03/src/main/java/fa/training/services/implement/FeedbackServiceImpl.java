@@ -14,38 +14,55 @@ import fa.training.services.FeedbackService;
 @Service
 public class FeedbackServiceImpl implements FeedbackService {
 
-	private static final Logger LOGGER = LogManager.getLogger(FeedbackServiceImpl.class);
+  private static final Logger LOGGER = LogManager.getLogger(FeedbackServiceImpl.class);
 
-	@Autowired
-	private FeedbackRepository feedbackRepository;
+  @Autowired
+  private FeedbackRepository feedbackRepository;
 
-	/**
-	 * @author HoangLV7
-	 * 
-	 */
-	@Override
-	public Feedback getAllFeedback(int userId, int subjectId) {
-		LOGGER.info("Get feedbacks of UserID " + userId + " and SubjectID " + subjectId);
-		return feedbackRepository.findByUserIdAndSubjectId(userId, subjectId).orElse(new Feedback(subjectId, userId));
-	}
+  /**
+   * @author HoangLV7
+   * 
+   */
+  @Override
+  public Feedback getAllFeedback(int userId, int subjectId) {
+    LOGGER.info("Get feedbacks of UserID " + userId + " and SubjectID " + subjectId);
+    return feedbackRepository.findByUserIdAndSubjectId(userId, subjectId).orElse(new Feedback(subjectId, userId));
+  }
 
-	/**
-	 * @author HoangLV7
-	 * 
-	 */
-	@Override
-	public Feedback save(Feedback feedback) {
-		LOGGER.info("Save new feedback");
-		return feedbackRepository.save(feedback);
-	}
+  /**
+   * @author HoangLV7
+   * 
+   */
+  @Override
+  public Feedback save(Feedback feedback) {
+    LOGGER.info("Save new feedback");
+    return feedbackRepository.save(feedback);
+  }
 
-	@Override
-	public List<Feedback> findFeedbackBySubjectIdAndClazzId(Integer subjectId, Integer clazzId) {
-		return feedbackRepository.findFeedbackBySubjectAndClazz(subjectId, clazzId);
-	}
+  /**
+   * @author ToanNT18
+   */
+  @Override
+  public List<Feedback> findFeedbackBySubjectIdAndClazzId(Integer subjectId, Integer clazzId) {
+    return feedbackRepository.findFeedbackBySubjectAndClazz(subjectId, clazzId);
+  }
 
-	@Override
-	public List<Feedback> findFeedbackByfindBySubjecId(Integer subjectId) {
-		return feedbackRepository.findFeedbackBySubjectId(subjectId);
-	}
+  /**
+   * @author ToanNT18
+   */
+  @Override
+  public List<Feedback> findFeedbackByfindBySubjecId(Integer subjectId) {
+    return feedbackRepository.findFeedbackBySubjectId(subjectId);
+  }
+
+  /**
+   * @author TrangDM2
+   * @param userId
+   * @param subjectId
+   * @return
+   */
+  @Override
+  public Feedback findBySubjectAndUser(Integer userId, Integer subjectId) {
+    return feedbackRepository.findByUserAndSubject(userId, subjectId);
+  }
 }

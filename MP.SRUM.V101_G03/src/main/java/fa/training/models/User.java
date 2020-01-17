@@ -2,7 +2,9 @@ package fa.training.models;
 
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -15,8 +17,11 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Pattern;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+
+import fa.training.utils.Constant;
 
 /**
  *
@@ -32,15 +37,16 @@ public class User implements Serializable {
   @Column(name = "Id")
   private Integer id;
 
-  @NotBlank
+  @Pattern(regexp = Constant.REGEX_NAME, message = Constant.VALID_NAME_MESSAGE)
   @Column(name = "FirstName")
   private String firstName;
 
-  @NotBlank
+  @Pattern(regexp = Constant.REGEX_NAME, message = Constant.VALID_NAME_MESSAGE)
   @Column(name = "LastName")
   private String lastName;
 
   @NotBlank
+  @Pattern(regexp = Constant.REGEX_PHONE_NUMBER, message = Constant.VALID_PHONE_MESSAGE)
   @Column(name = "Phone")
   private String phone;
 
@@ -64,25 +70,12 @@ public class User implements Serializable {
 
   @Column(name = "Gender")
   private String gender;
-
-  public String getGender() {
-    return gender;
-  }
-
-  public void setGender(String gender) {
-    this.gender = gender;
-  }
-
-  public String getStatus() {
-    return status;
-  }
-
-  public void setStatus(String status) {
-    this.status = status;
-  }
-
+  
   @Column(name = "Status")
   private String status;
+  
+  @Column(name = "LastLogin")
+  private LocalDateTime lastLogin;
 
   @JsonIgnore
   @OneToMany(mappedBy = "user")
@@ -90,7 +83,7 @@ public class User implements Serializable {
 
   @JsonIgnore
   @ManyToMany(mappedBy = "userList", cascade = CascadeType.MERGE)
-  private List<Clazz> clazzList;
+  private Set<Clazz> clazzList;
 
   @JsonIgnore
   @OneToMany(cascade = CascadeType.MERGE, mappedBy = "user")
@@ -108,13 +101,6 @@ public class User implements Serializable {
   @OneToMany(cascade = CascadeType.MERGE, mappedBy = "trainee")
   private List<ReviewTrainee> reviewTraineeList1;
 
-  public User() {
-  }
-
-  public User(Integer id) {
-    this.id = id;
-  }
-
   public User(String firstName, String lastName, String phone, String email, String password, String account,
       LocalDate birthDay, String role, String gender, String status) {
     super();
@@ -127,6 +113,29 @@ public class User implements Serializable {
     this.birthDay = birthDay;
     this.role = role;
     this.gender = gender;
+    this.status = status;
+  }
+
+  public User() {
+  }
+
+  public User(Integer id) {
+    this.id = id;
+  }
+  
+  public String getGender() {
+    return gender;
+  }
+
+  public void setGender(String gender) {
+    this.gender = gender;
+  }
+
+  public String getStatus() {
+    return status;
+  }
+
+  public void setStatus(String status) {
     this.status = status;
   }
 
@@ -210,11 +219,11 @@ public class User implements Serializable {
     this.attendanceList = attendanceList;
   }
 
-  public List<Clazz> getClazzList() {
+  public Set<Clazz> getClazzList() {
     return clazzList;
   }
 
-  public void setClazzList(List<Clazz> clazzList) {
+  public void setClazzList(Set<Clazz> clazzList) {
     this.clazzList = clazzList;
   }
 

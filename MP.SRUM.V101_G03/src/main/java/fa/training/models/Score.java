@@ -8,6 +8,11 @@ import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
+
+import org.hibernate.validator.constraints.Range;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 /**
  *
@@ -21,16 +26,20 @@ public class Score implements Serializable {
   @EmbeddedId
   protected ScorePK scorePK;
 
+  @Range(max = 10)
   @Column(name = "Theory")
   private Float theory;
 
+  @Range(max = 10)
   @Column(name = "Practice")
   private Float practice;
 
+  @JsonIgnore
   @JoinColumn(name = "SubjectId", referencedColumnName = "Id", insertable = false, updatable = false)
   @ManyToOne(optional = false)
   private Subject subject;
 
+  @JsonIgnore
   @JoinColumn(name = "UserId", referencedColumnName = "Id", insertable = false, updatable = false)
   @ManyToOne(optional = false)
   private User user;

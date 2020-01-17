@@ -2,6 +2,7 @@ package fa.training.models;
 
 import java.io.Serializable;
 import java.util.List;
+import java.util.Set;
 
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
@@ -53,7 +54,7 @@ public class Subject implements Serializable {
 
 	@JsonIgnore
   @ManyToMany(mappedBy = "subjectList", cascade = CascadeType.MERGE)
-  private List<Clazz> clazzList;
+  private Set<Clazz> clazzList;
 	
 	public Subject() {
 	}
@@ -149,11 +150,11 @@ public class Subject implements Serializable {
 		this.feedbackList = feedbackList;
 	}
 
-	public List<Clazz> getClazzList() {
+	public Set<Clazz> getClazzList() {
     return clazzList;
   }
 
-  public void setClazzList(List<Clazz> clazzList) {
+  public void setClazzList(Set<Clazz> clazzList) {
     this.clazzList = clazzList;
   }
 
