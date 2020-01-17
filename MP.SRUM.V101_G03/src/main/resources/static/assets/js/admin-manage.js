@@ -117,9 +117,8 @@ function editTraineeInfo(){
 }
 function addTrainee(){
 	let form = document.getElementById("add_trainee_form");
-	if(addUser(form)===true){
-		loadTrainees();
-	}
+	addUser(form)
+	loadTrainees();
 	return false;
 }
 function updateTrainee(){
@@ -300,7 +299,7 @@ function submitMarks() {
 		data: JSON.stringify(markGenerateFormArray(elements)),
 		contentType: "application/json",
 		success: (resp)=>{
-			Materialize.toast(resp, 4000);
+			swal("Success!", resp, "success")
 		},
 		error: (error)=>{
 			Materialize.toast(error.responseText, 4000);
@@ -374,18 +373,29 @@ function loadClassListAddedSubjects(subjects){
 }
 
 function removeSubjectFromClass(id) {
-	$.get({
-		url: '/admin/remove-subject-fromclass',
-		data: {
-			clazzId: this.currentClass,
-			subjectId: id
-		},
-		success: resp=>{
-			loadAllSubjectsExist();
-			loadAddedSubjects();
-			Materialize.toast(resp, 4000);
-		}
-	});
+	swal({
+			title: "Are you sure?",
+			text: "Your will delete this subject from class!",
+			type: "warning",
+			showCancelButton: true,
+			confirmButtonClass: "btn-danger",
+			confirmButtonText: "Yes, delete it!",
+			closeOnConfirm: false
+		}, () => {
+			$.get({
+				url: '/admin/remove-subject-fromclass',
+				data: {
+					clazzId: this.currentClass,
+					subjectId: id
+				},
+				success: resp=>{
+					loadAllSubjectsExist();
+					loadAddedSubjects();
+					swal("Deleted!", resp,"success");
+				}
+			});
+		});
+
 }
 
 function addSubjectToClass(id) {
@@ -446,8 +456,15 @@ function loadClassTraineeInfo(id){
 }
 
 function removeTraineeFromClass(id){
-	let cf = confirm("Are you sure??");
-	if(cf){
+	swal({
+		title: "Are you sure?",
+		text: "Your will delete this trainee from class!",
+		type: "warning",
+		showCancelButton: true,
+		confirmButtonClass: "btn-danger",
+		confirmButtonText: "Yes, delete it!",
+		closeOnConfirm: false
+	}, () => {
 		$.get({
 			url: '/admin/remove-trainee',
 			data: {
@@ -457,13 +474,10 @@ function removeTraineeFromClass(id){
 			success: (resp)=>{
 				loadClasses();
 				loadClassDetail(this.currentClass);
-				Materialize.toast(resp, 4000);
+				swal('Deleted', resp, 'success');
 			}
-		})
-	} else {
-		Materialize.toast("Canceled!", 4000);
-		return null;
-	}
+		});
+	});
 }
 
 function updateClassStatus() {
@@ -474,7 +488,7 @@ function updateClassStatus() {
 			status: $('#update-class-status').val()
 		},
 		success: (resp)=>{
-			Materialize.toast(resp, 4000);
+			swal("Success!", resp,"success");
 			loadClassDetail(this.currentClass);
 			loadClasses();
 		}
@@ -530,18 +544,28 @@ function editClassInfoSubmit(){
 }
 
 function submitAttendance() {
-	let attendances = document.getElementById("attendance-trainees");
-	let elements = attendances.querySelectorAll(".attendance-form");
-	$.post({
-		url: '/admin/do-attendance',
-		data: JSON.stringify(generateFormArray(elements)),
-		contentType: "application/json",
-		success: (resp)=>{
-			Materialize.toast(resp, 4000);
-		},
-		error: (error)=>{
-			Materialize.toast(error, 4000);
-		}
+	swal({
+		title: "Are you sure?",
+		text: "Your will today of attendance!",
+		type: "warning",
+		showCancelButton: true,
+		confirmButtonClass: "btn-danger",
+		confirmButtonText: "Yes, delete it!",
+		closeOnConfirm: false
+	}, () => {
+		let attendances = document.getElementById("attendance-trainees");
+		let elements = attendances.querySelectorAll(".attendance-form");
+		$.post({
+			url: '/admin/do-attendance',
+			data: JSON.stringify(generateFormArray(elements)),
+			contentType: "application/json",
+			success: (resp) => {
+				swal("Success!", resp,"success");
+			},
+			error: (error) => {
+				swal("Failed!", error, "danger");
+			}
+		});
 	});
 }
 
@@ -606,17 +630,28 @@ function addTrainerToClass(id) {
 }
 
 function removeTrainerFromClass(id) {
-	$.get({
-		url: '/admin/remove-trainer-fromclass',
-		data: {
-			clazzId: this.currentClass,
-			trainerId: id
-		},
-		success: resp=>{
-			loadTrainersToUpdate();
-			Materialize.toast(resp, 4000);
-		}
+	swal({
+		title: "Are you sure?",
+		text: "Your will delete this trainer from class!",
+		type: "warning",
+		showCancelButton: true,
+		confirmButtonClass: "btn-danger",
+		confirmButtonText: "Yes, delete it!",
+		closeOnConfirm: false
+	}, () => {
+		$.get({
+			url: '/admin/remove-trainer-fromclass',
+			data: {
+				clazzId: this.currentClass,
+				trainerId: id
+			},
+			success: resp=>{
+				loadTrainersToUpdate();
+				swal("Deleted!", resp,"success");
+			}
+		});
 	});
+
 }
 //=========================================================================
 //Trainer @Author TrangDM2
@@ -816,7 +851,7 @@ function updateUserStatus(element) {
 			status: element
 		},
 		success: (resp)=>{
-			Materialize.toast(resp, 4000)
+			swal("Success!", resp,"success");
 		}
 	})
 }

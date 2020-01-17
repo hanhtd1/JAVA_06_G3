@@ -134,7 +134,6 @@ public class AdminClassManageRestController {
       attendace.setNote(attend.getNote());
       attendace.setUser(trainee);
       attendanceList.add(attendace);
-      System.out.println(attendace);
     });
 
     try {

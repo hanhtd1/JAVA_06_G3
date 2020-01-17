@@ -107,20 +107,17 @@ public class AdminUserManageRestController {
       byte role = Byte.parseByte(user.getRole());
       User requestUser = user;
       String message = new String();
-      HttpStatus status = null;
       try {
         requestUser.setRole(role == 1 ? Constant.TRAINEE : Constant.TRAINER);
         requestUser.setStatus(Constant.USER_DEFAULT_STATUS);
         requestUser.setPassword(bcrypt.encode(Constant.DEFAULT_PASSWORD));
         adminUserService.saveUser(requestUser);
         message = Constant.CREATE_SUCCESS_MESSAGE;
-        status = HttpStatus.OK;
       } catch (Exception e) {
         message = Constant.CREATE_FAIL_MESSAGE;
-        status = HttpStatus.BAD_REQUEST;
       }
 
-      return new ResponseEntity<String>(message, status);
+      return new ResponseEntity<String>(message, HttpStatus.OK);
     }
   }
 

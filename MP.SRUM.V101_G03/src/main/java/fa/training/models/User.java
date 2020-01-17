@@ -74,7 +74,7 @@ public class User implements Serializable {
   @Column(name = "Status")
   private String status;
   
-  @Column(name = "LastLogin")
+  @Column(name = "LastLogin", nullable = true)
   private LocalDateTime lastLogin;
 
   @JsonIgnore

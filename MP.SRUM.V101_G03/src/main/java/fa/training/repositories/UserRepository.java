@@ -91,7 +91,7 @@ public interface UserRepository extends JpaRepository<User, Integer> {
    * @param user
    * @return list classmate of trainee
    */
-  @Query(value = "SELECT u.id, u.account, u.birth_day, u.email, u.first_name, u.gender, u.last_name, u.password, u.phone, u.role, u.status\r\n"
+  @Query(value = "SELECT u.id, u.account, u.birth_day, u.email, u.first_name, u.gender,u.last_login, u.last_name, u.password, u.phone, u.role, u.status\r\n"
       + "FROM uzer u INNER JOIN user_clazz uc\r\n"
       + "ON u.role = :role AND u.id = uc.user_id AND u.status = :status \r\n"
       + "WHERE uc.clazz_id in (SELECT uc.clazz_id\r\n"
