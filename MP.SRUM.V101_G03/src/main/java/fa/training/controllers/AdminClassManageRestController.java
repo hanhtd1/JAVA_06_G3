@@ -366,7 +366,6 @@ public class AdminClassManageRestController {
     return new ResponseEntity<String>(message, HttpStatus.OK);
   }
 
-  // TODO hỏi thằng Trung
   @PostMapping("update-marks")
   public ResponseEntity<?> updateMarks(@Valid @RequestBody List<AdminScoreDto> scoreDtos, BindingResult result) {
     if (result.hasErrors()) {

@@ -289,9 +289,10 @@ function submitMarks() {
 			Materialize.toast(resp, 4000);
 		},
 		error: (error)=>{
-			$.each(error.responseJSON, (key, value)=>{
-				Materialize.toast(key.toUpperCase() + ": " + value , 7000);
-			})
+			console.log(error);
+			// $.each(error.responseJSON, (key, value)=>{
+			// 	Materialize.toast(key.toUpperCase() + ": " + value , 7000);
+			// })
 		}
 	});
 }
