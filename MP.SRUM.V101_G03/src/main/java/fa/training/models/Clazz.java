@@ -26,141 +26,141 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 @Table(name = "Clazz")
 public class Clazz implements Serializable {
 
-  private static final long serialVersionUID = 1L;
-  @Id
-  @GeneratedValue(strategy = GenerationType.IDENTITY)
-  @Column(name = "Id")
-  private Integer id;
+	private static final long serialVersionUID = 1L;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "Id")
+	private Integer id;
 
-  @Column(name = "Name", unique = true)
-  private String name;
+	@Column(name = "Name", unique = true)
+	private String name;
 
-  @Column(name = "openDate")
-  private LocalDate openDate;
+	@Column(name = "openDate")
+	private LocalDate openDate;
 
-  @Column(name = "Note")
-  private String note;
+	@Column(name = "Note")
+	private String note;
 
-  @Column(name = "Category")
-  private String category;
+	@Column(name = "Category")
+	private String category;
 
-  @Column(name = "Status")
-  private String status;
-  
-  @JoinTable(name = "UserClazz", joinColumns = {
-      @JoinColumn(name = "ClazzId", referencedColumnName = "Id") }, inverseJoinColumns = {
-          @JoinColumn(name = "UserId", referencedColumnName = "Id") })
-  @ManyToMany
-  private List<User> userList;
+	@Column(name = "Status")
+	private String status;
 
-  @JsonIgnore
-  @OneToMany(mappedBy = "clazz", cascade = CascadeType.MERGE)
-  private List<ClazzSubject> clazzSubjectList;
+	@JoinTable(name = "UserClazz", joinColumns = {
+			@JoinColumn(name = "ClazzId", referencedColumnName = "Id") }, inverseJoinColumns = {
+					@JoinColumn(name = "UserId", referencedColumnName = "Id") })
+	@ManyToMany
+	private List<User> userList;
 
-  public Clazz() {
-  }
+	@JsonIgnore
+	@OneToMany(mappedBy = "clazz", cascade = CascadeType.MERGE)
+	private List<ClazzSubject> clazzSubjectList;
 
-  public Clazz(Integer id) {
-    this.id = id;
-  }
+	public Clazz() {
+	}
 
-  public Clazz(Integer id, String name, LocalDate openLocalDate, String note, String category, String status) {
-    this.id = id;
-    this.name = name;
-    this.openDate = openLocalDate;
-    this.note = note;
-    this.category = category;
-    this.status = status;
-  }
+	public Clazz(Integer id) {
+		this.id = id;
+	}
 
-  public Integer getId() {
-    return id;
-  }
+	public Clazz(Integer id, String name, LocalDate openLocalDate, String note, String category, String status) {
+		this.id = id;
+		this.name = name;
+		this.openDate = openLocalDate;
+		this.note = note;
+		this.category = category;
+		this.status = status;
+	}
 
-  public void setId(Integer id) {
-    this.id = id;
-  }
+	public Integer getId() {
+		return id;
+	}
 
-  public String getName() {
-    return name;
-  }
+	public void setId(Integer id) {
+		this.id = id;
+	}
 
-  public void setName(String name) {
-    this.name = name;
-  }
+	public String getName() {
+		return name;
+	}
 
-  public LocalDate getOpenDate() {
-    return openDate;
-  }
+	public void setName(String name) {
+		this.name = name;
+	}
 
-  public void setOpenDate(LocalDate openDate) {
-    this.openDate = openDate;
-  }
+	public LocalDate getOpenDate() {
+		return openDate;
+	}
 
-  public String getNote() {
-    return note;
-  }
+	public void setOpenDate(LocalDate openDate) {
+		this.openDate = openDate;
+	}
 
-  public void setNote(String note) {
-    this.note = note;
-  }
+	public String getNote() {
+		return note;
+	}
 
-  public String getCategory() {
-    return category;
-  }
+	public void setNote(String note) {
+		this.note = note;
+	}
 
-  public void setCategory(String category) {
-    this.category = category;
-  }
+	public String getCategory() {
+		return category;
+	}
 
-  public String getStatus() {
-    return status;
-  }
+	public void setCategory(String category) {
+		this.category = category;
+	}
 
-  public void setStatus(String status) {
-    this.status = status;
-  }
+	public String getStatus() {
+		return status;
+	}
 
-  public List<User> getUserList() {
-    return userList;
-  }
+	public void setStatus(String status) {
+		this.status = status;
+	}
 
-  public void setUserList(List<User> userList) {
-    this.userList = userList;
-  }
+	public List<User> getUserList() {
+		return userList;
+	}
 
-  public List<ClazzSubject> getClazzSubjectList() {
-    return clazzSubjectList;
-  }
+	public void setUserList(List<User> userList) {
+		this.userList = userList;
+	}
 
-  public void setClazzSubjectList(List<ClazzSubject> clazzSubjectList) {
-    this.clazzSubjectList = clazzSubjectList;
-  }
+	public List<ClazzSubject> getClazzSubjectList() {
+		return clazzSubjectList;
+	}
 
-  @Override
-  public int hashCode() {
-    int hash = 0;
-    hash += (id != null ? id.hashCode() : 0);
-    return hash;
-  }
+	public void setClazzSubjectList(List<ClazzSubject> clazzSubjectList) {
+		this.clazzSubjectList = clazzSubjectList;
+	}
 
-  @Override
-  public boolean equals(Object object) {
-    // TODO: Warning - this method won't work in the case the id fields are not set
-    if (!(object instanceof Clazz)) {
-      return false;
-    }
-    Clazz other = (Clazz) object;
-    if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
-      return false;
-    }
-    return true;
-  }
+	@Override
+	public int hashCode() {
+		int hash = 0;
+		hash += (id != null ? id.hashCode() : 0);
+		return hash;
+	}
 
-  @Override
-  public String toString() {
-    return "Clazz [id=" + id + ", name=" + name + ", openDate=" + openDate + ", note=" + note + ", category=" + category
-        + ", status=" + status + "]";
-  }
+	@Override
+	public boolean equals(Object object) {
+		// TODO: Warning - this method won't work in the case the id fields are not set
+		if (!(object instanceof Clazz)) {
+			return false;
+		}
+		Clazz other = (Clazz) object;
+		if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
+			return false;
+		}
+		return true;
+	}
+
+	@Override
+	public String toString() {
+		return "Clazz [id=" + id + ", name=" + name + ", openDate=" + openDate + ", note=" + note + ", category="
+				+ category + ", status=" + status + "]";
+	}
 
 }

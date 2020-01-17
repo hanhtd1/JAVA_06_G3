@@ -81,14 +81,6 @@ $("#paging li a").click(function(){
 	
 });
 
-function setId(id) {
-	$.get({
-		url: "/trainer/grade/" + id,
-		success: (res)=>{
-			$("#grade-modal").html(res);
-		}
-	});
-}
 
 function traineeChange() {
 	
@@ -105,10 +97,6 @@ function traineeChange() {
 
 function appendClass(tag) {
 	var a = document.getElementById("paging").getElementsByTagName("a");
-	for (i = 0; i < a.length; i++) {
-        a[i].classList.remove('active');
-    }
-	tag.classList.add('active');
 	var category = document.getElementById('category').value;
 	var class_name = document.getElementById('class-name').value;
 	var status = document.getElementById('status').value;
@@ -120,31 +108,7 @@ function appendClass(tag) {
 	});
 }
 
-function changePage(tag) {
-	var a = document.getElementById("paging").getElementsByTagName("a");
-	var index;
-	// 0 is previous and length - 1 is next
-	for (i = 1; i < a.length - 1; i++) {
-		if(a[i].classList.contains('active')) {
-			index = i;
-			break;
-		}
-    }
-	if(index != 1 || index != a.length - 2) {
-		a[index - 1].classList.add('active');
-		index -= 1;
-	}
-	
-	var category = document.getElementById('category').value;
-	var class_name = document.getElementById('class-name').value;
-	var status = document.getElementById('status').value;
-	$.get({
-		url: "/trainer/search?category="+category+"&clazzName="+class_name+"&status="+status+"&page=" + index,
-		success: (res)=>{
-			$("#trainees").html(res);
-		}
-	});
-}
+
 
 function loadClass() {
 	var clazzSearch = document.getElementById("find-class").value;
@@ -186,13 +150,52 @@ function loadSubject(clazzId) {
 	});
 }
 
-function getFeedback(id) {
+function changePage(tag) {
+	var category = document.getElementById('category').value;
+	var class_name = document.getElementById('class-name').value;
+	var status = document.getElementById('status').value;
 	$.get({
-		url: "/trainer/subject/feedback?subjectId="+id,
+		url: "/trainer/search?category="+category+"&clazzName="+class_name+"&status="+status+"&page=" + tag.innerHTML,
 		success: (res)=>{
-			$("#feedback-modal").html(res);
+			$("#trainees").html(res);
 		}
 	});
+}
+
+function changePreviousPage(tag) {
+	var a = document.getElementById("paging").getElementsByTagName("a");
+	var index;
+	// 0 is previous and length - 1 is next
+	for (i = 1; i < a.length - 1; i++) {
+		if(a[i].classList.contains('active')) {
+			index = i;
+			break;
+		}
+    }
+	tag.classList.remove("active");
+	if(index != 1) {
+		index -= 1;
+	} 
+	a[index].classList.add("active");
+	changePage(a[index]);
+}
+
+function changeNextPage(tag) {
+	var a = document.getElementById("paging").getElementsByTagName("a");
+	var index;
+	// 0 is previous and length - 1 is next
+	for (i = 1; i < a.length - 1; i++) {
+		if(a[i].classList.contains('active')) {
+			index = i;
+			break;
+		}
+    }
+	tag.classList.remove("active");
+	if(index != a.length - 2) {
+		index += 1;
+	} 
+	a[index].classList.add("active");
+	changePage(a[index]);
 }
 
 $("#trainer-class-manage").click(()=>{
@@ -203,8 +206,8 @@ $("#trainer-class-manage").click(()=>{
 		}
 	});
 });
-$("#trainer-trainee-manage").click(()=>{
 
+$("#trainer-trainee-manage").click(()=>{
 	$.get({
 		url: "/trainer/trainee-manage",
 		success: (res)=>{
@@ -212,6 +215,7 @@ $("#trainer-trainee-manage").click(()=>{
 		}
 	});
 });
+
 $("#trainer-subject-manage").click(()=>{
 	$.get({
 		url: "/trainer/subject-manage",
@@ -220,3 +224,10 @@ $("#trainer-subject-manage").click(()=>{
 		}
 	});
 });
+
+function openFeedbackForm() {
+	$("#feedback-modal").openModal();
+}
+
+
+

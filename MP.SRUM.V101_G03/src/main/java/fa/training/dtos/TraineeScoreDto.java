@@ -1,41 +1,14 @@
 package fa.training.dtos;
 
-public class TraineeScoreDto {
-	private String subjectName;
-	private Float theory;
-	private Float practice;
-	public TraineeScoreDto() {
-	}
+public interface TraineeScoreDto {
+	String getName();
 
-	public TraineeScoreDto(String subjectName, Float theory, Float practice) {
-		super();
-		this.subjectName = subjectName;
-		this.theory = theory;
-		this.practice = practice;
-	}
+	Float getPractice();
 
-	public String getSubjectName() {
-		return subjectName;
-	}
+	Float getTheory();
 
-	public void setSubjectName(String subjectName) {
-		this.subjectName = subjectName;
-	}
-
-	public Float getTheory() {
-		return theory;
-	}
-
-	public void setTheory(Float theory) {
-		this.theory = theory;
-	}
-
-	public Float getPractice() {
-		return practice;
-	}
-
-	public void setPractice(Float practice) {
-		this.practice = practice;
+	default void display() {
+		System.out.println("name : " + getName() + ", pratice : " + getPractice() + ", theory : " + getTheory());
 	}
 
 }

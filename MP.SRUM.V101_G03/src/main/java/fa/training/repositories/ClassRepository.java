@@ -118,19 +118,15 @@ public interface ClassRepository extends JpaRepository<Clazz, Integer> {
 	 * @return Optional<Clazz> that find by trainee id
 	 */
 	@Query(value = "SELECT c.id, c.category, c.name, c.note, open_date, c.status, c.open_date"
-			+ " FROM clazz c, user_clazz uc"
-			+ " WHERE c.id = uc.clazz_id AND uc.user_id = :userId", 
-			nativeQuery = true)
+			+ " FROM clazz c, user_clazz uc" + " WHERE c.id = uc.clazz_id AND uc.user_id = :userId", nativeQuery = true)
 	Optional<Clazz> findClazzByUser(@Param("userId") int userId);
-	
+
 	/**
-   * @author TrangDM2
-   *
-   */
-  @Query(value = "SELECT c.id, c.category, c.name, c.note, open_date, c.status, c.open_date"
-      + " FROM clazz c"
-      + " WHERE c.id IN"
-      + "(SELECT uc.clazz_id FROM user_clazz uc WHERE uc.user_id= :userId )", 
-      nativeQuery = true)
-  List<Clazz> findClazzsByUser(@Param("userId") int userId);
+	 * @author TrangDM2
+	 *
+	 */
+	@Query(value = "SELECT c.id, c.category, c.name, c.note, open_date, c.status, c.open_date" + " FROM clazz c"
+			+ " WHERE c.id IN"
+			+ "(SELECT uc.clazz_id FROM user_clazz uc WHERE uc.user_id= :userId )", nativeQuery = true)
+	List<Clazz> findClazzsByUser(@Param("userId") int userId);
 }

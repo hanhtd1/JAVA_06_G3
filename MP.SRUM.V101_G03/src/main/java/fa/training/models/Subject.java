@@ -45,7 +45,7 @@ public class Subject implements Serializable {
 	@OneToMany(mappedBy = "subject")
 	private List<Score> scoreList;
 
-  @JsonIgnore
+	@JsonIgnore
 	@OneToMany(mappedBy = "subject")
 	private List<Feedback> feedbackList;
 
@@ -177,7 +177,8 @@ public class Subject implements Serializable {
 
 	@Override
 	public String toString() {
-		return "com.Subject[ id=" + id + " ]";
+		return "Subject [id=" + id + ", name=" + name + ", code=" + code + ", duration=" + duration + ", status="
+				+ status + "]";
 	}
 
 }

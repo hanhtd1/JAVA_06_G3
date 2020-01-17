@@ -24,6 +24,6 @@ public interface FeedbackService {
 	 * @param clazzId
 	 * @return feedback find by subject.
 	 */
-	List<Feedback> findFeedbackByfindBySubjecId(Integer subjectId);
+	List<Feedback> findFeedbackBySubjecId(Integer subjectId);
 
 }
