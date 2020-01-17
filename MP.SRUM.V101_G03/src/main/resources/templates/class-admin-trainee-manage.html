@@ -187,31 +187,31 @@
 </div>
 <!-- Modal Structure -->
 <div id="update_trainee_information" class="modal modal-fixed-footer">
-	<form th:onsubmit="return updateTrainee()" class="col s12">
+	<form id="update_trainee_form" th:onsubmit="return updateTrainee()" class="col s12">
 		<div class="modal-content">
 			<h4>UPDATE TRAINEE INFORMATION</h4>
 			<div class="row">
-				<input type="hidden" id="update_id" class="traineeId" name="traineeId" />
+				<input type="hidden" id="update_id" class="traineeId" name="id" />
 				<div class="row">
 					<div class="input-field col s6">
-						<span>First Name</span> <input id="update_first_name" type="text"
+						<span>First Name</span> <input id="update_first_name" name="firstName" type="text"
 							class="validate">
 					</div>
 					<div class="input-field col s6">
-						<span>Last Name</span> <input id="update_last_name" type="text"
+						<span>Last Name</span> <input id="update_last_name" name="lastName" type="text"
 							class="validate">
 					</div>
 				</div>
 				<div class="row">
 					<div class="input-field col s12">
-						<span>Phone</span> <input id="update_phone" type="tel"
+						<span>Phone</span> <input id="update_phone" name="phone" type="tel"
 							class="validate">
 					</div>
 				</div>
 				<div class="row">
 					<div class="input-field col s6">
 						<span>Birth Day</span> 
-						<input id="update_birthday" type="date" class="validate">
+						<input id="update_birthday" type="date" name="birthDay" class="validate">
 					</div>
 					<div class="input-field col s6">
 						<span>Gender</span> 
@@ -224,10 +224,10 @@
 				</div>
 				<div class="row">
 					<div class="input-field col s6">
-						<input id="update_account" type="text" class="validate" readonly>
+						<input id="update_account" name="account" type="text" class="validate" readonly>
 					</div>
 					<div class="input-field col s6">
-						<input id="update_email" type="email" class="validate" readonly>
+						<input id="update_email" type="email" name="email" class="validate" readonly>
 					</div>
 				</div>
 			</div>

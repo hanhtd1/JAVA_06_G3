@@ -65,9 +65,6 @@ public class AdminSubjectController {
 		model.addAttribute("usersByClass", usersByClass);
 		model.addAttribute("subject", subject);
 		
-		System.out.println(classes);
-		System.out.println(usersByClass);
-		
 		return "class-admin-subject-details";
 	}
 	

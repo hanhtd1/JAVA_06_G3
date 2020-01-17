@@ -15,7 +15,7 @@ public class Constant {
 	public static final Integer DEFAULT_ID = 0;
 
 	// Status
-	public static final String CLASS_DEFAULT_STATUS = "In Comming";
+	public static final String CLASS_DEFAULT_STATUS = "In Coming";
   public static final String USER_DEFAULT_STATUS = "New";
 	public static final String TRAINEE_DEFAULT_STATUS = "New";
 	public static final String TRAINEE_ACTIVE_STATUS = "Active";
@@ -60,8 +60,4 @@ public class Constant {
 	public static final String CLAZZ_NAME_AND_CATEGORY_AND_STATUS = "CLAZZ_NAME_AND_CATEGORY_AND_STATUS";
 
   public static final int FIRST_RESULT = 0;
-  
-  //Validate messages
-  public static final String VALID_FIRST_NAME = "First name Deo dc phep blank!";
-
 }

@@ -3,10 +3,16 @@ package fa.training.controllers;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
+
+import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -80,32 +86,34 @@ public class AdminClassManageRestController {
    * @author TrangDM2
    */
   @PostMapping("create-class")
-  public ResponseEntity<String> saveClass(@RequestBody Clazz clazz) {
-    String message = new String();
-    HttpStatus status = null;
-    Clazz updateClazz = clazz;
+  public ResponseEntity<?> saveClass(@Valid @RequestBody Clazz clazz, BindingResult result) {
+    if (result.hasErrors()) {
+      Map<String, String> errors = result.getFieldErrors().stream()
+          .collect(Collectors.toMap(FieldError::getField, FieldError::getDefaultMessage));
+      return ResponseEntity.badRequest().body(errors);
+    } else {
+      String message = new String();
+      Clazz updateClazz = clazz;
 
-    try {
-      if (clazz.getId() == null) {
-        updateClazz.setStatus(Constant.CLASS_DEFAULT_STATUS);
-        adminClazzService.saveClass(clazz);
-        message = Constant.UPDATE_SUCCESS_MESSAGE;
-        status = HttpStatus.OK;
-      } else {
-        Clazz toUpdateClazz = adminClazzService.getClass(updateClazz.getId());
-        updateClazz.setUserList(toUpdateClazz.getUserList());
-        updateClazz.setStatus(toUpdateClazz.getStatus());
-        updateClazz.setSubjectList(toUpdateClazz.getSubjectList());
-        adminClazzService.saveClass(updateClazz);
-        message = Constant.CREATE_SUCCESS_MESSAGE;
-        status = HttpStatus.CREATED;
+      try {
+        if (clazz.getId() == null) {
+          updateClazz.setStatus(Constant.CLASS_DEFAULT_STATUS);
+          adminClazzService.saveClass(clazz);
+          message = Constant.UPDATE_SUCCESS_MESSAGE;
+        } else {
+          Clazz toUpdateClazz = adminClazzService.getClass(updateClazz.getId());
+          updateClazz.setUserList(toUpdateClazz.getUserList());
+          updateClazz.setStatus(toUpdateClazz.getStatus());
+          updateClazz.setSubjectList(toUpdateClazz.getSubjectList());
+          adminClazzService.saveClass(updateClazz);
+          message = Constant.CREATE_SUCCESS_MESSAGE;
+        }
+      } catch (Exception e) {
+        message = Constant.UPDATE_FAIL_MESSAGE;
       }
-    } catch (Exception e) {
-      message = Constant.UPDATE_FAIL_MESSAGE;
-      status = HttpStatus.BAD_REQUEST;
-    }
 
-    return new ResponseEntity<String>(message, status);
+      return new ResponseEntity<String>(message, HttpStatus.OK);
+    }
   }
 
   /**
@@ -358,25 +366,32 @@ public class AdminClassManageRestController {
     return new ResponseEntity<String>(message, HttpStatus.OK);
   }
 
+  // TODO hỏi thằng Trung
   @PostMapping("update-marks")
-  public ResponseEntity<String> updateMarks(@RequestBody List<AdminScoreDto> scoreDtos) {
-    String message = new String();
-    HttpStatus status = null;
-    
-    try {
-      scoreDtos.forEach(scoreDto -> {
-        ScorePK scorePk = new ScorePK(scoreDto.getSubjectId(), scoreDto.getUserId());
-        Score score = new Score(scorePk, scoreDto.getTheory(), scoreDto.getPractice());
-        scoreService.saveScore(score);
-      });
-      message = Constant.UPDATE_SUCCESS_MESSAGE;
-      status = HttpStatus.CREATED;
-    } catch (Exception e) {
-      message = Constant.UPDATE_FAIL_MESSAGE;
-      status = HttpStatus.BAD_REQUEST;
-    }
+  public ResponseEntity<?> updateMarks(@Valid @RequestBody List<AdminScoreDto> scoreDtos, BindingResult result) {
+    if (result.hasErrors()) {
+      Map<String, String> errors = result.getFieldErrors().stream()
+          .collect(Collectors.toMap(FieldError::getField, FieldError::getDefaultMessage));
+      return ResponseEntity.badRequest().body(errors);
+    } else {
+      String message = new String();
+      HttpStatus status = null;
 
-    return new ResponseEntity<String>(message, status);
+      try {
+        scoreDtos.forEach(scoreDto -> {
+          ScorePK scorePk = new ScorePK(scoreDto.getSubjectId(), scoreDto.getUserId());
+          Score score = new Score(scorePk, scoreDto.getTheory(), scoreDto.getPractice());
+          scoreService.saveScore(score);
+        });
+        message = Constant.UPDATE_SUCCESS_MESSAGE;
+        status = HttpStatus.CREATED;
+      } catch (Exception e) {
+        message = Constant.UPDATE_FAIL_MESSAGE;
+        status = HttpStatus.BAD_REQUEST;
+      }
+
+      return new ResponseEntity<String>(message, status);
+    }
   }
 
   /**

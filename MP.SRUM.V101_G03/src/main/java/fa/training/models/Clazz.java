@@ -13,6 +13,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.NotBlank;
 
 /**
  *
@@ -28,6 +29,7 @@ public class Clazz implements Serializable {
   @Column(name = "Id")
   private Integer id;
 
+  @NotBlank
   @Column(name = "Name", unique = true)
   private String name;
 
@@ -37,6 +39,7 @@ public class Clazz implements Serializable {
   @Column(name = "Note")
   private String note;
 
+  @NotBlank
   @Column(name = "Category")
   private String category;
 

@@ -1,6 +1,5 @@
-var currentTrainee;
 var currentClass;
-var currentTrainer;
+var currentUser;
 //=========================================================================
 // Trainee @Author TrangDM2
 function loadTrainees(){
@@ -38,7 +37,7 @@ function showTraineeList(res, className){
 function loadTraineeInfo(id){
 	$("#scores").html("")
 	$("#trainee-information").show();
-	this.currentTrainee = id;
+	this.currentUser = id;
 	$.get({
 		url: "/admin/user-info",
 		data: {
@@ -82,17 +81,14 @@ function showScoreList(res, feedbackBtn){
 }
 //unexpected
 function openModal(){
-	$("#feedback-modal").show();
+	$("#feedback-modal").openModal();
 }
-$("#exit-feedback").click(()=>{
-	$("#feedback-modal").hide();
-});
 //unexpected
 function editTraineeInfo(){
 	$.get({
 		url: "/admin/user-info",
 		data: {
-			id: this.currentTrainee
+			id: this.currentUser
 		},
 		success: (resp)=>{
 			$("#update_first_name").val(resp.firstName);
@@ -106,66 +102,19 @@ function editTraineeInfo(){
 	});
 }
 function addTrainee(){
-	let createForm = {}
-	createForm["firstName"]=$("#add_first_name").val()
-	createForm["lastName"]=$("#add_last_name").val()
-	createForm["phone"]=$("#add_phone").val()
-	createForm["email"]=$("#add_email").val()
-	createForm["account"]=$("#add_account").val()
-	createForm["birthDay"] = $('#add_birthday').val()
-	createForm["role"]=$('#add_role').val()
-	createForm["gender"]=$('#add_gender').val()
-	$.post({
-		url: "/admin/create-user",
-        contentType: "application/json",
-        data: JSON.stringify(createForm),
-		success: (resp)=>{
-			Materialize.toast(resp, 4000)
-		},
-		error: (resp)=>{
-			$.each(resp.responseJSON, (key, value)=>{
-				Materialize.toast(key.toUpperCase() + ": " + value , 7000);
-			})
-		}
-	});
+	let form = document.getElementById("add_trainee_form");
+	addUser(form);
+	loadTrainees();
 	return false;
 }
 function updateTrainee(){
-	let updateForm = {}
-	updateForm["id"]=$("#update_id").val()
-	updateForm["firstName"]=$("#update_first_name").val()
-	updateForm["lastName"]=$("#update_last_name").val()
-	updateForm["phone"]=$("#update_phone").val()
-	updateForm["email"]=$("#update_email").val()
-	updateForm["account"]=$("#update_account").val()
-	updateForm["birthDay"] = $('#update_birthday').val()
-	updateForm["gender"]=$('#update_gender').val()
-	$.post({
-		url: "/admin/update-user",
-        contentType: "application/json",
-        data: JSON.stringify(updateForm),
-		success: (resp)=>{
-			Materialize.toast(resp, 4000)
-		},
-		error: (resp)=>{
-			$.each(resp.responseJSON, (key, value)=>{
-				Materialize.toast(key.toUpperCase() + ": " + value , 7000);
-			})
-		}
-	});
+	let form = document.getElementById('update_trainee_form');
+	updateUser(form);
 	return false;
 }
 function changeTraineeStatus(){
-	$.get({
-		url: "/admin/update-status",
-		data: {
-			id: $("#statusTraineeId").val(),
-			status: $("#traineeStatus").val()
-		},
-		success: (resp)=>{
-			Materialize.toast(resp, 4000)
-		}
-	})
+	let e = $("#traineeStatus").val();
+	updateUserStatus(e);
 }
 
 //=========================================================================
@@ -299,8 +248,8 @@ function loadClassListTraineeToUpdateMark(trainees){
 				"<td>" + trainee.account + "</td>\n" +
 				"<td>" + trainee.firstName + " " + trainee.lastName + "</td>\n" +
 				"<td>" + trainee.phone + "</td>\n" +
-				"<td><input type=\"hidden\" name='userId' value='"+trainee.id+"' class=\"validate\"><input type=\"number\" name='theory' class=\"validate\"></td>\n" +
-				"<td><input type=\"number\" name='practice' class=\"validate\"></td>\n" +
+				"<td><input type=\"hidden\" name='userId' value='"+trainee.id+"' class=\"validate\"><input type=\"number\" max='10' name='theory' class=\"validate\"></td>\n" +
+				"<td><input type=\"number\" name='practice' max='10' class=\"validate\"></td>\n" +
 				"</tr>");
 		}
 	})
@@ -340,7 +289,9 @@ function submitMarks() {
 			Materialize.toast(resp, 4000);
 		},
 		error: (error)=>{
-			Materialize.toast(error, 4000);
+			$.each(error.responseJSON, (key, value)=>{
+				Materialize.toast(key.toUpperCase() + ": " + value , 7000);
+			})
 		}
 	});
 }
@@ -478,7 +429,8 @@ function loadClassListTraineeToAttendance(trainees){
 }
 
 function loadClassTraineeInfo(id){
-	//TODO
+	$('#trainee-info').openModal();
+	loadTraineeInfo(id);
 }
 
 function removeTraineeFromClass(id){
@@ -528,7 +480,9 @@ function addClass(){
 			loadClasses();
 		},
 		error: (resp)=>{
-			Materialize.toast(resp, 4000);
+			$.each(resp.responseJSON, (key, value)=>{
+				Materialize.toast(key.toUpperCase() + ": " + value , 7000);
+			})
 		}
 	});
 	return false;
@@ -684,7 +638,7 @@ function showTrainerList(res){
 }
 
 function loadTrainerInfo(id){
-	this.currentTrainer = id;
+	this.currentUser = id;
 	$("#trainer-information").show();
 	$.get({
 		url: '/admin/user-info',
@@ -726,7 +680,7 @@ function editTrainerInfo(){
 	$.get({
 		url: "/admin/user-info",
 		data: {
-			id: this.currentTrainer
+			id: this.currentUser
 		},
 		success: (resp)=>{
 			$("#update_first_name").val(resp.firstName);
@@ -742,52 +696,20 @@ function editTrainerInfo(){
 
 function addTrainer(){
 	let form = document.getElementById("add_trainer_form");
-	$.post({
-		url: "/admin/create-user",
-		contentType: "application/json",
-		data: JSON.stringify(Form2JsonMapper(form)),
-		success: (resp)=>{
-			Materialize.toast(resp, 4000);
-		},
-		error: (resp)=>{
-			Materialize.toast(resp.responseText, 4000);
-		}
-	});
+	addUser(form);
 	return false;
 }
 
 function updateTrainer(){
 	let form = document.getElementById('update_trainer_form');
-	console.log(JSON.stringify(Form2JsonMapper(form)));
-	$.post({
-		url: "/admin/update-user",
-		contentType: "application/json",
-		data: JSON.stringify(Form2JsonMapper(form)),
-		success: (resp)=>{
-			Materialize.toast(resp, 4000)
-		},
-		error: (resp)=>{
-			Materialize.toast(resp.responseText, 4000)
-		}
-	});
+	updateUser(form);
 	return false;
 }
 
 function changeTrainerStatus(){
-	$.get({
-		url: "/admin/update-status",
-		data: {
-			id: this.currentTrainer,
-			status: $("#trainerStatus").val()
-		},
-		success: (resp)=>{
-			Materialize.toast(resp, 4000)
-		}
-	})
+	let e = $("#trainerStatus").val();
+	updateUserStatus(e);
 }
-
-
-
 //=========================================================================
 //Function dung chung @Author TrangDM2
 /**
@@ -838,6 +760,49 @@ function generateClassName() {
 		},
 		success: (resp)=>{
 			$('#clazzName').val(resp)
+		}
+	})
+}
+
+function addUser(element) {
+	$.post({
+		url: "/admin/create-user",
+		contentType: "application/json",
+		data: JSON.stringify(Form2JsonMapper(element)),
+		success: (resp)=>{
+			Materialize.toast(resp, 4000);
+		},
+		error: (resp)=>{
+			$.each(resp.responseJSON, (key, value)=>{
+				Materialize.toast(key.toUpperCase() + ": " + value , 7000);
+			})
+		}
+	});
+}
+function updateUser(element) {
+	$.post({
+		url: "/admin/update-user",
+		contentType: "application/json",
+		data: JSON.stringify(Form2JsonMapper(element)),
+		success: (resp)=>{
+			Materialize.toast(resp, 4000)
+		},
+		error: (resp)=>{
+			$.each(resp.responseJSON, (key, value)=>{
+				Materialize.toast(key.toUpperCase() + ": " + value , 7000);
+			})
+		}
+	});
+}
+function updateUserStatus(element) {
+	$.get({
+		url: "/admin/update-status",
+		data: {
+			id: this.currentUser,
+			status: element
+		},
+		success: (resp)=>{
+			Materialize.toast(resp, 4000)
 		}
 	})
 }

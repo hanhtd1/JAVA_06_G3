@@ -18,6 +18,7 @@ import org.mockito.MockitoAnnotations;
 import fa.training.models.Clazz;
 import fa.training.models.User;
 import fa.training.repositories.ClassRepository;
+import fa.training.utils.Constant;
 
 public class ClazzServiceImplTest {
 	
@@ -38,9 +39,9 @@ public class ClazzServiceImplTest {
 
 	@Test
 	public void test_findClazzByTrainee() {
-		when(classRepository.findClazzByTrainee(anyInt())).thenReturn(Optional.of(new Clazz()));
+//		when(classRepository.findClazzByTrainee(anyInt())).thenReturn(Optional.of(new Clazz()));
 		User user = new User((int)Math.random());
-		assertThat(clazzServiceImpl.findClazzByTrainee(user), is(notNullValue()));
+		assertThat(clazzServiceImpl.findClazzByTrainee(user, Constant.TRAINEE), is(notNullValue()));
 	}
 
 }
