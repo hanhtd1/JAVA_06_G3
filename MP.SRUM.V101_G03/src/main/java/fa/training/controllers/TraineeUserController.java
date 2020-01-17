@@ -58,7 +58,7 @@ public class TraineeUserController {
 		String account = ((UserDetails)auth.getPrincipal()).getUsername();
 		LOGGER.info(account + " login successful");
 		User trainee = iUserService.getUser(account);
-		List<Clazz> classTrainee = clazzService.findClazzByTrainee(trainee);
+		List<Clazz> classTrainee = clazzService.findClazzByTrainee(trainee, Constant.TRAINEE);
 		List<User> users = iUserService.getMembers(trainee);
 		List<Attendance> attendances = iAttendanceService.getAttendancesByUser(trainee);
 		List<ScoreDto> scores = iScoreService.getScoreByUser(trainee.getId());

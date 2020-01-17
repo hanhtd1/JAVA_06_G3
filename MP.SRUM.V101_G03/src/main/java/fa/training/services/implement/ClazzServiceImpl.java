@@ -1,6 +1,7 @@
 package fa.training.services.implement;
 
 import java.util.List;
+import java.util.Optional;
 
 import javax.transaction.Transactional;
 
@@ -84,7 +85,7 @@ public class ClazzServiceImpl implements ClazzService {
 	}
 
 	@Override
-	public List<Clazz> findClazzByTrainee(User trainee) {
+	public Optional<Clazz> findClazzByTrainee(User trainee) {
 		return clazzRepository.findClazzByUser(trainee.getId());
 	}
 }

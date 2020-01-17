@@ -8,7 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -41,25 +40,13 @@ public class TrainerClassController {
 	@Autowired
 	private SubjectService subjectService;
 
-	@GetMapping
-	public String getClazz(Model model) {
-		List<Clazz> clazzs = clazzService.findAllClazzByTrainerId(2, 0);
-		System.out.println(clazzs.size());
-		clazzs.forEach(System.out::println);
-		return "<h1>Success</h1>";
-	}
-
 	@RequestMapping(value = "/content")
 	public String getClazzByNameOrCategory(
 			@RequestParam(name = "clazz", defaultValue = Constant.CLAZZ_CONTENT_SEARCH_DEFAULT) String searchContent,
 			@RequestParam(name = "status", defaultValue = Constant.CLAZZ_STATUS_DEFAULT) String status,
 			@RequestParam(name = "page", defaultValue = Constant.CLAZZ_PAGE_DEFAULT) int page, Model model) {
 		List<Clazz> clazzs;
-		System.out.println("-----------------------page : " + page);
 		String searchType = SearchType.clazzSearchType(searchContent, status);
-
-		System.out.println("---------------------search type : " + searchType);
-		System.out.println("---------------------page : " + page);
 		switch (searchType) {
 		case Constant.CLAZZ_SEARCH_BY_TRAINER_ID:
 			clazzs = clazzService.findAllClazzByTrainerId(Constant.USER_ID_DEFAULT, page - 1);
@@ -79,7 +66,7 @@ public class TrainerClassController {
 		}
 		model.addAttribute("totalPages", ClazzServiceImpl.totalPage);
 		model.addAttribute("clazzs", clazzs);
-		return "class-admin-class-manage :: clazzs";
+		return "trainer-class-manage :: clazzs";
 	}
 
 	@RequestMapping(value = "/trainee")
@@ -105,16 +92,16 @@ public class TrainerClassController {
 		model.addAttribute("statuss", statuss);
 		model.addAttribute("trainees", trainees);
 
-		return "class-admin-trainee-manage :: content-all";
+		return "trainer-trainee-manage :: content-all";
 	}
 
 	@RequestMapping(value = "/subject")
 	public String findSubjectByClazz(@RequestParam(name = "clazzId") int clazzId,
 			@RequestParam(name = "page", defaultValue = Constant.FIRST_PAGE_STRING) int page, Model model) {
-		List<Subject> subjects = subjectService.findSubjectByClazz(clazzId, PageRequest.of(page, Constant.PAGE_SIZE));
-
+		List<Subject> subjects = subjectService.findSubjectByClazz(clazzId,
+				PageRequest.of(page - 1, Constant.PAGE_SIZE));
 		model.addAttribute("totalPages", TraineeServiceImpl.numberOfPage);
 		model.addAttribute("subjects", subjects);
-		return "class-admin-subject-manage :: content-all";
+		return "trainer-subject-manage :: content-all";
 	}
 }

@@ -1,6 +1,7 @@
 package fa.training.services;
 
 import java.util.List;
+import java.util.Optional;
 
 import fa.training.models.Clazz;
 import fa.training.models.User;
@@ -70,5 +71,5 @@ public interface ClazzService {
 	 * @param trainee
 	 * @return class of trainee
 	 */
-	List<Clazz> findClazzByTrainee(User trainee);
+	Optional<Clazz> findClazzByTrainee(User trainee);
 }

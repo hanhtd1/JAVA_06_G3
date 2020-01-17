@@ -21,7 +21,7 @@ public interface SubjectRepository extends JpaRepository<Subject, Integer> {
 	 */
 	@Query(value = "SELECT * FROM udf_findSubjectByClazz(:clazzId)", nativeQuery = true)
 	Page<Subject> findSubjectByClazzId(@Param("clazzId") Integer clazzId, Pageable pageable);
-
+	
 	/**
 	 * @author HoangLV7
 	 */
@@ -51,7 +51,7 @@ public interface SubjectRepository extends JpaRepository<Subject, Integer> {
 	 */
 	@Query(value = "SELECT * FROM udf_findSubjectByUser(:userId)", nativeQuery = true)
 	Page<Subject> findSubjectByUserId(@Param("userId") Integer userId, Pageable pageable);
-	
+
 	/**
 	 * @author TrangDM2
 	 * @param clazz

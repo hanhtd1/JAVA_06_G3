@@ -40,8 +40,8 @@ public class TrainerMainController {
 	@Autowired
 	private ClazzService clazzService;
 
-  @Autowired
-  private AdminUserService adminUserService;
+	@Autowired
+	private AdminUserService adminUserService;
 
 	@GetMapping("grade-modal")
 	public String gradeModal() {
@@ -56,19 +56,20 @@ public class TrainerMainController {
 
 	@GetMapping("/")
 	public String home(Model model, Authentication auth) {
-	  String account = auth.getName();
-    User trainee = adminUserService.getUserByAccount(account).get();
-    model.addAttribute("currentUser", trainee);
+		String account = auth.getName();
+		User trainer = adminUserService.getUserByAccount(account).get();
+		model.addAttribute("currentUser", trainer);
 		return "trainer";
 	}
 
 	@GetMapping("class-manage")
 	public String classManage(Model model) {
-		List<Clazz> clazzs = clazzService.findAllClazzByTrainerId(2, Constant.FIRST_PAGE);
+		List<Clazz> clazzs = clazzService.findAllClazzByTrainerId(Constant.USER_ID_DEFAULT, Constant.FIRST_PAGE);
 		List<String> statuss = clazzs.stream().map(clazz -> clazz.getStatus()).distinct().collect(Collectors.toList());
 
 		statuss.add(0, Constant.TRAINEE_SEARCH_ALL);
 
+		model.addAttribute("index", Constant.FIRST_PAGE + 1);
 		model.addAttribute("totalPages", ClazzServiceImpl.totalPage);
 		model.addAttribute("statuss", statuss);
 		model.addAttribute("clazzs", clazzs);
@@ -78,7 +79,7 @@ public class TrainerMainController {
 	@GetMapping("trainee-manage")
 	public String getTraineeByUserId(Model model) {
 		List<User> trainees = traineeService.findAllTrainee(Constant.FIRST_PAGE);
-		List<Clazz> clazzs = clazzService.findAllClazzByTrainerId(2, Constant.FIRST_PAGE);
+		List<Clazz> clazzs = clazzService.findAllClazzByTrainerId(Constant.USER_ID_DEFAULT, Constant.FIRST_PAGE);
 
 		List<String> categories = clazzs.stream().map(clazz -> clazz.getCategory()).distinct()
 				.collect(Collectors.toList());
@@ -90,7 +91,8 @@ public class TrainerMainController {
 		categories.add(0, Constant.TRAINEE_SEARCH_ALL);
 		names.add(0, Constant.TRAINEE_SEARCH_ALL);
 		statuss.add(0, Constant.TRAINEE_SEARCH_ALL);
-		System.out.println("------------------" + TraineeServiceImpl.numberOfPage + "------------------");
+
+		model.addAttribute("index", Constant.FIRST_PAGE + 1);
 		model.addAttribute("totalPages", TraineeServiceImpl.numberOfPage);
 		model.addAttribute("categories", categories);
 		model.addAttribute("names", names);
