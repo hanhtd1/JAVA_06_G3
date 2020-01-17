@@ -47,13 +47,6 @@ public class FeedbackServiceImpl implements FeedbackService {
     return feedbackRepository.findFeedbackBySubjectAndClazz(subjectId, clazzId);
   }
 
-  /**
-   * @author ToanNT18
-   */
-  @Override
-  public List<Feedback> findFeedbackByfindBySubjecId(Integer subjectId) {
-    return feedbackRepository.findFeedbackBySubjectId(subjectId);
-  }
 
   /**
    * @author TrangDM2
@@ -64,5 +57,11 @@ public class FeedbackServiceImpl implements FeedbackService {
   @Override
   public Feedback findBySubjectAndUser(Integer userId, Integer subjectId) {
     return feedbackRepository.findByUserAndSubject(userId, subjectId);
+  }
+
+  @Override
+  public List<Feedback> findFeedbackBySubjecId(Integer subjectId) {
+    // TODO Auto-generated method stub
+    return null;
   }
 }

@@ -18,7 +18,13 @@ public interface FeedbackService {
 	 */
 	List<Feedback> findFeedbackBySubjectIdAndClazzId(Integer subjectId, Integer clazzId);
 
-	List<Feedback> findFeedbackByfindBySubjecId(Integer subjectId);
+	/**
+	 * @author ToanNT18
+	 * @param subjectId
+	 * @param clazzId
+	 * @return feedback find by subject.
+	 */
+	List<Feedback> findFeedbackBySubjecId(Integer subjectId);
 
   /**
    * @author TrangDM2

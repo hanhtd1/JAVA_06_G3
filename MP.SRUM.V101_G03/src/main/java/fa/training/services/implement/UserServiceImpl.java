@@ -15,7 +15,7 @@ import fa.training.utils.Constant;
 
 @Service
 public class UserServiceImpl implements UserService {
-	
+
 	private static final Logger LOGGER = LogManager.getLogger(UserServiceImpl.class);
 
 	@Autowired
@@ -51,13 +51,13 @@ public class UserServiceImpl implements UserService {
 		LOGGER.info("Get User by UserID " + userId);
 		return userRepository.findUserById(userId);
 	}
-	
+
 	/**
 	 * @author HoangLV7
 	 */
 	@Override
 	public Map<String, User> findAllByRole(String role) {
-		
+
 		return null;
 	}
 }

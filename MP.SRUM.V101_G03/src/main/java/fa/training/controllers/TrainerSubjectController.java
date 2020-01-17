@@ -3,13 +3,17 @@ package fa.training.controllers;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import fa.training.models.Feedback;
+import fa.training.models.Subject;
 import fa.training.services.FeedbackService;
+import fa.training.services.SubjectService;
+import fa.training.utils.Constant;
 
 /**
  *
@@ -20,13 +24,24 @@ import fa.training.services.FeedbackService;
 public class TrainerSubjectController {
 
 	@Autowired
+	private SubjectService subjectService;
+
+	@Autowired
 	private FeedbackService feedbackService;
 
-	@RequestMapping(value = "/feedback")
+	@RequestMapping(value = "/subject")
 	public String getFeedbackSubject(@RequestParam(name = "subjectId") int subjectId, Model model) {
-		List<Feedback> feedbacks = feedbackService.findFeedbackByfindBySubjecId(subjectId);
+		List<Subject> subjects = subjectService.findSubjectByUserId(Constant.USER_ID_DEFAULT - 1,
+				PageRequest.of(Constant.FIRST_PAGE, Constant.PAGE_SIZE));
+		model.addAttribute("subjects", subjects);
+		return "trainer-subject-manage :: content-all";
+	}
+
+	@RequestMapping(value = "/subject/feedback")
+	public String getFeedbackBySubjectId(@RequestParam("subjectId") int subjectId, Model model) {
+		List<Feedback> feedbacks = feedbackService.findFeedbackBySubjecId(subjectId);
 		model.addAttribute("feedbacks", feedbacks);
-		return "class-admin-subject-manage :: feedback";
+		return "trainer-subject-manage :: view-feedback";
 	}
 
 }
