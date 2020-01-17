@@ -28,8 +28,69 @@
 						</ul>
 					</div>
 				</div>
-				<div class="col s12 m7 l9" id="subjectDetails">
-					
+				<div class="col s12 m7 l9" id="subjectDetails"
+					style="display: none;">
+					<div class="mailbox-view">
+						<div class="mailbox-view-header">
+							<div class="left">
+								<div class="left">
+									<img th:src="@{../assets/images/profile-image-1.png}" alt=""
+										class="circle mailbox-profile-image z-depth-1">
+								</div>
+								<div class="left">
+									<span class="mailbox-title" id="subject-name"></span> Code: <span
+										class="mailbox-author" id="subject-code"></span><br>
+									Duration(days): <span class="mailbox-author"
+										id="subject-duration"></span>
+								</div>
+							</div>
+							<div class="right mailbox-buttons" id="subject-active">
+							</div>
+							
+							<div class="divider mailbox-divider"></div>
+							
+							<div id="details-subject-class"></div>
+							
+						</div>
+					</div>
+					<!-- Modal update -->
+					<div id="update-subject-modal" class="modal modal-fixed-footer">
+						<form class="col s12" th:action="@{edit-subject}" method="POST">
+							<div class="modal-content">
+								<p class="f-s-32">Edit subject</p>
+								<div>
+									<div class="row">
+										<div class="input-field col s12">
+											<p>Subject Name</p>
+											<input id="edit-subjectName" type="text" class="validate"
+												name="subjectName" required readonly>
+										</div>
+									</div>
+									<div class="row">
+										<div class="input-field col s12">
+											<p>Subject Code</p>
+											<input id="edit-subjectCode" type="text" class="validate"
+												name="subjectCode" required readonly>
+										</div>
+									</div>
+									<div class="row">
+										<div class="input-field col s12">
+											<p>Duration (Days)</p>
+											<input id="edit-subjectDuration" type="number" class="validate"
+												name="subjectDuration" required>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="modal-footer">
+								<input type="hidden" id="edit-subjectId">
+								<input type="hidden" id="edit-subjectStatus">
+								<button type="button"
+									class="modal-action waves-effect waves-green btn-flat"
+									th:onclick="edit_subjects()">Commit</button>
+							</div>
+						</form>
+					</div>
 				</div>
 			</div>
 		</div>

@@ -1,14 +1,52 @@
+var subId;
 function load_subjectDetails(subjectId){
+	subId = subjectId;
+	$('#subjectDetails').show();
 	$.ajax({
 		type: "GET",
-		url: "/admin/class-by-subject",
+		url: "/admin/load-subject",
+		dataType: "JSON",
 		data: {
 			subjectId : subjectId
 		},
 		success: (data)=>{
-			$('#subjectDetails').html(data)
+			$('#subject-name').html(data.name);
+			$('#subject-code').html(data.code);
+			$('#subject-duration').html(data.duration);
+			$('#subject-active').html("");
+			if(data.status != 'In Active'){
+				$('#subject-active').append('<a class="modal-trigger waves-effect waves-grey btn-flat m-t-xs"'
+									+' href="#update-subject-modal" onclick="editModal()">Edit</a> <a'
+									+' class="waves-effect waves-red btn-flat m-t-xs modal-trigger"'
+									+' href="#update-confirm"'
+									+' onclick="get_subject('+ data.id +')">Delete</a>');
+			};
+			$('#edit-subjectName').attr("value", data.name);
+			$('#edit-subjectCode').attr("value", data.code);
+			$('#edit-subjectDuration').attr("placeholder", data.duration);
+			$('#edit-subjectId').attr("value", data.id);
+			$('#edit-subjectStatus').attr("value", data.status);
+		}
+	});
+	$.ajax({
+		type: "GET",
+		url: "/admin/load-class",
+		data: {
+			subjectId : subjectId
+		},
+		success: (data)=>{
+			console.log("details");
+			$('#details-subject-class').html(data);
 		}
 	})
+}
+
+function editModal(){
+	$('#update-subject-modal').openModal();
+}
+
+function get_subject(subjectId) {
+	$('#update-confirm').openModal();
 }
 
 function load_subjects(){
@@ -52,38 +90,34 @@ function edit_subjects(){
 		url: "/admin/edit-subject",
 		dataType: "JSON",
 		data: {
-			subjectId : $('#subjectId').val(),
-			subjectName : $('#subjectName').val(),
-			subjectCode : $('#code').val(),
-			subjectDuration : $('#duration').val(),
-			subjectStatus : $('#subjectStatus').val()
+			subjectId : $('#edit-subjectId').val(),
+			subjectName : $('#edit-subjectName').val(),
+			subjectCode : $('#edit-subjectCode').val(),
+			subjectDuration : $('#edit-subjectDuration').val(),
+			subjectStatus : $('#edit-subjectStatus').val()
 		},
 		success: (data)=>{
 			Materialize.toast(data.message, 4000);
-			$('#duration-id').html(data.t.duration);
+			$('#subject-duration').html(data.t.duration);
 		}
 	})
 }
 
-function load_feedback(userId, subjectId){
+function load_feedback(userId){
+	console.log(subId);
 	$.ajax({
 		type: "GET",
 		url: "/admin/view-feedback",
 		data: {
 			userId : userId,
-			subjectId : subjectId
+			subjectId : subId
 		},
 		success: (data)=>{
+			console.log(data);
 			$("#feedback-content").html(data);
+			$('#feedback-modal').openModal();
 		}
 	})
-}
-
-
-
-var subId;
-function get_subject(subjectId) {
-	subId = subjectId;
 }
 
 function del_subject() {
@@ -98,42 +132,3 @@ function del_subject() {
 		}
 	})
 }
-
-$("#subject-new").click(()=>{
-	$.get({
-		url: "/admin/search",
-		data:{
-			subjectStatus : "New"
-		},
-		success: (res)=>{
-			console.log(res);
-			$('#list-subject').html(res)
-		}
-	});
-});
-
-$("#subject-active").click(()=>{
-	$.get({
-		url: "/admin/search",
-		data:{
-			subjectStatus : "Active"
-		},
-		success: (res)=>{
-			console.log(res);
-			$('#list-subject').html(res)
-		}
-	});
-});
-
-$("#subject-del").click(()=>{
-	$.get({
-		url: "/admin/search",
-		data:{
-			subjectStatus : "In Active"
-		},
-		success: (res)=>{
-			console.log(res);
-			$('#list-subject').html(res)
-		}
-	});
-});

@@ -36,7 +36,7 @@ public class AdminSubjectController {
 
 	@Autowired
 	public ClazzService clazzService;
-	
+
 	@Autowired
 	private FeedbackService iFeedbackService;
 
@@ -56,28 +56,32 @@ public class AdminSubjectController {
 		return apiObject;
 	}
 
-	@RequestMapping(path = "class-by-subject", method = RequestMethod.GET)
-	public String getSubjectDetails(Model model, @RequestParam Integer subjectId) {
-		List<Clazz> classes = clazzService.findBySubject(subjectId);
+	@RequestMapping(path = "load-subject", method = RequestMethod.GET)
+	public @ResponseBody Subject loadSubject(@RequestParam Integer subjectId) {
 		Subject subject = subjectService.findSubjectById(subjectId);
-		Map<String, List<User>> usersByClass = classes.stream()
+		return subject;
+	}
+
+	@RequestMapping(path = "load-class", method = RequestMethod.GET)
+	public String loadClass(Model model, @RequestParam Integer subjectId) {
+		List<Clazz> classes = clazzService.findBySubject(subjectId);
+		Map<String, List<User>> classDetails = classes.stream()
 				.collect(Collectors.toMap(Clazz::getName, Clazz::getUserList));
-		model.addAttribute("usersByClass", usersByClass);
-		model.addAttribute("subject", subject);
-		
+		model.addAttribute("usersByClass", classDetails);
 		return "class-admin-subject-details";
 	}
-	
+
 	@GetMapping("/view-feedback")
 	public @ResponseBody String viewFeedback(@RequestParam("userId") int userId,
 			@RequestParam("subjectId") int subjectId) {
 		Feedback feedback = iFeedbackService.getAllFeedback(userId, subjectId);
 		return feedback == null ? Constant.NOT_FOUND_MESSAGE : feedback.getContent();
 	}
-	
-	@RequestMapping(path = "edit-subject",  method = RequestMethod.POST)
-	public @ResponseBody ApiObject<Subject> updateSubject(@RequestParam Integer subjectId, @RequestParam String subjectName,
-			@RequestParam("subjectCode") String subjectCode, @RequestParam Float subjectDuration, @RequestParam String subjectStatus) {
+
+	@RequestMapping(path = "edit-subject", method = RequestMethod.POST)
+	public @ResponseBody ApiObject<Subject> updateSubject(@RequestParam Integer subjectId,
+			@RequestParam String subjectName, @RequestParam("subjectCode") String subjectCode,
+			@RequestParam Float subjectDuration, @RequestParam String subjectStatus) {
 		ApiObject<Subject> apiObject = new ApiObject<Subject>();
 		Subject subject = new Subject(subjectId, subjectName, subjectCode, subjectDuration, subjectStatus);
 		subject = subjectService.save(subject);
@@ -85,16 +89,16 @@ public class AdminSubjectController {
 		apiObject.setMessage(Constant.UPDATE_SUCCESS_MESSAGE);
 		return apiObject;
 	}
-	
+
 	@RequestMapping(path = "search", method = RequestMethod.GET)
-	public String seachSubject(Model model, @RequestParam("subjectStatus") String subjectStatus){
+	public String seachSubject(Model model, @RequestParam("subjectStatus") String subjectStatus) {
 		List<Subject> subjects = subjectService.findByStatus(subjectStatus);
 		model.addAttribute("subjects", subjects);
 		return "class-admin-subject-list";
 	}
-	
+
 	@RequestMapping(path = "del-subject", method = RequestMethod.DELETE)
-	public @ResponseBody Subject delSubject(@RequestParam Integer subjectId){
+	public @ResponseBody Subject delSubject(@RequestParam Integer subjectId) {
 		Subject subject = subjectService.delSubject(subjectId);
 		return subject;
 	}
