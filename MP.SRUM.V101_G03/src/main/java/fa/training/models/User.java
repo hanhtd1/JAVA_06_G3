@@ -74,8 +74,8 @@ public class User implements Serializable {
   @Column(name = "Status")
   private String status;
   
-  @Column(name = "LastLogin")
-  private LocalDateTime lastLogin;
+//  @Column(name = "LastLogin")
+//  private LocalDateTime lastLogin;
 
   @JsonIgnore
   @OneToMany(mappedBy = "user")

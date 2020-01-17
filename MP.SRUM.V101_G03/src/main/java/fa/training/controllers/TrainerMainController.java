@@ -132,16 +132,6 @@ public class TrainerMainController {
 		return "trainer-subject-manage";
 	}
 
-	@GetMapping("trainer-manage")
-	public String trainerManage() {
-		return "class-admin-trainer-manage";
-	}
-
-	@GetMapping("file-manage")
-	public String fileManage() {
-		return "import-export";
-	}
-
 	@GetMapping("guide")
 	public String guide() {
 		return "guide";
