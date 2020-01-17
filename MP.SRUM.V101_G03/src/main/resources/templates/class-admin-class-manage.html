@@ -121,9 +121,8 @@
 	</a>
 	<ul>
 		<li><a href="#add-class-modal"
-			class="btn-floating blue modal-trigger"><i class="material-icons">add</i>Add</a></li>
-		<li><a class="btn-floating green darken-1"><i
-				class="material-icons">description</i></a></li>
+			class="btn-floating blue modal-trigger"><i class="material-icons">add</i>Add</a>
+		</li>
 	</ul>
 </div>
 <!-- Modal View Trainee information -->
@@ -287,16 +286,16 @@
 		</div>
 	</form>
 </div>
-<!-- Modal feedback-->
-<div id="feedback-modal" class="modal" style="width: 40%;">
+<!-- Modal feedback -->
+<div id="feedback-modal" class="modal">
 	<form class="col s12">
 		<div class="modal-content">
-			<h4>Feedback</h4>
-			<div class="row">Feed backkkkkkkkkk</div>
+			<h4>View feedback</h4>
+			<div class="row" id="feedback_content"></div>
 		</div>
 		<div class="modal-footer">
-			<a href="#!"
-				class=" modal-action modal-close waves-effect waves-green btn-flat">Done</a>
+			<a href="#!" id="exit-feedback"
+				 class=" modal-action modal-close waves-effect waves-green btn-flat">Done</a>
 		</div>
 	</form>
 </div>
@@ -453,7 +452,7 @@
 		</div>
 	</div>
 	<div class="modal-footer">
-		<a href="#!" onclick="submitMarks()" class="modal-action modal-close waves-effect green btn ">Submit</a>
+		<a href="#!" onclick="submitMarks()" class="modal-action waves-effect green btn ">Submit</a>
 	</div>
 </div>
 <!-- Modal attendance -->

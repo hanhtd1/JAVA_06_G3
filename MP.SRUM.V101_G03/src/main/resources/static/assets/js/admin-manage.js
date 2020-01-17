@@ -80,7 +80,21 @@ function showScoreList(res, feedbackBtn){
 		"</tr>")
 }
 //unexpected
-function openModal(){
+function openModal(traineeId, subjectId){
+	$.get({
+		url: '/admin/get-user-feedback',
+		data: {
+			userId: traineeId,
+			subjectId: subjectId
+		},
+		success: resp => {
+			if(resp.content===undefined){
+				$('#feedback_content').html('Content not found!');
+			} else {
+				$('#feedback_content').html('<p>'+resp.content+'</p>');
+			}
+		}
+	});
 	$("#feedback-modal").openModal();
 }
 //unexpected
@@ -103,8 +117,9 @@ function editTraineeInfo(){
 }
 function addTrainee(){
 	let form = document.getElementById("add_trainee_form");
-	addUser(form);
-	loadTrainees();
+	if(addUser(form)===true){
+		loadTrainees();
+	}
 	return false;
 }
 function updateTrainee(){
@@ -280,7 +295,6 @@ function markGenerateFormArray(elements) {
 function submitMarks() {
 	let marks = document.getElementById("list-trainees-marks");
 	let elements = marks.querySelectorAll(".trainee-list");
-	console.log(markGenerateFormArray(elements));
 	$.post({
 		url: '/admin/update-marks',
 		data: JSON.stringify(markGenerateFormArray(elements)),
@@ -289,9 +303,7 @@ function submitMarks() {
 			Materialize.toast(resp, 4000);
 		},
 		error: (error)=>{
-			$.each(error.responseJSON, (key, value)=>{
-				Materialize.toast(key.toUpperCase() + ": " + value , 7000);
-			})
+			Materialize.toast(error.responseText, 4000);
 		}
 	});
 }
@@ -481,7 +493,7 @@ function addClass(){
 		},
 		error: (resp)=>{
 			$.each(resp.responseJSON, (key, value)=>{
-				Materialize.toast(key.toUpperCase() + ": " + value , 7000);
+				Materialize.toast(key.toUpperCase() + ": " + value , 10000);
 			})
 		}
 	});
@@ -771,11 +783,13 @@ function addUser(element) {
 		data: JSON.stringify(Form2JsonMapper(element)),
 		success: (resp)=>{
 			Materialize.toast(resp, 4000);
+			return true;
 		},
 		error: (resp)=>{
 			$.each(resp.responseJSON, (key, value)=>{
-				Materialize.toast(key.toUpperCase() + ": " + value , 7000);
-			})
+				Materialize.toast(key.toUpperCase() + ": " + value , 10000);
+			});
+			return false;
 		}
 	});
 }
@@ -789,7 +803,7 @@ function updateUser(element) {
 		},
 		error: (resp)=>{
 			$.each(resp.responseJSON, (key, value)=>{
-				Materialize.toast(key.toUpperCase() + ": " + value , 7000);
+				Materialize.toast(key.toUpperCase() + ": " + value , 10000);
 			})
 		}
 	});

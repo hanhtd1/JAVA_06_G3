@@ -1,8 +1,8 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <body>
 	<div class="col s12 m12 l12 no-p-h">
-		<div class="card mailbox-content" th:fragment="content-all">
-			<div class="card-content">
+		<div class="card mailbox-content">
+			<div class="card-content" th:fragment="content-all">
 				<div class="col s12 m12 l12 p-h-md">
 					<h3>Trainees Management</h3>
 					<div class="input-field col s4 m-t-sm">
@@ -26,7 +26,7 @@
 					<div class="input-field col s4 m-t-sm">
 						<p class="f-s-16">View by status</p>
 						<select class="p-h-md" name="status" id="status"
-							onchange="loadClass()">
+							onchange="traineeChange()">
 							<th:block th:each="status : ${statuss}">
 								<option th:value="${status}" th:text="${status}"></option>
 							</th:block>
@@ -34,8 +34,8 @@
 					</div>
 				</div>
 
-				<div class="row no-m-t no-m-b">
-					<div class="col s12 m12 l12" th:fragment="trainees" id="trainees">
+				<div class="row no-m-t no-m-b" id="trainees">
+					<div class="col s12 m12 l12" th:fragment="trainees">
 						<div class="mailbox-view">
 							<div class="mailbox-view-header">
 								<div class="mailbox-text">
@@ -69,7 +69,8 @@
 													</a> <a href="#feedback-modal"
 														th:style="${clazz} ? 'display: inline-block' : 'display: none' "
 														class="modal-trigger waves-effect waves-blue btn m-t-xs"
-														type="submit"> <i class="material-icons dp48">chat</i>
+														th:onclick="'openFeedbackForm()'"> <i
+															class="material-icons dp48">chat</i>
 													</a></td>
 												</tr>
 											</tbody>
@@ -82,78 +83,62 @@
 							th:if="${totalPages > 1}">
 							<ul class="pagination" id="paging">
 								<li class="page-item"><a class="page-link" id="#previous"
-									onclick="changePage(this)">Previous</a></li>
+									onclick="changePreviousPage(this)">Previous</a></li>
 								<th:block th:each="page: ${#numbers.sequence(1, totalPages)}">
 									<li th:class="page-item"
-										th:classappend="${page == index ? active : ''}"><a
+										th:classappend="${page == index} ? active : ''"><a
 										class="page-link" th:text="${page}" th:id="${page}"
-										onclick="appendClass(this)"></a></li>
+										th:classappend="${page == index} ? active : ''"
+										onclick="changePage(this)"></a></li>
 								</th:block>
 								<li class="page-item"><a class="page-link" id="#next"
-									onclick="changePage(this)">Next</a></li>
+									onclick="changeNextPage(this)">Next</a></li>
 							</ul>
 						</nav>
+						<!-- Score modal -->
+						<div id="grade-modal" class="modal">
+							<form class="col s12" th:fragment="scoreModal">
+								<div class="modal-content">
+									<h4>Grade</h4>
+									<table>
+										<tr>
+											<th>Subject</th>
+											<th>Theory</th>
+											<th>Practice</th>
+										</tr>
+										<tr th:each="score : ${scores}">
+											<td th:text="${score.name}"></td>
+											<td th:text="${score.practice}"></td>
+											<td th:text="${score.theory}"></td>
+										</tr>
+									</table>
+								</div>
+							</form>
+						</div>
+						-->
+
+						<!-- feedback modal -->
+						<div id="feedback-modal" class="modal" th:fragment="feedbackModal">
+							<form class="col s12" action="" id="feedback" method="post">
+								<div class="modal-content">
+									<h4>Feedback</h4>
+									<textarea rows="5" cols="5" required id="traineeFeedback"></textarea>
+								</div>
+								<div class="modal-footer">
+									<a href=""
+										class=" modal-action modal-close waves-effect waves-green btn-flat">Done</a>
+								</div>
+							</form>
+						</div>
+						<div class="left-sidebar-hover"></div>
 					</div>
 				</div>
 			</div>
 		</div>
 	</div>
-	<div class="left-sidebar-hover"></div>
 
-	<div class="fixed-action-btn vertical"
-		style="bottom: 45px; right: 24px;">
-		<a class="btn-floating btn-large red"> <i
-			class="large material-icons">mode_edit</i>
-		</a>
-		<ul>
-			<li><a href="#add-trainee-modal"
-				class="btn-floating blue modal-trigger"><i
-					class="material-icons">add</i>Add</a></li>
-			<li><a class="btn-floating green darken-1"><i
-					class="material-icons">description</i></a></li>
-		</ul>
-	</div>
-
-
-	<!-- Score modal -->
-	<div id="grade-modal" class="modal">
-		<form class="col s12" th:fragment="scoreModal">
-			<div class="modal-content">
-				<h4>Grade</h4>
-				<table>
-					<tr>
-						<th>Subject</th>
-						<th>Theory</th>
-						<th>Practice</th>
-					</tr>
-					<tr th:each="score : ${scores}">
-						<td th:text="${score.name}"></td>
-						<td th:text="${score.practice}"></td>
-						<td th:text="${score.theory}"></td>
-					</tr>
-				</table>
-			</div>
-		</form>
-	</div>
-
-	<!-- feedback modal -->
-	<div id="feedback-modal" class="modal" th:fragment="feedbackModal">
-		<form class="col s12" action="" id="feedback" method="post">
-			<div class="modal-content">
-				<h4>Feedback</h4>
-				<textarea rows="5" cols="5" required></textarea>
-			</div>
-			<div class="modal-footer">
-				<button type="submit" id="submit-feedback" class="btn btn-primary">Done</button>
-			</div>
-		</form>
-	</div>
-
-	<script th:src="@{../assets/plugins/jquery/jquery-2.2.0.min.js}"></script>
-	<script th:src="@{../assets/plugins/materialize/js/materialize.min.js}"></script>
-	<script th:src="@{../assets/plugins/material-preloader/js/materialPreloader.min.js}"></script>
-	<script th:src="@{../assets/plugins/jquery-blockui/jquery.blockui.js}"></script>
-	<script th:src="@{../assets/plugins/datatables/js/jquery.dataTables.min.js}"></script>
+	<script
+		th:src="@{../assets/plugins/datatables/js/jquery.dataTables.min.js}"></script>
 	<script th:src="@{../assets/plugins/simditor/scripts/module.js}"></script>
 	<script th:src="@{../assets/plugins/simditor/scripts/hotkeys.js}"></script>
 	<script th:src="@{../assets/plugins/simditor/scripts/uploader.js}"></script>

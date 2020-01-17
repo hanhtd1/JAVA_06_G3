@@ -44,96 +44,52 @@
 					<div class="col s12 m7 l9" id="class-detail"></div>
 				</div>
 			</div>
-			<div id="clazz-content" th:fragment="clazzs">
-				<table class="striped" style="margin-left: 2.5rem;">
-					<thead>
-						<tr>
-							<td>Class Name</td>
-							<td>Category</td>
-							<td>Open Date</td>
-							<th data-field="price">Action</th>
-							<td>
-						</tr>
-					</thead>
-					<tbody>
-						<tr th:each="clazz : ${clazzs}">
-							<td th:text="${clazz.name}"></td>
-							<td th:text="${clazz.category}"></td>
-							<td th:text="${clazz.openDate}"></td>
-							<td><a th:onclick=" 'loadTrainee(' + ${clazz.id} + ')' "><i
-									class="material-icons dp48">person_pin</i></a> <a
-								th:onclick="'loadSubject('+${clazz.id}+')'"><i
-									class="material-icons dp48">view_list</i></a></td>
-						</tr>
-					</tbody>
-				</table>
-				<nav aria-label="Page navigation example" th:if="${totalPages > 1}">
-					<ul class="pagination" id="paging">
-						<li class="page-item"><a class="page-link" id="#previous"
-							th:onclick="changePage(this)">Previous</a></li>
-						<th:block th:each="page: ${#numbers.sequence(1, totalPages)}">
-							<li th:class="page-item"
-								th:classappend="${page == index ? active : ''}"><a
-								class="page-link" th:text="${page}" th:id="${page}"
-								onclick="clazzByPage(this)"></a></li>
-						</th:block>
-						<li class="page-item"><a class="page-link" id="#next"
-							onclick="changePage(this)">Next</a></li>
-					</ul>
-				</nav>
+			<div id="clazz-content">
+				<div th:fragment="clazzs">
+					<table class="striped" style="margin-left: 2.5rem;">
+						<thead>
+							<tr>
+								<td>Class Name</td>
+								<td>Category</td>
+								<td>Open Date</td>
+								<th data-field="price">Action</th>
+								<td>
+							</tr>
+						</thead>
+						<tbody>
+							<tr th:each="clazz : ${clazzs}">
+								<td th:text="${clazz.name}"></td>
+								<td th:text="${clazz.category}"></td>
+								<td th:text="${clazz.openDate}"></td>
+								<td><a th:onclick=" 'loadTrainee(' + ${clazz.id} + ')' "><i
+										class="material-icons dp48">person_pin</i></a> <a
+									th:onclick="'loadSubject('+${clazz.id}+')'"><i
+										class="material-icons dp48">view_list</i></a></td>
+							</tr>
+						</tbody>
+					</table>
+
+					<nav aria-label="Page navigation example" th:if="${totalPages > 1}">
+						<ul class="pagination" id="paging">
+							<li class="page-item"><a class="page-link" id="#previous"
+								th:onclick="changePreviousPage(this)">Previous</a></li>
+							<th:block th:each="page: ${#numbers.sequence(1, totalPages)}">
+								<li th:class="page-item"
+									th:classappend="${page == index} ? active : ''"><a
+									class="page-link" th:text="${page}" th:id="${page}"
+									th:classappend="${page == index} ? active : ''"
+									onclick="clazzByPage(this)"></a></li>
+							</th:block>
+							<li class="page-item"><a class="page-link" id="#next"
+								onclick="changeNextPage(this)">Next</a></li>
+						</ul>
+					</nav>
+				</div>
 			</div>
 		</div>
 	</div>
 </div>
-
 <div class="left-sidebar-hover"></div>
-<div class="fixed-action-btn vertical"
-	style="bottom: 45px; right: 24px;">
-	<a class="btn-floating btn-large red"> <i
-		class="large material-icons">mode_edit</i>
-	</a>
-	<ul>
-		<li><a href="#add-class-modal"
-			class="btn-floating blue modal-trigger"><i class="material-icons">add</i>Add</a></li>
-		<li><a class="btn-floating green darken-1"><i
-				class="material-icons">description</i></a></li>
-	</ul>
-</div>
-<!-- Score modal -->
-<div id="grade-modal" class="modal">
-	<form class="col s12" th:fragment="scoreModal">
-		<div class="modal-content">
-			<h4>Grade</h4>
-			<table>
-				<tr>
-					<th>Subject</th>
-					<th>Theory</th>
-					<th>Practice</th>
-				</tr>
-				<tr th:each="score : ${scores}">
-					<td th:text="${score.name}"></td>
-					<td th:text="${score.practice}"></td>
-					<td th:text="${score.theory}"></td>
-				</tr>
-			</table>
-		</div>
-	</form>
-</div>
-
-<!-- feedback modal -->
-<div id="feedback-modal" class="modal" th:fragment="feedbackModal">
-	<form class="col s12" action="" id="feedback" method="post">
-		<div class="modal-content">
-			<h4>Feedback</h4>
-			<textarea rows="5" cols="5" required></textarea>
-		</div>
-		<div class="modal-footer">
-			<button type="submit" id="submit-feedback" class="btn btn-primary">Done</button>
-		</div>
-	</form>
-</div>
-
-
 <script th:src="@{../assets/plugins/jquery/jquery-2.2.0.min.js}"></script>
 <script th:src="@{../assets/plugins/materialize/js/materialize.min.js}"></script>
 <script

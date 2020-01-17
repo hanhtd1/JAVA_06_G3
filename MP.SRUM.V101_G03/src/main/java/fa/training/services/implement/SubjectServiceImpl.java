@@ -40,7 +40,7 @@ public class SubjectServiceImpl implements SubjectService {
     // TODO edit orElse
     return subjectRepository.findSubjectByCode(code).orElse(new Subject());
   }
-
+  
   @Override
   public Boolean checkSubjectExisted(String code) {
     return subjectRepository.findSubjectByCode(code).isPresent();

@@ -36,5 +36,11 @@ public interface FeedbackRepository extends JpaRepository<Feedback, Integer> {
 	 */
 	@Query(value = "SELECT * FROM udf_findFeedbackBySubjectId(:subjectId)", nativeQuery = true)
 	List<Feedback> findFeedbackBySubjectId(@Param("subjectId") Integer subjectId);
-
+	
+	/**
+	 * @author TrangDM2
+	 * @return
+	 */
+	@Query(value = "SELECT * FROM feedback WHERE user_id = :userId AND subject_id= :subjectId", nativeQuery = true)
+	Feedback findByUserAndSubject(@Param("userId") Integer userId, @Param("subjectId") Integer subjectId);
 }

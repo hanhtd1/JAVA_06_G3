@@ -366,32 +366,31 @@ public class AdminClassManageRestController {
     return new ResponseEntity<String>(message, HttpStatus.OK);
   }
 
-  // TODO hỏi thằng Trung
+  /**
+   * @author TrangDM2
+   * @param scoreDtos
+   * @param result
+   * @return
+   */
   @PostMapping("update-marks")
-  public ResponseEntity<?> updateMarks(@Valid @RequestBody List<AdminScoreDto> scoreDtos, BindingResult result) {
-    if (result.hasErrors()) {
-      Map<String, String> errors = result.getFieldErrors().stream()
-          .collect(Collectors.toMap(FieldError::getField, FieldError::getDefaultMessage));
-      return ResponseEntity.badRequest().body(errors);
-    } else {
-      String message = new String();
-      HttpStatus status = null;
+  public ResponseEntity<?> updateMarks(@RequestBody List<AdminScoreDto> scoreDtos) {
+    String message = new String();
+    HttpStatus status = null;
 
-      try {
-        scoreDtos.forEach(scoreDto -> {
-          ScorePK scorePk = new ScorePK(scoreDto.getSubjectId(), scoreDto.getUserId());
-          Score score = new Score(scorePk, scoreDto.getTheory(), scoreDto.getPractice());
-          scoreService.saveScore(score);
-        });
-        message = Constant.UPDATE_SUCCESS_MESSAGE;
-        status = HttpStatus.CREATED;
-      } catch (Exception e) {
-        message = Constant.UPDATE_FAIL_MESSAGE;
-        status = HttpStatus.BAD_REQUEST;
-      }
-
-      return new ResponseEntity<String>(message, status);
+    try {
+      scoreDtos.forEach(scoreDto -> {
+        ScorePK scorePk = new ScorePK(scoreDto.getSubjectId(), scoreDto.getUserId());
+        Score score = new Score(scorePk, scoreDto.getTheory(), scoreDto.getPractice());
+        scoreService.saveScore(score);
+      });
+      message = Constant.UPDATE_SUCCESS_MESSAGE;
+      status = HttpStatus.CREATED;
+    } catch (Exception e) {
+      message = Constant.UPDATE_FAIL_MESSAGE;
+      status = HttpStatus.BAD_REQUEST;
     }
+
+    return new ResponseEntity<String>(message, status);
   }
 
   /**

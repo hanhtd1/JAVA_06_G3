@@ -7,6 +7,7 @@ import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import fa.training.dtos.TraineeScoreDto;
 import fa.training.models.Clazz;
+import fa.training.models.ReviewTrainee;
 import fa.training.models.User;
 import fa.training.services.ClazzService;
 import fa.training.services.ReviewTraineeService;
@@ -62,14 +64,13 @@ public class TrainerUserController {
 		categories.add(0, Constant.TRAINEE_SEARCH_ALL);
 		names.add(0, Constant.TRAINEE_SEARCH_ALL);
 		statuss.add(0, Constant.TRAINEE_SEARCH_ALL);
-
 		model.addAttribute("index", page);
 		model.addAttribute("totalPages", TraineeServiceImpl.numberOfPage);
 		model.addAttribute("categories", categories);
 		model.addAttribute("names", names);
 		model.addAttribute("statuss", statuss);
 		model.addAttribute("trainees", trainees);
-		return "class-admin-trainee-manage :: trainees";
+		return "trainer-trainee-manage :: trainees";
 	}
 
 	@RequestMapping(value = "/search", method = RequestMethod.GET)
@@ -111,23 +112,30 @@ public class TrainerUserController {
 			trainees = new ArrayList<>();
 			break;
 		}
-		System.out.println("-------------------");
-		System.out.println(trainees);
 		model.addAttribute("index", page);
 		model.addAttribute("totalPages", TraineeServiceImpl.numberOfPage);
 		model.addAttribute("trainees", trainees);
-		return "class-admin-trainee-manage :: trainees";
+		return "trainer-trainee-manage :: trainees";
 	}
-
 
 	/**
 	 * @return
 	 */
+	@ExceptionHandler(Exception.class)
 	@RequestMapping(value = "/grade/{id}")
 	public String getScore(Model model, @PathVariable("id") Integer id) {
-		System.out.println("----------------------BEGIN----------------------");
 		List<TraineeScoreDto> scores = scoreService.findByIdUserId(id);
 		model.addAttribute("scores", scores);
-		return "class-admin-trainee-manage :: scoreModal";
+		return "trainer-trainee-manage :: scoreModal";
 	}
+
+	/**
+	 * @return
+	 */
+	@RequestMapping(value = "/review")
+	public String saveReview(@RequestParam("feedback") String feedback, Model model) {
+		reviewTraineeService.add(new ReviewTrainee());
+		return "trainer-trainee-manage :: scoreModal";
+	}
+
 }

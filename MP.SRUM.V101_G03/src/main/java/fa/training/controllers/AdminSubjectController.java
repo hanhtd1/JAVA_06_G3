@@ -2,6 +2,7 @@ package fa.training.controllers;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -65,7 +66,7 @@ public class AdminSubjectController {
 	@RequestMapping(path = "load-class", method = RequestMethod.GET)
 	public String loadClass(Model model, @RequestParam Integer subjectId) {
 		List<Clazz> classes = clazzService.findBySubject(subjectId);
-		Map<String, List<User>> classDetails = classes.stream()
+		Map<String, Set<User>> classDetails = classes.stream()
 				.collect(Collectors.toMap(Clazz::getName, Clazz::getUserList));
 		model.addAttribute("usersByClass", classDetails);
 		return "class-admin-subject-details";

@@ -1,6 +1,11 @@
 package fa.training.utils;
 
-public class Constant {
+public interface Constant {
+  
+  //Regex
+  public static final String REGEX_PHONE_NUMBER = "((09|03|07|08|05)+([0-9]{8})\\b)";
+  public static final String REGEX_NAME = "^[A-Z]+(([',. -][A-Z ])?[a-zA-Z]*)*{2,}$";
+  
 	public static final int PAGE_SIZE = 5;
 
 	// Roles
@@ -16,6 +21,7 @@ public class Constant {
 
 	// Status
 	public static final String CLASS_DEFAULT_STATUS = "In Coming";
+	public static final String CLASS_ACTIVE_STATUS = "Active";
   public static final String USER_DEFAULT_STATUS = "New";
 	public static final String TRAINEE_DEFAULT_STATUS = "New";
 	public static final String TRAINEE_ACTIVE_STATUS = "Active";
@@ -24,7 +30,6 @@ public class Constant {
 	public static final String SUBJECT_DEFAULT_STATUS = "New";
 	public static final String SUBJECT_ACTIVE_STATUS = "Active";
 	public static final String SUBJECT_DISABLED_STATUS = "In Active";
-	public static final String CLASS_ACTIVE_STATUS = "Active";
 	
 	// Message
 	public static final String UPDATE_SUCCESS_MESSAGE = "Update successfully!";
@@ -32,13 +37,13 @@ public class Constant {
 	public static final String CREATE_SUCCESS_MESSAGE = "Created successfully!";
 	public static final String CREATE_FAIL_MESSAGE = "Failed to create, this is already exist!";
 	public static final String NOT_FOUND_MESSAGE = "Not found!";
-
 	
+  public static final String VALID_NAME_MESSAGE = "Please enter valid name format!";
+  public static final String VALID_PHONE_MESSAGE = "Please enter valid phone number format! (ex: 09xxxx-xxxx)";
+
+	//Other
 	public static final String CLAZZ_CATEGORY = "Java";
-
 	public static final String TRAINEE_SEARCH_ALL = "All";
-
-
 	public static final String CATEGORY = "CATEGORY";
 	public static final String CLAZZ = "CLAZZ";
 	public static final String STATUS = "STATUS";

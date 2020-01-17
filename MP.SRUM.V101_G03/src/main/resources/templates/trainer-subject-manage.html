@@ -1,17 +1,13 @@
-<html xmlns:th="http://www.thymeleaf.org">
 <div class="col s12 m12 l12 no-p-h">
-	<div class="card mailbox-content" th:fragment="content-all">
-		<div class="card-content">
-			<div class="col s12 m12 l12 p-h-md">
+	<div class="card mailbox-content">
+		<div class="card-content" th:fragment="content-all">
+			<div class="col s12 m12 l12 p-h-md" id="main-content-subject">
 				<h3>Subjects Management</h3>
 			</div>
 			<div class="row no-m-t no-m-b">
 				<div class="col s12 m12 l12">
 					<div class="mailbox-view">
 						<div class="mailbox-view-header">
-							<div class="divider mailbox-divider"></div>
-							<h5>Feedback List</h5>
-							<div class="class-actions m-t-md"></div>
 							<div class="divider mailbox-divider"></div>
 							<div class="">
 								<table style="table-layout: fixed;"
@@ -31,7 +27,6 @@
 											<td th:text="${subject.duration}"></td>
 											<td><a
 												class="modal-trigger waves-effect waves-blue btn m-t-xs"
-												href="#feedback-modal"
 												th:onclick="'getFeedback(' + ${subject.id} + ')'"><i
 													class="material-icons dp48">chat</i></a></td>
 										</tr>
@@ -43,46 +38,30 @@
 				</div>
 			</div>
 		</div>
+		<!--  Modal view feedback-->
+		<div id="view-feedback-modal" class="modal">
+			<form class="col s12" th:fragment="view-feedback">
+				<div class="modal-content" th:each="feedback : ${feedbacks}">
+					<h4>Feedback Subject</h4>
+					<div class="row" th:text="${feedback.content}">Feedback</div>
+					<hr>
+				</div>
+				<div class="modal-footer">
+					<a href="#!"
+						class=" modal-action modal-close waves-effect waves-green btn-flat">Cancel</a>
+				</div>
+			</form>
+		</div>
 	</div>
 </div>
 <div class="left-sidebar-hover"></div>
-<div class="fixed-action-btn vertical"
-	style="bottom: 45px; right: 24px;">
-	<a class="btn-floating btn-large red"> <i
-		class="large material-icons">mode_edit</i>
-	</a>
-	<ul>
-		<li><a href="#add-subject-modal"
-			class="btn-floating blue modal-trigger"><i class="material-icons">add</i>Add</a></li>
-		<li><a class="btn-floating green darken-1"><i
-				class="material-icons">description</i></a></li>
-	</ul>
-</div>
-<!-- Modal feedback-->
-<div id="feedback-modal" class="modal" th:fragment="feedback">
-	<form class="col s12">
-		<div class="modal-content">
-			<h4>Add new trainee</h4>
-			<div class="row" th:text="${feedbacks}">Feedback</div>
-		</div>
-		<div class="modal-footer">
-			<a href="#!"
-				class=" modal-action modal-close waves-effect waves-green btn-flat">Cancel</a>
-		</div>
-	</form>
-</div>
 <!-- Javascripts -->
-<script th:src="@{../assets/plugins/jquery/jquery-2.2.0.min.js}"></script>
-<script th:src="@{../assets/plugins/materialize/js/materialize.min.js}"></script>
-<script th:src="@{../assets/plugins/material-preloader/js/materialPreloader.min.js}"></script>
-<script th:src="@{../assets/plugins/jquery-blockui/jquery.blockui.js}"></script>
-<script th:src="@{../assets/plugins/datatables/js/jquery.dataTables.min.js}"></script>
+<script
+	th:src="@{../assets/plugins/datatables/js/jquery.dataTables.min.js}"></script>
 <script th:src="@{../assets/plugins/simditor/scripts/module.js}"></script>
 <script th:src="@{../assets/plugins/simditor/scripts/hotkeys.js}"></script>
 <script th:src="@{../assets/plugins/simditor/scripts/uploader.js}"></script>
 <script th:src="@{../assets/plugins/simditor/scripts/simditor.js}"></script>
-<script th:src="@{../assets/js/alpha.min.js}"></script>
 <script th:src="@{../assets/js/pages/table-data.js}"></script>
 <script th:src="@{../assets/js/pages/mailbox.js}"></script>
 <script th:src="@{../assets/js/pages/form-wizard.js}"></script>
-</html>

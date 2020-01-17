@@ -9,6 +9,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 /**
  *
  * @author TrangDM2
@@ -24,10 +26,12 @@ public class Feedback implements Serializable {
     @Column(name = "Content")
     private String content;
     
+    @JsonIgnore
     @JoinColumn(name = "SubjectId", referencedColumnName = "Id", insertable = false, updatable = false)
     @ManyToOne(optional = false)
     private Subject subject;
     
+    @JsonIgnore
     @JoinColumn(name = "UserId", referencedColumnName = "Id", insertable = false, updatable = false)
     @ManyToOne(optional = false)
     private User user;
