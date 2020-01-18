@@ -124,8 +124,6 @@ public interface ClassRepository extends JpaRepository<Clazz, Integer> {
 	Optional<Clazz> findClazzByUser(@Param("userId") int userId,@Param("role") String role);
 	
 	/**
-=======================================================================================================
-  /**
    * @author TrangDM2
    *
    */

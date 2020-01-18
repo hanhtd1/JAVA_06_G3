@@ -1,7 +1,5 @@
 package fa.training.controllers;
 
-import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -23,7 +21,6 @@ import org.springframework.web.bind.annotation.RestController;
 import fa.training.dtos.AdminScoreDto;
 import fa.training.dtos.AttendanceDto;
 import fa.training.dtos.UserDto;
-import fa.training.models.Attendance;
 import fa.training.models.Clazz;
 import fa.training.models.Score;
 import fa.training.models.ScorePK;
@@ -36,12 +33,16 @@ import fa.training.services.ScoreService;
 import fa.training.services.SubjectService;
 import fa.training.utils.Constant;
 
+/**
+ * @author TrangDM2
+ *
+ */
 @RestController
 @RequestMapping("admin")
 public class AdminClassManageRestController {
 
   @Autowired
-  private AdminClassService adminClazzService;
+  private AdminClassService adminClassService;
 
   @Autowired
   private AdminUserService adminUserService;
@@ -60,7 +61,7 @@ public class AdminClassManageRestController {
    */
   @GetMapping("class-detail")
   public ResponseEntity<Clazz> classDetail(@RequestParam Integer id) {
-    Clazz clazz = adminClazzService.getClass(id);
+    Clazz clazz = adminClassService.getClass(id);
     return new ResponseEntity<Clazz>(clazz, HttpStatus.OK);
   }
 
@@ -69,7 +70,7 @@ public class AdminClassManageRestController {
    */
   @GetMapping("get-clazz-info")
   public ResponseEntity<Clazz> getClazz(@RequestParam Integer id) {
-    Clazz clazz = adminClazzService.getClass(id);
+    Clazz clazz = adminClassService.getClass(id);
     return new ResponseEntity<Clazz>(clazz, HttpStatus.OK);
   }
 
@@ -78,7 +79,7 @@ public class AdminClassManageRestController {
    */
   @GetMapping("get-classes")
   public ResponseEntity<List<Clazz>> filterClasses(@RequestParam String keyword, @RequestParam String status) {
-    List<Clazz> clazzs = adminClazzService.findClazzByKeyword(keyword, status);
+    List<Clazz> clazzs = adminClassService.findClazzByKeyword(keyword, status);
     return new ResponseEntity<List<Clazz>>(clazzs, HttpStatus.OK);
   }
 
@@ -96,18 +97,8 @@ public class AdminClassManageRestController {
       Clazz updateClazz = clazz;
 
       try {
-        if (clazz.getId() == null) {
-          updateClazz.setStatus(Constant.CLASS_DEFAULT_STATUS);
-          adminClazzService.saveClass(clazz);
-          message = Constant.UPDATE_SUCCESS_MESSAGE;
-        } else {
-          Clazz toUpdateClazz = adminClazzService.getClass(updateClazz.getId());
-          updateClazz.setUserList(toUpdateClazz.getUserList());
-          updateClazz.setStatus(toUpdateClazz.getStatus());
-          updateClazz.setSubjectList(toUpdateClazz.getSubjectList());
-          adminClazzService.saveClass(updateClazz);
-          message = Constant.CREATE_SUCCESS_MESSAGE;
-        }
+        adminClassService.saveClass(updateClazz, Constant.CLASS_DEFAULT_STATUS);
+        message = Constant.UPDATE_SUCCESS_MESSAGE;
       } catch (Exception e) {
         message = Constant.UPDATE_FAIL_MESSAGE;
       }
@@ -123,27 +114,18 @@ public class AdminClassManageRestController {
    */
   @PostMapping("do-attendance")
   public ResponseEntity<String> attendance(@RequestBody List<AttendanceDto> attendances) {
-    List<Attendance> attendanceList = new ArrayList<>();
     String message = new String();
+    HttpStatus status = null;
 
-    attendances.forEach(attend -> {
-      User trainee = adminUserService.getUser(attend.getUserId());
-      Attendance attendace = new Attendance();
-      attendace.setDate(LocalDate.now());
-      attendace.setType(attend.getType());
-      attendace.setNote(attend.getNote());
-      attendace.setUser(trainee);
-      attendanceList.add(attendace);
-    });
-
-    try {
-      attendanceService.saveAttendances(attendanceList);
+    if (attendanceService.saveAttendances(attendances)) {
       message = Constant.UPDATE_SUCCESS_MESSAGE;
-    } catch (Exception e) {
+      status = HttpStatus.CREATED;
+    } else {
       message = Constant.UPDATE_FAIL_MESSAGE;
+      status = HttpStatus.BAD_REQUEST;
     }
 
-    return new ResponseEntity<String>(message, HttpStatus.CREATED);
+    return new ResponseEntity<String>(message, status);
   }
 
   /**
@@ -151,9 +133,8 @@ public class AdminClassManageRestController {
    */
   @GetMapping("update-classstatus")
   public ResponseEntity<String> updateStatus(@RequestParam String status, @RequestParam int id) {
-    Clazz clazz = adminClazzService.getClass(id);
-    clazz.setStatus(status);
-    adminClazzService.saveClass(clazz);
+    Clazz clazz = adminClassService.getClass(id);
+    adminClassService.saveClass(clazz, status);
     return new ResponseEntity<String>(Constant.UPDATE_SUCCESS_MESSAGE, HttpStatus.OK);
   }
 
@@ -177,7 +158,7 @@ public class AdminClassManageRestController {
    */
   @GetMapping("add-trainee-toclass")
   public ResponseEntity<String> addTraineeToClass(@RequestParam Integer traineeId, @RequestParam Integer classId) {
-    Clazz clazz = adminClazzService.getClass(classId);
+    Clazz clazz = adminClassService.getClass(classId);
     User user = adminUserService.getUser(traineeId);
     String message = new String();
 
@@ -186,7 +167,7 @@ public class AdminClassManageRestController {
     clazz.getUserList().add(user);
 
     try {
-      adminClazzService.saveClass(clazz);
+      adminClassService.saveClass(clazz, clazz.getStatus());
       adminUserService.saveUser(user);
       message = Constant.CREATE_SUCCESS_MESSAGE;
     } catch (Exception e) {
@@ -204,7 +185,7 @@ public class AdminClassManageRestController {
    */
   @GetMapping("remove-trainee")
   public ResponseEntity<String> removeTraineeFromClass(@RequestParam Integer traineeId, @RequestParam Integer classId) {
-    Clazz clazz = adminClazzService.getClass(classId);
+    Clazz clazz = adminClassService.getClass(classId);
     User user = adminUserService.getUser(traineeId);
     String message = new String();
 
@@ -213,7 +194,7 @@ public class AdminClassManageRestController {
     clazz.getUserList().remove(user);
 
     try {
-      adminClazzService.saveClass(clazz);
+      adminClassService.saveClass(clazz, clazz.getStatus());
       adminUserService.saveUser(user);
       message = Constant.UPDATE_SUCCESS_MESSAGE;
     } catch (Exception e) {
@@ -254,7 +235,7 @@ public class AdminClassManageRestController {
   @GetMapping("add-subject-to-class")
   public ResponseEntity<String> addSubjectToClass(@RequestParam Integer subjectId, @RequestParam Integer classId) {
     Subject subject = subjectService.findSubjectById(subjectId);
-    Clazz clazz = adminClazzService.getClass(classId);
+    Clazz clazz = adminClassService.getClass(classId);
     String message = new String();
 
     subject.getClazzList().add(clazz);
@@ -262,11 +243,12 @@ public class AdminClassManageRestController {
 
     try {
       subjectService.save(subject);
-      adminClazzService.saveClass(clazz);
+      adminClassService.saveClass(clazz, clazz.getStatus());
       message = Constant.UPDATE_SUCCESS_MESSAGE;
     } catch (Exception e) {
       message = Constant.UPDATE_FAIL_MESSAGE;
     }
+
     return new ResponseEntity<String>(message, HttpStatus.OK);
   }
 
@@ -279,7 +261,7 @@ public class AdminClassManageRestController {
   @GetMapping("remove-subject-fromclass")
   public ResponseEntity<String> removeSubject(@RequestParam Integer subjectId, @RequestParam Integer clazzId) {
     Subject subject = subjectService.findSubjectById(subjectId);
-    Clazz clazz = adminClazzService.getClass(clazzId);
+    Clazz clazz = adminClassService.getClass(clazzId);
     String message = new String();
 
     subject.getClazzList().remove(clazz);
@@ -287,11 +269,12 @@ public class AdminClassManageRestController {
 
     try {
       subjectService.save(subject);
-      adminClazzService.saveClass(clazz);
+      adminClassService.saveClass(clazz, clazz.getStatus());
       message = Constant.UPDATE_SUCCESS_MESSAGE;
     } catch (Exception e) {
       message = Constant.UPDATE_FAIL_MESSAGE;
     }
+
     return new ResponseEntity<String>(message, HttpStatus.OK);
   }
 
@@ -300,7 +283,7 @@ public class AdminClassManageRestController {
    */
   @GetMapping("trainer-class")
   public ResponseEntity<List<Clazz>> trainerClass(@RequestParam int id) {
-    List<Clazz> classes = adminClazzService.getClassByUser(id);
+    List<Clazz> classes = adminClassService.getClassByUser(id);
     return new ResponseEntity<List<Clazz>>(classes, HttpStatus.OK);
   }
 
@@ -323,7 +306,7 @@ public class AdminClassManageRestController {
    */
   @GetMapping("add-trainer-toclass")
   public ResponseEntity<String> addTrainer(@RequestParam Integer clazzId, @RequestParam Integer trainerId) {
-    Clazz clazz = adminClazzService.getClass(clazzId);
+    Clazz clazz = adminClassService.getClass(clazzId);
     User trainer = adminUserService.getUser(trainerId);
     String message = new String();
 
@@ -331,12 +314,13 @@ public class AdminClassManageRestController {
     trainer.getClazzList().add(clazz);
 
     try {
-      adminClazzService.saveClass(clazz);
+      adminClassService.saveClass(clazz, clazz.getStatus());
       adminUserService.saveUser(trainer);
       message = Constant.UPDATE_SUCCESS_MESSAGE;
     } catch (Exception e) {
       message = Constant.UPDATE_FAIL_MESSAGE;
     }
+
     return new ResponseEntity<String>(message, HttpStatus.OK);
   }
 
@@ -348,7 +332,7 @@ public class AdminClassManageRestController {
    */
   @GetMapping("remove-trainer-fromclass")
   public ResponseEntity<String> removeTrainer(@RequestParam Integer clazzId, @RequestParam Integer trainerId) {
-    Clazz clazz = adminClazzService.getClass(clazzId);
+    Clazz clazz = adminClassService.getClass(clazzId);
     User trainer = adminUserService.getUser(trainerId);
     String message = new String();
 
@@ -356,12 +340,13 @@ public class AdminClassManageRestController {
     trainer.getClazzList().remove(clazz);
 
     try {
-      adminClazzService.saveClass(clazz);
+      adminClassService.saveClass(clazz, clazz.getStatus());
       adminUserService.saveUser(trainer);
       message = Constant.UPDATE_SUCCESS_MESSAGE;
     } catch (Exception e) {
       message = Constant.UPDATE_FAIL_MESSAGE;
     }
+
     return new ResponseEntity<String>(message, HttpStatus.OK);
   }
 
@@ -398,7 +383,7 @@ public class AdminClassManageRestController {
   @GetMapping("get-classname")
   public ResponseEntity<String> getClassName(@RequestParam String location, @RequestParam String category,
       @RequestParam String type) {
-    String className = adminClazzService.generateClassName(location, type, category);
+    String className = adminClassService.generateClassName(location, type, category);
     return new ResponseEntity<String>(className, HttpStatus.CREATED);
   }
 }

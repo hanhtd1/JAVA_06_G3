@@ -2,6 +2,7 @@ package fa.training.services;
 
 import java.util.List;
 
+import fa.training.dtos.AttendanceDto;
 import fa.training.models.Attendance;
 import fa.training.models.User;
 
@@ -13,6 +14,6 @@ public interface AttendanceService {
 
 	List<Attendance> getAttendancesByUser(User user);
 
-	List<Attendance> saveAttendances(List<Attendance> attendances);
+	Boolean saveAttendances(List<AttendanceDto> attendances);
 
 }

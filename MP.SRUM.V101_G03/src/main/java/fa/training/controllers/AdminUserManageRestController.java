@@ -41,6 +41,7 @@ public class AdminUserManageRestController {
 
   @Autowired
   private FeedbackService feedbackService;
+
   @Autowired
   private BCryptPasswordEncoder bcrypt;
 
@@ -52,7 +53,7 @@ public class AdminUserManageRestController {
     User user = adminUserService.getUser(id);
     return new ResponseEntity<User>(user, HttpStatus.OK);
   }
-  
+
   /**
    * @author TrangDM2
    * @param userId
@@ -60,7 +61,7 @@ public class AdminUserManageRestController {
    * @return
    */
   @GetMapping("get-user-feedback")
-  public ResponseEntity<Feedback> getUserFeedback(@RequestParam Integer userId, @RequestParam Integer subjectId){
+  public ResponseEntity<Feedback> getUserFeedback(@RequestParam Integer userId, @RequestParam Integer subjectId) {
     Feedback feedback = feedbackService.findBySubjectAndUser(userId, subjectId);
     return new ResponseEntity<Feedback>(feedback, HttpStatus.OK);
   }

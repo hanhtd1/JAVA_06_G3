@@ -41,8 +41,8 @@ public class AdminMainController {
   @GetMapping("/")
   public String home(Model model, Authentication auth) {
     String account = auth.getName();
-    User trainee = adminUserService.getUserByAccount(account).get();
-    model.addAttribute("currentUser", trainee);
+    User user = adminUserService.getUserByAccount(account).get();
+    model.addAttribute("currentUser", user);
     return "index";
   }
   

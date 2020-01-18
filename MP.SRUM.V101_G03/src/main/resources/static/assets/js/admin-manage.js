@@ -130,7 +130,23 @@ function changeTraineeStatus(){
 	let e = $("#traineeStatus").val();
 	updateUserStatus(e);
 }
-
+function changePassword() {
+	let form = document.getElementById("change-password-from");
+	$.post({
+		url: '/change-password',
+		contentType: "application/json",
+		data: JSON.stringify(Form2JsonMapper(form)),
+		success: resp => {
+			setTimeout(()=>{
+				location.reload();
+			}, 2000);
+			swal("Success!", "Change password successfully!","success");
+		}, error: error => {
+			swal("Failed!", "Change password failed, please check account and password!","error");
+		}
+	});
+	return false;
+}
 //=========================================================================
 // CLass @Author TrangDM2
 function loadClasses(){
@@ -491,6 +507,7 @@ function updateClassStatus() {
 			swal("Success!", resp,"success");
 			loadClassDetail(this.currentClass);
 			loadClasses();
+			$('#update-class-status-modal').closeModal();
 		}
 	})
 }
@@ -502,7 +519,8 @@ function addClass(){
 		data: JSON.stringify(Form2JsonMapper(form)),
 		contentType: "application/json",
 		success: (resp)=>{
-			Materialize.toast(resp, 4000);
+			swal("Created!", resp,"success");
+			$('#add-class-modal').closeModal();
 			loadClasses();
 		},
 		error: (resp)=>{
@@ -537,7 +555,8 @@ function editClassInfoSubmit(){
 		data: JSON.stringify(Form2JsonMapper(form)),
 		contentType: "application/json",
 		success: (resp)=>{
-			Materialize.toast(resp, 4000);
+			swal("Success!", resp,"success");
+			$('#update-class-modal').closeModal();
 		}
 	});
 	return false;
@@ -546,11 +565,11 @@ function editClassInfoSubmit(){
 function submitAttendance() {
 	swal({
 		title: "Are you sure?",
-		text: "Your will today of attendance!",
+		text: "Your will submit today of attendance!",
 		type: "warning",
 		showCancelButton: true,
 		confirmButtonClass: "btn-danger",
-		confirmButtonText: "Yes, delete it!",
+		confirmButtonText: "Yes, do it!",
 		closeOnConfirm: false
 	}, () => {
 		let attendances = document.getElementById("attendance-trainees");
@@ -561,9 +580,10 @@ function submitAttendance() {
 			contentType: "application/json",
 			success: (resp) => {
 				swal("Success!", resp,"success");
+				$('#attendance-modal').closeModal();
 			},
 			error: (error) => {
-				swal("Failed!", error, "danger");
+				swal("Failed!","Something wrong, Please check your input!", "error");
 			}
 		});
 	});
@@ -851,6 +871,7 @@ function updateUserStatus(element) {
 			status: element
 		},
 		success: (resp)=>{
+			$('#update-status').closeModal();
 			swal("Success!", resp,"success");
 		}
 	})

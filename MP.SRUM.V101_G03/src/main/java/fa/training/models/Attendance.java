@@ -16,6 +16,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.NotBlank;
 
 /**
  *
@@ -33,6 +34,7 @@ public class Attendance implements Serializable {
 	@Column(name = "Date")
 	private LocalDate date;
 
+	@NotBlank
 	@Column(name = "Type")
 	private String type;
 

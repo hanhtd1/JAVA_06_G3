@@ -385,3 +385,180 @@
 2020-01-17 23:44:55 INFO  UserServiceImpl:51 - Get User by UserID 2
 2020-01-17 23:44:55 INFO  ScoreServiceImpl:55 - Get score by UserId 2
 2020-01-17 23:44:59 INFO  FeedbackServiceImpl:28 - Get feedbacks of UserID 5 and SubjectID 1
+2020-01-18 12:03:11 INFO  TraineeUserController:59 - TrangDM login successful
+2020-01-18 12:03:11 INFO  UserServiceImpl:42 - Get User by Account TrangDM
+2020-01-18 12:03:11 INFO  UserServiceImpl:30 - Get classmate of user TrangDM
+2020-01-18 12:03:11 INFO  AttendanceServiceImpl:36 - Get list of Attendace by TrangDM
+2020-01-18 12:03:11 INFO  ScoreServiceImpl:55 - Get score by UserId 2
+2020-01-18 12:03:19 INFO  UserServiceImpl:51 - Get User by UserID 13
+2020-01-18 12:03:19 INFO  ScoreServiceImpl:55 - Get score by UserId 13
+2020-01-18 12:03:23 INFO  UserServiceImpl:51 - Get User by UserID 5
+2020-01-18 12:03:23 INFO  ScoreServiceImpl:55 - Get score by UserId 5
+2020-01-18 12:03:32 INFO  UserServiceImpl:51 - Get User by UserID 13
+2020-01-18 12:03:32 INFO  ScoreServiceImpl:55 - Get score by UserId 13
+2020-01-18 12:03:34 INFO  FeedbackServiceImpl:28 - Get feedbacks of UserID 2 and SubjectID 1
+2020-01-18 12:57:17 INFO  FeedbackServiceImpl:28 - Get feedbacks of UserID 2 and SubjectID 1
+2020-01-18 14:27:34 INFO  TraineeUserController:59 - TrangDM login successful
+2020-01-18 14:27:34 INFO  UserServiceImpl:42 - Get User by Account TrangDM
+2020-01-18 14:32:14 INFO  TraineeUserController:59 - TrangDM login successful
+2020-01-18 14:32:14 INFO  UserServiceImpl:42 - Get User by Account TrangDM
+2020-01-18 14:40:20 INFO  TraineeUserController:59 - TrangDM login successful
+2020-01-18 14:40:20 INFO  UserServiceImpl:42 - Get User by Account TrangDM
+2020-01-18 14:40:32 INFO  TraineeUserController:59 - TrangDM login successful
+2020-01-18 14:40:32 INFO  UserServiceImpl:42 - Get User by Account TrangDM
+2020-01-18 14:43:13 INFO  TraineeUserController:59 - TrangDM login successful
+2020-01-18 14:43:13 INFO  UserServiceImpl:42 - Get User by Account TrangDM
+2020-01-18 14:43:23 INFO  TraineeUserController:59 - TrangDM login successful
+2020-01-18 14:43:23 INFO  UserServiceImpl:42 - Get User by Account TrangDM
+2020-01-18 14:44:09 INFO  TraineeUserController:59 - TrangDM login successful
+2020-01-18 14:44:09 INFO  UserServiceImpl:42 - Get User by Account TrangDM
+2020-01-18 14:44:39 INFO  TraineeUserController:59 - TrangDM login successful
+2020-01-18 14:44:39 INFO  UserServiceImpl:42 - Get User by Account TrangDM
+2020-01-18 14:44:48 INFO  TraineeUserController:59 - TrangDM login successful
+2020-01-18 14:44:48 INFO  UserServiceImpl:42 - Get User by Account TrangDM
+2020-01-18 14:57:43 INFO  TraineeUserController:59 - TrangDM login successful
+2020-01-18 14:57:43 INFO  UserServiceImpl:42 - Get User by Account TrangDM
+2020-01-18 14:57:53 INFO  TraineeUserController:59 - TrangDM login successful
+2020-01-18 14:57:53 INFO  UserServiceImpl:42 - Get User by Account TrangDM
+2020-01-18 14:57:59 INFO  TraineeUserController:59 - TrangDM login successful
+2020-01-18 14:57:59 INFO  UserServiceImpl:42 - Get User by Account TrangDM
+2020-01-18 15:00:07 INFO  TraineeUserController:59 - TrangDM login successful
+2020-01-18 15:00:07 INFO  UserServiceImpl:42 - Get User by Account TrangDM
+2020-01-18 15:00:31 INFO  TraineeUserController:59 - TrangDM login successful
+2020-01-18 15:00:32 INFO  UserServiceImpl:42 - Get User by Account TrangDM
+2020-01-18 15:00:46 INFO  TraineeUserController:59 - TrangDM login successful
+2020-01-18 15:00:46 INFO  UserServiceImpl:42 - Get User by Account TrangDM
+2020-01-18 15:01:27 INFO  TraineeUserController:59 - TrangDM login successful
+2020-01-18 15:01:27 INFO  UserServiceImpl:42 - Get User by Account TrangDM
+2020-01-18 15:01:35 INFO  TraineeUserController:59 - TrangDM login successful
+2020-01-18 15:01:35 INFO  UserServiceImpl:42 - Get User by Account TrangDM
+2020-01-18 15:02:24 INFO  TraineeUserController:59 - TrangDM login successful
+2020-01-18 15:02:24 INFO  UserServiceImpl:42 - Get User by Account TrangDM
+2020-01-18 15:02:30 INFO  TraineeUserController:59 - TrangDM login successful
+2020-01-18 15:02:30 INFO  UserServiceImpl:42 - Get User by Account TrangDM
+2020-01-18 15:02:39 INFO  TraineeUserController:59 - TrangDM login successful
+2020-01-18 15:02:39 INFO  UserServiceImpl:42 - Get User by Account TrangDM
+2020-01-18 15:02:56 INFO  TraineeUserController:59 - TrangDM login successful
+2020-01-18 15:02:56 INFO  UserServiceImpl:42 - Get User by Account TrangDM
+2020-01-18 15:03:02 INFO  TraineeUserController:59 - TrangDM login successful
+2020-01-18 15:03:02 INFO  UserServiceImpl:42 - Get User by Account TrangDM
+2020-01-18 15:05:28 INFO  TraineeUserController:59 - TrangDM login successful
+2020-01-18 15:05:28 INFO  UserServiceImpl:42 - Get User by Account TrangDM
+2020-01-18 15:05:51 INFO  TraineeUserController:59 - TrangDM login successful
+2020-01-18 15:05:51 INFO  UserServiceImpl:42 - Get User by Account TrangDM
+2020-01-18 15:06:19 INFO  TraineeUserController:59 - TrangDM login successful
+2020-01-18 15:06:19 INFO  UserServiceImpl:42 - Get User by Account TrangDM
+2020-01-18 15:07:56 INFO  TraineeUserController:59 - TrangDM login successful
+2020-01-18 15:07:56 INFO  UserServiceImpl:42 - Get User by Account TrangDM
+2020-01-18 15:08:54 INFO  TraineeUserController:59 - TrangDM login successful
+2020-01-18 15:08:54 INFO  UserServiceImpl:42 - Get User by Account TrangDM
+2020-01-18 15:10:05 INFO  TraineeUserController:59 - TrangDM login successful
+2020-01-18 15:10:05 INFO  UserServiceImpl:42 - Get User by Account TrangDM
+2020-01-18 15:10:15 INFO  TraineeUserController:59 - TrangDM login successful
+2020-01-18 15:10:15 INFO  UserServiceImpl:42 - Get User by Account TrangDM
+2020-01-18 15:10:15 INFO  UserServiceImpl:30 - Get classmate of user TrangDM
+2020-01-18 15:10:15 INFO  AttendanceServiceImpl:35 - Get list of Attendace by TrangDM
+2020-01-18 15:10:15 INFO  ScoreServiceImpl:55 - Get score by UserId 2
+2020-01-18 15:10:35 INFO  TraineeUserController:59 - TrangDM login successful
+2020-01-18 15:10:35 INFO  UserServiceImpl:42 - Get User by Account TrangDM
+2020-01-18 15:10:35 INFO  UserServiceImpl:30 - Get classmate of user TrangDM
+2020-01-18 15:10:35 INFO  AttendanceServiceImpl:35 - Get list of Attendace by TrangDM
+2020-01-18 15:10:35 INFO  ScoreServiceImpl:55 - Get score by UserId 2
+2020-01-18 15:11:05 INFO  UserServiceImpl:51 - Get User by UserID 9
+2020-01-18 15:11:05 INFO  ScoreServiceImpl:55 - Get score by UserId 9
+2020-01-18 15:11:07 INFO  UserServiceImpl:51 - Get User by UserID 13
+2020-01-18 15:11:07 INFO  ScoreServiceImpl:55 - Get score by UserId 13
+2020-01-18 15:11:09 INFO  UserServiceImpl:51 - Get User by UserID 5
+2020-01-18 15:11:09 INFO  ScoreServiceImpl:55 - Get score by UserId 5
+2020-01-18 15:11:28 INFO  TraineeUserController:59 - TrangDM1 login successful
+2020-01-18 15:11:28 INFO  UserServiceImpl:42 - Get User by Account TrangDM1
+2020-01-18 15:13:59 INFO  TraineeUserController:59 - TrangDM1 login successful
+2020-01-18 15:13:59 INFO  UserServiceImpl:42 - Get User by Account TrangDM1
+2020-01-18 15:13:59 INFO  UserServiceImpl:30 - Get classmate of user TrangDM1
+2020-01-18 15:13:59 INFO  AttendanceServiceImpl:35 - Get list of Attendace by TrangDM1
+2020-01-18 15:13:59 INFO  ScoreServiceImpl:55 - Get score by UserId 5
+2020-01-18 15:14:14 INFO  TraineeUserController:59 - TrangDM1 login successful
+2020-01-18 15:14:14 INFO  UserServiceImpl:42 - Get User by Account TrangDM1
+2020-01-18 15:14:14 INFO  UserServiceImpl:30 - Get classmate of user TrangDM1
+2020-01-18 15:14:14 INFO  AttendanceServiceImpl:35 - Get list of Attendace by TrangDM1
+2020-01-18 15:14:14 INFO  ScoreServiceImpl:55 - Get score by UserId 5
+2020-01-18 15:14:31 INFO  TraineeUserController:59 - TrangDM1 login successful
+2020-01-18 15:14:31 INFO  UserServiceImpl:42 - Get User by Account TrangDM1
+2020-01-18 15:14:31 INFO  UserServiceImpl:30 - Get classmate of user TrangDM1
+2020-01-18 15:14:31 INFO  AttendanceServiceImpl:35 - Get list of Attendace by TrangDM1
+2020-01-18 15:14:31 INFO  ScoreServiceImpl:55 - Get score by UserId 5
+2020-01-18 15:15:36 INFO  TraineeUserController:59 - TrangNV login successful
+2020-01-18 15:15:36 INFO  UserServiceImpl:42 - Get User by Account TrangNV
+2020-01-18 15:15:50 INFO  TraineeUserController:59 - TrangNV login successful
+2020-01-18 15:15:50 INFO  UserServiceImpl:42 - Get User by Account TrangNV
+2020-01-18 15:15:50 INFO  UserServiceImpl:30 - Get classmate of user TrangNV
+2020-01-18 15:15:50 INFO  AttendanceServiceImpl:35 - Get list of Attendace by TrangNV
+2020-01-18 15:15:50 INFO  ScoreServiceImpl:55 - Get score by UserId 9
+2020-01-18 15:17:26 INFO  TraineeUserController:59 - TrangLM login successful
+2020-01-18 15:17:26 INFO  UserServiceImpl:42 - Get User by Account TrangLM
+2020-01-18 15:17:38 INFO  TraineeUserController:59 - TrangLM login successful
+2020-01-18 15:17:38 INFO  UserServiceImpl:42 - Get User by Account TrangLM
+2020-01-18 15:17:38 INFO  UserServiceImpl:30 - Get classmate of user TrangLM
+2020-01-18 15:17:38 INFO  AttendanceServiceImpl:35 - Get list of Attendace by TrangLM
+2020-01-18 15:17:38 INFO  ScoreServiceImpl:55 - Get score by UserId 13
+2020-01-18 15:19:03 INFO  TraineeUserController:59 - TrangDT login successful
+2020-01-18 15:19:03 INFO  UserServiceImpl:42 - Get User by Account TrangDT
+2020-01-18 15:19:13 INFO  TraineeUserController:59 - TrangDT login successful
+2020-01-18 15:19:13 INFO  UserServiceImpl:42 - Get User by Account TrangDT
+2020-01-18 15:19:13 INFO  UserServiceImpl:30 - Get classmate of user TrangDT
+2020-01-18 15:19:13 INFO  AttendanceServiceImpl:35 - Get list of Attendace by TrangDT
+2020-01-18 15:19:13 INFO  ScoreServiceImpl:55 - Get score by UserId 12
+2020-01-18 15:21:52 INFO  TraineeUserController:59 - TrangDT login successful
+2020-01-18 15:21:52 INFO  UserServiceImpl:42 - Get User by Account TrangDT
+2020-01-18 15:23:16 INFO  TraineeUserController:59 - TrangDT login successful
+2020-01-18 15:23:16 INFO  UserServiceImpl:42 - Get User by Account TrangDT
+2020-01-18 15:31:34 INFO  TraineeUserController:59 - TrangLM login successful
+2020-01-18 15:31:34 INFO  UserServiceImpl:42 - Get User by Account TrangLM
+2020-01-18 15:31:34 INFO  UserServiceImpl:30 - Get classmate of user TrangLM
+2020-01-18 15:31:34 INFO  AttendanceServiceImpl:35 - Get list of Attendace by TrangLM
+2020-01-18 15:31:34 INFO  ScoreServiceImpl:55 - Get score by UserId 13
+2020-01-18 15:40:16 INFO  TraineeUserController:59 - TrangDT login successful
+2020-01-18 15:40:16 INFO  UserServiceImpl:42 - Get User by Account TrangDT
+2020-01-18 15:40:16 INFO  UserServiceImpl:30 - Get classmate of user TrangDT
+2020-01-18 15:40:16 INFO  AttendanceServiceImpl:35 - Get list of Attendace by TrangDT
+2020-01-18 15:40:16 INFO  ScoreServiceImpl:55 - Get score by UserId 12
+2020-01-18 15:40:22 INFO  TraineeUserController:59 - TrangDT login successful
+2020-01-18 15:40:22 INFO  UserServiceImpl:42 - Get User by Account TrangDT
+2020-01-18 15:40:22 INFO  UserServiceImpl:30 - Get classmate of user TrangDT
+2020-01-18 15:40:22 INFO  AttendanceServiceImpl:35 - Get list of Attendace by TrangDT
+2020-01-18 15:40:22 INFO  ScoreServiceImpl:55 - Get score by UserId 12
+2020-01-18 15:42:04 INFO  TraineeUserController:59 - TrangNV login successful
+2020-01-18 15:42:04 INFO  UserServiceImpl:42 - Get User by Account TrangNV
+2020-01-18 15:42:04 INFO  UserServiceImpl:30 - Get classmate of user TrangNV
+2020-01-18 15:42:04 INFO  AttendanceServiceImpl:35 - Get list of Attendace by TrangNV
+2020-01-18 15:42:04 INFO  ScoreServiceImpl:55 - Get score by UserId 9
+2020-01-18 15:46:50 INFO  TraineeUserController:59 - TrangNV login successful
+2020-01-18 15:46:50 INFO  UserServiceImpl:42 - Get User by Account TrangNV
+2020-01-18 15:46:50 INFO  UserServiceImpl:30 - Get classmate of user TrangNV
+2020-01-18 15:46:50 INFO  AttendanceServiceImpl:35 - Get list of Attendace by TrangNV
+2020-01-18 15:46:50 INFO  ScoreServiceImpl:55 - Get score by UserId 9
+2020-01-18 15:46:50 INFO  TraineeUserController:59 - TrangNV login successful
+2020-01-18 15:46:50 INFO  UserServiceImpl:42 - Get User by Account TrangNV
+2020-01-18 15:46:50 INFO  UserServiceImpl:30 - Get classmate of user TrangNV
+2020-01-18 15:46:50 INFO  AttendanceServiceImpl:35 - Get list of Attendace by TrangNV
+2020-01-18 15:46:50 INFO  ScoreServiceImpl:55 - Get score by UserId 9
+2020-01-18 15:51:37 INFO  TraineeUserController:59 - TrangLM login successful
+2020-01-18 15:51:37 INFO  UserServiceImpl:42 - Get User by Account TrangLM
+2020-01-18 15:51:37 INFO  UserServiceImpl:30 - Get classmate of user TrangLM
+2020-01-18 15:51:37 INFO  AttendanceServiceImpl:35 - Get list of Attendace by TrangLM
+2020-01-18 15:51:37 INFO  ScoreServiceImpl:55 - Get score by UserId 13
+2020-01-18 15:51:41 INFO  TraineeUserController:59 - TrangLM login successful
+2020-01-18 15:51:41 INFO  UserServiceImpl:42 - Get User by Account TrangLM
+2020-01-18 15:51:41 INFO  UserServiceImpl:30 - Get classmate of user TrangLM
+2020-01-18 15:51:41 INFO  AttendanceServiceImpl:35 - Get list of Attendace by TrangLM
+2020-01-18 15:51:41 INFO  ScoreServiceImpl:55 - Get score by UserId 13
+2020-01-18 15:53:45 INFO  TraineeUserController:59 - TrangDM login successful
+2020-01-18 15:53:45 INFO  UserServiceImpl:42 - Get User by Account TrangDM
+2020-01-18 15:53:45 INFO  UserServiceImpl:30 - Get classmate of user TrangDM
+2020-01-18 15:53:45 INFO  AttendanceServiceImpl:35 - Get list of Attendace by TrangDM
+2020-01-18 15:53:45 INFO  ScoreServiceImpl:55 - Get score by UserId 2
+2020-01-18 15:54:48 INFO  TraineeUserController:59 - TrangDM1 login successful
+2020-01-18 15:54:48 INFO  UserServiceImpl:42 - Get User by Account TrangDM1
+2020-01-18 15:54:48 INFO  UserServiceImpl:30 - Get classmate of user TrangDM1
+2020-01-18 15:54:48 INFO  AttendanceServiceImpl:35 - Get list of Attendace by TrangDM1
+2020-01-18 15:54:48 INFO  ScoreServiceImpl:55 - Get score by UserId 5

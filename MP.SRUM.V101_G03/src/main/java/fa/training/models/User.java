@@ -70,16 +70,16 @@ public class User implements Serializable {
 
   @Column(name = "Gender")
   private String gender;
-  
+
   @Column(name = "Status")
   private String status;
-  
+
   @Column(name = "LastLogin", nullable = true)
   private LocalDateTime lastLogin;
 
   @JsonIgnore
   @OneToMany(mappedBy = "user")
-  private List<Attendance> attendanceList;
+  private Set<Attendance> attendanceList;
 
   @JsonIgnore
   @ManyToMany(mappedBy = "userList", cascade = CascadeType.MERGE)
@@ -122,7 +122,7 @@ public class User implements Serializable {
   public User(Integer id) {
     this.id = id;
   }
-  
+
   public String getGender() {
     return gender;
   }
@@ -211,11 +211,19 @@ public class User implements Serializable {
     this.role = role;
   }
 
-  public List<Attendance> getAttendanceList() {
+  public LocalDateTime getLastLogin() {
+    return lastLogin;
+  }
+
+  public void setLastLogin(LocalDateTime lastLogin) {
+    this.lastLogin = lastLogin;
+  }
+
+  public Set<Attendance> getAttendanceList() {
     return attendanceList;
   }
 
-  public void setAttendanceList(List<Attendance> attendanceList) {
+  public void setAttendanceList(Set<Attendance> attendanceList) {
     this.attendanceList = attendanceList;
   }
 
