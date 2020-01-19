@@ -1,7 +1,6 @@
 package fa.training.adminservicetest;
 
 import static org.junit.Assert.assertEquals;
-import static org.mockito.Mockito.doThrow;
 import static org.mockito.Mockito.when;
 
 import java.time.LocalDate;

@@ -72,7 +72,7 @@
 					<nav aria-label="Page navigation example" th:if="${totalPages > 1}">
 						<ul class="pagination" id="paging">
 							<li class="page-item"><a class="page-link" id="#previous"
-								th:onclick="changePreviousPage(this)">Previous</a></li>
+								th:onclick="changePreviousClazzPage(this)">Previous</a></li>
 							<th:block th:each="page: ${#numbers.sequence(1, totalPages)}">
 								<li th:class="page-item"
 									th:classappend="${page == index} ? active : ''"><a
@@ -81,7 +81,7 @@
 									onclick="clazzByPage(this)"></a></li>
 							</th:block>
 							<li class="page-item"><a class="page-link" id="#next"
-								onclick="changeNextPage(this)">Next</a></li>
+								onclick="changeNextClazzPage(this)">Next</a></li>
 						</ul>
 					</nav>
 				</div>

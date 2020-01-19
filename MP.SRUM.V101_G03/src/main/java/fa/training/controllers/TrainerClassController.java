@@ -10,6 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.SessionAttribute;
 
 import fa.training.models.Clazz;
 import fa.training.models.Subject;
@@ -41,7 +42,7 @@ public class TrainerClassController {
 	private SubjectService subjectService;
 
 	@RequestMapping(value = "/content")
-	public String getClazzByNameOrCategory(
+	public String getClazzByNameOrCategory(@SessionAttribute("user") User user,
 			@RequestParam(name = "clazz", defaultValue = Constant.CLAZZ_CONTENT_SEARCH_DEFAULT) String searchContent,
 			@RequestParam(name = "status", defaultValue = Constant.CLAZZ_STATUS_DEFAULT) String status,
 			@RequestParam(name = "page", defaultValue = Constant.CLAZZ_PAGE_DEFAULT) int page, Model model) {
@@ -49,30 +50,32 @@ public class TrainerClassController {
 		String searchType = SearchType.clazzSearchType(searchContent, status);
 		switch (searchType) {
 		case Constant.CLAZZ_SEARCH_BY_TRAINER_ID:
-			clazzs = clazzService.findAllClazzByTrainerId(Constant.USER_ID_DEFAULT, page - 1);
+			clazzs = clazzService.findAllClazzByTrainerId(user.getId(), page - 1);
 			break;
 		case Constant.STATUS:
-			clazzs = clazzService.findClazzByStatus(Constant.USER_ID_DEFAULT, page, status);
+			clazzs = clazzService.findClazzByStatus(user.getId(), page, status);
 			break;
 		case Constant.CLAZZ_NAME_AND_CATEGORY:
-			clazzs = clazzService.findClazzByNameOrCategory(Constant.USER_ID_DEFAULT, page, searchContent);
+			clazzs = clazzService.findClazzByNameOrCategory(user.getId(), page, searchContent);
 			break;
 		case Constant.CLAZZ_NAME_AND_CATEGORY_AND_STATUS:
-			clazzs = clazzService.findClazzByStatusAndContent(Constant.USER_ID_DEFAULT, page, status, searchContent);
+			clazzs = clazzService.findClazzByStatusAndContent(user.getId(), page, status, searchContent);
 			break;
 		default:
 			clazzs = new ArrayList<>();
 			break;
 		}
+		model.addAttribute("index", page);
 		model.addAttribute("totalPages", ClazzServiceImpl.totalPage);
 		model.addAttribute("clazzs", clazzs);
 		return "trainer-class-manage :: clazzs";
 	}
 
 	@RequestMapping(value = "/trainee")
-	public String findTraineeByClazz(@RequestParam(name = "clazzId") int clazzId, Model model) {
+	public String findTraineeByClazz(@SessionAttribute("user") User user, @RequestParam(name = "clazzId") int clazzId,
+			Model model) {
 		List<User> trainees = traineeService.findTraineeByClazzId(clazzId, Constant.FIRST_PAGE);
-		List<Clazz> clazzs = clazzService.findAllClazzByTrainerId(Constant.USER_ID_DEFAULT, Constant.FIRST_PAGE);
+		List<Clazz> clazzs = clazzService.findAllClazzByTrainerId(user.getId(), Constant.FIRST_PAGE);
 
 		List<String> categories = clazzs.stream().map(clazz -> clazz.getCategory()).distinct()
 				.collect(Collectors.toList());

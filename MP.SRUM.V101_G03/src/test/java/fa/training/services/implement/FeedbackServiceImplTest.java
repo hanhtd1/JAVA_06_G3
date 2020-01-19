@@ -1,6 +1,5 @@
 package fa.training.services.implement;
 
-import static org.hamcrest.CoreMatchers.any;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.notNullValue;
 import static org.junit.Assert.assertThat;
