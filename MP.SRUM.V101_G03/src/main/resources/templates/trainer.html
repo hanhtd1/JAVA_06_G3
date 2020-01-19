@@ -39,10 +39,12 @@
 		<div th:replace="layouts/admin-header :: header"></div>
 		<div th:replace="layouts/trainer-side-menu :: side-menu"></div>
 		<main class="mn-inner inner-active-sidebar m-t-lg">
-			<div id="main-content" class="row no-m-t no-m-b"></div>
+			<div id="main-content" class="row no-m-t no-m-b">
+				<div th:replace="class-admin-dashboard :: dashboard"></div>
+			</div>
 		</main>
 	</div>
-
+	
 	<!--  Modal view feedback-->
 	<div id="view-feedback-modal" class="modal">
 		<form class="col s12" th:fragment="view-feedback">
@@ -58,7 +60,7 @@
 		</form>
 	</div>
 	<!-- Javascripts -->
-
+	
 	<script th:src="@{../assets/plugins/jquery/jquery-2.2.0.min.js}"></script>
 	<script th:src="@{../assets/plugins/materialize/js/materialize.min.js}"></script>
 	<script

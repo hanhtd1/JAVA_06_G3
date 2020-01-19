@@ -9,8 +9,11 @@ import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.SessionAttribute;
+import org.springframework.web.bind.annotation.SessionAttributes;
 
 import fa.training.models.Clazz;
 import fa.training.models.Subject;
@@ -25,6 +28,7 @@ import fa.training.services.implement.TraineeServiceImpl;
 import fa.training.utils.Constant;
 
 @Controller
+@SessionAttributes("user")
 @RequestMapping("trainer")
 public class TrainerMainController {
 
@@ -48,7 +52,7 @@ public class TrainerMainController {
 		scoreService.findByIdUserId(1);
 		return "guide";
 	}
-
+	
 	@GetMapping("feedback-modal")
 	public String feedbackModal() {
 		return "guide";
@@ -61,10 +65,10 @@ public class TrainerMainController {
 		model.addAttribute("currentUser", trainer);
 		return "trainer";
 	}
-
+	
 	@GetMapping("class-manage")
-	public String classManage(Model model) {
-		List<Clazz> clazzs = clazzService.findAllClazzByTrainerId(Constant.USER_ID_DEFAULT, Constant.FIRST_PAGE);
+	public String classManage(@SessionAttribute("user") User user, Model model) {
+		List<Clazz> clazzs = clazzService.findAllClazzByTrainerId(user.getId(), Constant.FIRST_PAGE);
 		List<String> statuss = clazzs.stream().map(clazz -> clazz.getStatus()).distinct().collect(Collectors.toList());
 
 		statuss.add(0, Constant.TRAINEE_SEARCH_ALL);
@@ -77,9 +81,9 @@ public class TrainerMainController {
 	}
 
 	@GetMapping("trainee-manage")
-	public String getTraineeByUserId(Model model) {
+	public String getTraineeByUserId(@SessionAttribute("user") User user, Model model) {
 		List<User> trainees = traineeService.findAllTrainee(Constant.FIRST_PAGE);
-		List<Clazz> clazzs = clazzService.findAllClazzByTrainerId(Constant.USER_ID_DEFAULT, Constant.FIRST_PAGE);
+		List<Clazz> clazzs = clazzService.findAllClazzByTrainerId(user.getId(), Constant.FIRST_PAGE);
 
 		List<String> categories = clazzs.stream().map(clazz -> clazz.getCategory()).distinct()
 				.collect(Collectors.toList());
@@ -102,9 +106,10 @@ public class TrainerMainController {
 	}
 
 	@GetMapping("trainee-manage/{clazzName}")
-	public String getTraineeByClazzId(@PathVariable("clazzName") String clazzName, Model model) {
+	public String getTraineeByClazzId(@SessionAttribute("user") User user, @PathVariable("clazzName") String clazzName,
+			Model model) {
 		List<User> trainees = traineeService.findTraineeByClazzName(clazzName, Constant.FIRST_PAGE);
-		List<Clazz> clazzs = clazzService.findAllClazzByTrainerId(Constant.USER_ID_DEFAULT, Constant.FIRST_PAGE);
+		List<Clazz> clazzs = clazzService.findAllClazzByTrainerId(user.getId(), Constant.FIRST_PAGE);
 
 		List<String> categories = clazzs.stream().map(clazz -> clazz.getCategory()).distinct()
 				.collect(Collectors.toList());
@@ -125,8 +130,8 @@ public class TrainerMainController {
 	}
 
 	@GetMapping("subject-manage")
-	public String subjectManage(Model model) {
-		List<Subject> subjects = subjectService.findSubjectByUserId(Constant.USER_ID_DEFAULT - 1,
+	public String subjectManage(@SessionAttribute("user") User user, Model model) {
+		List<Subject> subjects = subjectService.findSubjectByUserId(user.getId(),
 				PageRequest.of(Constant.FIRST_PAGE, Constant.PAGE_SIZE));
 		model.addAttribute("subjects", subjects);
 		return "trainer-subject-manage";
@@ -137,4 +142,10 @@ public class TrainerMainController {
 		return "guide";
 	}
 
+	@ModelAttribute("user")
+	public User getUserInfo(Authentication auth) {
+		String account = auth.getName();
+		User user = adminUserService.getUserByAccount(account).get();
+		return user;
+	}
 }
