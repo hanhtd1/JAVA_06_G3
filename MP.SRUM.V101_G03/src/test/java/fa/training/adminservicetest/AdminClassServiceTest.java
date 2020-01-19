@@ -6,12 +6,12 @@ import static org.mockito.Mockito.when;
 import java.time.LocalDate;
 
 import org.junit.AfterClass;
-import org.junit.BeforeClass;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.junit.MockitoJUnitRunner;
+import org.springframework.test.context.junit4.SpringRunner;
 
 import fa.training.models.Clazz;
 import fa.training.repositories.ClassRepository;
@@ -21,7 +21,7 @@ import fa.training.services.implement.AdminClassServiceImpl;
  * @author TrangDM2
  *
  */
-@RunWith(MockitoJUnitRunner.class)
+@RunWith(SpringRunner.class)
 public class AdminClassServiceTest {
 
   @Mock
@@ -30,12 +30,8 @@ public class AdminClassServiceTest {
   @InjectMocks
   private AdminClassServiceImpl adminClassService;
 
-  @BeforeClass
-  public static void setUpBeforeClass() throws Exception {
-  }
-
-  @AfterClass
-  public static void tearDownAfterClass() throws Exception {
+  @Before
+  public static void setUp() throws Exception {
   }
 
   /**
