@@ -120,6 +120,37 @@
 				</div>
 			</nav>
 		</header>
+		<aside id="slide-out" class="side-nav white fixed">
+			<div class="side-nav-wrapper">
+				<div class="sidebar-profile">
+					<div class="sidebar-profile-image">
+						<img th:src="@{../assets/images/profile-image.png}" class="circle" alt="">
+					</div>
+					<div class="sidebar-profile-info">
+						<p class="account-settings-link">
+						<p th:text="${trainee.account}"></p>
+						<span th:text="${trainee.email}"></span>
+						</p>
+					</div>
+				</div>
+				<ul class="sidebar-menu collapsible collapsible-accordion"
+						data-collapsible="accordion">
+					<li class="no-padding"><a
+									class="collapsible-header waves-effect waves-grey"><i
+									class="material-icons">view_list</i>Dashboard</a></li>
+					<li class="no-padding"><a
+									class="collapsible-header waves-effect waves-grey"><i
+									class="material-icons">info</i>Guide</a></li>
+					<li class="divider"></li>
+					<li class="no-padding"><a href="/logout" class="waves-effect waves-grey"><i
+									class="material-icons">exit_to_app</i>Sign Out</a></li>
+				</ul>
+				<div class="footer">
+					<p class="copyright">Group 3 ©</p>
+					<a href="#!">Privacy</a> &amp; <a href="#!">Terms</a>
+				</div>
+			</div>
+		</aside>
 		<main class="mn-inner inner-active-sidebar">
 			<div class="row no-m-t no-m-b">
 				<div class="col s12 m12 l12 no-p-h">

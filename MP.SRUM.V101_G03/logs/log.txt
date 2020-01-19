@@ -328,3 +328,5 @@
 2020-01-19 00:56:22 INFO  AttendanceServiceImpl:30 - Get list of Attendace by userID null
 >>>>>>> trainee
 2020-01-19 23:33:12 INFO  TraineeUserController:59 - TrangDV login successful
+2020-01-20 00:22:38 INFO  TraineeUserController:59 - TrangDM login successful
+2020-01-20 00:27:32 INFO  TraineeUserController:59 - TrangDM login successful
