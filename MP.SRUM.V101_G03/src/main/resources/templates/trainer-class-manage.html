@@ -61,8 +61,8 @@
 								<td th:text="${clazz.name}"></td>
 								<td th:text="${clazz.category}"></td>
 								<td th:text="${clazz.openDate}"></td>
-								<td><a th:onclick=" 'loadTrainee(' + ${clazz.id} + ')' "><i
-										class="material-icons dp48">person_pin</i></a> <a
+								<td><a th:onclick=" 'loadTrainee(' + ${clazz.id} + ')' " class="btn-flat"><i
+										class="material-icons dp48">person_pin</i></a> <a class="btn-flat"
 									th:onclick="'loadSubject('+${clazz.id}+')'"><i
 										class="material-icons dp48">view_list</i></a></td>
 							</tr>

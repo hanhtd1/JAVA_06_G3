@@ -136,6 +136,7 @@ function loadTrainee(clazzId) {
 	$.get({
 		url: "/trainer/clazz/trainee?clazzId="+clazzId,
 		success: (res)=>{
+			console.log(res)
 			$("#main-content").html(res);
 		}
 	});
