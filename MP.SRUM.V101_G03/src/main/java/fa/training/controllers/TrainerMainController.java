@@ -71,8 +71,8 @@ public class TrainerMainController {
 		List<BestTraineeDto> bestTrainees = userService.findTopThreeBestTrainee();
 		List<User> users = userService.findAll();
 		List<Subject> subjects = subjectService.findAll();
-		Long totalTrainees = users.parallelStream().map(user -> user.getRole().equals(Constant.ROLE_TRAINEE)).count();
-		Long totalTrainers = users.parallelStream().map(user -> user.getRole().equals(Constant.ROLE_TRAINER)).count();
+		Long totalTrainees = users.parallelStream().map(user -> user.getRole().equals(Constant.TRAINEE)).count();
+		Long totalTrainers = users.parallelStream().map(user -> user.getRole().equals(Constant.TRAINER)).count();
 		int totalSubjects = subjects.size();
 
 		model.addAttribute("totalTrainees", (int) Math.pow(totalTrainees, 2));

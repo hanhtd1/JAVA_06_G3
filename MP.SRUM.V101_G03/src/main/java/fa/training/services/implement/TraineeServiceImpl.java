@@ -38,7 +38,7 @@ public class TraineeServiceImpl implements TraineeService {
 
 	@Override
 	public List<User> findAllTrainee(int page) {
-		Page<User> users = traineeRepository.findAllByRole(Constant.ROLE_TRAINEE,
+		Page<User> users = traineeRepository.findAllByRole(Constant.TRAINEE,
 				PageRequest.of(page, Constant.PAGE_SIZE));
 		numberOfPage = users.getTotalPages();
 		return users.getContent();

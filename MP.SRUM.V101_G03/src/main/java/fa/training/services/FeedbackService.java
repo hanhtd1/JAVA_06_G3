@@ -5,9 +5,16 @@ import java.util.List;
 import fa.training.models.Feedback;
 
 public interface FeedbackService {
+	/**
+	 * @author HoangLV7
+	 * 
+	 */
+	public Feedback getFeedback(int userId, int subjectId);
 
-	public Feedback getAllFeedback(int userId, int subjectId);
-
+	/**
+	 * @author HoangLV7
+	 * 
+	 */
 	public Feedback save(Feedback feedback);
 
 	/**
@@ -26,12 +33,12 @@ public interface FeedbackService {
 	 */
 	List<Feedback> findFeedbackBySubjecId(Integer subjectId);
 
-  /**
-   * @author TrangDM2
-   * @param userId
-   * @param subjectId
-   * @return
-   */
-  Feedback findBySubjectAndUser(Integer userId, Integer subjectId);
+	/**
+	 * @author TrangDM2
+	 * @param userId
+	 * @param subjectId
+	 * @return
+	 */
+	Feedback findBySubjectAndUser(Integer userId, Integer subjectId);
 
 }

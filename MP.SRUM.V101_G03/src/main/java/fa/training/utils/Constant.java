@@ -55,8 +55,6 @@ public interface Constant {
 
 	public static final int USER_ID_DEFAULT = 2;
 	public static final String FIRST_PAGE_STRING = "1";
-	public static final String ROLE_TRAINEE = "ROLE_TRAINEE";
-	public static final String ROLE_TRAINER = "ROLE_TRAINER";
 
 	public static final String CLAZZ_CONTENT_SEARCH_DEFAULT = "";
 	public static final String CLAZZ_STATUS_DEFAULT = "All";
@@ -66,4 +64,7 @@ public interface Constant {
 	public static final String CLAZZ_NAME_AND_CATEGORY_AND_STATUS = "CLAZZ_NAME_AND_CATEGORY_AND_STATUS";
 
 	public static final int FIRST_RESULT = 0;
+
+  public static final String UPDATE_ACTION = "UPDATE";
+  public static final String CREATE_ACTION = "CREATE";
 }

@@ -85,7 +85,6 @@ public class TrainerUserController {
 			return "redirect:search-all?page=" + page;
 		}
 		String searchType = SearchType.searchType(category, clazzName, status);
-		System.out.println("search type : " + searchType);
 		switch (searchType) {
 		case Constant.CATEGORY:
 			trainees = traineeService.findTraineeByCategory(category, page - 1);
@@ -94,7 +93,7 @@ public class TrainerUserController {
 			trainees = traineeService.findTraineeByClazzName(clazzName, page - 1);
 			break;
 		case Constant.STATUS:
-			trainees = traineeService.findTraineeByClazzName(clazzName, page - 1);
+			trainees = traineeService.findTraineeByStatus(status, page - 1);
 			break;
 		case Constant.CATEGORY_CLAZZ:
 			trainees = traineeService.findTraineeByCategoryAndClazz(category, clazzName, page - 1);

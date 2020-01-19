@@ -1,7 +1,6 @@
 package fa.training.services;
 
 import java.util.List;
-import java.util.Map;
 
 import fa.training.dtos.BestTraineeDto;
 import fa.training.models.User;
@@ -11,7 +10,6 @@ import fa.training.models.User;
  *
  */
 public interface UserService {
-	Map<String, User> findAllByRole(String role);
 
 	List<User> getMembers(User user);
 

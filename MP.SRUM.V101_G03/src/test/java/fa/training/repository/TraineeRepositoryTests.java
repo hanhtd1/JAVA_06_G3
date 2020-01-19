@@ -36,7 +36,7 @@ public class TraineeRepositoryTests {
 
 	@Test
 	public void findByIdTest() {
-		Page<User> pageUser = traineeRepository.findAllByRole(Constant.ROLE_TRAINEE,
+		Page<User> pageUser = traineeRepository.findAllByRole(Constant.TRAINEE,
 				PageRequest.of(Constant.FIRST_RESULT, Constant.PAGE_SIZE));
 		assertTrue(pageUser == null);
 	}

@@ -44,17 +44,8 @@ public class AdminSubjectController {
 	@RequestMapping(path = "add-subject", method = RequestMethod.POST)
 	public @ResponseBody ApiObject<Subject> addSubject(@RequestParam String subjectName,
 			@RequestParam("subjectCode") String subjectCode, @RequestParam Float subjectDuration) {
-		ApiObject<Subject> apiObject = new ApiObject<Subject>();
-		boolean checkExisted = subjectService.checkSubjectExisted(subjectCode);
-		if (checkExisted) {
-			apiObject.setMessage(Constant.CREATE_FAIL_MESSAGE);
-		} else {
-			Subject subject = new Subject(subjectName, subjectCode, subjectDuration, Constant.SUBJECT_ACTIVE_STATUS);
-			subject = subjectService.save(subject);
-			apiObject.setMessage(Constant.CREATE_SUCCESS_MESSAGE);
-			apiObject.setT(subject);
-		}
-		return apiObject;
+		Subject subject = new Subject(subjectName, subjectCode, subjectDuration, Constant.SUBJECT_ACTIVE_STATUS);
+		return subjectService.save(subject);
 	}
 
 	@RequestMapping(path = "load-subject", method = RequestMethod.GET)
@@ -75,7 +66,7 @@ public class AdminSubjectController {
 	@GetMapping("/view-feedback")
 	public @ResponseBody String viewFeedback(@RequestParam("userId") int userId,
 			@RequestParam("subjectId") int subjectId) {
-		Feedback feedback = iFeedbackService.getAllFeedback(userId, subjectId);
+		Feedback feedback = iFeedbackService.getFeedback(userId, subjectId);
 		return feedback == null ? Constant.NOT_FOUND_MESSAGE : feedback.getContent();
 	}
 
@@ -83,12 +74,8 @@ public class AdminSubjectController {
 	public @ResponseBody ApiObject<Subject> updateSubject(@RequestParam Integer subjectId,
 			@RequestParam String subjectName, @RequestParam("subjectCode") String subjectCode,
 			@RequestParam Float subjectDuration, @RequestParam String subjectStatus) {
-		ApiObject<Subject> apiObject = new ApiObject<Subject>();
 		Subject subject = new Subject(subjectId, subjectName, subjectCode, subjectDuration, subjectStatus);
-		subject = subjectService.save(subject);
-		apiObject.setT(subject);
-		apiObject.setMessage(Constant.UPDATE_SUCCESS_MESSAGE);
-		return apiObject;
+		return subjectService.update(subject);
 	}
 
 	@RequestMapping(path = "search", method = RequestMethod.GET)

@@ -61,7 +61,7 @@ public class AdminClassServiceImpl implements AdminClassService {
   @Override
   public Clazz addUserToClass(Integer userId, Integer classId) throws IllegalArgumentException {
     Clazz clazz = this.getClass(classId);
-    User user = userRepository.findUserById(userId);
+    User user = userRepository.findUserById(userId).orElse(new User());
     
     if(user.getRole().equals(Constant.TRAINEE)) {
       user.setStatus(Constant.TRAINEE_ACTIVE_STATUS);
@@ -83,7 +83,7 @@ public class AdminClassServiceImpl implements AdminClassService {
   @Override
   public Clazz removeUserFromClass(Integer userId, Integer classId) throws IllegalArgumentException {
     Clazz clazz = this.getClass(classId);
-    User user = userRepository.findUserById(userId);
+    User user = userRepository.findUserById(userId).orElse(new User());
     
     if(user.getRole().equals(Constant.TRAINEE)) {
       user.setStatus(Constant.TRAINEE_DEFAULT_STATUS);
@@ -104,7 +104,7 @@ public class AdminClassServiceImpl implements AdminClassService {
    */
   @Override
   public Clazz addSubjectToClass(Integer subjectId, Integer classId) throws IllegalArgumentException {
-    Subject subject = subjectRepository.findSubjectById(subjectId).orElse(null);
+    Subject subject = subjectRepository.findSubjectById(subjectId).orElse(new Subject());
     Clazz clazz = this.getClass(classId);
     
     clazz.getSubjectList().add(subject);

@@ -16,7 +16,7 @@
 					</div>
 					<div class="input-field col s4 m-t-sm">
 						<p class="f-s-16">View by class</p>
-						<select class="p-h-md" name="class-name" id="class-name"
+						<select class="p-h-md" name="class-name"  id="class-name"
 							onchange="traineeChange()">
 							<th:block th:each="name : ${names}">
 								<option th:value="${name}" th:text="${name}"></option>
@@ -115,7 +115,6 @@
 								</div>
 							</form>
 						</div>
-						-->
 
 						<!-- feedback modal -->
 						<div id="feedback-modal" class="modal" th:fragment="feedbackModal">
