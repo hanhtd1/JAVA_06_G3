@@ -1,145 +1,135 @@
+<div th:fragment="dashboard">
+	<div class="row no-m-t no-m-b">
+		<div class="col s12 m12 l4">
+			<div class="card stats-card">
+				<div class="card-content">
+					<div class="card-options">
+						<ul>
+							<li class="red-text"><span class="badge cyan lighten-1">gross</span></li>
+						</ul>
+					</div>
+					<span class="card-title">Trainee</span> <span class="stats-counter"><span
+						class="counter" th:text="${totalTrainees}">48190</span><small>this
+							week</small></span>
+				</div>
+				<div id="sparkline-bar"></div>
+			</div>
+		</div>
+		<div class="col s12 m12 l4">
+			<div class="card stats-card">
+				<div class="card-content">
+					<div class="card-options">
+						<ul>
+							<li><a href="javascript:void(0)"><i
+									class="material-icons">more_vert</i></a></li>
+						</ul>
+					</div>
+					<span class="card-title">Trainer</span> <span class="stats-counter"><span
+						class="counter" th:text="${totalTrainers}">83710</span><small>This
+							month</small></span>
+				</div>
+				<div id="sparkline-line"></div>
+			</div>
+		</div>
+		<div class="col s12 m12 l4">
+			<div class="card stats-card">
+				<div class="card-content">
+					<span class="card-title">Subject</span> <span class="stats-counter"><span
+						class="counter" th:text="${totalSubjects}">23230</span><small>Last
+							week</small></span>
+					<div class="percent-info green-text">
+						8% <i class="material-icons">trending_up</i>
+					</div>
+				</div>
+				<div class="progress stats-card-progress">
+					<div class="determinate" style="width: 70%"></div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="row no-m-t no-m-b">
+		<div class="col s12">
+			<div class="cd-pricing-container">
+				<div class="cd-pricing-switcher">
+					<h3>BEST TRAINEE THIS WEEK</h3>
+				</div>
+				<ul class="cd-pricing-list cd-bounce-invert">
+					<li>
+						<ul class="cd-pricing-wrapper">
+							<li data-type="monthly" class="is-visible m-t-lg"><header
+									class="cd-pricing-header">
+									<h5 th:text="${bestTrainees[1].name}">Trainee A</h5>
+									<div class="cd-price">
+										<span class="cd-value">A</span>
+									</div>
+								</header>
+								<div class="cd-pricing-body">
+									<ul class="cd-pricing-features">
+										<li>Rank: A</li>
+										<li th:text="${bestTrainees[1].name}">Class: Java 06</li>
+										<li th:text="${#numbers.formatDecimal(bestTrainees[1].score,1,2)}">Grade: 10/10</li>
+									</ul>
+								</div> <footer class="cd-pricing-footer">
+									<a class="waves-effect waves-light btn" href="#">View
+										Information</a>
+								</footer></li>
+						</ul>
+					</li>
+					<li class="cd-popular">
+						<ul class="cd-pricing-wrapper">
+							<li data-type="monthly" class="is-visible"><header
+									class="cd-pricing-header">
+									<h5 th:text="${bestTrainees[0].name}">Trainee AA</h5>
+									<div class="cd-price">
+										<span class="cd-value">A+</span>
+									</div>
+								</header>
+								<div class="cd-pricing-body">
+									<ul class="cd-pricing-features">
+										<li>Rank: A+</li>
+										<li th:text="${bestTrainees[0].name}">Class: Java 06</li>
+										<li th:text="${#numbers.formatDecimal(bestTrainees[0].score,1,2)}">Grade: 20/10</li>
+									</ul>
+								</div> <footer class="cd-pricing-footer">
+									<a class="waves-effect waves-light btn red " href="#">View
+										Information</a>
+								</footer></li>
+						</ul>
+					</li>
+					<li>
+						<ul class="cd-pricing-wrapper">
+							<li data-type="monthly" class="is-visible m-t-md"><header
+									class="cd-pricing-header">
+									<h5 th:text="${bestTrainees[2].name}">Trainee AA</h5>
+									<div class="cd-price">
+										<span class="cd-value">A-</span>
+									</div>
+								</header>
+								<div class="cd-pricing-body">
+									<ul class="cd-pricing-features">
+										<li>Rank: A-</li>
+										<li th:text="${bestTrainees[2].name}">Class: Java 06</li>
+										<li th:text="${#numbers.formatDecimal(bestTrainees[2].score,1,2)}">Grade: 8/10</li>
+									</ul>
+								</div> <footer class="cd-pricing-footer">
+									<a class="waves-effect waves-light btn" href="#">View
+										Information</a>
+								</footer></li>
+						</ul>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</div>
+</div>
 
-<div class="row no-m-t no-m-b" th:fragment="dashboard">
-	<div class="col s12 m12 l3">
-		<div class="card stats-card">
-			<div class="card-content">
-				<div class="card-options">
-					<ul>
-						<li class="red-text"><span class="badge cyan lighten-1">gross</span></li>
-					</ul>
-				</div>
-				<span class="card-title">Sales</span> <span class="stats-counter">$<span
-					class="counter">48190</span><small>This week</small></span>
-			</div>
-			<div id="sparkline-bar"></div>
-		</div>
-	</div>
-	<div class="col s12 m12 l3">
-		<div class="card stats-card">
-			<div class="card-content">
-				<div class="card-options">
-					<ul>
-						<li><a href="javascript:void(0)"><i
-								class="material-icons">more_vert</i></a></li>
-					</ul>
-				</div>
-				<span class="card-title">Page views</span> <span
-					class="stats-counter"><span class="counter">83710</span><small>This
-						month</small></span>
-			</div>
-			<div id="sparkline-line"></div>
-		</div>
-	</div>
-	<div class="col s12 m12 l3">
-		<div class="card stats-card">
-			<div class="card-content">
-				<span class="card-title">Reports</span> <span class="stats-counter"><span
-					class="counter">23230</span><small>Last week</small></span>
-				<div class="percent-info green-text">
-					8% <i class="material-icons">trending_up</i>
-				</div>
-			</div>
-			<div class="progress stats-card-progress">
-				<div class="determinate" style="width: 70%"></div>
-			</div>
-		</div>
-	</div>
-	<div class="col s12 m12 l3">
-		<div class="card stats-card">
-			<div class="card-content">
-				<span class="card-title">Reports</span> <span class="stats-counter"><span
-					class="counter">23230</span><small>Last week</small></span>
-				<div class="percent-info green-text">
-					8% <i class="material-icons">trending_up</i>
-				</div>
-			</div>
-			<div class="progress stats-card-progress">
-				<div class="determinate" style="width: 70%"></div>
-			</div>
-		</div>
-	</div>
-</div>
-<div class="row no-m-t no-m-b">
-	<div class="col s12">
-		<div class="cd-pricing-container">
-			<div class="cd-pricing-switcher">
-				<h3>BEST TRAINEE THIS WEEK</h3>
-			</div>
-			<ul class="cd-pricing-list cd-bounce-invert">
-				<li>
-					<ul class="cd-pricing-wrapper">
-						<li data-type="monthly" class="is-visible m-t-lg"><header
-								class="cd-pricing-header">
-								<h5>Trainee A</h5>
-								<div class="cd-price">
-									<span class="cd-value">A</span>
-								</div>
-							</header>
-							<div class="cd-pricing-body">
-								<ul class="cd-pricing-features">
-									<li>Rank: A</li>
-									<li>Class: Java 06</li>
-									<li>Grade: 10/10</li>
-								</ul>
-							</div> <footer class="cd-pricing-footer">
-								<a class="waves-effect waves-light btn" href="#">View
-									Information</a>
-							</footer></li>
-					</ul>
-				</li>
-				<li class="cd-popular">
-					<ul class="cd-pricing-wrapper">
-						<li data-type="monthly" class="is-visible"><header
-								class="cd-pricing-header">
-								<h5>Trainee AA</h5>
-								<div class="cd-price">
-									<span class="cd-value">A+</span>
-								</div>
-							</header>
-							<div class="cd-pricing-body">
-								<ul class="cd-pricing-features">
-									<li>Rank: A+</li>
-									<li>Class: Java 06</li>
-									<li>Grade: 20/10</li>
-								</ul>
-							</div> <footer class="cd-pricing-footer">
-								<a class="waves-effect waves-light btn red " href="#">View
-									Information</a>
-							</footer></li>
-					</ul>
-				</li>
-				<li>
-					<ul class="cd-pricing-wrapper">
-						<li data-type="monthly" class="is-visible m-t-md"><header
-								class="cd-pricing-header">
-								<h5>Trainee AA</h5>
-								<div class="cd-price">
-									<span class="cd-value">A-</span>
-								</div>
-							</header>
-							<div class="cd-pricing-body">
-								<ul class="cd-pricing-features">
-									<li>Rank: A-</li>
-									<li>Class: Java 06</li>
-									<li>Grade: 8/10</li>
-								</ul>
-							</div> <footer class="cd-pricing-footer">
-								<a class="waves-effect waves-light btn" href="#">View
-									Information</a>
-							</footer>
-						</li>
-					</ul>
-				</li>
-			</ul>
-		</div>
-	</div>
-</div>
-<div class="row no-m-t no-m-b"></div>
 <script th:src="@{../assets/plugins/jquery/jquery-2.2.0.min.js}"></script>
 <script th:src="@{../assets/plugins/materialize/js/materialize.min.js}"></script>
-<script th:src="@{../assets/plugins/material-preloader/js/materialPreloader.min.js}"></script>
+<script
+	th:src="@{../assets/plugins/material-preloader/js/materialPreloader.min.js}"></script>
 <script th:src="@{../assets/plugins/jquery-blockui/jquery.blockui.js}"></script>
-<script th:src="@{../assets/plugins/datatables/js/jquery.dataTables.min.js}"></script>
+<script
+	th:src="@{../assets/plugins/datatables/js/jquery.dataTables.min.js}"></script>
 <script th:src="@{../assets/plugins/simditor/scripts/module.js}"></script>
 <script th:src="@{../assets/plugins/simditor/scripts/hotkeys.js}"></script>
 <script th:src="@{../assets/plugins/simditor/scripts/uploader.js}"></script>

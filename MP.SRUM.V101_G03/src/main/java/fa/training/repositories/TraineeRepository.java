@@ -47,7 +47,7 @@ public interface TraineeRepository extends JpaRepository<User, Integer> {
 	 */
 	@Query(value = "SELECT * FROM udf_findTraineeByClazz(:clazzId)", nativeQuery = true)
 	Page<User> findTraineeByClazzId(@Param("clazzId") Integer clazzId, Pageable pageable);
-
+	
 	/**
 	 * @author ToanNT18
 	 * @param category

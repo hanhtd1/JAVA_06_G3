@@ -8,6 +8,7 @@ import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import fa.training.dtos.BestTraineeDto;
 import fa.training.models.User;
 import fa.training.repositories.UserRepository;
 import fa.training.services.UserService;
@@ -60,4 +61,17 @@ public class UserServiceImpl implements UserService {
 
 		return null;
 	}
+
+	@Override
+	public List<User> findAll() {
+		return userRepository.findAll();
+	}
+
+	@Override
+	public List<BestTraineeDto> findTopThreeBestTrainee() {
+		List<BestTraineeDto> findTopThreeBestTrainee = userRepository.findTopThreeBestTrainee();
+		findTopThreeBestTrainee.forEach(System.out::println);
+		return userRepository.findTopThreeBestTrainee();
+	}
+
 }
