@@ -45,7 +45,7 @@ public class AdminClassServiceTest {
   @Test
   public void testSaveClassSuccess() {
     Clazz clazz = new Clazz(null, "JAVA", LocalDate.now(), "new class", "java", "Active");
-    when(adminClassService.saveClass(clazz, clazz.getStatus())).thenReturn(clazz);
+    when(adminClassService.saveClass(clazz, clazz.getStatus())).thenReturn(new Clazz());
     assertEquals(clazz, adminClassService.saveClass(clazz, clazz.getStatus()));
   }
 
@@ -53,10 +53,9 @@ public class AdminClassServiceTest {
    * @author TrangDM2
    */
   @Test(expected = IllegalArgumentException.class)
-//  @Test
   public void testSaveClassFail() {
     Clazz clazz = new Clazz();
-    doThrow(new IllegalArgumentException()).when(classRepository).save(clazz);
+//    doThrow(new IllegalArgumentException()).when(classRepository).save(clazz);
     when(adminClassService.saveClass(clazz, clazz.getStatus())).thenReturn(null);
     assertEquals(clazz, adminClassService.saveClass(clazz, clazz.getStatus()));
   }
