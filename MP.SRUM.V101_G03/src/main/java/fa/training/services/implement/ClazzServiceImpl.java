@@ -76,7 +76,7 @@ public class ClazzServiceImpl implements ClazzService {
 		totalPage = pageClazz.getTotalPages();
 		return pageClazz.getContent();
 	}
-	
+
 	/**
 	 * @author HoangLV7
 	 */
@@ -91,7 +91,9 @@ public class ClazzServiceImpl implements ClazzService {
 	 */
 	@Override
 	public Clazz findClazzByTrainee(User trainee, String role) {
-		return clazzRepository.findClazzByUser(trainee.getId(), role).orElse(new Clazz());
+		return (trainee != null && trainee.getId() != null)
+				? clazzRepository.findClazzByUser(trainee.getId(), role).orElse(new Clazz())
+				: new Clazz();
 
 	}
 }

@@ -113,7 +113,7 @@ public interface UserRepository extends JpaRepository<User, Integer> {
    * @param userId
    * @return
    */
-  public User findUserById(int userId);
+  public Optional<User> findUserById(int userId);
 
   /**
    * @author ToanNT18

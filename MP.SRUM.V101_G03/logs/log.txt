@@ -320,3 +320,7 @@
 2020-01-17 20:05:43 INFO  AttendanceServiceImpl:29 - Get list of Attendace by TrangDM2
 2020-01-17 20:05:43 INFO  ScoreServiceImpl:55 - Get score by UserId 6
 >>>>>>> admin
+2020-01-19 00:22:29 INFO  AttendanceServiceImpl:29 - Get list of Attendace by null
+2020-01-19 00:23:44 INFO  AttendanceServiceImpl:30 - Get list of Attendace by null
+2020-01-19 00:30:01 INFO  AttendanceServiceImpl:30 - Get list of Attendace by userID null
+2020-01-19 00:56:22 INFO  AttendanceServiceImpl:30 - Get list of Attendace by userID null

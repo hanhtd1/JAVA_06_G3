@@ -65,4 +65,6 @@ public interface Constant {
 	public static final String CLAZZ_NAME_AND_CATEGORY_AND_STATUS = "CLAZZ_NAME_AND_CATEGORY_AND_STATUS";
 
   public static final int FIRST_RESULT = 0;
+  public static final String UPDATE_ACTION = "UPDATE";
+  public static final String CREATE_ACTION = "CREATE";
 }

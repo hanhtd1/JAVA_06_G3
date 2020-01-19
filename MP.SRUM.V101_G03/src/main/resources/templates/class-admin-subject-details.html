@@ -14,7 +14,7 @@
 					</tr>
 				</thead>
 				<tbody>
-					<tr th:each="user : ${usersByClass.get(className)}">
+					<tr th:each="user : ${usersByClass.get(className)}" th:object="${user}" th:if="${user.role} == 'ROLE_TRAINEE'">
 						<td th:text="${user.account}"></td>
 						<td th:text="${user.firstName}+' ' + ${user.lastName}"></td>
 						<td th:text="${user.phone}"></td>

@@ -1,5 +1,6 @@
 package fa.training.services.implement;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.log4j.LogManager;
@@ -13,8 +14,8 @@ import fa.training.repositories.AttendanceRepository;
 import fa.training.services.AttendanceService;
 
 @Service
-public class AttendanceServiceImpl implements AttendanceService{
-	
+public class AttendanceServiceImpl implements AttendanceService {
+
 	private static final Logger LOGGER = LogManager.getLogger(AttendanceServiceImpl.class);
 
 	@Autowired
@@ -26,10 +27,10 @@ public class AttendanceServiceImpl implements AttendanceService{
 	 */
 	@Override
 	public List<Attendance> getAttendancesByUser(User user) {
-		LOGGER.info("Get list of Attendace by "+ user.getAccount());
-		return attendanceRepository.findAttendanceByUser(user.getId());
+		return (user != null && user.getId() != null) ? attendanceRepository.findAttendanceByUser(user.getId())
+				: new ArrayList<Attendance>();
 	}
-	
+
 	/**
 	 * @author TrangDM2
 	 * @param attendances
@@ -37,7 +38,7 @@ public class AttendanceServiceImpl implements AttendanceService{
 	 */
 	@Override
 	public List<Attendance> saveAttendances(List<Attendance> attendances) {
-	  return attendanceRepository.saveAll(attendances);
+		return attendanceRepository.saveAll(attendances);
 	}
 
 }

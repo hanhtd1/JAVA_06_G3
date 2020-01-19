@@ -73,7 +73,7 @@ public class TraineeUserController {
 	@GetMapping("/view-feedback")
 	public @ResponseBody String viewFeedback(@RequestParam Integer userId,
 			@RequestParam Integer subjectId) {
-		Feedback feedback = iFeedbackService.getAllFeedback(userId, subjectId);
+		Feedback feedback = iFeedbackService.getFeedback(userId, subjectId);
 		return feedback == null ? Constant.NOT_FOUND_MESSAGE: feedback.getContent();
 	}
 
