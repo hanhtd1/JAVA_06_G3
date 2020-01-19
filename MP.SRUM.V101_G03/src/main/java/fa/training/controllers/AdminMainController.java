@@ -9,6 +9,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import fa.training.dtos.BestTraineeDto;
 import fa.training.dtos.UserDto;
 import fa.training.models.Clazz;
 import fa.training.models.Subject;
@@ -16,6 +17,7 @@ import fa.training.models.User;
 import fa.training.services.AdminClassService;
 import fa.training.services.AdminUserService;
 import fa.training.services.SubjectService;
+import fa.training.services.UserService;
 import fa.training.utils.Constant;
 
 /**
@@ -35,16 +37,19 @@ public class AdminMainController {
   @Autowired
   private SubjectService subjectService;
 
+  @Autowired
+  private UserService userService;
+
   /**
    * @author TrangDM2
    */
   @GetMapping("/")
   public String home(Model model, Authentication auth) {
     String account = auth.getName();
-    User user = adminUserService.getUserByAccount(account).get();
+    User uzer = adminUserService.getUserByAccount(account).get();
 
-    model.addAttribute("currentUser", user);
-
+    model.addAttribute("currentUser", uzer);
+    
     return "index";
   }
 
@@ -52,7 +57,19 @@ public class AdminMainController {
    * @author TrangDM2
    */
   @GetMapping("home")
-  public String classAdmin() {
+  public String classAdmin(Model model) {
+    List<BestTraineeDto> bestTrainees = userService.findTopThreeBestTrainee();
+    List<User> users = userService.findAll();
+    List<Subject> subjects = subjectService.findAll();
+    Long totalTrainees = users.parallelStream().map(user -> user.getRole().equals(Constant.ROLE_TRAINEE)).count();
+    Long totalTrainers = users.parallelStream().map(user -> user.getRole().equals(Constant.ROLE_TRAINER)).count();
+    int totalSubjects = subjects.size();
+
+    model.addAttribute("totalTrainees", (int) Math.pow(totalTrainees, 2));
+    model.addAttribute("totalTrainers", (int) Math.pow(totalTrainers, 2));
+    model.addAttribute("totalSubjects", (int) Math.pow(totalSubjects, 2));
+    model.addAttribute("bestTrainees", bestTrainees);
+
     return "class-admin-dashboard";
   }
 

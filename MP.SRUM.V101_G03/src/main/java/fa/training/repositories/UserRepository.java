@@ -11,6 +11,7 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import fa.training.dtos.BestTraineeDto;
 import fa.training.models.User;
 
 @Repository
@@ -148,4 +149,10 @@ public interface UserRepository extends JpaRepository<User, Integer> {
    */
   @Query(value = "SELECT * FROM udf_findTraineeByCategory(:category, :role)", nativeQuery = true)
   List<User> findTraineeByCategory(@Param("category") String category, Pageable pageable);
+
+  /**
+   * @return
+   */
+  @Query(value = "SELECT * FROM findBestTrainee()", nativeQuery = true)
+  List<BestTraineeDto> findTopThreeBestTrainee();
 }

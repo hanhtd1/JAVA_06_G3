@@ -5,7 +5,6 @@ import static org.mockito.Mockito.when;
 
 import java.time.LocalDate;
 
-import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;

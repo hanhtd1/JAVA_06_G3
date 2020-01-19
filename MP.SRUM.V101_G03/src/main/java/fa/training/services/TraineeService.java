@@ -71,4 +71,5 @@ public interface TraineeService {
 	 */
 	List<User> findTraineeByCategoryAndClazzAndStatus(String category, String clazzName, String status,
 			Integer pageIndex);
+
 }

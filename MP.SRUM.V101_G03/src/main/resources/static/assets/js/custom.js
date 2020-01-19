@@ -7,6 +7,7 @@ $(window).load(()=>{
 		}
 	});
 });
+
 $("#class-manage").click(()=>{
 	$.get({
 		url: "/admin/class-manage",

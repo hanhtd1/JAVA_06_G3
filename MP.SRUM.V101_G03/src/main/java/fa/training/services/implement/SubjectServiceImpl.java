@@ -42,7 +42,7 @@ public class SubjectServiceImpl implements SubjectService {
     // TODO edit orElse
     return subjectRepository.findSubjectByCode(code).orElse(new Subject());
   }
-  
+
   @Override
   public Boolean checkSubjectExisted(String code) {
     return subjectRepository.findSubjectByCode(code).isPresent();
@@ -77,16 +77,16 @@ public class SubjectServiceImpl implements SubjectService {
     return subjectRepository.findSubjectByStatus(status);
   }
 
-	@Override
-	public List<Subject> findSubjectByClazz(Integer clazzId, Pageable pageable) {
-		Page<Subject> pageSubject = subjectRepository.findSubjectByClazzId(clazzId, pageable);
-		return pageSubject.getContent();
-	}
+  @Override
+  public List<Subject> findSubjectByClazz(Integer clazzId, Pageable pageable) {
+    Page<Subject> pageSubject = subjectRepository.findSubjectByClazzId(clazzId, pageable);
+    return pageSubject.getContent();
+  }
 
-	@Override
-	public List<Subject> findSubjectByUserId(Integer userId, Pageable pageable) {
-		Page<Subject> pageSubject = subjectRepository.findSubjectByUserId(userId, pageable);
-		return pageSubject.getContent();
-	}
+  @Override
+  public List<Subject> findSubjectByUserId(Integer userId, Pageable pageable) {
+    Page<Subject> pageSubject = subjectRepository.findSubjectByUserId(userId, pageable);
+    return pageSubject.getContent();
+  }
 
 }
