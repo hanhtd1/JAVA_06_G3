@@ -30,20 +30,20 @@ public class Clazz implements Serializable {
   private Integer id;
 
   @NotBlank
-  @Column(name = "Name", unique = true)
+  @Column(name = "Name", unique = true, nullable = false)
   private String name;
 
-  @Column(name = "openDate")
+  @Column(name = "openDate", nullable = false)
   private LocalDate openDate;
 
   @Column(name = "Note")
   private String note;
 
   @NotBlank
-  @Column(name = "Category")
+  @Column(name = "Category", nullable = false)
   private String category;
 
-  @Column(name = "Status")
+  @Column(name = "Status", nullable = false)
   private String status;
   
   @JoinTable(name = "UserClazz", joinColumns = {

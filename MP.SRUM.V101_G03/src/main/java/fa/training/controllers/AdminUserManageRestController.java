@@ -9,8 +9,6 @@ import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -42,9 +40,6 @@ public class AdminUserManageRestController {
   @Autowired
   private FeedbackService feedbackService;
 
-  @Autowired
-  private BCryptPasswordEncoder bcrypt;
-
   /**
    * @author TrangDM2
    */
@@ -74,6 +69,7 @@ public class AdminUserManageRestController {
       @RequestParam Integer role) {
     String userRole = role == 1 ? Constant.TRAINEE : Constant.TRAINER;
     List<UserDto> trainees = adminUserService.findUserByKeyword(keyword, userRole, status);
+    
     return new ResponseEntity<List<UserDto>>(trainees, HttpStatus.OK);
   }
 
@@ -82,8 +78,8 @@ public class AdminUserManageRestController {
    */
   @GetMapping("get-trainers-toadd")
   public ResponseEntity<List<User>> getTrainers(@RequestParam Integer classId) {
-    List<User> trainees = adminUserService.findUserNotInClass(classId, Constant.TRAINER);
-    return new ResponseEntity<List<User>>(trainees, HttpStatus.OK);
+    List<User> trainers = adminUserService.findUserNotInClass(classId, Constant.TRAINER);
+    return new ResponseEntity<List<User>>(trainers, HttpStatus.OK);
   }
 
   /**
@@ -98,55 +94,21 @@ public class AdminUserManageRestController {
   /**
    * @author TrangDM2
    */
-  @PostMapping("create-user")
+  @PostMapping("save-user")
   public ResponseEntity<?> createUser(@Valid @RequestBody User user, BindingResult result) {
     if (result.hasErrors()) {
       Map<String, String> errors = result.getFieldErrors().stream()
           .collect(Collectors.toMap(FieldError::getField, FieldError::getDefaultMessage));
+      
       return ResponseEntity.badRequest().body(errors);
     } else {
-      byte role = Byte.parseByte(user.getRole());
-      User requestUser = user;
       String message = new String();
+      
       try {
-        requestUser.setRole(role == 1 ? Constant.TRAINEE : Constant.TRAINER);
-        requestUser.setStatus(Constant.USER_DEFAULT_STATUS);
-        requestUser.setPassword(bcrypt.encode(Constant.DEFAULT_PASSWORD));
-        adminUserService.saveUser(requestUser);
+        adminUserService.saveUser(user);
         message = Constant.CREATE_SUCCESS_MESSAGE;
       } catch (Exception e) {
         message = Constant.CREATE_FAIL_MESSAGE;
-      }
-
-      return new ResponseEntity<String>(message, HttpStatus.OK);
-    }
-  }
-
-  /**
-   * @author TrangDM2
-   */
-  @PostMapping("update-user")
-  public ResponseEntity<?> updaterUser(@Valid @RequestBody User user, BindingResult result) {
-    if (result.hasErrors()) {
-      Map<String, String> errors = result.getFieldErrors().stream()
-          .collect(Collectors.toMap(FieldError::getField, FieldError::getDefaultMessage));
-      return ResponseEntity.badRequest().body(errors);
-    } else {
-      String message = new String();
-      User updateUser = user;
-      User toUpdateUser = adminUserService.getUserByAccount(user.getAccount()).orElseThrow(() -> {
-        throw new UsernameNotFoundException(Constant.NOT_FOUND_MESSAGE);
-      });
-
-      updateUser.setPassword(toUpdateUser.getPassword());
-      updateUser.setRole(toUpdateUser.getRole());
-      updateUser.setStatus(toUpdateUser.getStatus());
-
-      try {
-        adminUserService.saveUser(updateUser);
-        message = Constant.UPDATE_SUCCESS_MESSAGE;
-      } catch (Exception e) {
-        message = Constant.UPDATE_FAIL_MESSAGE;
       }
 
       return new ResponseEntity<String>(message, HttpStatus.OK);

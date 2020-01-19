@@ -12,6 +12,10 @@ import fa.training.models.User;
 import fa.training.services.AdminUserService;
 import fa.training.utils.Constant;
 
+/**
+ * @author TrangDM2
+ *
+ */
 @Controller
 public class AuthorizationController {
 
@@ -25,10 +29,7 @@ public class AuthorizationController {
   @GetMapping("/")
   public String index(Authentication auth) {
     User user = adminUserService.getUserByAccount(auth.getName()).orElse(null);
-    if (user.getLastLogin() == null) {
-      return "change-password";
-    }
-    return "redirect:authorization";
+    return user.getLastLogin() == null ? "change-password" : "redirect:authorization";
   }
 
   /**

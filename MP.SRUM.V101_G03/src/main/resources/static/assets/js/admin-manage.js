@@ -63,7 +63,7 @@ function loadTraineeInfo(id){
 				if(res.practice==null || res.theory==null){
 					feedbackBtn="";
 				} else {
-					feedbackBtn="<a onclick='openModal("+res.traineeId+", "+res.subjectId+")' \" class=\"modal-trigger waves-effect waves-blue btn m-t-xs\"\n href=\"#!\">View feedback</a>";
+					feedbackBtn="<a onclick='loadFeedback("+res.traineeId+", "+res.subjectId+")' \" class=\"modal-trigger waves-effect waves-blue btn m-t-xs\"\n href=\"#!\">View feedback</a>";
 				}
 				this.showScoreList(res,feedbackBtn);
 			})
@@ -79,8 +79,7 @@ function showScoreList(res, feedbackBtn){
 		"<td>"+feedbackBtn+"</td>\n" +
 		"</tr>")
 }
-//unexpected
-function openModal(traineeId, subjectId){
+function loadFeedback(traineeId, subjectId){
 	$.get({
 		url: '/admin/get-user-feedback',
 		data: {
@@ -97,7 +96,6 @@ function openModal(traineeId, subjectId){
 	});
 	$("#feedback-modal").openModal();
 }
-//unexpected
 function editTraineeInfo(){
 	$.get({
 		url: "/admin/user-info",
@@ -117,13 +115,14 @@ function editTraineeInfo(){
 }
 function addTrainee(){
 	let form = document.getElementById("add_trainee_form");
-	addUser(form)
+	saveUser(form);
 	loadTrainees();
 	return false;
 }
 function updateTrainee(){
 	let form = document.getElementById('update_trainee_form');
-	updateUser(form);
+	saveUser(form);
+	loadTrainees();
 	return false;
 }
 function changeTraineeStatus(){
@@ -170,9 +169,8 @@ function showClassList(res){
 	$("#list_classes").append("<li>\n" +
 		"<a  href=\"#!\" onclick=\"loadClassDetail("+res.id+")\" >\n" +
 		"<h5 class=\"f-s-19\">"+res.name+"</h5>\n" +
-		"<span>\n" +
-		"<i class=\"tiny material-icons\">person_pin</i> <span>"+res.userList.length+"</span> Members\n" +
-		"</span>\n" +
+		"<span><i class=\"tiny material-icons\">person_pin</i> <span>"+res.userList.length+"</span> Members</span><br>\n" +
+		"<span><i class=\"tiny material-icons\">slow_motion_video</i> <span>"+res.status+"</span></span>\n" +
 		"</a>\n" +
 		"</li>");
 }
@@ -763,13 +761,13 @@ function editTrainerInfo(){
 
 function addTrainer(){
 	let form = document.getElementById("add_trainer_form");
-	addUser(form);
+	saveUser(form);
 	return false;
 }
 
 function updateTrainer(){
 	let form = document.getElementById('update_trainer_form');
-	updateUser(form);
+	saveUser(form);
 	return false;
 }
 
@@ -831,9 +829,9 @@ function generateClassName() {
 	})
 }
 
-function addUser(element) {
+function saveUser(element) {
 	$.post({
-		url: "/admin/create-user",
+		url: "/admin/save-user",
 		contentType: "application/json",
 		data: JSON.stringify(Form2JsonMapper(element)),
 		success: (resp)=>{
@@ -845,21 +843,6 @@ function addUser(element) {
 				Materialize.toast(key.toUpperCase() + ": " + value , 10000);
 			});
 			return false;
-		}
-	});
-}
-function updateUser(element) {
-	$.post({
-		url: "/admin/update-user",
-		contentType: "application/json",
-		data: JSON.stringify(Form2JsonMapper(element)),
-		success: (resp)=>{
-			Materialize.toast(resp, 4000)
-		},
-		error: (resp)=>{
-			$.each(resp.responseJSON, (key, value)=>{
-				Materialize.toast(key.toUpperCase() + ": " + value , 10000);
-			})
 		}
 	});
 }

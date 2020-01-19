@@ -11,6 +11,10 @@ import fa.training.models.User;
 import fa.training.repositories.UserRepository;
 import fa.training.utils.Constant;
 
+/**
+ * @author TrangDM2
+ *
+ */
 @Service
 public class UserLoginService implements UserDetailsService {
 
@@ -25,8 +29,10 @@ public class UserLoginService implements UserDetailsService {
     User user = userRepository.findByAccount(username).orElseThrow(() -> {
       throw new UsernameNotFoundException(Constant.NOT_FOUND_MESSAGE);
     });
+    
     UserDetails userDetails = new org.springframework.security.core.userdetails.User(user.getAccount(),
         user.getPassword(), AuthorityUtils.createAuthorityList(user.getRole()));
+    
     return userDetails;
   }
 

@@ -20,7 +20,7 @@ public interface AdminUserService {
 
   List<UserDto> getUsersByRole(String role);
 
-  User saveUser(User user);
+  User saveUser(User user) throws IllegalArgumentException;
 
   List<User> getAllUsers();
 

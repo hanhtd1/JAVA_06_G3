@@ -562,3 +562,8 @@
 2020-01-18 15:54:48 INFO  UserServiceImpl:30 - Get classmate of user TrangDM1
 2020-01-18 15:54:48 INFO  AttendanceServiceImpl:35 - Get list of Attendace by TrangDM1
 2020-01-18 15:54:48 INFO  ScoreServiceImpl:55 - Get score by UserId 5
+2020-01-19 01:29:20 INFO  TraineeUserController:59 - TrangDM login successful
+2020-01-19 01:29:20 INFO  UserServiceImpl:42 - Get User by Account TrangDM
+2020-01-19 01:29:20 INFO  UserServiceImpl:30 - Get classmate of user TrangDM
+2020-01-19 01:29:20 INFO  AttendanceServiceImpl:35 - Get list of Attendace by TrangDM
+2020-01-19 01:29:20 INFO  ScoreServiceImpl:55 - Get score by UserId 2

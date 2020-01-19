@@ -35,7 +35,9 @@
 										<a href="#!" th:onclick="'loadClassDetail('+${class.id}+')'">
 										<h5 class="f-s-19" th:text="${class.name}"></h5>
 										<span> <i class="tiny material-icons">person_pin</i>
-											<span th:text="${class.userList.size()}"> </span> Members</span>
+											<span th:text="${class.userList.size()}"> </span> Members</span><br>
+											<span> <i class="tiny material-icons">slow_motion_video</i>
+											<span th:text="${class.status}"> </span></span>
 										</a>
 									</li>
 								</ul>

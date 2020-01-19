@@ -12,7 +12,7 @@ import fa.training.dtos.AttendanceDto;
 import fa.training.models.Attendance;
 import fa.training.models.User;
 import fa.training.repositories.AttendanceRepository;
-import fa.training.services.AdminUserService;
+import fa.training.repositories.UserRepository;
 import fa.training.services.AttendanceService;
 
 @Service
@@ -24,7 +24,7 @@ public class AttendanceServiceImpl implements AttendanceService {
   private AttendanceRepository attendanceRepository;
 
   @Autowired
-  private AdminUserService adminUserService;
+  private UserRepository userRepository;
 
   /**
    * @author HoangLV7
@@ -46,7 +46,7 @@ public class AttendanceServiceImpl implements AttendanceService {
 
     try {
       attendances.forEach(attend -> {
-        User trainee = adminUserService.getUser(attend.getUserId());
+        User trainee = userRepository.findUserById(attend.getUserId());
         Attendance attendance = attendanceRepository.findByDateAndUser(LocalDate.now(), trainee);
         if (null == attendance) {
           attendance = new Attendance();

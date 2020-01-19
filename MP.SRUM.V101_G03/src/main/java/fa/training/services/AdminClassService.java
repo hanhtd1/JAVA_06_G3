@@ -27,4 +27,12 @@ public interface AdminClassService {
 
   List<Clazz> getClassByUser(Integer userId);
 
+  Clazz addUserToClass(Integer traineeId, Integer classId) throws IllegalArgumentException;
+
+  Clazz removeUserFromClass(Integer traineeId, Integer classId) throws IllegalArgumentException;
+
+  Clazz addSubjectToClass(Integer subjectId, Integer classId) throws IllegalArgumentException;
+
+  Clazz removeSubjectFromClass(Integer subjectId, Integer classId) throws IllegalArgumentException;
+
 }

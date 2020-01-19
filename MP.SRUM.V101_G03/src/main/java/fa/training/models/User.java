@@ -38,40 +38,40 @@ public class User implements Serializable {
   private Integer id;
 
   @Pattern(regexp = Constant.REGEX_NAME, message = Constant.VALID_NAME_MESSAGE)
-  @Column(name = "FirstName")
+  @Column(name = "FirstName", nullable = false)
   private String firstName;
 
   @Pattern(regexp = Constant.REGEX_NAME, message = Constant.VALID_NAME_MESSAGE)
-  @Column(name = "LastName")
+  @Column(name = "LastName", nullable = false)
   private String lastName;
 
   @NotBlank
   @Pattern(regexp = Constant.REGEX_PHONE_NUMBER, message = Constant.VALID_PHONE_MESSAGE)
-  @Column(name = "Phone")
+  @Column(name = "Phone", nullable = false)
   private String phone;
 
   @NotBlank
   @Email
-  @Column(name = "Email", unique = true)
+  @Column(name = "Email", unique = true, nullable = false)
   private String email;
 
-  @Column(name = "Password")
+  @Column(name = "Password", nullable = false)
   private String password;
 
   @NotBlank
-  @Column(name = "Account", unique = true)
+  @Column(name = "Account", unique = true, nullable = false)
   private String account;
 
-  @Column(name = "BirthDay")
+  @Column(name = "BirthDay", nullable = false)
   private LocalDate birthDay;
 
-  @Column(name = "Role")
+  @Column(name = "Role", nullable = false)
   private String role;
 
-  @Column(name = "Gender")
+  @Column(name = "Gender", nullable = false)
   private String gender;
 
-  @Column(name = "Status")
+  @Column(name = "Status", nullable = false)
   private String status;
 
   @Column(name = "LastLogin", nullable = true)

@@ -17,6 +17,10 @@ import fa.training.models.User;
 import fa.training.services.AdminUserService;
 import fa.training.utils.Constant;
 
+/**
+ * @author TrangDM2
+ *
+ */
 @Controller
 public class AuthenticationController {
 
@@ -32,11 +36,7 @@ public class AuthenticationController {
    */
   @GetMapping("login")
   public String login(Authentication auth) {
-    if (null == auth) {
-      return "sign-in";
-    }
-
-    return "redirect:/";
+    return null == auth ? "sign-in" : "redirect:/";
   }
 
   /**
@@ -52,9 +52,12 @@ public class AuthenticationController {
 
     if (changePassword.getAccount().equals(auth.getName().toLowerCase()) && changePassword.isPasswordMatch()) {
       User user = adminUserService.getUserByAccount(auth.getName()).orElse(null);
+
       user.setPassword(bcrypt.encode(changePassword.getPassword()));
       user.setLastLogin(LocalDateTime.now());
+
       adminUserService.saveUser(user);
+
       messsage = Constant.UPDATE_SUCCESS_MESSAGE;
       status = HttpStatus.CREATED;
     } else {

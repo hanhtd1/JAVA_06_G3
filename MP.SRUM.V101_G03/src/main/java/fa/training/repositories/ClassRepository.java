@@ -19,7 +19,7 @@ public interface ClassRepository extends JpaRepository<Clazz, Integer> {
 	 * @author TrangDM2
 	 * @return
 	 */
-	@Query("select c from Clazz c where (c.name like :keyword or c.category like :keyword) and status like :status")
+	@Query("select c from Clazz c where (c.name like :keyword or c.category like :keyword) and status like :status order by id desc")
 	List<Clazz> findClassByKeyword(@Param("keyword") String keyword, @Param("status") String status);
 
 	/**
@@ -106,9 +106,7 @@ public interface ClassRepository extends JpaRepository<Clazz, Integer> {
 	 * @return list of class which is found by subject
 	 */
 	@Query(value = "SELECT c.id, c.category, c.name, c.note, open_date, c.status, c.open_date"
-			+ " FROM clazz c, clazz_subject sc, subject s"
-			+ " WHERE c.id = sc.clazz_id AND sc.subject_id = s.id AND c.status = :status"
-			+ " AND s.id = :subjectId", nativeQuery = true)
+			+ " FROM clazz c WHERE c.id IN (SELECT cs.clazz_id FROM clazz_subject cs WHERE cs.subject_id= :subjectId) AND c.status = :status", nativeQuery = true)
 	List<Clazz> findBySubject(@Param("status") String status, @Param("subjectId") int subjectId);
 
 	/**

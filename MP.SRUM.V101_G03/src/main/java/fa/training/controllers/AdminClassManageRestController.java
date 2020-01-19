@@ -22,8 +22,6 @@ import fa.training.dtos.AdminScoreDto;
 import fa.training.dtos.AttendanceDto;
 import fa.training.dtos.UserDto;
 import fa.training.models.Clazz;
-import fa.training.models.Score;
-import fa.training.models.ScorePK;
 import fa.training.models.Subject;
 import fa.training.models.User;
 import fa.training.services.AdminClassService;
@@ -158,17 +156,10 @@ public class AdminClassManageRestController {
    */
   @GetMapping("add-trainee-toclass")
   public ResponseEntity<String> addTraineeToClass(@RequestParam Integer traineeId, @RequestParam Integer classId) {
-    Clazz clazz = adminClassService.getClass(classId);
-    User user = adminUserService.getUser(traineeId);
     String message = new String();
 
-    user.setStatus(Constant.TRAINEE_ACTIVE_STATUS);
-    user.getClazzList().add(clazz);
-    clazz.getUserList().add(user);
-
     try {
-      adminClassService.saveClass(clazz, clazz.getStatus());
-      adminUserService.saveUser(user);
+      adminClassService.addUserToClass(traineeId, classId);
       message = Constant.CREATE_SUCCESS_MESSAGE;
     } catch (Exception e) {
       message = Constant.CREATE_FAIL_MESSAGE;
@@ -185,20 +176,13 @@ public class AdminClassManageRestController {
    */
   @GetMapping("remove-trainee")
   public ResponseEntity<String> removeTraineeFromClass(@RequestParam Integer traineeId, @RequestParam Integer classId) {
-    Clazz clazz = adminClassService.getClass(classId);
-    User user = adminUserService.getUser(traineeId);
     String message = new String();
 
-    user.setStatus(Constant.USER_DEFAULT_STATUS);
-    user.getClazzList().remove(clazz);
-    clazz.getUserList().remove(user);
-
     try {
-      adminClassService.saveClass(clazz, clazz.getStatus());
-      adminUserService.saveUser(user);
-      message = Constant.UPDATE_SUCCESS_MESSAGE;
+      adminClassService.removeUserFromClass(traineeId, classId);
+      message = Constant.CREATE_SUCCESS_MESSAGE;
     } catch (Exception e) {
-      message = Constant.UPDATE_FAIL_MESSAGE;
+      message = Constant.CREATE_FAIL_MESSAGE;
     }
 
     return new ResponseEntity<String>(message, HttpStatus.OK);
@@ -234,16 +218,10 @@ public class AdminClassManageRestController {
    */
   @GetMapping("add-subject-to-class")
   public ResponseEntity<String> addSubjectToClass(@RequestParam Integer subjectId, @RequestParam Integer classId) {
-    Subject subject = subjectService.findSubjectById(subjectId);
-    Clazz clazz = adminClassService.getClass(classId);
     String message = new String();
 
-    subject.getClazzList().add(clazz);
-    clazz.getSubjectList().add(subject);
-
     try {
-      subjectService.save(subject);
-      adminClassService.saveClass(clazz, clazz.getStatus());
+      adminClassService.addSubjectToClass(subjectId, classId);
       message = Constant.UPDATE_SUCCESS_MESSAGE;
     } catch (Exception e) {
       message = Constant.UPDATE_FAIL_MESSAGE;
@@ -260,16 +238,10 @@ public class AdminClassManageRestController {
    */
   @GetMapping("remove-subject-fromclass")
   public ResponseEntity<String> removeSubject(@RequestParam Integer subjectId, @RequestParam Integer clazzId) {
-    Subject subject = subjectService.findSubjectById(subjectId);
-    Clazz clazz = adminClassService.getClass(clazzId);
     String message = new String();
 
-    subject.getClazzList().remove(clazz);
-    clazz.getSubjectList().remove(subject);
-
     try {
-      subjectService.save(subject);
-      adminClassService.saveClass(clazz, clazz.getStatus());
+      adminClassService.removeSubjectFromClass(subjectId, clazzId);
       message = Constant.UPDATE_SUCCESS_MESSAGE;
     } catch (Exception e) {
       message = Constant.UPDATE_FAIL_MESSAGE;
@@ -306,19 +278,13 @@ public class AdminClassManageRestController {
    */
   @GetMapping("add-trainer-toclass")
   public ResponseEntity<String> addTrainer(@RequestParam Integer clazzId, @RequestParam Integer trainerId) {
-    Clazz clazz = adminClassService.getClass(clazzId);
-    User trainer = adminUserService.getUser(trainerId);
     String message = new String();
 
-    clazz.getUserList().add(trainer);
-    trainer.getClazzList().add(clazz);
-
     try {
-      adminClassService.saveClass(clazz, clazz.getStatus());
-      adminUserService.saveUser(trainer);
-      message = Constant.UPDATE_SUCCESS_MESSAGE;
+      adminClassService.addUserToClass(trainerId, clazzId);
+      message = Constant.CREATE_SUCCESS_MESSAGE;
     } catch (Exception e) {
-      message = Constant.UPDATE_FAIL_MESSAGE;
+      message = Constant.CREATE_FAIL_MESSAGE;
     }
 
     return new ResponseEntity<String>(message, HttpStatus.OK);
@@ -332,19 +298,13 @@ public class AdminClassManageRestController {
    */
   @GetMapping("remove-trainer-fromclass")
   public ResponseEntity<String> removeTrainer(@RequestParam Integer clazzId, @RequestParam Integer trainerId) {
-    Clazz clazz = adminClassService.getClass(clazzId);
-    User trainer = adminUserService.getUser(trainerId);
     String message = new String();
 
-    clazz.getUserList().remove(trainer);
-    trainer.getClazzList().remove(clazz);
-
     try {
-      adminClassService.saveClass(clazz, clazz.getStatus());
-      adminUserService.saveUser(trainer);
-      message = Constant.UPDATE_SUCCESS_MESSAGE;
+      adminClassService.removeUserFromClass(trainerId, clazzId);
+      message = Constant.CREATE_SUCCESS_MESSAGE;
     } catch (Exception e) {
-      message = Constant.UPDATE_FAIL_MESSAGE;
+      message = Constant.CREATE_FAIL_MESSAGE;
     }
 
     return new ResponseEntity<String>(message, HttpStatus.OK);
@@ -353,7 +313,6 @@ public class AdminClassManageRestController {
   /**
    * @author TrangDM2
    * @param scoreDtos
-   * @param result
    * @return
    */
   @PostMapping("update-marks")
@@ -362,11 +321,8 @@ public class AdminClassManageRestController {
     HttpStatus status = null;
 
     try {
-      scoreDtos.forEach(scoreDto -> {
-        ScorePK scorePk = new ScorePK(scoreDto.getSubjectId(), scoreDto.getUserId());
-        Score score = new Score(scorePk, scoreDto.getTheory(), scoreDto.getPractice());
-        scoreService.saveScore(score);
-      });
+      scoreService.saveScores(scoreDtos);
+      
       message = Constant.UPDATE_SUCCESS_MESSAGE;
       status = HttpStatus.CREATED;
     } catch (Exception e) {

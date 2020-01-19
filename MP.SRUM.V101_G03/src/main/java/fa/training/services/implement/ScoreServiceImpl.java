@@ -10,9 +10,11 @@ import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import fa.training.dtos.AdminScoreDto;
 import fa.training.dtos.ScoreDto;
 import fa.training.dtos.TraineeScoreDto;
 import fa.training.models.Score;
+import fa.training.models.ScorePK;
 import fa.training.repositories.ScoreRepository;
 import fa.training.services.ScoreService;
 
@@ -43,8 +45,17 @@ public class ScoreServiceImpl implements ScoreService {
    * @return
    */
   @Override
-  public Score saveScore(Score score) {
-    return scoreRepository.save(score);
+  public List<Score> saveScores(List<AdminScoreDto> scoreDtos) throws IllegalArgumentException{
+    List<Score> scores = new ArrayList<>();
+    
+      scoreDtos.forEach(scoreDto -> {
+        ScorePK scorePk = new ScorePK(scoreDto.getSubjectId(), scoreDto.getUserId());
+        Score score = new Score(scorePk, scoreDto.getTheory(), scoreDto.getPractice());
+        
+        scores.add(score);
+      });
+      
+    return scoreRepository.saveAll(scores);
   }
   /**
    * @author HoangLV7

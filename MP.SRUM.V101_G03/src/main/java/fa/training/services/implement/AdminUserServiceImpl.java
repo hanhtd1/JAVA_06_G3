@@ -7,6 +7,7 @@ import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import fa.training.dtos.ScoreDto;
@@ -27,21 +28,25 @@ import fa.training.utils.Constant;
 public class AdminUserServiceImpl implements AdminUserService {
   @Autowired
   private UserRepository userRepository;
+
   @Autowired
   private ScoreRepository scoreRepository;
 
+  @Autowired
+  private BCryptPasswordEncoder bcrypt;
+
   /**
-   *@author TrangDM2
+   * @author TrangDM2
    */
   @Override
   public User getUser(int id) {
-    return userRepository.findById(id).orElseThrow(()->{
+    return userRepository.findById(id).orElseThrow(() -> {
       throw new UsernameNotFoundException(Constant.NOT_FOUND_MESSAGE);
     });
   }
 
   /**
-   *@author TrangDM2
+   * @author TrangDM2
    */
   @Override
   public Optional<User> getUserByAccount(String account) {
@@ -49,46 +54,70 @@ public class AdminUserServiceImpl implements AdminUserService {
   }
 
   /**
-   *@author TrangDM2
+   * @author TrangDM2
    */
   @Override
   public List<UserDto> getUsersByRole(String role) {
     List<User> users = userRepository.findAllByRole(role);
     List<UserDto> userDtos = new ArrayList<>();
+
     users.forEach(user -> {
       Clazz clazz = null;
       Set<Clazz> clazzs = user.getClazzList();
+
       if (!clazzs.isEmpty()) {
         clazz = clazzs.iterator().next();
       }
+
       userDtos.add(new UserDto(user, clazz));
     });
+
     return userDtos;
   }
 
   /**
-   *@author TrangDM2
+   * @author TrangDM2
    */
   @Override
-  public User saveUser(User user) {
-    return userRepository.save(user);
+  public User saveUser(User user) throws IllegalArgumentException {
+    User requestUser = user;
+
+    if (user.getId() == null) {
+      byte role = Byte.parseByte(requestUser.getRole());
+
+      requestUser.setRole(role == 1 ? Constant.TRAINEE : Constant.TRAINER);
+      requestUser.setStatus(Constant.USER_DEFAULT_STATUS);
+      requestUser.setPassword(bcrypt.encode(Constant.DEFAULT_PASSWORD));
+    } else {
+      User toUpdateUser = userRepository.findByAccount(user.getAccount()).orElseThrow(() -> {
+        throw new UsernameNotFoundException(Constant.NOT_FOUND_MESSAGE);
+      });
+
+      requestUser.setPassword(toUpdateUser.getPassword());
+      requestUser.setRole(toUpdateUser.getRole());
+      requestUser.setStatus(toUpdateUser.getStatus());
+    }
+
+    return userRepository.save(requestUser);
   }
 
   /**
-   *@author TrangDM2
+   * @author TrangDM2
    */
   @Override
   public List<ScoreDto> getScore(Integer id) {
     List<Score> scores = scoreRepository.findAllScoreByUserId(id);
     List<ScoreDto> scoresDto = new ArrayList<>();
+
     scores.forEach(score -> {
       scoresDto.add(new ScoreDto(score));
     });
+
     return scoresDto;
   }
 
   /**
-   *@author TrangDM2
+   * @author TrangDM2
    */
   @Override
   public List<User> getAllUsers() {
@@ -96,41 +125,45 @@ public class AdminUserServiceImpl implements AdminUserService {
   }
 
   /**
-   *@author TrangDM2
+   * @author TrangDM2
    */
   @Override
-  public List<UserDto> findUserByKeyword(String keyword, String role, String status){
-    List<User> users = userRepository.findUsersByKeyword("%"+keyword+"%",role, "%"+status+"%");
+  public List<UserDto> findUserByKeyword(String keyword, String role, String status) {
+    List<User> users = userRepository.findUsersByKeyword("%" + keyword + "%", role, "%" + status + "%");
     List<UserDto> userDtos = new ArrayList<>();
+
     users.forEach(user -> {
       Clazz clazz = null;
       Set<Clazz> clazzs = user.getClazzList();
+
       if (!clazzs.isEmpty()) {
         clazz = clazzs.iterator().next();
       }
+
       userDtos.add(new UserDto(user, clazz));
     });
+
     return userDtos;
   }
-  
+
   /**
    * @author TrangDM2
    * @param classId
    * @return
    */
   @Override
-  public List<User> findUserNotInClass(Integer classId, String role){
+  public List<User> findUserNotInClass(Integer classId, String role) {
     return userRepository.findTrainerNotInClassByClassId(classId, role);
   }
 
   /**
-   *@author TrangDM2
+   * @author TrangDM2
    */
   @Override
   public void updateUserStatus(int id, String status) {
     userRepository.updateUserStatus(status, id);
   }
-  
+
   /**
    * @author TrangDM2
    * @param clazzId
@@ -138,12 +171,12 @@ public class AdminUserServiceImpl implements AdminUserService {
    * @return
    */
   @Override
-  public List<User> getUserByClazzAndRole(Integer clazzId, String role){
+  public List<User> getUserByClazzAndRole(Integer clazzId, String role) {
     return userRepository.findUserByClazzAndRole(clazzId, role);
   }
 
   /**
-   *@author TrangDM2
+   * @author TrangDM2
    */
   @Override
   public List<User> saveUsers(List<User> traineeList) {
@@ -151,21 +184,27 @@ public class AdminUserServiceImpl implements AdminUserService {
   }
 
   /**
-   *@author TrangDM2
+   * @author TrangDM2
    */
   @Override
   public String generateAccount(String firstName, StringBuilder lastName) {
     StringBuilder account = lastName;
+
     for (int i = 0; i < firstName.length(); i++) {
       char c = firstName.charAt(i);
-      if ((int)c <= 90 && (int)c >64) {
+
+      if ((int) c <= 90 && (int) c > 64) {
         account.append(c);
       }
     }
-    int number = userRepository.getNumberOfAccount(account + "%");;
-    if(number==0) {
+
+    int number = userRepository.getNumberOfAccount(account + "%");
+
+    if (number == 0) {
       account.append("");
-    } else account.append(String.valueOf(number));
+    } else
+      account.append(String.valueOf(number));
+
     return account.toString();
   }
 

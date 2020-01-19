@@ -22,6 +22,8 @@ import fa.training.utils.Constant;
 @Transactional
 public class SubjectServiceImpl implements SubjectService {
 
+  public static int pageTotals;
+
   @Autowired
   private SubjectRepository subjectRepository;
 
@@ -74,8 +76,6 @@ public class SubjectServiceImpl implements SubjectService {
     // TODO edit orElse null
     return subjectRepository.findSubjectByStatus(status);
   }
-
-	public static int pageTotals;
 
 	@Override
 	public List<Subject> findSubjectByClazz(Integer clazzId, Pageable pageable) {

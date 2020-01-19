@@ -25,16 +25,16 @@ import fa.training.utils.Constant;
 @Controller
 @RequestMapping("admin")
 public class AdminMainController {
-  
+
   @Autowired
   private AdminUserService adminUserService;
-  
+
   @Autowired
   private AdminClassService adminClassService;
-  
+
   @Autowired
   private SubjectService subjectService;
-  
+
   /**
    * @author TrangDM2
    */
@@ -42,10 +42,12 @@ public class AdminMainController {
   public String home(Model model, Authentication auth) {
     String account = auth.getName();
     User user = adminUserService.getUserByAccount(account).get();
+
     model.addAttribute("currentUser", user);
+
     return "index";
   }
-  
+
   /**
    * @author TrangDM2
    */
@@ -53,17 +55,19 @@ public class AdminMainController {
   public String classAdmin() {
     return "class-admin-dashboard";
   }
-  
+
   /**
    * @author TrangDM2
    */
   @GetMapping("class-manage")
   public String classManage(Model model) {
     List<Clazz> clazzes = adminClassService.getClasses();
+
     model.addAttribute("classes", clazzes);
+
     return "class-admin-class-manage";
   }
-  
+
   /**
    * @author TrangDM2
    */
@@ -71,39 +75,45 @@ public class AdminMainController {
   public String traineeManage(Model model) {
     List<UserDto> trainees = adminUserService.getUsersByRole("ROLE_TRAINEE");
     List<Clazz> classes = adminClassService.getClasses();
+
     model.addAttribute("trainees", trainees);
     model.addAttribute("classes", classes);
+
     return "class-admin-trainee-manage";
   }
-  
+
   /**
    * @author HoangLV7
    */
   @GetMapping("subject-manage")
   public String subjectManage(Model model) {
-	  List<Subject> subjects = subjectService.findAll();
-	  model.addAttribute("subjects", subjects);
+    List<Subject> subjects = subjectService.findAll();
+
+    model.addAttribute("subjects", subjects);
+
     return "class-admin-subject-manage";
   }
-  
+
   /**
    * @author TrangDM2
    */
   @GetMapping("trainer-manage")
   public String trainerManage(Model model) {
     List<UserDto> trainers = adminUserService.getUsersByRole(Constant.TRAINER);
+
     model.addAttribute("trainers", trainers);
+
     return "class-admin-trainer-manage";
   }
-  
+
   /**
    * @author TrangDM2
    */
   @GetMapping("file-manage")
   public String fileManage() {
     return "import-export";
-  } 
-  
+  }
+
   /**
    * @author TrangDM2
    */

@@ -31,11 +31,11 @@ public class Attendance implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 
-	@Column(name = "Date")
+	@Column(name = "Date", nullable = false)
 	private LocalDate date;
 
 	@NotBlank
-	@Column(name = "Type")
+	@Column(name = "Type", nullable = false)
 	private String type;
 
 	@Column(name = "Note")

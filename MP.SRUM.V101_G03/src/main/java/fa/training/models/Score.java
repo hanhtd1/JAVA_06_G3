@@ -26,11 +26,11 @@ public class Score implements Serializable {
   protected ScorePK scorePK;
 
   @Range(max = 10)
-  @Column(name = "Theory")
+  @Column(name = "Theory", nullable = false)
   private Float theory;
 
   @Range(max = 10)
-  @Column(name = "Practice")
+  @Column(name = "Practice", nullable = false)
   private Float practice;
 
   @JsonIgnore
