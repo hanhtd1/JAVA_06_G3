@@ -2,7 +2,6 @@ package fa.training.adminservicetest;
 
 import static org.junit.Assert.assertNotNull;
 import static org.mockito.Mockito.when;
-import static org.mockito.ArgumentMatchers.*;
 
 import org.junit.After;
 import org.junit.Before;
@@ -34,7 +33,7 @@ public class AdminClassServiceTest {
 
   @Mock
   private SubjectRepository subjectRepository;
-  
+
   @InjectMocks
   private AdminClassServiceImpl adminClassService;
 
@@ -53,7 +52,7 @@ public class AdminClassServiceTest {
   @Test
   public void testSaveClassSuccess() {
     Clazz clazz = new Clazz();
-    when(adminClassService.saveClass(clazz, clazz.getStatus())).thenReturn(new Clazz());
+    when(classRepository.save(clazz)).thenReturn(clazz);
     assertNotNull(adminClassService.saveClass(clazz, clazz.getStatus()));
   }
 
@@ -63,14 +62,8 @@ public class AdminClassServiceTest {
   @Test(expected = NullPointerException.class)
   public void testSaveClassFail() {
     Clazz clazz = new Clazz();
-    when(adminClassService.saveClass(clazz, clazz.getStatus())).thenReturn(new Clazz());
+    when(classRepository.save(clazz)).thenReturn(clazz);
     assertNotNull(adminClassService.saveClass(null, null));
-  }
-  
-  @Test
-  public void testAddUserToClassSuccess() {
-    when(adminClassService.addSubjectToClass(anyInt(), anyInt())).thenReturn(new Clazz());
-    assertNotNull(adminClassService.addUserToClass(anyInt(), anyInt()));
   }
 
 }

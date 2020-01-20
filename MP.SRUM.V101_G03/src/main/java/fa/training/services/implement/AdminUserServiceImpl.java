@@ -135,11 +135,11 @@ public class AdminUserServiceImpl implements AdminUserService {
     users.forEach(user -> {
       Clazz clazz = null;
       Set<Clazz> clazzs = user.getClazzList();
-
+      
       if (!clazzs.isEmpty()) {
         clazz = clazzs.iterator().next();
       }
-
+      
       userDtos.add(new UserDto(user, clazz));
     });
 

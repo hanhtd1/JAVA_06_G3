@@ -330,3 +330,13 @@
 2020-01-19 23:33:12 INFO  TraineeUserController:59 - TrangDV login successful
 2020-01-20 00:22:38 INFO  TraineeUserController:59 - TrangDM login successful
 2020-01-20 00:27:32 INFO  TraineeUserController:59 - TrangDM login successful
+2020-01-20 08:51:01 INFO  TraineeUserController:59 - TrangDT login successful
+2020-01-20 08:51:06 INFO  TraineeUserController:59 - TrangDT login successful
+2020-01-20 08:52:59 INFO  TraineeUserController:59 - TrangDT login successful
+2020-01-20 08:53:11 INFO  TraineeUserController:59 - TrangDT login successful
+2020-01-20 08:58:28 INFO  TraineeUserController:59 - TrangLM login successful
+2020-01-20 10:32:25 INFO  TraineeUserController:59 - TrangDM login successful
+2020-01-20 10:33:46 INFO  TraineeUserController:59 - TrangDT login successful
+2020-01-20 10:34:44 INFO  TraineeUserController:59 - TrangDT login successful
+2020-01-20 10:35:12 INFO  TraineeUserController:59 - TrangDT login successful
+2020-01-20 10:35:40 INFO  TraineeUserController:59 - TrangDT login successful

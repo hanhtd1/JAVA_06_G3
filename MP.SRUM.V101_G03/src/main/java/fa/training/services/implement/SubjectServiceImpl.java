@@ -48,7 +48,7 @@ public class SubjectServiceImpl implements SubjectService {
   public ApiObject<Subject> save(Subject subject) {
     ApiObject<Subject> apiObject = new ApiObject<Subject>();
     boolean checkExisted = checkSubjectExisted(subject.getCode());
-    if (checkExisted && subject.getDuration() < 0) {
+    if (checkExisted || subject.getDuration() < 0) {
       apiObject.setMessage(Constant.CREATE_FAIL_MESSAGE);
     } else {
       subject = subjectRepository.save(subject);
@@ -62,7 +62,7 @@ public class SubjectServiceImpl implements SubjectService {
   public ApiObject<Subject> update(Subject subject) {
     ApiObject<Subject> apiObject = new ApiObject<Subject>();
     boolean checkExisted = checkSubjectExisted(subject.getCode());
-    if (!checkExisted && subject.getDuration() < 0) {
+    if (!checkExisted || subject.getDuration() < 0) {
       apiObject.setMessage(Constant.UPDATE_FAIL_MESSAGE);
     } else {
       subject = subjectRepository.save(subject);
